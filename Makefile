@@ -2,11 +2,11 @@
 
 .PHONY: run
 run: ## Run Django
-	poetry run python manage.py runserver
+	poetry run python project_stanza/manage.py runserver
 
 .PHONY: migrate
 migrate: ## Run Django migrations
-	poetry run python manage.py makemigrations && poetry run python manage.py migrate
+	poetry run python project_stanza/manage.py makemigrations && poetry run python project_stanza/manage.py migrate
 
 .PHONY: poetry-setup
 poetry-setup: ## Install Python deps
