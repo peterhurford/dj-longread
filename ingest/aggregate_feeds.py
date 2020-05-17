@@ -1252,6 +1252,7 @@ def add_row(cur, table_name, column_names, row):
                                                '(' + ', '.join(row) + ')'))
      return None
 
+
 print('Psycopg2 connect')
 conn = psycopg2.connect('dbname=stanza_dev user=dbuser')
 cur = conn.cursor()

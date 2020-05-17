@@ -1,4 +1,7 @@
+import psycopg2
+
 import pandas as pd
+
 
 def clean_domain(domain):
     if isinstance(domain, str):
@@ -43,11 +46,19 @@ def format_link(data):
                                                      domain,
                                                      data['summary'])
 
-links = pd.read_csv('data/links.csv')
+
+print('Psycopg2 connect')
+conn = psycopg2.connect('dbname=stanza_dev user=dbuser')
+cur = conn.cursor()
+cur.execute('SELECT * FROM links')
+links = cur.fetchall()
+links = pd.DataFrame(links)
+links.columns = ['id', 'url', 'title', 'summary', 'domain', 'date', 'liked',
+                 'category', 'aggregator']
 links = links[links['liked'] == 1]
 links = links[links['summary'].apply(lambda x: isinstance(x, str))]  # Filter out empty summary
 links = links.iloc[::-1]  # Reverse
-categories = links.groupby('cluster')
+categories = links.groupby('category')
 links = links.apply(format_link, axis=1).values.tolist()
 
 with open('site/index.html', 'w') as site:
