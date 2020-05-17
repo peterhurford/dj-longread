@@ -1,0 +1,1 @@
+ cat Links.html | sed 's/https:\/\/www.google.com\/url\?q\=//g' | sed 's/ class="c3"//g' | sed 's/<a href="/@s@/g' | sed 's/:<\/span>/@s@/g' | sed -e 's/<[^<>]*>//g' | sed 's/">/@s@/g' | sed 's/:&nbsp;/@s@/g' | sed 's/\n//g' > links.txt
