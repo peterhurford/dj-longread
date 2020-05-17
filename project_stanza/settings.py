@@ -72,11 +72,11 @@ WSGI_APPLICATION = 'project_stanza.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.path.join(BASE_DIR, 'db.postgresql'),
+        'NAME': 'stanza_dev',
+        'USER': 'dbuser',
     }
 }
 
