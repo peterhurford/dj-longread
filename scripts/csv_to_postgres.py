@@ -20,8 +20,10 @@ def enquote(text):
      return '\'' + escape(str(text)) + '\''
 
 
-def add_row(cur, table_name, row):
-     cur.execute('INSERT INTO {} VALUES {}'.format(table_name, '(' + ', '.join(row) + ')'))
+def add_row(cur, table_name, column_names, row):
+     cur.execute('INSERT INTO {} {} VALUES {}'.format(table_name,
+                                                      '(' + ', '.join(column_names) + ')',
+                                                      '(' + ', '.join(row) + ')'))
      return None
 
 
@@ -29,15 +31,15 @@ def create_links_table(cur):
      # TODO: Use Django migration
     cur.execute("""
         CREATE TABLE links(
-            id integer PRIMARY KEY,
-            url text,
-            title text,
-            summary text,
-            domain text,
-            date timestamp,
-            liked integer,
-            category text,
-            aggregator text
+            id SERIAL PRIMARY KEY,
+            url TEXT,
+            title TEXT,
+            summary TEXT,
+            domain TEXT,
+            date TIMESTAMP,
+            liked INTEGER,
+            category TEXT,
+            aggregator TEXT
         )
     """)
     return None
@@ -47,10 +49,10 @@ def create_upcoming_table(cur):
      # TODO: Use Django migration
     cur.execute("""
         CREATE TABLE upcoming(
-            id integer PRIMARY KEY,
-            url text,
-            title text,
-            aggregator text
+            id SERIAL PRIMARY KEY,
+            url TEXT,
+            title TEXT,
+            aggregator TEXT
         )
     """)
     return None
@@ -80,8 +82,7 @@ lines = links.shape[0]
 for i in range(lines):
     if i % 1000 == 0:
         print('{}/{}'.format(i, lines))
-    data = [enquote(i),
-             enquote(links.iloc[i].url),
+    data = [enquote(links.iloc[i].url),
             enquote(links.iloc[i].title),
             enquote(links.iloc[i].summary),
             enquote(links.iloc[i].domain),
@@ -89,7 +90,10 @@ for i in range(lines):
             str(links.iloc[i].liked),
             enquote(links.iloc[i].category),
             enquote(links.iloc[i].aggregator)]
-    add_row(cur, 'links', data)
+    add_row(cur,
+            'links',
+            ['url', 'title', 'summary', 'domain', 'date', 'liked', 'category', 'aggregator'],
+            data)
 
 
 # TODO: Use Django migration
@@ -112,11 +116,10 @@ lines = upcoming.shape[0]
 for i in range(lines):
     if i % 1000 == 0:
         print('{}/{}'.format(i, lines))
-    data = [enquote(i),
-            enquote(upcoming.iloc[i].url),
+    data = [enquote(upcoming.iloc[i].url),
             enquote(upcoming.iloc[i].title),
             enquote(upcoming.iloc[i].aggregator)]
-    add_row(cur, 'upcoming', data)
+    add_row(cur, 'upcoming', ['url', 'title', 'aggregator'], data)
 
 
 print('Done')
