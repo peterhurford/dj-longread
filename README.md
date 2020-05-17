@@ -8,14 +8,16 @@ There are too many articles on the internet to possibly read them all. We want t
 2. Install [postgres.app](https://postgresapp.com/downloads.html) - or figure out how to install
  postgres yourself
 3. Make sure you got your Clang working `xcode-select --install`
-
-Once you have postgres running, please also create a database called `stanza_dev` and a user:
+4. Once you have postgres running, please also create a database called `stanza_dev` and a user:
 
  ```sql
  CREATE DATABASE stanza_dev;
  CREATE USER dbuser;
  ALTER USER dbuser WITH SUPERUSER;
  ```
+
+5. Run `make migrate`
+6. Run `python manage.py createsuperuser`
 
 
 ## Run

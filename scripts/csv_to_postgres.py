@@ -28,51 +28,9 @@ def add_row(cur, table_name, column_names, row):
      return None
 
 
-def create_links_table(cur):
-     # TODO: Use Django migration
-    cur.execute("""
-        CREATE TABLE links(
-            id SERIAL PRIMARY KEY,
-            url TEXT,
-            title TEXT,
-            summary TEXT,
-            domain TEXT,
-            date TIMESTAMP,
-            liked INTEGER,
-            category TEXT,
-            aggregator TEXT
-        )
-    """)
-    return None
-
-
-def create_upcoming_table(cur):
-     # TODO: Use Django migration
-    cur.execute("""
-        CREATE TABLE upcoming(
-            id SERIAL PRIMARY KEY,
-            url TEXT,
-            title TEXT,
-            aggregator TEXT
-        )
-    """)
-    return None
-
-
 print('Psycopg2 connect')
 conn = psycopg2.connect('dbname=stanza_dev user=dbuser')
 cur = conn.cursor()
-
-
-# TODO: Use Django migration
-print('Check links table')
-if table_exists(cur, 'links'):
-    print('Drop existing links table')
-    drop_table(cur, 'links')
-
-print('Create empty links table')
-create_links_table(cur)
-conn.commit()
 
 
 print('Load links CSV')
@@ -98,17 +56,6 @@ for i in range(lines):
             data)
 
 
-# TODO: Use Django migration
-print('Check upcoming table')
-if table_exists(cur, 'upcoming'):
-    print('Drop existing upcoming table')
-    drop_table(cur, 'upcoming')
-
-print('Create empty upcoming table')
-create_upcoming_table(cur)
-conn.commit()
-
-
 print('Load upcoming CSV')
 upcoming = pd.read_csv('data/upcoming.csv')
 
@@ -124,4 +71,5 @@ for i in range(lines):
     add_row(cur, 'upcoming', ['url', 'title', 'aggregator'], data)
 
 
+conn.commit()
 print('Done')
