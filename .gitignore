@@ -146,16 +146,11 @@ static
 # dev db
 db.sqlite3
 
-# IDEs
-.vscode
-.idea/
-
 .history
 ^.expenv$
 .deploy.sh
 .DS_Store
 
-data/census_block_groups.7z
-data/v10/
-data/v107/
-data/esriinfo/
+data/glove.6B.300d.txt
+data/extract/*
+data/*.pkl
