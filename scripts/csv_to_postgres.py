@@ -51,7 +51,7 @@ for i in range(lines):
             enquote(links.iloc[i].category),
             enquote(links.iloc[i].aggregator)]
     add_row(cur,
-            'links',
+            'link_link',
             ['url', 'title', 'summary', 'domain', 'date', 'liked', 'category', 'aggregator'],
             data)
 
@@ -68,7 +68,7 @@ for i in range(lines):
     data = [enquote(upcoming.iloc[i].url),
             enquote(upcoming.iloc[i].title),
             enquote(upcoming.iloc[i].aggregator)]
-    add_row(cur, 'upcoming', ['url', 'title', 'aggregator'], data)
+    add_row(cur, 'link_upcoming', ['url', 'title', 'aggregator'], data)
 
 
 conn.commit()

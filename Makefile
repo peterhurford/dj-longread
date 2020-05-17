@@ -6,7 +6,7 @@ run: ## Run Django
 
 .PHONY: migrate
 migrate: ## Run Django migrations
-	poetry run python manage.py makemigrations && python manage.py makemigrations links && poetry run python manage.py migrate
+	poetry run python manage.py makemigrations && python manage.py makemigrations link && poetry run python manage.py migrate
 
 .PHONY: poetry-setup
 poetry-setup: ## Install Python deps
