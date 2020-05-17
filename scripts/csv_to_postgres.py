@@ -21,9 +21,10 @@ def enquote(text):
 
 
 def add_row(cur, table_name, column_names, row):
-     cur.execute('INSERT INTO {} {} VALUES {}'.format(table_name,
-                                                      '(' + ', '.join(column_names) + ')',
-                                                      '(' + ', '.join(row) + ')'))
+     cur.execute(('INSERT INTO {} {} VALUES {} ON ' + 
+                 'CONFLICT DO NOTHING').format(table_name,
+                                               '(' + ', '.join(column_names) + ')',
+                                               '(' + ', '.join(row) + ')'))
      return None
 
 
@@ -56,6 +57,7 @@ def create_upcoming_table(cur):
         )
     """)
     return None
+
 
 print('Psycopg2 connect')
 conn = psycopg2.connect('dbname=stanza_dev user=dbuser')
