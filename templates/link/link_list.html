@@ -7,7 +7,8 @@
 <body>
   <div id="main">
     <h1>Links Archive</h1>
-    <p><a href="/">(See upcoming)</a></p>
+    <p>(<a href="/">See upcoming</a>, <a href="/links/add_link.html">Add link</a>)</p>
+
     <ul>
     {% for link in object_list %}
     <li><b><a href="{{ link.url }}">{{ link.title }}</a> [{{ link.domain }}]:</b> {{ link.summary }} <i>({{ link.category }})</i></li>

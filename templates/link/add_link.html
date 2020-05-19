@@ -1,0 +1,18 @@
+{% load static %}
+<head>
+  <title>Add Link</title>
+  <link href="{% static "style.css" %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <div id="main">
+    <h1>Add Link</h1>
+    <p>(<a href="/">See upcoming</a>, <a href="/links">see archive</a>, <a href="/links/add_link.html">Add link</a>)</p>
+
+		<form action="/link/" method="post">
+				{% csrf_token %}
+				{{ form }}
+				<input type="submit" value="Submit">
+		</form>
+  </div>
+</body>

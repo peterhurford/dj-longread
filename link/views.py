@@ -1,6 +1,20 @@
 from django.views.generic.list import ListView
+from django.shortcuts import render
 
 from link.models import Link, Upcoming
+from link.forms import LinkForm
+
+def get_link(request):
+    if request.method == 'POST':
+        form = NameForm(request.POST)
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/links')
+    else:
+        form = LinkForm()
+    return render(request, 'link/add_link.html', {'form': form})
 
 
 class LinkListView(ListView):
