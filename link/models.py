@@ -3,30 +3,17 @@ from django.urls import reverse
 
 
 class Link(models.Model):
-    url = models.CharField(max_length=2000)
-    title = models.CharField(max_length=2000)
-    summary = models.CharField(max_length=10000, blank=True, null=True)
-    domain = models.CharField(max_length=2000)
-    date = models.DateTimeField('date added')
-    liked = models.IntegerField(default=0)
-    category = models.CharField(max_length=2000, blank=True, null=True)
-    aggregator = models.CharField(max_length=2000)
+    url = models.CharField(max_length=2000, default='htpp://www.example.com')
+    title = models.CharField(max_length=2000, default='Example')
+    summary = models.CharField(max_length=10000, blank=True, null=True, default='')
+    domain = models.CharField(max_length=2000, blank=True, null=True, default='example.com')
+    date = models.DateTimeField('date added', blank=True, null=True)
+    liked = models.IntegerField(blank=True, null=True, default=1)
+    category = models.CharField(max_length=2000, blank=True, null=True, default='')
+    aggregator = models.CharField(max_length=2000, default='')
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('upcoming-list')
-
-
-class Upcoming(models.Model):
-    url = models.CharField(max_length=2000)
-    title = models.CharField(max_length=2000)
-    aggregator = models.CharField(max_length=2000)
-
-    def __str__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse('upcoming-list')
-

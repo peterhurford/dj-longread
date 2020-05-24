@@ -60,7 +60,7 @@ print('Load upcoming CSV')
 upcoming = pd.read_csv('data/upcoming.csv')
 
 
-print('Upload upcoming CSV to upcoming table')
+print('Upload upcoming CSV to links table')
 lines = upcoming.shape[0]
 for i in range(lines):
     if i % 1000 == 0:
@@ -68,7 +68,7 @@ for i in range(lines):
     data = [enquote(upcoming.iloc[i].url),
             enquote(upcoming.iloc[i].title),
             enquote(upcoming.iloc[i].aggregator)]
-    add_row(cur, 'link_upcoming', ['url', 'title', 'aggregator'], data)
+    add_row(cur, 'link_link', ['url', 'title', 'aggregator'], data)
 
 
 conn.commit()

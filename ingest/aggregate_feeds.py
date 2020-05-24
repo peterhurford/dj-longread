@@ -1261,53 +1261,9 @@ for i, content in enumerate(contents):
     if i % 1000 == 0:
         print('{}/{}'.format(i, lines))
     add_row(cur,
-            'upcoming',
+            'link_link',
             ['title', 'url', 'aggregator'],
             [enquote(c) for c in content])
 
 import pdb
 pdb.set_trace()
-
-
-    # TODO:
-    # print('Processing...')
-    # tmp2 = pd.DataFrame(contents, columns=['title', 'url', 'aggregator'])
-    # if tmp is None:
-    #     original_size = 0
-    #     tmp = tmp2
-    # else:
-    #     original_size = tmp.shape[0]
-    #     tmp = pd.concat((tmp, tmp2), sort=False)
-
-    # tmp = tmp[tmp['url'].apply(lambda url: isinstance(url, str))]
-    # tmp = tmp[tmp['url'].apply(lambda url: 'http' in url)]
-    # tmp = tmp.drop_duplicates('url', keep='first')
-    # tmp['title'].fillna(tmp['url'], inplace=True)
-    # tmp['title'] = tmp['title'].apply(lambda t: t.strip())
-    # tmp = tmp.drop_duplicates('title', keep='first')
-    # tmp = tmp[tmp['url'].apply(lambda url: url not in links['url'].values)]
-    # tmp = tmp[tmp['title'].apply(lambda title: title not in links['title'].values)]
-    # tmp = tmp[tmp['url'].apply(lambda url: 'reddit.com' not in url)]
-    # tmp = tmp[tmp['url'].apply(lambda url: 'alignmentforum.org' not in url)]
-    # tmp = tmp[tmp['title'].apply(lambda title: 'Politics Podcast' not in title)]
-    # tmp = tmp[tmp['title'].apply(lambda title: 'Palladium Podcast' not in title)]
-    # tmp = tmp[tmp['title'].apply(lambda title: 'Cautionary Tales Ep' not in title)]
-
-    # tmp['domain'] = tmp['url'].apply(clean_url).apply(get_root_url)
-    # tmp.loc[tmp['domain'] == 'forum.effectivealtruism.org', 'aggregator'] = 'EAForum'
-    # tmp.loc[tmp['domain'] == 'lesswrong.com', 'aggregator'] = 'LW'
-    # tmp.loc[tmp['domain'] == 'www.lesswrong.com', 'aggregator'] = 'LW'
-    # tmp.drop('domain', axis=1, inplace=True)
-
-    # print('...Added {}'.format(max(tmp.shape[0] - original_size, 0)))
-    # print('...Backlog is now {}'.format(tmp.shape[0]))
-
-    # print('Saving dump...')
-    # tmp.to_csv('data/tmp.csv', index=False)
-
-    # now = datetime.now()
-    # thirty_min_from_now = now + timedelta(minutes=30)
-    # while now < thirty_min_from_now:
-    #     now = datetime.now()
-    #     print('...It is currently {}. Next refresh at {}'.format(now, thirty_min_from_now))
-    #     time.sleep(120)
