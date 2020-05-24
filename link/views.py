@@ -65,4 +65,5 @@ class UpcomingDelete(DeleteView):
     success_url = reverse_lazy('upcoming-list')
 
     def delete(self, *args, **kwargs):
+		# TODO: Log in links DB
         return super().delete(*args, **kwargs)
