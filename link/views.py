@@ -26,7 +26,7 @@ class LinkListView(ListView):
                             .exclude(summary__isnull=True)
                             .exclude(summary__exact='')
                             .exclude(summary__exact='nan')
-                            .order_by('added'))
+                            .order_by('-added'))
     context_object_name = 'link_list'
     template_name = 'link/link_list.html'
 
@@ -34,7 +34,7 @@ class LinkListView(ListView):
 class UpcomingListView(ListView):
     model = Link
     paginate_by = 13
-    queryset = Link.objects.filter(liked__isnull=True).order_by('added').reverse()
+    queryset = Link.objects.filter(liked__isnull=True).order_by('-added')
     context_object_name = 'upcoming_list'
     template_name = 'link/upcoming_list.html'
 
