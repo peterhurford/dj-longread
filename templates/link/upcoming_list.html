@@ -11,7 +11,7 @@
 
     <ul>
     {% for link in object_list %}
-      <li><b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a></li>
+      <li><a class='btn btn-success' href="/{{link.pk}}/">Yes</a> <a class='btn btn-danger' href="/links" name="delete_btn">No</a> <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a></li>
     {% empty %}
         <li>No links yet.</li>
     {% endfor %}

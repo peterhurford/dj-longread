@@ -1,3 +1,4 @@
+from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import render
 
@@ -17,6 +18,15 @@ def get_link(request):
     return render(request, 'link/add_link.html', {'form': form})
 
 
+class LinkDetailView(DetailView):
+
+    model = Link
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
 class LinkListView(ListView):
     model = Link
     paginate_by = 10
@@ -26,10 +36,20 @@ class LinkListView(ListView):
         return context
 
 
-class UpcomingListView(ListView):
+class UpcomingDetailView(DetailView):
+
     model = Upcoming
-    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class UpcomingListView(ListView):
+    model = Upcoming
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
