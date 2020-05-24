@@ -34,7 +34,7 @@ class LinkListView(ListView):
 class UpcomingListView(ListView):
     model = Link
     paginate_by = 13
-    queryset = Link.objects.filter(liked__isnull=True).order_by('added')
+    queryset = Link.objects.filter(liked__isnull=True).order_by('added').reverse()
     context_object_name = 'upcoming_list'
     template_name = 'link/upcoming_list.html'
 
