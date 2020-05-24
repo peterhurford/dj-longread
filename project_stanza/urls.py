@@ -13,6 +13,6 @@ urlpatterns = [
 	url(r'^delete/(?P<pk>\d+)/$', views.UpcomingDelete.as_view(), name='upcoming_delete'),
     path('links/', views.LinkListView.as_view(), name='link-list'),
     path('links/<int:pk>/', views.LinkDetailView.as_view(), name='link-detail'),
-    path('links/add_link.html', views.get_link, name='add-link'),
+    path('links/add_link.html', views.LinkCreate.as_view(), name='link-create'),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

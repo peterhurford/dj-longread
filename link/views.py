@@ -3,21 +3,12 @@ from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import render
+from django.utils import timezone
 
 from link.models import Link, Upcoming
 from link.forms import LinkForm
 
-def get_link(request):
-    if request.method == 'POST':
-        form = NameForm(request.POST)
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/links')
-    else:
-        form = LinkForm()
-    return render(request, 'link/add_link.html', {'form': form})
+from .utils.url import clean_url, get_root_url
 
 
 class LinkDetailView(DetailView):
@@ -37,9 +28,19 @@ class LinkListView(ListView):
         return context
 
 
-# TODO: Implement
 class LinkCreate(CreateView):
     model = Link
+    fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator']
+
+    def form_valid(self, form):
+        form.instance.date = timezone.now()
+        form.instance.domain = get_root_url(clean_url(form.instance.url)) 
+        return super().form_valid(form)
+
+    def create(self, *args, **kwargs):
+        self.date = timezone.now()
+        self.domain = get_root_url(clean_url(self.url)) 
+        return super().create(*args, **kwargs)
 
 
 class UpcomingDetailView(DetailView):
@@ -65,5 +66,6 @@ class UpcomingDelete(DeleteView):
     success_url = reverse_lazy('upcoming-list')
 
     def delete(self, *args, **kwargs):
-		# TODO: Log in links DB
+        # TODO: Initiate LinkCreate with 0 or 1
         return super().delete(*args, **kwargs)
+
