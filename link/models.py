@@ -9,7 +9,7 @@ class Link(models.Model):
     domain = models.CharField(max_length=2000)
     date = models.DateTimeField('date added')
     liked = models.IntegerField(default=0)
-    category = models.CharField(max_length=2000)
+    category = models.CharField(max_length=2000, blank=True, null=True)
     aggregator = models.CharField(max_length=2000)
 
     def __str__(self):

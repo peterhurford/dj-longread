@@ -65,7 +65,18 @@ class UpcomingDelete(DeleteView):
     model = Upcoming
     success_url = reverse_lazy('upcoming-list')
 
-    def delete(self, *args, **kwargs):
-        # TODO: Initiate LinkCreate with 0 or 1
-        return super().delete(*args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        upcoming = Upcoming.objects.get(pk=kwargs['pk'])
+        domain = get_root_url(clean_url(upcoming.url)) 
+        date = timezone.now()
+        link = Link(url=upcoming.url,
+                    title=upcoming.title,
+                    summary='',
+                    domain=domain,
+                    date=date,
+                    liked=0,
+                    category='',
+                    aggregator=upcoming.aggregator)
+        link.save()
+        return super().delete(request, *args, **kwargs)
 
