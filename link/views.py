@@ -1,3 +1,5 @@
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import render
@@ -19,7 +21,6 @@ def get_link(request):
 
 
 class LinkDetailView(DetailView):
-
     model = Link
 
     def get_context_data(self, **kwargs):
@@ -34,6 +35,11 @@ class LinkListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+# TODO: Implement
+class LinkCreate(CreateView):
+    model = Link
 
 
 class UpcomingDetailView(DetailView):
@@ -53,3 +59,10 @@ class UpcomingListView(ListView):
         context = super().get_context_data(**kwargs)
         return context
 
+
+class UpcomingDelete(DeleteView):
+    model = Upcoming
+    success_url = reverse_lazy('upcoming-list')
+
+    def delete(self, *args, **kwargs):
+        return super().delete(*args, **kwargs)

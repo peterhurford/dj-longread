@@ -11,7 +11,12 @@
 
     <ul>
     {% for link in object_list %}
-      <li><a class='btn btn-success' href="/{{link.pk}}/">Yes</a> <a class='btn btn-danger' href="/links" name="delete_btn">No</a> <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a></li>
+      <li><a class='btn btn-success' href="/{{link.pk}}/">Yes</a>
+          <form action="{% url 'upcoming_delete' pk=link.pk %}" method="POST">
+            {% csrf_token %}
+            <input class="btn btn-default btn-danger" type="submit" value="No"/>
+          </form>
+         <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a></li>
     {% empty %}
         <li>No links yet.</li>
     {% endfor %}
