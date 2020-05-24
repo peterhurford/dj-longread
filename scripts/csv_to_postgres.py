@@ -1,5 +1,8 @@
 import json
 import psycopg2
+
+from datetime import datetime
+
 import pandas as pd
 
 
@@ -47,12 +50,13 @@ for i in range(lines):
             enquote(links.iloc[i].summary),
             enquote(links.iloc[i].domain),
             enquote(links.iloc[i].date),
+            enquote(links.iloc[i].date),
             str(links.iloc[i].liked),
             enquote(links.iloc[i].category),
             enquote(links.iloc[i].aggregator)]
     add_row(cur,
             'link_link',
-            ['url', 'title', 'summary', 'domain', 'date', 'liked', 'category', 'aggregator'],
+            ['url', 'title', 'summary', 'domain', 'added', 'modified', 'liked', 'category', 'aggregator'],
             data)
 
 
@@ -67,8 +71,10 @@ for i in range(lines):
         print('{}/{}'.format(i, lines))
     data = [enquote(upcoming.iloc[i].url),
             enquote(upcoming.iloc[i].title),
-            enquote(upcoming.iloc[i].aggregator)]
-    add_row(cur, 'link_link', ['url', 'title', 'aggregator'], data)
+            enquote(upcoming.iloc[i].aggregator),
+            enquote(str(datetime.now().date())),
+            enquote(str(datetime.now().date()))]
+    add_row(cur, 'link_link', ['url', 'title', 'aggregator', 'added', 'modified'], data)
 
 
 conn.commit()

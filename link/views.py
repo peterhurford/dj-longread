@@ -24,7 +24,9 @@ class LinkListView(ListView):
     queryset = (Link.objects.exclude(liked__isnull=True)
                             .exclude(liked__exact=0)
                             .exclude(summary__isnull=True)
-                            .exclude(summary__exact=''))
+                            .exclude(summary__exact='')
+                            .exclude(summary__exact='nan')
+                            .order_by('added'))
     context_object_name = 'link_list'
     template_name = 'link/link_list.html'
 
@@ -32,7 +34,7 @@ class LinkListView(ListView):
 class UpcomingListView(ListView):
     model = Link
     paginate_by = 13
-    queryset = Link.objects.filter(liked__isnull=True)
+    queryset = Link.objects.filter(liked__isnull=True).order_by('added')
     context_object_name = 'upcoming_list'
     template_name = 'link/upcoming_list.html'
 
@@ -42,12 +44,12 @@ class LinkCreate(CreateView):
     fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator']
 
     def form_valid(self, form):
-        form.instance.date = timezone.now()
+        form.instance.modified = timezone.now()
         form.instance.domain = get_root_url(clean_url(form.instance.url)) 
         return super().form_valid(form)
 
     def create(self, *args, **kwargs):
-        self.date = timezone.now()
+        self.modified = timezone.now()
         self.domain = get_root_url(clean_url(self.url)) 
         return super().create(*args, **kwargs)
 
@@ -58,7 +60,7 @@ class LinkUpdate(UpdateView):
     template_name_suffix = '_update_form'
 
     def form_valid(self, form):
-        form.instance.date = timezone.now()
+        form.instance.modified = timezone.now()
         form.instance.domain = get_root_url(clean_url(form.instance.url)) 
         if not form.instance.liked:
             form.instance.liked = 0
@@ -67,7 +69,7 @@ class LinkUpdate(UpdateView):
     def update(self, request, *args, **kwargs):
         if not self.liked:
             self.liked = 0
-        self.date = timezone.now()
+        self.modified = timezone.now()
         self.domain = get_root_url(clean_url(self.url)) 
         return super().create(*args, **kwargs)
 

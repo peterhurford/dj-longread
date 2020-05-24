@@ -1262,8 +1262,6 @@ for i, content in enumerate(contents):
         print('{}/{}'.format(i, lines))
     add_row(cur,
             'link_link',
-            ['title', 'url', 'aggregator'],
-            [enquote(c) for c in content])
+            ['title', 'url', 'aggregator', 'added', 'modified'],
+            [enquote(c) for c in content + [str(datetime.now().date())] * 2])
 
-import pdb
-pdb.set_trace()
