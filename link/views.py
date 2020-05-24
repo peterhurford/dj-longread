@@ -60,11 +60,13 @@ class LinkUpdate(UpdateView):
     def form_valid(self, form):
         form.instance.date = timezone.now()
         form.instance.domain = get_root_url(clean_url(form.instance.url)) 
-        form.instance.liked = 0
+        if not form.instance.liked:
+            form.instance.liked = 0
         return super().form_valid(form)
 
     def update(self, request, *args, **kwargs):
-        self.liked = 0
+        if not self.liked:
+            self.liked = 0
         self.date = timezone.now()
         self.domain = get_root_url(clean_url(self.url)) 
         return super().create(*args, **kwargs)
