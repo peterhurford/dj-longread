@@ -8,6 +8,7 @@ from mlgear.utils import chunk
 
 from utils.download import read
 from utils.ingest import clean_url, get_root_url
+from utils.sql import table_exists, drop_table, escape, enquote, add_row, delete_row, find_row
 
 
 ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
@@ -1242,21 +1243,6 @@ else:
     contents += content131
 
 
-# TODO: DRY with scripts/csv_to_postgres.py
-def escape(text):
-    return text.replace('\'', '\'\'')
-
-def enquote(text):
-     return '\'' + escape(str(text)) + '\''
-
-
-def add_row(cur, table_name, column_names, row):
-    cur.execute('INSERT INTO {} {} VALUES {}'.format(table_name,
-                                                     '(' + ', '.join(column_names) + ')',
-                                                     '(' + ', '.join(row) + ')'))
-    return None
-
-
 def add_link_row(cur, content):
     add_row(cur,
             'link_link',
@@ -1265,24 +1251,9 @@ def add_link_row(cur, content):
     return None
 
 
-def delete_row(cur, table_name, column_name, value):
-    cur.execute('DELETE FROM {} WHERE {} = {}'.format(table_name, column_name, value))
-    return None
-
-
 def delete_link_row(cur, url):
     delete_row(cur, 'link_link', 'url', enquote(url))
     return None
-
-
-def find_row(cur, table_name, col, value, n=1):
-    cur.execute('SELECT * FROM {} WHERE {} = {}'.format(table_name, col, enquote(value)))
-    if n == 1:
-        return cur.fetchone()
-    elif n == 'many':
-        return cur.fetchall()
-    else:
-        return ValueError('n must be 1 or many')
 
 
 def find_link_row(cur, url):
