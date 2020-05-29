@@ -391,15 +391,6 @@ else:
                   'https://carnegieendowment.org' + c[1], 'Acton'] for c in content37]
     contents += content37
 
-print('Load ZeroHedge...')
-content38, error, msg = read('http://feeds.feedburner.com/zerohedge/feed', return_type='soup', reader_type='xml')
-if error:
-    print(msg)
-else:
-    content38 = content38.find_all('item')
-    content38 = [[c.title.get_text(), c.link.get_text(), 'ZeroHedge'] for c in content38]
-    contents += content38
-
 print('Load Noah Blog...')
 content39, error, msg = read('http://noahpinionblog.blogspot.com/feeds/posts/default', return_type='soup', reader_type='xml')
 if error:
@@ -764,15 +755,6 @@ else:
     content77 = content77.find_all('entry')
     content77 = [[c.title.get_text(), str(c.find_all('link')[-1]).split('"')[1], 'WorldInData'] for c in content77]
     contents += content77
-
-print('Load LGM...')
-content78, error, msg = read('http://www.lawyersgunsmoneyblog.com/feed', return_type='soup', reader_type='xml')
-if error:
-    print(msg)
-else:
-    content78 = content78.find_all('item')
-    content78 = [[c.title.get_text(), c.link.get_text(), 'LGM'] for c in content78]
-    contents += content78
 
 print('Load Fake Nous...')
 content79, error, msg = read('http://fakenous.net/?feed=rss2', return_type='soup', reader_type='xml')
