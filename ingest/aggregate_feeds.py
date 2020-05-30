@@ -1,4 +1,5 @@
 import time
+import random
 import psycopg2
 
 import pandas as pd
@@ -15,7 +16,29 @@ ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
             'liked', 'category', 'aggregator']
 
 
+def add_link_row(cur, content):
+    add_row(cur,
+            'link_link',
+            ['title', 'url', 'aggregator', 'added', 'modified'],
+            [enquote(c) for c in content + [str(datetime.now().date())] * 2])
+    return None
+
+
+def delete_link_row(cur, url):
+    delete_row(cur, 'link_link', 'url', enquote(url))
+    return None
+
+
+def find_link_row(cur, url):
+    result = find_row(cur, 'link_link', 'url', url, n='many')
+    if result:
+        return [dict(zip(ALL_COLS, r)) for r in result]
+    else:
+        return []
+
+
 contents = []
+
 
 print('Load HN...')
 content, error, msg = read('https://news.ycombinator.com/rss', return_type='list', reader_type='xml')
@@ -1225,25 +1248,7 @@ else:
     contents += content131
 
 
-def add_link_row(cur, content):
-    add_row(cur,
-            'link_link',
-            ['title', 'url', 'aggregator', 'added', 'modified'],
-            [enquote(c) for c in content + [str(datetime.now().date())] * 2])
-    return None
-
-
-def delete_link_row(cur, url):
-    delete_row(cur, 'link_link', 'url', enquote(url))
-    return None
-
-
-def find_link_row(cur, url):
-    result = find_row(cur, 'link_link', 'url', url, n='many')
-    if result:
-        return [dict(zip(ALL_COLS, r)) for r in result]
-    else:
-        return []
+random.shuffle(contents)
 
 
 print('Psycopg2 connect')
