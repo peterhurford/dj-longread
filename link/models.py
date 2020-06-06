@@ -1,5 +1,10 @@
+from datetime import datetime
+
 from django.db import models
 from django.urls import reverse
+
+
+DEFAULT_TIME = datetime(2020, 1, 1, 0, 0, 0, 0)
 
 
 class Link(models.Model):
@@ -7,8 +12,8 @@ class Link(models.Model):
     title = models.CharField(max_length=2000, default='Example')
     summary = models.CharField(max_length=10000, blank=True, null=True, default='')
     domain = models.CharField(max_length=2000, blank=True, null=True, default='example.com')
-    added = models.DateTimeField('date added', default='1900-01-01')
-    modified = models.DateTimeField('date modified', default='1900-01-01')
+    added = models.DateTimeField('date added', default=DEFAULT_TIME)
+    modified = models.DateTimeField('date modified', default=DEFAULT_TIME)
     liked = models.IntegerField(blank=True, null=True, default=1)
     category = models.CharField(max_length=2000, blank=True, null=True, default='')
     aggregator = models.CharField(max_length=2000, default='')
