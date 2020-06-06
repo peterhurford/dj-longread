@@ -19,11 +19,12 @@ There are too many articles on the internet to possibly read them all. We want t
 5. Run `make migrate`
 6. Run `python manage.py createsuperuser`
 7. Seed the DB by running `python3 -m scripts.csv_to_postgres`
-8. Get latest data by running `python3 -m ingest.aggregate_feeds`
+8. Get latest data by running `make update`
 
 
 ## Run
 
 ```
+make update
 make run
 ```

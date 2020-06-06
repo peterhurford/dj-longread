@@ -8,17 +8,18 @@ run: ## Run Django
 migrate: ## Run Django migrations
 	poetry run python manage.py makemigrations && python manage.py makemigrations link && poetry run python manage.py migrate
 
-.PHONY: poetry-setup
-poetry-setup: ## Install Python deps
+.PHONY: setup ## Install Python deps
+setup: poetry-setup
 	pip install poetry
 	poetry install
-
-.PHONY: setup ## Install Homebrew and Python deps
-setup: poetry-setup
 
 .PHONY: build
 build: ## Build package
 	poetry build
+
+.PHONY: update
+update: ## Update the DB with the latest articles pulled from RSS
+	python3 -m ingest.aggregate_feeds
 
 .PHONY: help
 help:
