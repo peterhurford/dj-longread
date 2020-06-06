@@ -21,7 +21,7 @@ def add_link_row(cur, content):
     add_row(cur,
             'link_link',
             ['title', 'url', 'aggregator', 'added', 'modified'],
-            [enquote(c) for c in content + [str(datetime.now().date())] * 2])
+            [enquote(c) for c in content + [str(datetime.now())] * 2])
     return None
 
 
