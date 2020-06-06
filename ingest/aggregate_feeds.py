@@ -12,6 +12,7 @@ from utils.ingest import clean_url, get_root_url
 from utils.sql import table_exists, drop_table, escape, enquote, add_row, delete_row, find_row
 
 
+# DRY with scripts/import_onetab.py
 ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
             'liked', 'category', 'aggregator']
 
@@ -1251,6 +1252,7 @@ else:
 random.shuffle(contents)
 
 
+# TODO: DRY with scripts/import_onetab.py
 print('Psycopg2 connect')
 conn = psycopg2.connect('dbname=stanza_dev user=dbuser')
 cur = conn.cursor()
@@ -1284,4 +1286,4 @@ for i, content in enumerate(contents):
 cur.close()
 conn.commit()
 conn.close()
-
+print('Done')
