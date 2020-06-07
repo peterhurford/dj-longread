@@ -48,9 +48,13 @@ contents = []
 for i, line in enumerate(lines):
     if '|' in line:
         linex = line.split(' | ')
+        if len(linex) < 2:
+            raise ValueError('{} was not a valid line'.format(line))
         url = linex[0]
         title = linex[1]
         contents.append([title.replace('\n', ''), url, 'Custom'])
+    else:
+        raise ValueError('{} was not a valid line'.format(line))
 
 
 # TODO: DRY with ingest/aggregate_feeds.py
