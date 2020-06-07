@@ -15,6 +15,7 @@ class Link(models.Model):
     added = models.DateTimeField('date added', default=DEFAULT_TIME)
     modified = models.DateTimeField('date modified', default=DEFAULT_TIME)
     liked = models.IntegerField(blank=True, null=True, default=1)
+    benched = models.IntegerField(blank=True, null=True, default=0)
     category = models.CharField(max_length=2000, blank=True, null=True, default='')
     aggregator = models.CharField(max_length=2000, default='')
 
