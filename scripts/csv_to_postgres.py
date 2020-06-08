@@ -49,8 +49,8 @@ for i in range(lines):
     data = [enquote(upcoming.iloc[i].url),
             enquote(upcoming.iloc[i].title),
             enquote(upcoming.iloc[i].aggregator),
-            enquote('2020-01-01'),
-            enquote('2020-01-01')]
+            enquote('1900-01-01'),
+            enquote('1900-01-01')]
     add_row(cur, 'link_link', ['url', 'title', 'aggregator', 'added', 'modified'], data)
 
 

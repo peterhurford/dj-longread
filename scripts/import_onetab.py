@@ -73,7 +73,7 @@ for i, content in enumerate(contents):
     elif len(result) > 1:
         delete_link_row(cur, content[1])
         add_link_row(cur, content)
-    elif str(result[0]['added'].date()) == '2020-01-01':
+    elif str(result[0]['added'].date()) == '1900-01-01':
         delete_link_row(cur, content[1])
         add_link_row(cur, content)
 

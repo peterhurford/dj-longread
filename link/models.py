@@ -4,7 +4,7 @@ from django.db import models
 from django.urls import reverse
 
 
-DEFAULT_TIME = datetime(2020, 1, 1, 0, 0, 0, 0)
+DEFAULT_TIME = datetime(1900, 1, 1, 0, 0, 0, 0)
 
 
 class Link(models.Model):
