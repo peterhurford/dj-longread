@@ -14,14 +14,14 @@ from utils.sql import table_exists, drop_table, escape, enquote, add_row, delete
 
 # DRY with scripts/import_onetab.py
 ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
-            'liked', 'category', 'aggregator']
+            'liked', 'benched', 'category', 'aggregator']
 
 
 def add_link_row(cur, content):
     add_row(cur,
             'link_link',
-            ['title', 'url', 'aggregator', 'added', 'modified'],
-            [enquote(c) for c in content + [str(datetime.now())] * 2])
+            ['title', 'url', 'aggregator', 'added', 'modified', 'benched'],
+            [enquote(c) for c in content + [str(datetime.now())] * 2] + [enquote('0')])
     return None
 
 
