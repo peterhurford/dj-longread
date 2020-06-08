@@ -86,6 +86,8 @@ class LinkUpdate(UpdateView):
     def update(self, request, *args, **kwargs):
         if not self.liked:
             self.liked = 0
+        if not self.added or str(self.added.date()) == '2020-01-01':
+            self.added = timezone.now()
         self.modified = timezone.now()
         self.domain = get_root_url(clean_url(self.url)) 
         return super().create(*args, **kwargs)

@@ -11,7 +11,7 @@
 
     <ul>
     {% for link in object_list %}
-    <li><b><a href="{{ link.url }}">{{ link.title }}</a> [{{ link.domain }}]:</b> {{ link.summary }} <i>({{ link.category }})</i></li>
+    <li><b><a href="{{ link.url }}">{{ link.title }}</a> [{{ link.domain }}]:</b> {{ link.summary }} <i>({{ link.category }}, {{ link.added }})</i></li>
     {% empty %}
       <li>No links yet.</li>
     {% endfor %}
