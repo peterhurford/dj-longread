@@ -73,10 +73,10 @@ class LinkUpdate(UpdateView):
     def form_valid(self, form):
         if self._is_bench_request():
             form.instance.benched = 1
-            logging.info('Benched {}'.format(form.instance.title))
+            logging.info('Benched "{}"'.format(form.instance.title))
         elif not form.instance.liked:
             form.instance.liked = 0
-            logging.info('Deleted {}'.format(form.instance.title))
+            logging.info('Deleted "{}"'.format(form.instance.title))
 
         form.instance.modified = timezone.now()
         form.instance.domain = get_root_url(clean_url(form.instance.url)) 
