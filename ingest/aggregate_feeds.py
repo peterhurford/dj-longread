@@ -1191,7 +1191,7 @@ if error:
     print(msg)
 else:
     content125 = [str(c) for c in content125.find_all('a') if 'blog-page-heading' in str(c)]
-    content125 = [['https://www.nateliason.com/blog' + c[3], c[6].replace('</h2><p class=', '').replace('>', ''), 'NatEliason'] for c in [c.split('"') for c in content125]]
+    content125 = [[c[6].replace('</h2><p class=', '').replace('>', ''), 'https://www.nateliason.com/blog' + c[3], 'NatEliason'] for c in [c.split('"') for c in content125]]
     contents += content125
 
 print('Load NatElison Book Notes...')
@@ -1200,7 +1200,7 @@ if error:
     print(msg)
 else:
     content126 = [str(c) for c in content126.find_all('p') if '/notes' in str(c)]
-    content126 = [['https://www.nateliason.com' + c[1], 'Book Notes: ' + c[2].split('</a>')[0].replace('>', ''), 'NatEliason'] for c in [c.split('"') for c in content126]]
+    content126 = [['Book Notes: ' + c[2].split('</a>')[0].replace('>', ''), 'https://www.nateliason.com' + c[1], 'NatEliason'] for c in [c.split('"') for c in content126]]
     contents += content126
 
 print('Load SLW...')
