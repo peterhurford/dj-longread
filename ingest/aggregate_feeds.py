@@ -1191,7 +1191,7 @@ if error:
     print(msg)
 else:
     content125 = [str(c) for c in content125.find_all('a') if 'blog-page-heading' in str(c)]
-    content125 = [[c[6].replace('</h2><p class=', '').replace('>', ''), 'https://www.nateliason.com/blog' + c[3], 'NatEliason'] for c in [c.split('"') for c in content125]]
+    content125 = [[c[6].replace('</h2><p class=', '').replace('>', ''), 'https://www.nateliason.com' + c[3], 'NatEliason'] for c in [c.split('"') for c in content125]]
     contents += content125
 
 print('Load NatElison Book Notes...')
