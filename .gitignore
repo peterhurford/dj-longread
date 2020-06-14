@@ -151,6 +151,7 @@ db.sqlite3
 .deploy.sh
 .DS_Store
 
+# Project specific
 data/glove.6B.300d.txt
 data/extract/*
 data/*.pkl
