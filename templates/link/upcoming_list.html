@@ -18,19 +18,14 @@
             <input type="hidden" name="aggregator" value="{{ link.aggregator }}">
             <input type="hidden" name="url" value="{{ link.url }}">
             <input type="hidden" name="title" value="{{ link.title }}">
+            <input type="hidden" name="location" value="random">
             <input class="btn btn-default btn-danger" type="submit" name="delete" value="No"/>
-            <input class="btn btn-default btn-warning" type="submit" name="bench" value="-"/>
-            <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a> (<i>{{ link.added }}</i>
-            {% if link.benched == 1 %}
-              *
-            {% endif %}
-            )</li>
+            <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a> (<i>{{ link.added }}</i> {{ link.priority }})</li>
           </form>
     {% empty %}
         <li>No links yet.</li>
     {% endfor %}
     </ul>
-
     <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}

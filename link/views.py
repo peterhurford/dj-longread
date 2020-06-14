@@ -4,20 +4,13 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.db.models import Case, When, Q, F, FloatField, ExpressionWrapper
 from django.shortcuts import render
 from django.utils import timezone
 
 from link.models import Link
 
 from .utils.url import clean_url, get_root_url
-
-
-class LinkDetailView(DetailView):
-    model = Link
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
 
 
 class LinkListView(ListView):
@@ -28,7 +21,7 @@ class LinkListView(ListView):
                             .exclude(summary__isnull=True)
                             .exclude(summary__exact='')
                             .exclude(summary__exact='nan')
-                            .order_by('benched', '-added'))
+                            .order_by('-added'))
     context_object_name = 'link_list'
     template_name = 'link/link_list.html'
 
@@ -36,7 +29,29 @@ class LinkListView(ListView):
 class UpcomingListView(ListView):
     model = Link
     paginate_by = 14
-    queryset = Link.objects.filter(liked__isnull=True).order_by('benched', '-added')
+    queryset = (Link.objects.filter(liked__isnull=True)
+                .annotate(priority=Case(When(Q(aggregator__exact='538'), then=16),
+                                        When(Q(aggregator__exact='Vox'), then=16),
+                                        When(Q(aggregator__exact='EAForum'), then=16),
+                                        When(Q(aggregator__exact='SSC'), then=15),
+                                        When(Q(aggregator__exact='Custom'), then=15),
+                                        When(Q(aggregator__exact='Twitter'), then=15),
+                                        When(Q(aggregator__exact='LW'), then=10),
+                                        When(Q(aggregator__exact='CurrentAffairs'), then=8),
+                                        When(Q(aggregator__exact='Caplan'), then=6),
+                                        When(Q(aggregator__exact='MR'), then=6),
+                                        When(Q(aggregator__exact='EABlogs'), then=5),
+                                        When(Q(aggregator__exact='Sumner'), then=4),
+                                        When(Q(aggregator__exact='Noah'), then=4),
+                                        When(Q(aggregator__exact='D4P'), then=4),
+                                        When(Q(aggregator__exact='3P'), then=3),
+                                        When(Q(aggregator__exact='Rosewater'), then=3),
+                                        When(Q(aggregator__exact='HN'), then=0.5),
+                                        default=1,
+                                        output_field=FloatField()))
+                .annotate(priority=ExpressionWrapper((1 + (F('priority') / 20.0)) + (F('id') / 2000.0),
+                                                     output_field=FloatField()))
+                .order_by('-priority').all())
     context_object_name = 'upcoming_list'
     template_name = 'link/upcoming_list.html'
 
@@ -58,23 +73,11 @@ class LinkCreate(CreateView):
 
 class LinkUpdate(UpdateView):
     model = Link
-    fields = ['url', 'title', 'summary', 'liked', 'benched', 'category', 'aggregator']
+    fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator']
     template_name_suffix = '_update_form'
 
-    def _is_bench_request(self):
-        if not self.request:
-            return False
-        if not self.request.POST:
-            return False
-        if not self.request.POST.get('bench'):
-            return False
-        return self.request.POST['bench'] == '-'
-
     def form_valid(self, form):
-        if self._is_bench_request():
-            form.instance.benched = 1
-            logging.info('Benched "{}"'.format(form.instance.title))
-        elif not form.instance.liked:
+        if not form.instance.liked:
             form.instance.liked = 0
             logging.info('Deleted "{}"'.format(form.instance.title))
 
