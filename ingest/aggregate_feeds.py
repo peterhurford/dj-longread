@@ -1209,7 +1209,7 @@ if error:
     print(msg)
 else:
     content127 = [str(c) for c in content127.find_all('a') if 'Issue' in str(c)]
-    content127 = [['https://softwareleadweekly.com' + c[3], 'Software Lead Weekly ' + c[-1].replace('></path></svg>', '').replace('</a>', ''), 'SLW'] for c in [c.split('"') for c in content127]]
+    content127 = [['Software Lead Weekly ' + c[-1].replace('></path></svg>', '').replace('</a>', ''), 'https://softwareleadweekly.com' + c[3], 'SLW'] for c in [c.split('"') for c in content127]]
     contents += content127
 
 print('Load Gladfelter...')
