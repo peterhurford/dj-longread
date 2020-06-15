@@ -8,9 +8,10 @@ run: ## Run Django
 migrate: ## Run Django migrations
 	poetry run python manage.py makemigrations && python manage.py makemigrations link && poetry run python manage.py migrate
 
-.PHONY: setup ## Install Python deps
-setup: poetry-setup
+.PHONY: setup
+setup: ## Install Python deps
 	pip install poetry
+	poetry update
 	poetry install
 
 .PHONY: build
