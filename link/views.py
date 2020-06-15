@@ -49,7 +49,9 @@ class UpcomingListView(ListView):
                                         When(Q(aggregator__exact='HN'), then=0.5),
                                         default=1,
                                         output_field=FloatField()))
-                .annotate(priority=ExpressionWrapper((1 + (F('priority') / 20.0)) + (F('id') / 2000.0),
+                .annotate(priority=ExpressionWrapper((1 + (F('priority') / 20.0)) +
+                                                         (F('id') / 2000.0) +
+                                                         (F('seed') / 100.0),
                                                      output_field=FloatField()))
                 .order_by('-priority').all())
     context_object_name = 'upcoming_list'

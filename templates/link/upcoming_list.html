@@ -20,7 +20,7 @@
             <input type="hidden" name="title" value="{{ link.title }}">
             <input type="hidden" name="location" value="random">
             <input class="btn btn-default btn-danger" type="submit" name="delete" value="No"/>
-            <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a> (<i>{{ link.added }}</i> {{ link.priority }})</li>
+            <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a> (<i>{{ link.added }}</i>)</li>
           </form>
     {% empty %}
         <li>No links yet.</li>
