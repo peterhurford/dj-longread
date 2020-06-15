@@ -14,14 +14,21 @@ from utils.sql import table_exists, drop_table, escape, enquote, add_row, delete
 
 # DRY with scripts/import_onetab.py
 ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
-            'liked', 'benched', 'category', 'aggregator']
+            'liked', 'category', 'aggregator', 'seed']
+
+
+def get_max_id(cur):
+    cur.execute('SELECT MAX(id) FROM link_link')
+    return cur.fetchone()[0]
 
 
 def add_link_row(cur, content):
+    seed = random.randint(1, 100)
+    idx = get_max_id(cur) + 1
     add_row(cur,
             'link_link',
-            ['title', 'url', 'aggregator', 'added', 'modified', 'benched'],
-            [enquote(c) for c in content + [str(datetime.now())] * 2] + [enquote('0')])
+            ['id', 'title', 'url', 'aggregator', 'added', 'modified', 'seed'],
+            [enquote(str(idx))] + [enquote(c) for c in content + [str(datetime.now())] * 2] + [enquote(str(seed))])
     return None
 
 
@@ -1258,30 +1265,16 @@ conn = psycopg2.connect('dbname=stanza_dev user=dbuser')
 cur = conn.cursor()
 lines = len(contents)
 for i, content in enumerate(contents):
-    if i % 100 == 0:
+    if i % 10 == 0:
         print('{}/{}'.format(i, lines))
 
     result = find_link_row(cur, content[1])
 
-    if len(result) == 0:
-        add_link_row(cur, content)
-    elif len(result) > 1:
+    if len(result) > 1 or (not len(result) == 0 and str(result[0]['added'].date()) == '1900-01-01'):
         delete_link_row(cur, content[1])
-        add_link_row(cur, content)
-    elif str(result[0]['added'].date()) == '1900-01-01':
-        delete_link_row(cur, content[1])
-        add_link_row(cur, content)
 
-    result = find_link_row(cur, content[1])
-    if len(result) == 0:
-        print('FATAL ERROR 1')
-        import pdb
-        pdb.set_trace()
-
-    if len(result) > 1:
-        print('FATAL ERROR 2')
-        import pdb
-        pdb.set_trace()
+    if len(result) == 0 or len(result) > 1 or str(result[0]['added'].date()) == '1900-01-01':
+        add_link_row(cur, content)
 
 cur.close()
 conn.commit()
