@@ -15,7 +15,7 @@ from .utils.url import clean_url, get_root_url
 
 class LinkListView(ListView):
     model = Link
-    paginate_by = 5
+    paginate_by = 50
     queryset = (Link.objects.exclude(liked__isnull=True)
                             .exclude(liked__exact=0)
                             .exclude(summary__isnull=True)
@@ -28,7 +28,7 @@ class LinkListView(ListView):
 
 class UpcomingListView(ListView):
     model = Link
-    paginate_by = 14
+    paginate_by = 17
     queryset = (Link.objects.filter(liked__isnull=True)
                 .annotate(priority=Case(When(Q(aggregator__exact='538'), then=16),
                                         When(Q(aggregator__exact='Vox'), then=16),
