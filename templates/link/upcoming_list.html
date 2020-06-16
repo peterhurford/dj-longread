@@ -12,15 +12,15 @@
     <ul>
     {% for link in object_list %}
       <li>
-        <form action="{% url 'link_update' pk=link.pk %}?q={{ request.GET.q }}" method="POST">
+        <form action="{% url 'link_update' pk=link.pk %}?q={{ request.GET.q }}&page={{ page_obj.number }}" method="POST">
             {% csrf_token %}
-            <a class='btn btn-success' href="/update/{{link.pk}}/?q={{ request.GET.q }}">Yes</a>
+            <a class='btn btn-success' href="/update/{{link.pk}}/?q={{ request.GET.q }}&page={{ page_obj.number }}">Yes</a>
             <input type="hidden" name="aggregator" value="{{ link.aggregator }}">
             <input type="hidden" name="url" value="{{ link.url }}">
             <input type="hidden" name="title" value="{{ link.title }}">
             <input class="btn btn-default btn-danger" type="submit" name="delete" value="No"/>
             <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a> (<i>{{ link.added }}</i>)</li>
-          </form>
+        </form>
     {% empty %}
         <li>No links yet.</li>
     {% endfor %}
