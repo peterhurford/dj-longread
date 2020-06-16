@@ -59,7 +59,9 @@ class UpcomingListView(ListView):
                                                          output_field=FloatField()))
                     .order_by('-priority'))
         if query:
-            queryset = queryset.filter(Q(url__icontains=query))
+            queryset = queryset.filter(Q(url__icontains=query) |
+                                       Q(title__icontains=query) |
+                                       Q(aggregator__icontains=query))
         queryset = queryset.all()
         return queryset
 
