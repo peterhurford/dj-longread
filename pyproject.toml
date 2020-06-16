@@ -6,13 +6,13 @@ authors = ["Peter Hurford <peter@peterhurford.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
+django = "*"
+django-background-tasks = "^1.2.5"
+gunicorn = "^20.0.4"
 mlgear = { git = "https://github.com/peterhurford/mlgear.git", branch = "master" }
 pandas = "*"
 psycopg2-binary = "^2.8.4"
-gunicorn = "^20.0.4"
 requests = "^2.23.0"
-django = "*"
-django-background-tasks = "^1.2.5"
 scipy = "^1.4.1"
 
 [tool.poetry.dev-dependencies]
