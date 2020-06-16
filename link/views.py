@@ -16,12 +16,24 @@ from .utils.url import clean_url, get_root_url
 class LinkListView(ListView):
     model = Link
     paginate_by = 50
-    queryset = (Link.objects.exclude(liked__isnull=True)
-                            .exclude(liked__exact=0)
-                            .exclude(summary__isnull=True)
-                            .exclude(summary__exact='')
-                            .exclude(summary__exact='nan')
-                            .order_by('-added'))
+
+    def get_queryset(self):
+        queryset = (Link.objects.exclude(liked__isnull=True)
+                                .exclude(liked__exact=0)
+                                .exclude(summary__isnull=True)
+                                .exclude(summary__exact='')
+                                .exclude(summary__exact='nan')
+                                .order_by('-added'))
+        query = self.request.GET.get('q')
+        if query:
+            queryset = queryset.filter(Q(url__icontains=query) |
+                                       Q(title__icontains=query) |
+                                       Q(aggregator__icontains=query) |
+                                       Q(category__icontains=query) |
+                                       Q(summary__icontains=query))
+        queryset = queryset.all()
+        return queryset
+
     context_object_name = 'link_list'
     template_name = 'link/link_list.html'
 
