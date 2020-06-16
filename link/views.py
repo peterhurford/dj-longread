@@ -31,7 +31,6 @@ class UpcomingListView(ListView):
     paginate_by = 17
 
     def get_queryset(self):
-        query = self.request.GET.get('q')
         queryset = (Link.objects
                     .filter(liked__isnull=True)
                     .annotate(priority=Case(When(Q(aggregator__exact='538'), then=16),
@@ -58,6 +57,7 @@ class UpcomingListView(ListView):
                                                              (F('seed') / 100.0),
                                                          output_field=FloatField()))
                     .order_by('-priority'))
+        query = self.request.GET.get('q')
         if query:
             queryset = queryset.filter(Q(url__icontains=query) |
                                        Q(title__icontains=query) |
