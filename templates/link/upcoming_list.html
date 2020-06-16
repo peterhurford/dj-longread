@@ -6,21 +6,20 @@
 
 <body>
   <div id="main">
-    <h1>Upcoming Links</h1>
+    <h1>Upcoming Links {{ request.GET.q }}</h1>
     <p>(<a href="/links">See archive</a>, <a href="/links/add_link.html">Add link</a>, <a href="/admin/link/link">Admin</a>)</p>
 
     <ul>
     {% for link in object_list %}
       <li>
-          <form action="{% url 'link_update' pk=link.pk %}" method="POST">
+        <form action="{% url 'link_update' pk=link.pk %}?q={{ request.GET.q }}" method="POST">
             {% csrf_token %}
-						<a class='btn btn-success' href="/update/{{link.pk}}/">Yes</a>
+            <a class='btn btn-success' href="/update/{{link.pk}}/?q={{ request.GET.q }}">Yes</a>
             <input type="hidden" name="aggregator" value="{{ link.aggregator }}">
             <input type="hidden" name="url" value="{{ link.url }}">
             <input type="hidden" name="title" value="{{ link.title }}">
-            <input type="hidden" name="location" value="random">
             <input class="btn btn-default btn-danger" type="submit" name="delete" value="No"/>
-            <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a> (<i>{{ link.added }}</i>)</li>
+            <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}?q={{ request.GET.q }}">{{ link.title }}</a> (<i>{{ link.added }}</i>)</li>
           </form>
     {% empty %}
         <li>No links yet.</li>
@@ -29,8 +28,8 @@
     <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                <a href="?q={{ request.GET.q }}&page=1">&laquo; first</a>
+                <a href="?q={{ request.GET.q }}&page={{ page_obj.previous_page_number }}">previous</a>
             {% endif %}
 
             <span class="current">
@@ -38,8 +37,8 @@
             </span>
 
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                <a href="?q={{ request.GET.q }}&page={{ page_obj.next_page_number }}">next</a>
+                <a href="?q={{ request.GET.q }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
     </div>

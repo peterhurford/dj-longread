@@ -14,3 +14,4 @@ urlpatterns = [
     path('links/add_link.html', views.LinkCreate.as_view(), name='link-create'),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
