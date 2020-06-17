@@ -24,13 +24,21 @@ class LinkListView(ListView):
                                 .exclude(summary__exact='')
                                 .exclude(summary__exact='nan')
                                 .order_by('-added'))
-        query = self.request.GET.get('q')
-        if query:
-            queryset = queryset.filter(Q(url__icontains=query) |
-                                       Q(title__icontains=query) |
-                                       Q(aggregator__icontains=query) |
-                                       Q(category__icontains=query) |
-                                       Q(summary__icontains=query))
+        url = self.request.GET.get('url')
+        if url:
+            queryset = queryset.filter(Q(url__icontains=url))
+        title = self.request.GET.get('title')
+        if title:
+            queryset = queryset.filter(Q(title__icontains=title))
+        aggregator = self.request.GET.get('aggregator')
+        if aggregator:
+            queryset = queryset.filter(Q(aggregator__icontains=aggregator))
+        category = self.request.GET.get('category')
+        if category:
+            queryset = queryset.filter(Q(category__icontains=category))
+        summary = self.request.GET.get('summary')
+        if summary:
+            queryset = queryset.filter(Q(summary__icontains=summary))
         queryset = queryset.all()
         return queryset
 
@@ -68,11 +76,15 @@ class UpcomingListView(ListView):
                                                              (F('seed') / 100.0),
                                                          output_field=FloatField()))
                     .order_by('-priority'))
-        query = self.request.GET.get('q')
-        if query:
-            queryset = queryset.filter(Q(url__icontains=query) |
-                                       Q(title__icontains=query) |
-                                       Q(aggregator__icontains=query))
+        url = self.request.GET.get('url')
+        if url:
+            queryset = queryset.filter(Q(url__icontains=url))
+        title = self.request.GET.get('title')
+        if title:
+            queryset = queryset.filter(Q(title__icontains=title))
+        aggregator = self.request.GET.get('aggregator')
+        if aggregator:
+            queryset = queryset.filter(Q(aggregator__icontains=aggregator))
         queryset = queryset.all()
         return queryset
 
