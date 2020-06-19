@@ -1364,6 +1364,7 @@ print('Psycopg2 connect')
 conn = psycopg2.connect('dbname=stanza_dev user=dbuser')
 cur = conn.cursor()
 lines = len(contents)
+news = 0
 for i, content in enumerate(contents):
     if i % 10 == 0:
         print('{}/{}'.format(i, lines))
@@ -1374,10 +1375,11 @@ for i, content in enumerate(contents):
         delete_link_row(cur, content[1])
 
     if len(result) == 0 or len(result) > 1 or str(result[0]['added'].date()) == '1900-01-01':
+        news += 1
         add_link_row(cur, content)
 
 cur.close()
 conn.commit()
 conn.close()
-print('Done')
+print('Done - {} new links added!'.format(news))
 
