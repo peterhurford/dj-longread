@@ -13,18 +13,12 @@ ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
             'liked', 'category', 'aggregator', 'seed']
 
 
-def get_max_id(cur):
-    cur.execute('SELECT MAX(id) FROM link_link')
-    return cur.fetchone()[0]
-
-
 def add_link_row(cur, content):
     seed = random.randint(1, 100)
-    idx = get_max_id(cur) + 1
     add_row(cur,
             'link_link',
-            ['id', 'title', 'url', 'aggregator', 'added', 'modified', 'seed'],
-            [enquote(str(idx))] + [enquote(c) for c in content + [str(datetime.now())] * 2] + [enquote(str(seed))])
+            ['title', 'url', 'aggregator', 'added', 'modified', 'seed'],
+            [enquote(c) for c in content + [str(datetime.now())] * 2] + [enquote(str(seed))])
     return None
 
 
