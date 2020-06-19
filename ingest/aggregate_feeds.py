@@ -1396,9 +1396,18 @@ content148, error, message = read('https://reason.com/latest/feed/', return_type
 if error:
     print(msg)
 else:
+    content148 = content148.find_all('item')
+    content148 = [[c.title.get_text(), c.link.get_text(), 'Reason'] for c in content148]
+    contents += content148
+
+print('Load Jen Skerritt...')
+content149, error, message = read('https://www.bloomberg.com/authors/ARMlA4tT8uE/jen-skerritt.rss', return_type='soup')
+if error:
+    print(msg)
+else:
     content149 = content149.find_all('item')
-    content149 = [[c.title.get_text(), c.link.get_text(), 'Reason'] for c in content149]
-    contents += content147
+    content149 = [[c.title.get_text(), c.link.get_text(), 'JenSkerritt'] for c in content149]
+    contents += content149
 
 
 random.shuffle(contents)
