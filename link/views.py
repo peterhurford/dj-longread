@@ -51,9 +51,22 @@ class UpcomingListView(ListView):
     paginate_by = 17
 
     def get_queryset(self):
-        queryset = (Link.objects
-                    .filter(liked__isnull=True)
-                    .annotate(priority=Case(When(Q(aggregator__exact='538'), then=16),
+        queryset = Link.objects.filter(liked__isnull=True)
+        url = self.request.GET.get('url')
+        if url:
+            queryset = queryset.filter(Q(url__icontains=url))
+        title = self.request.GET.get('title')
+        if title:
+            queryset = queryset.filter(Q(title__icontains=title))
+        aggregator = self.request.GET.get('aggregator')
+        if aggregator:
+            queryset = queryset.filter(Q(aggregator__icontains=aggregator))
+        sort = self.request.GET.get('sort')
+        if sort == 'recent':
+            queryset = queryset.order_by('-added')
+        else:
+            queryset = (queryset.annotate(priority=Case(
+                                            When(Q(aggregator__exact='538'), then=16),
                                             When(Q(aggregator__exact='Vox'), then=16),
                                             When(Q(aggregator__exact='EAForum'), then=16),
                                             When(Q(aggregator__exact='SSC'), then=15),
@@ -71,20 +84,11 @@ class UpcomingListView(ListView):
                                             When(Q(aggregator__exact='HN'), then=0.5),
                                             default=1,
                                             output_field=FloatField()))
-                    .annotate(priority=ExpressionWrapper((1 + (F('priority') / 20.0)) +
-                                                             (F('id') / 2000.0) +
-                                                             (F('seed') / 100.0),
-                                                         output_field=FloatField()))
-                    .order_by('-priority'))
-        url = self.request.GET.get('url')
-        if url:
-            queryset = queryset.filter(Q(url__icontains=url))
-        title = self.request.GET.get('title')
-        if title:
-            queryset = queryset.filter(Q(title__icontains=title))
-        aggregator = self.request.GET.get('aggregator')
-        if aggregator:
-            queryset = queryset.filter(Q(aggregator__icontains=aggregator))
+                        .annotate(priority=ExpressionWrapper((1 + (F('priority') / 20.0)) +
+                                                                 (F('id') / 2000.0) +
+                                                                 (F('seed') / 100.0),
+                                                             output_field=FloatField()))
+                        .order_by('-priority'))
         queryset = queryset.all()
         return queryset
 
@@ -120,7 +124,8 @@ class LinkUpdate(UpdateView):
         title = get_.get('title', '')
         aggregator = get_.get('aggregator', '')
         page = get_.get('page')
-        return '/?url={}&title={}&aggregator={}&page={}'.format(url, title, aggregator, page)
+        sort = get_.get('sort')
+        return '/?url={}&title={}&aggregator={}&page={}&sort={}'.format(url, title, aggregator, page, sort)
 
     def form_valid(self, form):
         if not form.instance.liked:
