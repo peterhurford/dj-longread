@@ -98,11 +98,13 @@ class LinkCreate(CreateView):
 
     def form_valid(self, form):
         form.instance.modified = timezone.now()
+        form.instance.added = timezone.now()
         form.instance.domain = get_root_url(clean_url(form.instance.url)) 
         return super().form_valid(form)
 
     def create(self, *args, **kwargs):
         self.modified = timezone.now()
+        self.added = timezone.now()
         self.domain = get_root_url(clean_url(self.url)) 
         return super().create(*args, **kwargs)
 
