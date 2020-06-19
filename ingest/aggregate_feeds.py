@@ -1211,15 +1211,6 @@ else:
     content127 = [['Software Lead Weekly ' + c[-1].replace('></path></svg>', '').replace('</a>', ''), 'https://softwareleadweekly.com' + c[3], 'SLW'] for c in [c.split('"') for c in content127]]
     contents += content127
 
-print('Load Gladfelter...')
-content128, error, msg = read('https://www.ogladfelter.com/rss.xml', return_type='soup', reader_type='xml')
-if error:
-    print(msg)
-else:
-    content128 = content128.find_all('item')
-    content128 = [[c.title.get_text(), c.link.get_text(), 'Gladfelter'] for c in content128]
-    contents += content128
-
 print('Load French Press...')
 content129, error, msg = read('https://frenchpress.thedispatch.com/feed', return_type='soup', reader_type='xml')
 if error:
