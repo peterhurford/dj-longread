@@ -22,8 +22,7 @@ class LinkListView(ListView):
                                 .exclude(liked__exact=0)
                                 .exclude(summary__isnull=True)
                                 .exclude(summary__exact='')
-                                .exclude(summary__exact='nan')
-                                .order_by('-added'))
+                                .exclude(summary__exact='nan'))
         url = self.request.GET.get('url')
         if url:
             queryset = queryset.filter(Q(url__icontains=url))
@@ -39,6 +38,12 @@ class LinkListView(ListView):
         summary = self.request.GET.get('summary')
         if summary:
             queryset = queryset.filter(Q(summary__icontains=summary))
+        sort = self.request.GET.get('sort')
+        if sort == 'random':
+            queryset = queryset.order_by('seed', 'id')
+        else:
+            queryset = queryset.order_by('-added')
+            
         queryset = queryset.all()
         return queryset
 
@@ -64,6 +69,8 @@ class UpcomingListView(ListView):
         sort = self.request.GET.get('sort')
         if sort == 'recent':
             queryset = queryset.order_by('-added')
+        elif sort == 'random':
+            queryset = queryset.order_by('seed', 'id')
         else:
             queryset = (queryset.annotate(priority=Case(
                                             When(Q(aggregator__exact='538'), then=16),
