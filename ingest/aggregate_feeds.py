@@ -1077,7 +1077,7 @@ else:
     contents += content112
 
 print('Load DataRobot...')
-content113, error, msg = read('https://blog.datarobot.com/rss.xml', return_type='soup', reader_type='xml')
+content113, error, msg = read('https://www.datarobot.com/blog/feed/', return_type='soup', reader_type='xml')
 if error:
     print(msg)
 else:
