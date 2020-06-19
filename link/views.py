@@ -115,7 +115,12 @@ class LinkUpdate(UpdateView):
     template_name_suffix = '_update_form'
 
     def get_success_url(self):
-        return '/?q={}&page={}'.format(self.request.GET.get('q'), self.request.GET.get('page'))
+        get_ = self.request.GET
+        url = get_.get('url', '')
+        title = get_.get('title', '')
+        aggregator = get_.get('aggregator', '')
+        page = get_.get('page')
+        return '/?url={}&title={}&aggregator={}&page={}'.format(url, title, aggregator, page)
 
     def form_valid(self, form):
         if not form.instance.liked:
