@@ -18,7 +18,7 @@ There are too many articles on the internet to possibly read them all. We want t
 
 5. Run `make migrate`
 6. Run `python manage.py createsuperuser`
-7. Seed the DB by running `python3 -m scripts.csv_to_postgres`
+7. [optional] Seed the DB by obtaining a data export CSV and [importing it into Postgres](https://www.postgresqltutorial.com/import-csv-file-into-posgresql-table/). Data export can be obtained with `make exportdb` from someone with a complete database.
 8. Get latest data by running `make update`
 
 
