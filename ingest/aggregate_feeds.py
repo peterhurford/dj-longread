@@ -1391,6 +1391,15 @@ else:
     content147 = [[c.title.get_text(), c.id.get_text(), 'KenWhite'] for c in content147]
     contents += content147
 
+print('Load Reason...')
+content148, error, message = read('https://reason.com/latest/feed/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content149 = content149.find_all('item')
+    content149 = [[c.title.get_text(), c.link.get_text(), 'Reason'] for c in content149]
+    contents += content147
+
 
 random.shuffle(contents)
 
