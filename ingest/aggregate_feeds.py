@@ -189,15 +189,6 @@ else:
     content15 = [[c.title.get_text(), c.link.get_text(), 'Beeminder'] for c in content15]
     contents += content15
 
-print('Load Katherine Savoie...')
-content16, error, msg = read('https://www.deliberatehappiness.com/1/feed', return_type='soup', reader_type='xml')
-if error:
-    print(msg)
-else:
-    content16 = content16.find_all('item')
-    content16 = [[c.title.get_text(), c.link.get_text(), 'KatherineSavoie'] for c in content16]
-    contents += content16
-
 print('Load Mr. Money Mustache...')
 content17, error, msg = read('https://feeds.feedburner.com/mrmoneymustache', return_type='soup', reader_type='xml')
 if error:
@@ -589,15 +580,6 @@ else:
     content56 = content56.find_all('entry')
     content56 = [[c.title.get_text(), str(c.find_all('link')[-1]).split('"')[1], 'Conservable'] for c in content56]
     contents += content56
-
-print('Load Harford...')
-content57, error, msg = read('http://timharford.com/feed/', return_type='soup', reader_type='xml')
-if error:
-    print(msg)
-else:
-    content57 = content57.find_all('item')
-    content57 = [[c.title.get_text(), c.link.get_text(), 'Harford'] for c in content57]
-    contents += content57
 
 print('Load Krugman...')
 content58, error, msg = read('http://www.nytimes.com/svc/collections/v1/publish/www.nytimes.com/column/paul-krugman/rss.xml', return_type='soup', reader_type='xml')
@@ -1347,7 +1329,7 @@ else:
     contents += content142
 
 print('Load Newport...')
-content143, error, message = read('https://www.calnewport.com/blog/feed/', return_type='soup')
+content143, error, message = read('https://www.calnewport.com/blog/feed/', return_type='soup', reader_type='xml')
 if error:
     print(msg)
 else:
