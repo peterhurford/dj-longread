@@ -1418,6 +1418,15 @@ else:
     content150 = [[c.title.get_text(), c.link.get_text(), 'SignalVNoise'] for c in content150]
     contents += content150
 
+print('Load Dan Wahl...')
+content151, error, message = read('https://danwahl.net/atom.xml', return_type='soup')
+if error:
+    print(msg)
+else:
+    content151 = content151.find_all('entry')
+    content151 = [[c.title.get_text(), c.id.get_text(), 'DanWahl'] for c in content151]
+    contents += content151
+
 
 random.shuffle(contents)
 
