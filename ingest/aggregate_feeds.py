@@ -1409,6 +1409,15 @@ else:
     content149 = [[c.title.get_text(), c.link.get_text(), 'JenSkerritt'] for c in content149]
     contents += content149
 
+print('Load Signal v Noise...')
+content150, error, message = read('https://m.signalvnoise.com/feed/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content150 = content150.find_all('item')
+    content150 = [[c.title.get_text(), c.link.get_text(), 'SignalVNoise'] for c in content150]
+    contents += content150
+
 
 random.shuffle(contents)
 
