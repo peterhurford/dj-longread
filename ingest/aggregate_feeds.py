@@ -42,6 +42,7 @@ def find_link_row(cur, url):
 contents = []
 
 
+# TODO: DRY loading framework
 print('Load HN...')
 content, error, msg = read('https://news.ycombinator.com/rss', return_type='list', reader_type='xml')
 if error:
@@ -948,15 +949,12 @@ else:
     contents += content96
 
 print('Load Guzey Twitter...')
-content97, error, message = read('https://www.getrevue.co/profile/guzey/', return_type='soup')
+content97, error, message = read('https://bestoftwitter.substack.com/feed', return_type='soup')
 if error:
     print(msg)
 else:
-    content97 = [c for c in content97.find_all('a') if 'Best of' in str(c)]
-    content97 = [str(c).split('"') for c in content97]
-    content97 = [[c[0], c[1]] for c in [[c for c in cs if 'best' in c.lower()] for cs in content97]]
-    content97 = [[c[1].replace('Best of Twitter - Best of Twitter - ', 'Best of Twitter - ').replace('title=\'', ''),
-                  'https://www.getrevue.co' + c[0], 'Guzey'] for c in content97]
+    content97 = content97.find_all('item')
+    content97 = [[c.title.get_text(), c.link.get_text(), 'Guzey'] for c in content97]
     contents += content97
 
 print('Load Guzey Links...')
@@ -1248,6 +1246,123 @@ else:
     content131 = content131.find_all('item')
     content131 = [[c.title.get_text(), c.link.get_text(), 'Danluu'] for c in content131]
     contents += content131
+
+print('Load Lewis...')
+content132, error, message = read('https://us14.campaign-archive.com/feed?u=66df320da8400b581cbc1b539&id=de632a3c62', return_type='soup')
+if error:
+    print(msg)
+else:
+    content132 = content132.find_all('item')
+    content132 = [[c.title.get_text(), c.link.get_text(), 'Bollard'] for c in content132]
+    contents += content132
+
+print('Load CSET...')
+content133, error, message = read('https://us20.campaign-archive.com/feed?u=248119f7a6386759c3a4f7155&id=fcbacf8c3e', return_type='soup')
+if error:
+    print(msg)
+else:
+    content133 = content133.find_all('item')
+    content133 = [[c.title.get_text(), c.link.get_text(), 'CSET'] for c in content133]
+    contents += content133
+
+print('Load HLI...')
+content133, error, message = read('https://us19.campaign-archive.com/feed?u=e759f3a724b8709250fb153c2&id=163285db12', return_type='soup')
+if error:
+    print(msg)
+else:
+    content133 = content133.find_all('item')
+    content133 = [[c.title.get_text(), c.link.get_text(), 'HLI'] for c in content133]
+    contents += content133
+
+print('Load Pluripotent...')
+content134, error, message = read('https://pluripotent.substack.com/feed', return_type='soup')
+if error:
+    print(msg)
+else:
+    content134 = content134.find_all('item')
+    content134 = [[c.title.get_text(), c.link.get_text(), 'Pluripotent'] for c in content134]
+    contents += content134
+
+print('Load Letters From An American...')
+content135, error, message = read('https://heathercoxrichardson.substack.com/feed/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content135 = content135.find_all('item')
+    content135 = [[c.title.get_text(), c.link.get_text(), 'LFaA'] for c in content135]
+    contents += content135
+
+print('Load FP China Brief...')
+content136, error, message = read('https://foreignpolicy.com/category/china-brief/feed/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content136 = content136.find_all('item')
+    content136 = [[c.title.get_text(), c.link.get_text(), 'FPChina'] for c in content136]
+    contents += content136
+
+print('Load FP South Asia Brief...')
+content137, error, message = read('https://foreignpolicy.com/category/south-asia-brief/feed/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content137 = content137.find_all('item')
+    content137 = [[c.title.get_text(), c.link.get_text(), 'FPSouthAsia'] for c in content137]
+    contents += content137
+
+print('Load FP Morning Brief...')
+content138, error, message = read('https://foreignpolicy.com/category/morning-brief/feed/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content138 = content138.find_all('item')
+    content138 = [[c.title.get_text(), c.link.get_text(), 'FPMorning'] for c in content138]
+    contents += content138
+
+print('Load FP Security Brief...')
+content139, error, message = read('https://foreignpolicy.com/category/security-brief/feed/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content139 = content139.find_all('item')
+    content139 = [[c.title.get_text(), c.link.get_text(), 'FPSecurity'] for c in content139]
+    contents += content139
+
+print('Load FP While You Weren\'t Looking...')
+content140, error, message = read('https://foreignpolicy.com/category/while-you-werent-looking/feed/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content140 = content140.find_all('item')
+    content140 = [[c.title.get_text(), c.link.get_text(), 'FP-WYWL'] for c in content140]
+    contents += content140
+
+print('Load Politico Morning Ag...')
+content141, error, message = read('https://rss.politico.com/morningagriculture.xml', return_type='soup')
+if error:
+    print(msg)
+else:
+    content141 = content141.find_all('item')
+    content141 = [[c.title.get_text(), c.link.get_text(), 'MorningAg'] for c in content141]
+    contents += content141
+
+print('Load FWI...')
+content142, error, message = read('https://us3.campaign-archive.com/feed?u=2afeee16b30494a373a377a31&id=92de5d8090', return_type='soup')
+if error:
+    print(msg)
+else:
+    content142 = content142.find_all('item')
+    content142 = [[c.title.get_text(), c.link.get_text(), 'FWI'] for c in content142]
+    contents += content142
+
+print('Load Newport...')
+content143, error, message = read('https://www.calnewport.com/blog/feed/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content143 = content143.find_all('item')
+    content143 = [[c.title.get_text(), c.link.get_text(), 'Newport'] for c in content143]
+    contents += content143
 
 
 random.shuffle(contents)
