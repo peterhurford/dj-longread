@@ -1355,6 +1355,42 @@ else:
     content143 = [[c.title.get_text(), c.link.get_text(), 'Newport'] for c in content143]
     contents += content143
 
+print('Load Yascha Mounk...')
+content144, error, message = read('https://www.theatlantic.com/feed/author/yascha-mounk/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content144 = content144.find_all('entry')
+    content144 = [[c.title.get_text(), c.id.get_text(), 'YaschaMounk'] for c in content144]
+    contents += content144
+
+print('Load Quinta Jurecic...')
+content145, error, message = read('https://www.theatlantic.com/feed/author/quinta-jurecic/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content145 = content145.find_all('entry')
+    content145 = [[c.title.get_text(), c.id.get_text(), 'QuintaJurecic'] for c in content145]
+    contents += content145
+
+print('Load Ken White...')
+content146, error, message = read('https://www.theatlantic.com/feed/author/ken-white/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content146 = content146.find_all('entry')
+    content146 = [[c.title.get_text(), c.id.get_text(), 'KenWhite'] for c in content146]
+    contents += content146
+
+print('Load David Frum...')
+content147, error, message = read('https://www.theatlantic.com/feed/author/david-frum/', return_type='soup')
+if error:
+    print(msg)
+else:
+    content147 = content147.find_all('entry')
+    content147 = [[c.title.get_text(), c.id.get_text(), 'KenWhite'] for c in content147]
+    contents += content147
+
 
 random.shuffle(contents)
 
