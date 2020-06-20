@@ -294,15 +294,6 @@ else:
     content25 = [[c.title.get_text(), c.link.get_text(), 'Dinsmore'] for c in content25]
     contents += content25
 
-print('Load Hanson...')
-content26, error, msg = read('http://www.overcomingbias.com/feed', return_type='soup', reader_type='xml')
-if error:
-    print(msg)
-else:
-    content26 = content26.find_all('item')
-    content26 = [[c.title.get_text(), c.link.get_text(), 'Hanson'] for c in content26]
-    contents += content26
-
 print('Load Muehlhauser...')
 content28, error, msg = read('http://feeds.feedburner.com/LukeMuehlhauser', return_type='soup', reader_type='xml')
 if error:
