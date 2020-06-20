@@ -527,15 +527,6 @@ else:
     content51 = [[c.title.get_text(), str(c.find_all('link')[-1]).split('"')[1], 'EconometricSense'] for c in content51]
     contents += content51
 
-print('Load Freakonometrics...')
-content52, error, msg = read('https://freakonometrics.hypotheses.org/feed', return_type='soup', reader_type='xml')
-if error:
-    print(msg)
-else:
-    content52 = content52.find_all('item')
-    content52 = [[c.title.get_text(), c.link.get_text(), 'Freakonometrics'] for c in content52]
-    contents += content52
-
 print('Load Riholtz...')
 content53, error, msg = read('https://ritholtz.com/feed/', return_type='soup', reader_type='xml')
 if error:
