@@ -608,15 +608,6 @@ else:
     content62 = [[c.title.get_text(), str(c.link).split('"')[1], 'Schneier'] for c in content62]
     contents += content62
 
-print('Load Christian Rationalist...')
-content63, error, msg = read('https://thechristianrationalist.com/feed/', return_type='soup', reader_type='xml')
-if error:
-    print(msg)
-else:
-    content63 = content63.find_all('item')
-    content63 = [[c.title.get_text(), c.link.get_text(), 'ChristianRationalist'] for c in content63]
-    contents += content63
-
 print('Load GrumpyEcon...')
 content64, error, msg = read('https://johnhcochrane.blogspot.com/feeds/posts/default', return_type='soup', reader_type='xml')
 if error:
