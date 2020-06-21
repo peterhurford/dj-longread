@@ -1,18 +1,17 @@
-import time
+import os
 import random
 import psycopg2
 
 import pandas as pd
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from mlgear.utils import chunk
 
 from utils.download import read
-from utils.ingest import clean_url, get_root_url
-from utils.sql import table_exists, drop_table, escape, enquote, add_row, delete_row, find_row
+from utils.sql import enquote, add_row, delete_row, find_row
 
 
-# DRY with scripts/import_onetab.py
+# TODO: DRY with scripts/import_onetab.py
 ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
             'liked', 'category', 'aggregator', 'seed']
 
@@ -427,32 +426,36 @@ contents += load_contents('JenSkerritt',
                           'https://www.bloomberg.com/authors/ARMlA4tT8uE/jen-skerritt.rss',
                           'item')
 contents += load_contents('DanWahl', 'https://danwahl.net/atom.xml', 'entry')
+
+print('-')
+print('Gathering content')
 random.shuffle(contents)
 
-
 # TODO: DRY with scripts/import_onetab.py
+print('Data export')
+os.system('make exportdb')
+
+print('-')
+print('Load data')
+links = pd.read_csv('data/export.csv', header=None)
+links.columns = ALL_COLS
+
 print('Psycopg2 connect')
 conn = psycopg2.connect('dbname=stanza_dev user=dbuser')
 cur = conn.cursor()
+existing_urls = set(links['url'].values)
+contents = [c for c in contents if c[1] not in existing_urls]
 lines = len(contents)
-news = 0
+print('Adding to DB')
 for i, content in enumerate(contents):
     if i % 10 == 0:
-        print('{}/{}'.format(i, lines))
-
-    # TODO: Run an exportdb action, compare against CSV
-    result = find_link_row(cur, content[1])
-
-    if len(result) > 1 or (not len(result) == 0 and str(result[0]['added'].date()) == '1900-01-01'):
-        delete_link_row(cur, content[1])
-
-    if len(result) == 0 or len(result) > 1 or str(result[0]['added'].date()) == '1900-01-01':
-        news += 1
-        # TODO: Add more postprocessing from project stanza 1
-        add_link_row(cur, content)
+        print('...{}/{}'.format(i, lines))
+    # TODO: Add more postprocessing from project stanza 1
+    add_link_row(cur, content)
 
 cur.close()
 conn.commit()
 conn.close()
-print('Done - {} new links added!'.format(news))
+print('-')
+print('Done! - {} new links added!'.format(lines))
 
