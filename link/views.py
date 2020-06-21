@@ -73,6 +73,7 @@ class UpcomingListView(ListView):
             queryset = queryset.order_by('seed', 'id')
         else:
             queryset = (queryset.annotate(priority=Case(
+                                            When(Q(aggregator__exact='Dispatch'), then=20),
                                             When(Q(aggregator__exact='538'), then=16),
                                             When(Q(aggregator__exact='Vox'), then=16),
                                             When(Q(aggregator__exact='EAForum'), then=16),
