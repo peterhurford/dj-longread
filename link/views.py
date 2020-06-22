@@ -74,6 +74,13 @@ class UpcomingListView(ListView):
         else:
             queryset = (queryset.annotate(priority=Case(
                                             When(Q(aggregator__exact='Dispatch'), then=20),
+                                            When(Q(aggregator__exact='LFaA'), then=20),
+                                            When(Q(aggregator__exact='FPMorning'), then=20),
+                                            When(Q(aggregator__exact='FPSecurity'), then=20),
+                                            When(Q(aggregator__exact='FPChina'), then=20),
+                                            When(Q(aggregator__exact='FPSouthAsia'), then=20),
+                                            When(Q(aggregator__exact='FP-WYWL'), then=20),
+                                            When(Q(aggregator__exact='MorningAg'), then=20),
                                             When(Q(aggregator__exact='538'), then=16),
                                             When(Q(aggregator__exact='Vox'), then=16),
                                             When(Q(aggregator__exact='EAForum'), then=16),
@@ -92,7 +99,7 @@ class UpcomingListView(ListView):
                                             When(Q(aggregator__exact='HN'), then=0.5),
                                             default=1,
                                             output_field=FloatField()))
-                        .annotate(priority=ExpressionWrapper((1 + (F('priority') / 20.0)) +
+                        .annotate(priority=ExpressionWrapper((1 + (F('priority') / 17.0)) +
                                                                  (F('id') / 2000.0) +
                                                                  (F('seed') / 100.0),
                                                              output_field=FloatField()))
