@@ -293,7 +293,6 @@ contents += load_contents('Sumner', 'https://www.econlib.org/feed/indexSumner_xm
                           sumner_reading_fn)
 contents += load_contents('NewFood', 'https://newfoodeconomy.org/feed/', 'item')
 contents += load_contents('Morrill', 'http://feeds.feedburner.com/daniellemorrill', 'item')
-contents += load_contents('BLH', 'https://bleedingheartlibertarians.com/feed/', 'item')
 contents += load_contents('WorldInData', 'https://ourworldindata.org/atom.xml', 'entry')
 contents += load_contents('FakeNous', 'http://fakenous.net/?feed=rss2', 'item')
 contents += load_contents('SamAltman', 'http://blog.samaltman.com/posts.atom', 'entry-link')
