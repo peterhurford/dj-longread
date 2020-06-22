@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.db.models import Case, When, Q, F, FloatField, ExpressionWrapper
+from django.db.models import Case, When, Q, F, FloatField, ExpressionWrapper, Max
 from django.shortcuts import render
 from django.utils import timezone
 
@@ -41,6 +41,8 @@ class LinkListView(ListView):
         sort = self.request.GET.get('sort')
         if sort == 'random':
             queryset = queryset.order_by('seed', 'id')
+        elif sort == 'diversity':
+            queryset = queryset.order_by('aggregator', '-added').distinct('aggregator')
         else:
             queryset = queryset.order_by('-added')
             
@@ -71,6 +73,8 @@ class UpcomingListView(ListView):
             queryset = queryset.order_by('-added')
         elif sort == 'random':
             queryset = queryset.order_by('seed', 'id')
+        elif sort == 'diversity':
+            queryset = queryset.order_by('aggregator', '-added').distinct('aggregator')
         else:
             queryset = (queryset.annotate(priority=Case(
                                             When(Q(aggregator__exact='Dispatch'), then=20),
