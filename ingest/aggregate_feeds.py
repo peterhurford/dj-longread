@@ -8,7 +8,7 @@ from datetime import datetime
 from mlgear.utils import chunk
 
 from utils.download import read
-from utils.sql import enquote, add_row, delete_row, find_row
+from utils.sql import enquote, add_row, delete_row
 
 
 # TODO: DRY with scripts/import_onetab.py
@@ -25,17 +25,9 @@ def add_link_row(cur, content):
     return None
 
 
-def delete_link_row(cur, url):
-    delete_row(cur, 'link_link', 'url', enquote(url))
+def delete_link_row(cur, id_):
+    delete_row(cur, 'link_link', 'id', enquote(id_))
     return None
-
-
-def find_link_row(cur, url):
-    result = find_row(cur, 'link_link', 'url', url, n='many')
-    if result:
-        return [dict(zip(ALL_COLS, r)) for r in result]
-    else:
-        return []
 
 
 def entry_process_fn(name, content):
@@ -50,7 +42,7 @@ def item_process_fn(name, content):
                 c.link.get_text() if c.link is not None else '', name] for c in content]
     return content
 
-def item_split_process_fn(name, content):
+def entry_link_process_fn(name, content):
     content = content.find_all('entry')
     content = [[c.title.get_text() if c.title is not None else 'Blank',
                 str(c.find_all('link')[-1]).split('"')[1] if c.link is not None else '',
@@ -70,11 +62,18 @@ def load_contents(name, feed, reader_fn, return_type='soup', reader_type='xml'):
         reader_fn = item_process_fn
     elif reader_fn == 'entry':
         reader_fn = entry_process_fn
+    elif reader_fn == 'entry-link':
+        reader_fn = entry_link_process_fn
 
     content = reader_fn(name, content)
 
     if len(content) == 0:
         print('--- ERROR: No content!')
+        return []
+
+    if 'http' not in content[0][1]:
+        print('--- ERROR: Malformed URLs!')
+        return []
 
     return content
 
@@ -155,7 +154,7 @@ contents += load_contents('Progress', 'https://rootsofprogress.org/posts',
 
 contents += load_contents('PhilosophyEtc',
                           'http://feeds.philosophyetc.net/PhilosophyEtCetera',
-                          item_split_process_fn)
+                          'entry-link')
 
 def asphalt_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'bookmark' in str(c)]
@@ -180,7 +179,8 @@ contents += load_contents('Muehlhauser', 'http://feeds.feedburner.com/LukeMuehlh
 
 def leo_reader_fn(name, content):
     content = [str(c).split('"') for c in content.find_all('a')]
-    content = [[c[2].replace('</a>', '').replace('>', '').replace('\n', ''), c[1], 'Leo'] for c in content]
+    content = [[c[2].replace('</a>', '').replace('>', '').replace('\n', ''),
+                'https://zenhabits.net' + c[1], 'Leo'] for c in content]
     content = content[2:]
     return content
 contents += load_contents('Leo', 'https://zenhabits.net/archives/', leo_reader_fn,
@@ -230,7 +230,7 @@ contents += load_contents('Rosewater',
 contents += load_contents('Levels', 'https://levels.io/rss/', 'item')
 contents += load_contents('TSNR', 'https://tnsr.org/feed/', 'item')
 contents += load_contents('Noah', 'http://noahpinionblog.blogspot.com/feeds/posts/default',
-                          item_split_process_fn)
+                          'entry-link')
 contents += load_contents('Noah',
                           'https://www.bloomberg.com/opinion/authors/AR3OYuAmvcU/noah-smith.rss',
                           'item')
@@ -249,23 +249,23 @@ contents += load_contents('Chait', 'http://nymag.com/author/jonathan-chait/', ch
                           reader_type='lxml')
 
 contents += load_contents('3P', 'https://www.peoplespolicyproject.org/feed/', 'item')
-contents += load_contents('DeLong', 'https://www.bradford-delong.com/atom.xml', 'entry')
+contents += load_contents('DeLong', 'https://www.bradford-delong.com/atom.xml', 'entry-link')
 contents += load_contents('ImportAI', 'https://jack-clark.net/feed/', 'item')
 contents += load_contents('MoneyIllusion', 'http://feeds.feedburner.com/Themoneyillusion', 'item')
 contents += load_contents('AllegedWisdom', 
                           'http://allegedwisdom.blogspot.com/feeds/posts/default',
-                          'entry')
+                          'entry-link')
 contents += load_contents('Mike', 'https://mikethemadbiologist.com/feed/', 'item')
 contents += load_contents('Gelman', 'https://statmodeling.stat.columbia.edu/feed/', 'item')
 contents += load_contents('EconometricSense',
                           'http://econometricsense.blogspot.com/feeds/posts/default',
-                          'entry')
+                          'entry-link')
 contents += load_contents('Riholtz', 'https://ritholtz.com/feed/', 'item')
 contents += load_contents('PragCap', 'https://www.pragcap.com/feed/', 'item')
 contents += load_contents('NakedCapitalism', 'https://www.nakedcapitalism.com/feed', 'item')
 contents += load_contents('Conservable',
                           'http://conversableeconomist.blogspot.com/feeds/posts/default',
-                          'entry')
+                          'entry-link')
 contents += load_contents('Krugman',
                           'http://www.nytimes.com/svc/collections/v1/publish/www.nytimes.com/column/paul-krugman/rss.xml',
                           'item')
@@ -274,10 +274,10 @@ contents += load_contents('VoxEU', 'https://voxeu.org/feed/recent/rss.xml', 'ite
 contents += load_contents('EnlightementEcon',
                           'http://www.enlightenmenteconomics.com/blog/index.php/feed/',
                           'item')
-contents += load_contents('Schneier', 'https://www.schneier.com/blog/atom.xml', 'entry')
+contents += load_contents('Schneier', 'https://www.schneier.com/blog/atom.xml', 'entry-link')
 contents += load_contents('GrumpyEcon',
                           'https://johnhcochrane.blogspot.com/feeds/posts/default',
-                          'entry')
+                          'entry-link')
 contents += load_contents('SupplySide', 'https://blog.supplysideliberal.com/post?format=rss', 'item')
 contents += load_contents('Bulletin', 'https://thebulletin.org/feed/', 'item')
 contents += load_contents('Rodney', 'http://rodneybrooks.com/blog/feed/', 'item')
@@ -296,20 +296,20 @@ contents += load_contents('Morrill', 'http://feeds.feedburner.com/daniellemorril
 contents += load_contents('BLH', 'https://bleedingheartlibertarians.com/feed/', 'item')
 contents += load_contents('WorldInData', 'https://ourworldindata.org/atom.xml', 'entry')
 contents += load_contents('FakeNous', 'http://fakenous.net/?feed=rss2', 'item')
-contents += load_contents('SamAltman', 'http://blog.samaltman.com/posts.atom', 'entry')
+contents += load_contents('SamAltman', 'http://blog.samaltman.com/posts.atom', 'entry-link')
 contents += load_contents('Crawford', 'https://jasoncrawford.org/feed.xml', 'entry')
-contents += load_contents('HBR', 'http://feeds.hbr.org/harvardbusiness/', 'entry')
+contents += load_contents('HBR', 'http://feeds.hbr.org/harvardbusiness/', 'entry-link')
 contents += load_contents('Devon', 'https://devonzuegel.com/feed.xml', 'entry')
 contents += load_contents('Pseudoerasmus', 'https://pseudoerasmus.com/feed/', 'item')
 contents += load_contents('Nintil', 'https://nintil.com/rss.xml', 'item')
 contents += load_contents('Aarora', 'https://harshitaarora.com/feed/', 'item')
 contents += load_contents('WTB', 'https://medium.com/feed/what-to-build', 'item')
-contents += load_contents('Elad', 'http://blog.eladgil.com/feeds/posts/default', 'entry')
+contents += load_contents('Elad', 'http://blog.eladgil.com/feeds/posts/default', 'entry-link')
 contents += load_contents('Eghbal', 'https://nadiaeghbal.com/feed', 'entry')
 contents += load_contents('Greenspun', 'https://philip.greenspun.com/blog/feed/', 'item')
 contents += load_contents('ScholarsSage',
                           'https://scholars-stage.blogspot.com/feeds/posts/default',
-                          'entry')
+                          'entry-link')
 contents += load_contents('Gross', 'https://dcgross.com/feed.xml', 'entry')
 contents += load_contents('Kling', 'http://www.arnoldkling.com/blog/feed/', 'item')
 contents += load_contents('Seliger', 'https://jakeseliger.com/feed/', 'item')
@@ -414,13 +414,13 @@ contents += load_contents('FWI',
                           'item')
 contents += load_contents('Newport', 'https://www.calnewport.com/blog/feed/', 'item')
 contents += load_contents('YaschaMounk', 'https://www.theatlantic.com/feed/author/yascha-mounk/',
-                          'entry')
+                          'entry-link')
 contents += load_contents('QuintaJurecic',
                           'https://www.theatlantic.com/feed/author/quinta-jurecic',
-                          'entry')
+                          'entry-link')
 contents += load_contents('KenWhite', 'https://www.theatlantic.com/feed/author/ken-white/',
-                          'entry')
-contents += load_contents('Frum', 'https://www.theatlantic.com/feed/author/david-frum/', 'entry')
+                          'entry-link')
+contents += load_contents('Frum', 'https://www.theatlantic.com/feed/author/david-frum/', 'entry-link')
 contents += load_contents('Reason', 'https://reason.com/latest/feed/', 'item')
 contents += load_contents('JenSkerritt',
                           'https://www.bloomberg.com/authors/ARMlA4tT8uE/jen-skerritt.rss',
@@ -443,19 +443,47 @@ links.columns = ALL_COLS
 print('Psycopg2 connect')
 conn = psycopg2.connect('dbname=stanza_dev user=dbuser')
 cur = conn.cursor()
+
+print('-')
+print('Purging broken links')
+broken = links[~links['url'].apply(lambda u: isinstance(u, str) and 'http' in u)]['id']
+lines = len(broken)
+if lines == 0:
+    print('...No broken links detected')
+else:
+    for i, id_ in enumerate(broken):
+        delete_link_row(cur, id_)
+    print('...{} broken links purged!'.format(lines))
+
+print('-')
+print('Calculating links to add')
 existing_urls = set(links['url'].values)
 contents = [c for c in contents if c[1] not in existing_urls]
 lines = len(contents)
-print('Adding to DB')
-for i, content in enumerate(contents):
-    if i % 10 == 0:
-        print('...{}/{}'.format(i, lines))
-    # TODO: Add more postprocessing from project stanza 1
-    add_link_row(cur, content)
+if lines == 0:
+    print('...No links to add')
+else:
+    print('...Adding links to DB')
+    for i, content in enumerate(contents):
+        # TODO: Add more postprocessing from project stanza 1
+        add_link_row(cur, content)
+    print('...{} new links added!'.format(lines))
 
+print('-')
+print('Purging duplicated')
+duplicated = links[links['url'].duplicated()]['id']
+lines = len(duplicated)
+if lines == 0:
+    print('...No duplicated links detected')
+else:
+    for i, id_ in enumerate(duplicated):
+        delete_link_row(cur, id_)
+    print('...{} duplicated purged!'.format(lines))
+
+print('-')
+print('Closing connection')
 cur.close()
 conn.commit()
 conn.close()
-print('-')
-print('Done! - {} new links added!'.format(lines))
+print('DONE!')
 
