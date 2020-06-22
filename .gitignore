@@ -18,6 +18,9 @@ db.sqlite3-journal
 instance/
 .webassets-cache
 
+# Jupyter stuff:
+.ipynb_checkpoints/
+
 # Project specific:
 data/glove.6B.300d.txt
 data/extract/*
