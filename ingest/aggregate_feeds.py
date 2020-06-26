@@ -97,10 +97,19 @@ def ea_blogs_reader_fn(name, content):
     content = [[c[1].split('>')[1].split('<')[0],
                  c[0].replace('"', '').strip(),
                  'EABlogs'] for c in content]
-    return content
+    processed_content = []
+    for c in content:
+        if 'forum.effectivealtruism.org' in c[1]:
+            c[2] = 'EAForum'
+        elif 'lesswrong.com' in c[1]:
+            c[2] = 'LW'
+        if 'reddit.com/r/' not in c[1]:  # Drop EA Reddit
+            processed_content.append(c)
+    return processed_content
 contents += load_contents('EABlogs', 'http://eablogs.net', ea_blogs_reader_fn)
 
-contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml?view=curated-rss', 'item')
+contents += load_contents('EAForum', 'https://forum.effectivealtruism.org/feed.xml', 'item')
+contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml', 'item')
 contents += load_contents('538', 'https://fivethirtyeight.com/politics/feed/', 'item')
 contents += load_contents('Lusk', 'http://jaysonlusk.com/blog?format=rss', 'item')
 
