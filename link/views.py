@@ -42,9 +42,9 @@ class LinkListView(ListView):
         if sort == 'random':
             queryset = queryset.order_by('seed', 'id')
         elif sort == 'diversity':
-            queryset = queryset.order_by('aggregator', '-added').distinct('aggregator')
+            queryset = queryset.order_by('aggregator', '-modified').distinct('aggregator')
         else:
-            queryset = queryset.order_by('-added')
+            queryset = queryset.order_by('-modified')
             
         queryset = queryset.all()
         return queryset
