@@ -434,6 +434,7 @@ contents += load_contents('JenSkerritt',
                           'https://www.bloomberg.com/authors/ARMlA4tT8uE/jen-skerritt.rss',
                           'item')
 contents += load_contents('DanWahl', 'https://danwahl.net/atom.xml', 'entry')
+contents += load_contents('Metaculus', 'https://www.metaculus.com/news/rss/', 'item')
 
 print('-')
 print('Gathering content')
