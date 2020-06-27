@@ -468,13 +468,16 @@ print('Calculating links to add')
 existing_urls = set(links['url'].values)
 contents = [c for c in contents if c[1] not in existing_urls]
 lines = len(contents)
+added = []
 if lines == 0:
     print('...No links to add')
 else:
     print('...Adding links to DB')
     for i, content in enumerate(contents):
-        # TODO: Add more postprocessing from project stanza 1
-        add_link_row(cur, content)
+        if content[1] not in added:
+            # TODO: Add more postprocessing from project stanza 1
+            add_link_row(cur, content)
+            added.append(content[1])
     print('...{} new links added!'.format(lines))
 
 print('-')
@@ -486,7 +489,7 @@ if lines == 0:
 else:
     for i, id_ in enumerate(duplicated):
         delete_link_row(cur, id_)
-    print('...{} duplicated purged!'.format(lines))
+    print('...{} duplicated links purged!'.format(lines))
 
 print('-')
 print('Closing connection')
