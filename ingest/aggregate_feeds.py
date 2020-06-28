@@ -435,6 +435,16 @@ contents += load_contents('JenSkerritt',
                           'item')
 contents += load_contents('DanWahl', 'https://danwahl.net/atom.xml', 'entry')
 contents += load_contents('Metaculus', 'https://www.metaculus.com/news/rss/', 'item')
+def evans_reader_fn(name, content):
+    content = [str(c) for c in content.find_all('a') if 'benedictevans' in str(c)]
+    content = [c.split('href="')[-1].split('>')[:-1] for c in content]
+    content = [[c[1].replace('</a', ''),
+                'https://www.ben-evans.com' + c[0],
+                'BenEvans'] for c in content]
+    content = [c for c in content if '\n' not in c[0]]
+    return content
+contents += load_contents('BenEvans', 'https://www.ben-evans.com/essays', evans_reader_fn,
+                          reader_type='lxml')
 
 print('-')
 print('Gathering content')
