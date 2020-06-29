@@ -439,7 +439,7 @@ def evans_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'benedictevans' in str(c)]
     content = [c.split('href="')[-1].split('>')[:-1] for c in content]
     content = [[c[1].replace('</a', ''),
-                'https://www.ben-evans.com' + c[0],
+                'https://www.ben-evans.com' + c[0].replace('"', ''),
                 'BenEvans'] for c in content]
     content = [c for c in content if '\n' not in c[0]]
     return content
