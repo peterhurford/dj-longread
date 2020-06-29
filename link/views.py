@@ -74,7 +74,7 @@ class UpcomingListView(ListView):
         elif sort == 'random':
             queryset = queryset.order_by('seed', 'id')
         elif sort == 'diversity':
-            queryset = queryset.order_by('aggregator', '-added').distinct('aggregator')
+            queryset = queryset.order_by('seed', 'aggregator', '-added')
         else:
             queryset = (queryset.annotate(priority=Case(
                                             When(Q(aggregator__exact='LFaA'), then=30),
