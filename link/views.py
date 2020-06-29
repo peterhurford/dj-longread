@@ -77,7 +77,6 @@ class UpcomingListView(ListView):
             queryset = queryset.order_by('aggregator', '-added').distinct('aggregator')
         else:
             queryset = (queryset.annotate(priority=Case(
-                                            When(Q(aggregator__exact='Dispatch'), then=30),
                                             When(Q(aggregator__exact='LFaA'), then=30),
                                             When(Q(aggregator__exact='FPMorning'), then=30),
                                             When(Q(aggregator__exact='FPSecurity'), then=30),
@@ -85,6 +84,7 @@ class UpcomingListView(ListView):
                                             When(Q(aggregator__exact='FPSouthAsia'), then=30),
                                             When(Q(aggregator__exact='FP-WYWL'), then=30),
                                             When(Q(aggregator__exact='MorningAg'), then=30),
+                                            When(Q(aggregator__exact='Dispatch'), then=25),
                                             When(Q(aggregator__exact='EAForum'), then=16),
                                             When(Q(aggregator__exact='538'), then=14),
                                             When(Q(aggregator__exact='Vox'), then=14),
@@ -111,8 +111,8 @@ class UpcomingListView(ListView):
                                             default=1,
                                             output_field=FloatField()))
                         .annotate(priority=ExpressionWrapper((1 + (F('priority') / 17.0)) +
-                                                                 (F('id') / 2000.0) +
-                                                                 (F('seed') / 80.0),
+                                                                 (F('id') / 1700.0) +
+                                                                 (F('seed') / 75.0),
                                                              output_field=FloatField()))
                         .order_by('-priority'))
         queryset = queryset.all()
