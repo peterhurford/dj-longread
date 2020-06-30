@@ -63,6 +63,7 @@ class UpcomingListView(ListView):
         context = super(UpcomingListView, self).get_context_data(**kwargs)
         today = datetime.today()
         today = datetime(today.year, today.month, today.day)
+        context['total_count'] = Link.objects.count()
         context['read_count'] = (Link.objects.exclude(liked__isnull=True)
                                              .filter(modified__gte=today)
                                              .count())

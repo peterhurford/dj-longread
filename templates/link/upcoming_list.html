@@ -33,7 +33,7 @@
             {% endif %}
 
             <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. <em>({{ read_count }} read today)</em>
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. <em>({{ total_count }} total, {{ read_count }} read today)</em>
             </span>
 
             {% if page_obj.has_next %}
