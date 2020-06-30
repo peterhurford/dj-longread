@@ -1,10 +1,12 @@
 import logging
 
+from datetime import datetime
+
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.db.models import Case, When, Q, F, FloatField, ExpressionWrapper, Max
+from django.db.models import Case, When, Q, F, FloatField, ExpressionWrapper, Max, Count
 from django.shortcuts import render
 from django.utils import timezone
 
@@ -56,6 +58,15 @@ class LinkListView(ListView):
 class UpcomingListView(ListView):
     model = Link
     paginate_by = 17
+
+    def get_context_data(self, **kwargs):
+        context = super(UpcomingListView, self).get_context_data(**kwargs)
+        today = datetime.today()
+        today = datetime(today.year, today.month, today.day)
+        context['read_count'] = (Link.objects.exclude(liked__isnull=True)
+                                             .filter(modified__gte=today)
+                                             .count())
+        return context
 
     def get_queryset(self):
         queryset = Link.objects.filter(liked__isnull=True)
