@@ -446,6 +446,7 @@ def evans_reader_fn(name, content):
 contents += load_contents('BenEvans', 'https://www.ben-evans.com/essays', evans_reader_fn,
                           reader_type='lxml')
 contents += load_contents('KateLowry', 'https://medium.com/feed/@kate.lowry', 'item')
+contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/', 'item')
 
 print('-')
 print('Gathering content')
