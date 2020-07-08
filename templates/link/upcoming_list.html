@@ -29,15 +29,15 @@
         <span class="step-links">
             {% if page_obj.has_previous %}
               <a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&sort={{ request.GET.sort }}&page=1">&laquo; first</a>
-              <a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&sort={{ request.GET.sort }}&page={{ page_obj.previous_page_number }}">previous</a>
+              <a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&sort={{ request.GET.sort }}&page={{ page_obj.previous_page_number }}">previous</a>...
             {% endif %}
 
             <span class="current">
-              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. <em>({{ total_count }} total, {{ read_count }} read today)</em>
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}... <em>({{ total_count }} total... {{ liked_count }} liked / {{ read_count }} read today)</em>
             </span>
 
             {% if page_obj.has_next %}
-              <a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&sort={{ request.GET.sort }}&page={{ page_obj.next_page_number }}">next</a>
+              ...<a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&sort={{ request.GET.sort }}&page={{ page_obj.next_page_number }}">next</a>
               <a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&sort={{ request.GET.sort }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>

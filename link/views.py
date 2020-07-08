@@ -57,7 +57,7 @@ class LinkListView(ListView):
 
 class UpcomingListView(ListView):
     model = Link
-    paginate_by = 17
+    paginate_by = 16
 
     def get_context_data(self, **kwargs):
         context = super(UpcomingListView, self).get_context_data(**kwargs)
@@ -69,6 +69,10 @@ class UpcomingListView(ListView):
         context['read_count'] = (Link.objects.exclude(liked__isnull=True)
                                              .filter(modified__gte=today)
                                              .count())
+        context['liked_count'] = (Link.objects.exclude(liked__isnull=True)
+                                              .filter(modified__gte=today)
+                                              .exclude(liked__exact=0)
+                                              .count())
         return context
 
     def get_queryset(self):
@@ -125,9 +129,9 @@ class UpcomingListView(ListView):
                                             When(Q(aggregator__exact='HN'), then=0.5),
                                             default=1,
                                             output_field=FloatField()))
-                        .annotate(priority=ExpressionWrapper((1 + (F('priority') / 17.0)) +
+                        .annotate(priority=ExpressionWrapper((1 + (F('priority') / 19.0)) +
                                                                  (F('id') / 1700.0) +
-                                                                 (F('seed') / 75.0),
+                                                                 (F('seed') / 50.0),
                                                              output_field=FloatField()))
                         .order_by('-priority'))
         queryset = queryset.all()
