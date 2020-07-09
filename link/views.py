@@ -43,7 +43,7 @@ class LinkListView(ListView):
         sort = self.request.GET.get('sort')
         if sort == 'random':
             queryset = queryset.order_by('seed', 'id')
-        elif sort == 'diversity':
+        elif sort == 'diverse':
             queryset = queryset.order_by('aggregator', '-modified').distinct('aggregator')
         else:
             queryset = queryset.order_by('-modified')
@@ -91,8 +91,10 @@ class UpcomingListView(ListView):
             queryset = queryset.order_by('-added')
         elif sort == 'random':
             queryset = queryset.order_by('seed', 'id')
-        elif sort == 'diversity':
+        elif sort == 'diverse':
             queryset = queryset.order_by('seed', 'aggregator', '-added')
+        elif sort == 'diverserecent':
+            queryset = queryset.order_by('seed', '-added')
         else:
             queryset = (queryset.annotate(priority=Case(
                                             When(Q(aggregator__exact='LFaA'), then=30),
