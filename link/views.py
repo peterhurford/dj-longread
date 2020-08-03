@@ -97,15 +97,15 @@ class UpcomingListView(ListView):
             queryset = queryset.order_by('seed', '-added')
         else:
             queryset = (queryset.annotate(priority=Case(
-                                            When(Q(aggregator__exact='LFaA'), then=30),
-                                            When(Q(aggregator__exact='FPMorning'), then=30),
-                                            When(Q(aggregator__exact='FPSecurity'), then=30),
-                                            When(Q(aggregator__exact='FPChina'), then=30),
-                                            When(Q(aggregator__exact='FPSouthAsia'), then=30),
-                                            When(Q(aggregator__exact='FP-WYWL'), then=30),
-                                            When(Q(aggregator__exact='MorningAg'), then=30),
+                                            When(Q(aggregator__exact='LFaA'), then=40),
+                                            When(Q(aggregator__exact='FPMorning'), then=40),
+                                            When(Q(aggregator__exact='FPSecurity'), then=40),
+                                            When(Q(aggregator__exact='FPChina'), then=40),
+                                            When(Q(aggregator__exact='FPSouthAsia'), then=40),
+                                            When(Q(aggregator__exact='FP-WYWL'), then=40),
+                                            When(Q(aggregator__exact='MorningAg'), then=40),
                                             When(Q(aggregator__exact='Dispatch') &
-                                                 Q(title__startswith='The Morning'), then=30),
+                                                 Q(title__startswith='The Morning'), then=40),
                                             When(Q(aggregator__exact='EAForum'), then=14),
                                             When(Q(aggregator__exact='538'), then=14),
                                             When(Q(aggregator__exact='SSC'), then=14),
@@ -132,7 +132,7 @@ class UpcomingListView(ListView):
                                             When(Q(aggregator__exact='3P'), then=3),
                                             default=1,
                                             output_field=FloatField()))
-                        .annotate(priority=ExpressionWrapper((1 + (F('priority') / 19.0)) +
+                        .annotate(priority=ExpressionWrapper((1 + (F('priority') / 18.0)) +
                                                                  (F('id') / 1700.0) +
                                                                  (F('seed') / 50.0),
                                                              output_field=FloatField()))
