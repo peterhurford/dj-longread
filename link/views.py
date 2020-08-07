@@ -106,14 +106,15 @@ class UpcomingListView(ListView):
                                             When(Q(aggregator__exact='MorningAg'), then=40),
                                             When(Q(aggregator__exact='Dispatch') &
                                                  Q(title__startswith='The Morning'), then=40),
+                                            When(Q(aggregator__exact='Custom'), then=25),
                                             When(Q(aggregator__exact='EAForum'), then=14),
                                             When(Q(aggregator__exact='538'), then=14),
                                             When(Q(aggregator__exact='SSC'), then=14),
-                                            When(Q(aggregator__exact='Custom'), then=14),
                                             When(Q(aggregator__exact='Vox'), then=9),
                                             When(Q(aggregator__exact='Dispatch'), then=9),
                                             When(Q(aggregator__exact='Noah'), then=9),
                                             When(Q(aggregator__exact='EABlogs'), then=8),
+                                            When(Q(aggregator__exact='AI Impacts'), then=8),
                                             When(Q(aggregator__exact='DanWahl'), then=8),
                                             When(Q(aggregator__exact='JenSkerritt'), then=8),
                                             When(Q(aggregator__exact='Lusk'), then=8),
@@ -133,8 +134,8 @@ class UpcomingListView(ListView):
                                             default=1,
                                             output_field=FloatField()))
                         .annotate(priority=ExpressionWrapper((1 + (F('priority') / 18.0)) +
-                                                                 (F('id') / 1700.0) +
-                                                                 (F('seed') / 50.0),
+                                                                  (F('id') / 1900.0) +
+                                                                  (F('seed') / 50.0),
                                                              output_field=FloatField()))
                         .order_by('-priority'))
         queryset = queryset.all()
