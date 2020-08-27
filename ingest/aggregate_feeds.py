@@ -333,11 +333,12 @@ contents += load_contents('Matuschak', 'https://andymatuschak.org/', andy_reader
                           reader_type='lxml')
 
 def guzey_reader_fn(name, content):
-    content = content.find_all('div')[-3].find_all('a')
-    content = [[c[2].replace('</a>', '').replace('>', '').replace('>', ''),
-                  'https://guzey.com/' + c[1], 'Guzey'] for c in [str(c).split('"') for c in content]] 
+    content = [c for c in content.find_all('a')][16:-8]
+    content = [str(c).split('"') for c in content]
+    content = [[c[2].replace('</a>', '').replace('>', '').replace('“', '').replace('”', ''),
+               'https://guzey.com/' + c[1], 'Guzey'] for c in content]
     return content
-contents += load_contents('Guzey', 'https://guzey.com/', guzey_reader_fn, reader_type='lxml')
+contents += load_contents('Guzey', 'https://guzey.com/', guzey_reader_fn)
 contents += load_contents('Guzey', 'https://bestoftwitter.substack.com/feed', 'item')
 
 def guzey_link_reader_fn(name, content):
@@ -353,6 +354,9 @@ contents += load_contents('CH', 'http://feeds.feedburner.com/codinghorror?format
 contents += load_contents('TDS', 'https://towardsdatascience.com/feed', 'item')
 contents += load_contents('Niskanen', 'https://www.niskanencenter.org/feed/', 'item')
 contents += load_contents('SSIR', 'https://ssir.org/site/rss_2.0', 'item')
+print('### Fix MOF')
+import pdb
+pdb.set_trace()
 contents += load_contents('MOF', 'https://www.mischiefsoffaction.com/blog-feed.xml', 'item')
 contents += load_contents('Rosie', 'https://rosiecam.home.blog/blog-feed/feed/', 'item')
 contents += load_contents('RyanAvent', 'https://ryanavent.substack.com/feed', 'item')
@@ -420,6 +424,9 @@ contents += load_contents('MorningAg', 'https://rss.politico.com/morningagricult
 contents += load_contents('FWI',
                           'https://us3.campaign-archive.com/feed?u=2afeee16b30494a373a377a31&id=92de5d8090',
                           'item')
+print('### Fix Newport')
+import pdb
+pdb.set_trace()
 contents += load_contents('Newport', 'https://www.calnewport.com/blog/feed/', 'item')
 contents += load_contents('YaschaMounk', 'https://www.theatlantic.com/feed/author/yascha-mounk/',
                           'entry-link')
