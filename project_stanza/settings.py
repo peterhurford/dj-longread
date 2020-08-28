@@ -5,10 +5,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b8y6aghqt42ehfnc7j#!6pf6!jqc2=0b3-5x4fj=t@i(enyolq'
+localsecret = 'localsecret'
+SECRET_KEY = os.environ.get('APP_SECRET_KEY', localsecret)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEVELOPMENT', False)
+
+if not DEBUG and SECRET_KEY == localsecret:
+    raise ValueError('Entering production with no SECRET_KEY')
+
 
 ALLOWED_HOSTS = []
 
