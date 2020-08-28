@@ -15,7 +15,7 @@ if not DEBUG and SECRET_KEY == localsecret:
     raise ValueError('Entering production with no SECRET_KEY')
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
