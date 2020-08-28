@@ -1,5 +1,6 @@
 import os
 import django_heroku
+import dj_database_url
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -11,6 +12,7 @@ SECRET_KEY = os.environ.get('APP_SECRET_KEY', localsecret)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEVELOPMENT', False)
+IS_HEROKU = os.environ.get('IS_HEROKU', False)
 
 if not DEBUG and SECRET_KEY == localsecret:
     raise ValueError('Entering production with no APP_SECRET_KEY')
@@ -60,13 +62,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'project_stanza.wsgi.application'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'stanza_dev',
-        'USER': 'dbuser',
+if IS_HEROKU:
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'stanza_dev',
+            'USER': 'dbuser',
+        }
     }
-}
 
 
 AUTH_PASSWORD_VALIDATORS = [
