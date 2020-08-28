@@ -91,6 +91,7 @@ contents += load_contents('HN', 'https://news.ycombinator.com/rss',
 contents += load_contents('Vox', 'https://www.vox.com/rss/index.xml', 'entry')
 contents += load_contents('SSC', 'https://slatestarcodex.com/feed/', 'item')
 
+
 def ea_blogs_reader_fn(name, content):
     content = content.find_all('ul')[0]
     content = [str(c.a).split('href="')[1].split('rel=') for c in content.find_all('li')]
@@ -98,15 +99,59 @@ def ea_blogs_reader_fn(name, content):
                  c[0].replace('"', '').strip(),
                  'EABlogs'] for c in content]
     processed_content = []
+
+    # Add custom aggregators for EA Blogs members
+    url_map = {'forum.effectivealtruism.org': 'EAForum',
+               'lesswrong.com': 'LW',
+               'faunalytics.org': 'Faunalytics',
+               'cset.georgetown.edu': 'CSET',
+               'givingwhatwecan.org': 'GWWC',
+               'gfi.org': 'GFI',
+               'overcomingbias.com': 'Hanson',
+               'impartial-priorities.org': 'ImpPri',
+               'philosophyetc.net': 'PhilosophyEtc',
+               'thingofthings.wordpress.com': 'Ozy',
+               'povertyactionlab.org': 'JPAL',
+               'benjaminrosshoffman.com': 'BenHoffman',
+               'vox.com': 'Vox',
+               'outbreakobservatory.org': 'OutbreakO',
+               'futureoflife.org': 'FLI',
+               'charityentrepreneurship.com': 'CE',
+               'existence.org': 'BERI',
+               'stijnbruers.wordpress.com': 'Bruers',
+               'animal-ethics.org': 'AnimalEthics',
+               'fhi.ox.ac.uk': 'FHI',
+               'centreforeffectivealtruism.org': 'CEA',
+               '80000hours.org': '80K',
+               'rationalconspiracy.com': 'RatlConspiracy',
+               'lukemuehlhauser.com': 'Muehlhauser',
+               'longtermrisk.org': 'CLR',
+               'thewholesky.wordpress.com': 'JuliaWise',
+               'globalprioritiesinstitute.org': 'GPI',
+               'theunitofcaring.tumblr.com': 'Kelsey',
+               'givedirectly.org': 'GiveDirectly',
+               'acesounderglass.com': 'VanNostrand'
+               }
+    # Drop certain sites from list
+    drops = ['reddit.com/r/', 'qualiacomputing.com', 'alignmentforum.org']
+
     for c in content:
-        if 'forum.effectivealtruism.org' in c[1]:
-            c[2] = 'EAForum'
-        elif 'lesswrong.com' in c[1]:
-            c[2] = 'LW'
-        if 'reddit.com/r/' not in c[1]:  # Drop EA Reddit
+        for url, label in url_map.items():
+            if url in c[1]:
+                c[2] = label
+        
+        include = True
+        for drop in drops:
+            if drop in c[1]:
+                include = False
+
+        if include:
             processed_content.append(c)
+
     return processed_content
+
 contents += load_contents('EABlogs', 'http://eablogs.net', ea_blogs_reader_fn)
+
 
 contents += load_contents('EAForum', 'https://forum.effectivealtruism.org/feed.xml', 'item')
 contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml', 'item')
