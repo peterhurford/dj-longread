@@ -3,9 +3,7 @@ import psycopg2
 
 from datetime import datetime
 
-import pandas as pd
-
-from utils.sql import table_exists, drop_table, escape, enquote, add_row, delete_row, find_row
+from utils.sql import enquote, add_row, delete_row, find_row
 
 
 # DRY with ingest/aggregate_feeds.py

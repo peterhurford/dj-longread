@@ -1,12 +1,9 @@
 import gzip
-import http
-import socket
 
 from os import path
 from bs4 import BeautifulSoup
 
 from urllib import request
-from urllib.error import HTTPError, URLError
 
 
 def file_name_from_url(url):
