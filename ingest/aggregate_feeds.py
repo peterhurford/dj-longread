@@ -5,7 +5,6 @@ import psycopg2
 import pandas as pd
 
 from datetime import datetime
-from mlgear.utils import chunk
 
 from utils.download import read
 from utils.sql import enquote, add_row, delete_row
@@ -14,6 +13,13 @@ from utils.sql import enquote, add_row, delete_row
 # TODO: DRY with scripts/import_onetab.py
 ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
             'liked', 'category', 'aggregator', 'seed']
+
+
+def chunk(l, n):
+    out = []
+    for i in range(0, len(l), n):
+        out.append(l[i:i + n])
+    return out
 
 
 def add_link_row(cur, content):
