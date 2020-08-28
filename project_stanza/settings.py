@@ -13,7 +13,7 @@ SECRET_KEY = os.environ.get('APP_SECRET_KEY', localsecret)
 DEBUG = os.environ.get('DEVELOPMENT', False)
 
 if not DEBUG and SECRET_KEY == localsecret:
-    raise ValueError('Entering production with no SECRET_KEY')
+    raise ValueError('Entering production with no APP_SECRET_KEY')
 
 
 ALLOWED_HOSTS = ['*']
