@@ -354,9 +354,6 @@ contents += load_contents('CH', 'http://feeds.feedburner.com/codinghorror?format
 contents += load_contents('TDS', 'https://towardsdatascience.com/feed', 'item')
 contents += load_contents('Niskanen', 'https://www.niskanencenter.org/feed/', 'item')
 contents += load_contents('SSIR', 'https://ssir.org/site/rss_2.0', 'item')
-print('### Fix MOF')
-import pdb
-pdb.set_trace()
 contents += load_contents('MOF', 'https://www.mischiefsoffaction.com/blog-feed.xml', 'item')
 contents += load_contents('Rosie', 'https://rosiecam.home.blog/blog-feed/feed/', 'item')
 contents += load_contents('RyanAvent', 'https://ryanavent.substack.com/feed', 'item')
@@ -424,10 +421,8 @@ contents += load_contents('MorningAg', 'https://rss.politico.com/morningagricult
 contents += load_contents('FWI',
                           'https://us3.campaign-archive.com/feed?u=2afeee16b30494a373a377a31&id=92de5d8090',
                           'item')
-print('### Fix Newport')
-import pdb
-pdb.set_trace()
-contents += load_contents('Newport', 'https://www.calnewport.com/blog/feed/', 'item')
+contents += load_contents('Newport', 'https://www.calnewport.com/blog/feed/', 'item',
+                          reader_type='gzip')
 contents += load_contents('YaschaMounk', 'https://www.theatlantic.com/feed/author/yascha-mounk/',
                           'entry-link')
 contents += load_contents('QuintaJurecic',

@@ -1,3 +1,4 @@
+import gzip
 import http
 import socket
 
@@ -68,6 +69,9 @@ def read(url, return_type='text', reader_type='lxml'):
             msg = str(e)
             error = True
         if not error:
+            if reader_type == 'gzip':
+                content = gzip.decompress(content)
+                reader_type = 'xml'
             soup = BeautifulSoup(content, features=reader_type)
             text = soup.find_all(text=True)
             output = ''
