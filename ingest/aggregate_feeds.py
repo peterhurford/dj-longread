@@ -515,7 +515,8 @@ links = pd.read_csv('data/export.csv', header=None)
 links.columns = ALL_COLS
 
 print('Psycopg2 connect')
-conn = psycopg2.connect('dbname=stanza_dev user=dbuser')
+DATABASE_URL = os.environ.get('DATABASE_URL', 'dbname=stanza_dev user=dbuser')
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
 
 print('-')
