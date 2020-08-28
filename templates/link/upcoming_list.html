@@ -7,7 +7,7 @@
 <body>
   <div id="main">
     <h1>Upcoming Links {{ request.GET.q }}</h1>
-    <p>(<a href="/links">See archive</a>, <a href="/">See upcoming</a>, <a href="/links/add_link.html">Add link</a>, <a href="/admin/link/link">Admin</a>)</p>
+    <p>(<a href="/links">See archive</a>, <a href="/">See upcoming</a>, <a href="/links/add_link.html">Add link</a>, <a href="/admin/link/link">Admin</a>, <a href="/admin/logout">Logout</a>)</p>
 
     <ul>
     {% for link in object_list %}

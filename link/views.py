@@ -2,10 +2,12 @@ import logging
 
 from datetime import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q, F, ExpressionWrapper, FloatField
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
-from django.db.models import Q, F, ExpressionWrapper, FloatField
 from django.utils import timezone
+
 
 from link.models import Link
 
@@ -55,9 +57,10 @@ class LinkListView(ListView):
     template_name = 'link/link_list.html'
 
 
-class UpcomingListView(ListView):
+class UpcomingListView(LoginRequiredMixin, ListView):
     model = Link
     paginate_by = 16
+    login_url = 'admin/login'
 
     def get_context_data(self, **kwargs):
         context = super(UpcomingListView, self).get_context_data(**kwargs)
@@ -113,9 +116,10 @@ class UpcomingListView(ListView):
     template_name = 'link/upcoming_list.html'
 
 
-class LinkCreate(CreateView):
+class LinkCreate(LoginRequiredMixin, CreateView):
     model = Link
     fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator']
+    login_url = 'admin/login'
 
     def form_valid(self, form):
         form.instance.modified = timezone.now()
@@ -130,10 +134,11 @@ class LinkCreate(CreateView):
         return super().create(*args, **kwargs)
 
 
-class LinkUpdate(UpdateView):
+class LinkUpdate(LoginRequiredMixin, UpdateView):
     model = Link
     fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator']
     template_name_suffix = '_update_form'
+    login_url = 'admin/login'
 
     def get_success_url(self):
         get_ = self.request.GET
