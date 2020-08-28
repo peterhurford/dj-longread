@@ -8,10 +8,6 @@ run: ## Run Django
 migrate: ## Run Django migrations
 	poetry run python manage.py makemigrations && python manage.py makemigrations link && poetry run python manage.py migrate
 
-.PHONY: herokumigrate
-herokumigrate: ## Run Django migrations on Heroku
-	heroku run python manage.py makemigrations && python manage.py makemigrations link && heroku run python manage.py migrate
-
 .PHONY: setup
 setup: ## Install Python deps
 	pip install poetry
