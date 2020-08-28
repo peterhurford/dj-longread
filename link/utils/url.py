@@ -1,4 +1,4 @@
-# TODO: DRY with utils/url.py
+# TODO: DRY with ../utils/url.py
 
 from urllib.parse import urlparse
 
