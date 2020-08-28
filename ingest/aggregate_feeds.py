@@ -153,8 +153,8 @@ def ea_blogs_reader_fn(name, content):
 contents += load_contents('EABlogs', 'http://eablogs.net', ea_blogs_reader_fn)
 
 
-contents += load_contents('EAForum', 'https://forum.effectivealtruism.org/feed.xml', 'item')
-contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml', 'item')
+contents += load_contents('EAForum', 'https://forum.effectivealtruism.org/feed.xml?view=rss&karmaThreshold=20', 'item')
+contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml?view=rss&karmaThreshold=20', 'item')
 contents += load_contents('538', 'https://fivethirtyeight.com/politics/feed/', 'item')
 contents += load_contents('Lusk', 'http://jaysonlusk.com/blog?format=rss', 'item')
 
