@@ -12,14 +12,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 INSTALLED_APPS = [
+    'account',
     'link',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 ]
 
@@ -31,6 +32,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+MIDDLEWARE_CLASSES = [
+    'account.middleware.LocaleMiddleware',
+    'account.middleware.TimezoneMiddleware',
 ]
 
 ROOT_URLCONF = 'project_stanza.urls'
@@ -51,8 +57,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'project_stanza.wsgi.application'
+TEMPLATE_CONTEXT_PROCESSORS = ['account.context_processors.account']
 
+WSGI_APPLICATION = 'project_stanza.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -61,7 +68,6 @@ DATABASES = {
         'USER': 'dbuser',
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
