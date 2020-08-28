@@ -7,7 +7,6 @@ authors = ["Peter Hurford <peter@peterhurford.com>"]
 [tool.poetry.dependencies]
 python = "^3.6"
 django = "^3.1"
-django-background-tasks = "^1.2.5"
 django-heroku = "^0.3.1"
 gunicorn = "^20.0.4"
 mlgear = { git = "https://github.com/peterhurford/mlgear.git", branch = "master" }

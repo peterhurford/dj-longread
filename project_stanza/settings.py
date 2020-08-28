@@ -20,7 +20,6 @@ ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
-    'background_task',
     'link',
     'django.contrib.admin',
     'django.contrib.auth',
