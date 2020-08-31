@@ -35,3 +35,15 @@ make run
 If you encounter `ValueError: Entering production with no SECRET_KEY`, you should either set a `SECRET_KEY` environment variable or set a `DEVELOPMENT=1` environment variable.
 
 Set a `DEVELOPMENT=1` variable to see errors in local dev.
+
+
+## Testing
+
+There aren't any formal tests yet, but we hope all of the following commands work:
+
+```
+make exportdb
+make update
+make run
+```
+
