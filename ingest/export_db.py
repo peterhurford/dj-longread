@@ -1,8 +1,6 @@
 import os
 import psycopg2
 
-import pandas as pd
-
 from utils.sql import export_db
 
 
