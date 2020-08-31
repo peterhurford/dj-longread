@@ -6,7 +6,6 @@ from datetime import datetime
 from utils.sql import enquote, add_row, delete_row, find_row
 
 
-# DRY with ingest/aggregate_feeds.py
 ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
             'liked', 'category', 'aggregator', 'seed']
 

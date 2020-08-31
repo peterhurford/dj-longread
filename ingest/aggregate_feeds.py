@@ -10,11 +10,6 @@ from utils.download import read
 from utils.sql import enquote, add_row, delete_row
 
 
-# TODO: DRY with scripts/import_onetab.py
-ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
-            'liked', 'category', 'aggregator', 'seed']
-
-
 def chunk(l, n):
     out = []
     for i in range(0, len(l), n):
@@ -511,8 +506,7 @@ os.system('make exportdb')
 
 print('-')
 print('Load data')
-links = pd.read_csv('data/export.csv', header=None)
-links.columns = ALL_COLS
+links = pd.read_csv('data/export.csv')
 
 print('Psycopg2 connect')
 DATABASE_URL = os.environ.get('DATABASE_URL', 'dbname=stanza_dev user=dbuser')
