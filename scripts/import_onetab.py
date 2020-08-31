@@ -3,11 +3,7 @@ import psycopg2
 
 from datetime import datetime
 
-from utils.sql import enquote, add_row, delete_row, find_row
-
-
-ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
-            'liked', 'category', 'aggregator', 'seed']
+from utils.sql import enquote, add_row, delete_row, find_row, ALL_COLS
 
 
 def add_link_row(cur, content):

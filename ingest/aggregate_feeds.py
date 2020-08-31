@@ -7,7 +7,7 @@ import pandas as pd
 from datetime import datetime
 
 from utils.download import read
-from utils.sql import enquote, add_row, delete_row
+from utils.sql import enquote, add_row, delete_row, export_db
 
 
 def chunk(l, n):
@@ -500,18 +500,15 @@ print('-')
 print('Gathering content')
 random.shuffle(contents)
 
-# TODO: DRY with scripts/import_onetab.py
-print('Data export')
-os.system('make exportdb')
-
 print('-')
-print('Load data')
-links = pd.read_csv('data/export.csv')
-
 print('Psycopg2 connect')
 DATABASE_URL = os.environ.get('DATABASE_URL', 'dbname=stanza_dev user=dbuser')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
+
+print('-')
+print('Data export')
+links = export_db(cur)
 
 print('-')
 print('Purging broken links')

@@ -24,8 +24,7 @@ update: ## Update the DB with the latest articles pulled from RSS
 
 .PHONY: exportdb
 exportdb: ## Export the links database to CSV
-	psql stanza_dev dbuser -c "\copy (SELECT * FROM link_link) TO data/export.csv WITH CSV;"
-	echo "id,url,title,summary,domain,added,modified,liked,category,aggregator,seed" | cat - data/export.csv > /tmp/out && mv /tmp/out data/export.csv
+	python3 -m ingest.export_db
 
 .PHONY: help
 help:

@@ -1,3 +1,12 @@
+import os
+
+import pandas as pd
+
+
+ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
+            'liked', 'category', 'aggregator', 'seed']
+
+
 def table_exists(cur, table_name):
     cur.execute('SELECT * FROM information_schema.tables WHERE table_name=%s', (table_name,))
     return cur.rowcount >= 1
@@ -35,4 +44,20 @@ def find_row(cur, table_name, col, value, n=1):
         return cur.fetchall()
     else:
         return ValueError('n must be 1 or many')
+
+
+def export_db(cur, outfile='data/export.csv', verbose=True):
+    with open(outfile, 'r') as f:
+        if verbose:
+            print('...Downloading')
+        path = os.path.abspath(outfile)
+        copy_sql = 'COPY (SELECT * FROM link_link) TO \'{}\' WITH CSV;'.format(path)
+        cur.copy_expert(copy_sql, f)
+
+    if verbose:
+        print('...Formatting')
+    links = pd.read_csv(outfile)
+    links.columns = ALL_COLS
+    links.to_csv(outfile, index=False)
+    return links
 
