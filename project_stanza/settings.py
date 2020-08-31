@@ -62,16 +62,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'project_stanza.wsgi.application'
 
 
+DATABASES = {}
 if IS_HEROKU:
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'stanza_dev',
-            'USER': 'dbuser',
-        }
-    }
+    DATABASES['default'] = {'ENGINE': 'django.db.backends.postgresql',
+                            'NAME': 'stanza_dev',
+                            'USER': 'dbuser'}
 
 
 AUTH_PASSWORD_VALIDATORS = [
