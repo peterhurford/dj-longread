@@ -72,6 +72,9 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
         print('...Formatting')
     links = pd.read_csv(outfile, header=None)
     links.columns = ALL_COLS
+    links = links[links['id'].notnull()]   # Drop empty column
+    links['id'] = links['id'].astype(int)  # Fix float ID issue
+    links = links.sort_values('id')
     links.to_csv(outfile, index=False)
     return links
 
