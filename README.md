@@ -30,6 +30,11 @@ make run
 ```
 
 
+## Deployment
+
+Deployment is on Heroku. `heroku run make update` can manually update the list of articles.
+
+
 ## Debugging 
 
 If you encounter `ValueError: Entering production with no SECRET_KEY`, you should either set a `SECRET_KEY` environment variable or set a `DEVELOPMENT=1` environment variable.
