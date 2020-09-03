@@ -108,7 +108,7 @@ class UpcomingListView(LoginRequiredMixin, ListView):
                                                                   (F('id') / (TIME_WEIGHT * 100)) +
                                                                   (F('seed') / RANDOM_WEIGHT),
                                                              output_field=FloatField()))
-                        .order_by('-priority'))
+                        .order_by('-priority', 'id'))
         queryset = queryset.all()
         return queryset
 
