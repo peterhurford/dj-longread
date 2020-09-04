@@ -62,16 +62,16 @@ def read(url, return_type='text', reader_type='lxml'):
         ]
         try:
             content = response.read()
-        except Exception as e:
-            msg = str(e)
-            error = True
-        if not error:
             if reader_type == 'gzip':
                 content = gzip.decompress(content)
                 reader_type = 'xml'
             soup = BeautifulSoup(content, features=reader_type)
-            text = soup.find_all(text=True)
+        except Exception as e:
+            msg = str(e)
+            error = True
+        if not error:
             output = ''
+            text = soup.find_all(text=True)
             for t in text:
                 if t.parent.name not in blacklist:
                     output += '{} '.format(t)
