@@ -1,7 +1,7 @@
 from django.db.models import Case, When, Q, FloatField
 
 
-PRIORITY_WEIGHT = 17  # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 15  # The lower this number, the more links will be ranked according
                       # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 14      # The lower this number, the more it will be the case that recent
@@ -21,12 +21,12 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='FP-WYWL'), then=40),
                           When(Q(aggregator__exact='MorningAg'), then=40),
                           When(Q(aggregator__exact='Custom'), then=25),
-                          When(Q(aggregator__exact='Bollard'), then=17),
-                          When(Q(aggregator__exact='EAForum'), then=15),
-                          When(Q(aggregator__exact='538'), then=15),
-                          When(Q(aggregator__exact='SSC'), then=14),
-                          When(Q(aggregator__exact='80K'), then=14),
-                          When(Q(aggregator__exact='CEA'), then=14),
+                          When(Q(aggregator__exact='Bollard'), then=18),
+                          When(Q(aggregator__exact='EAForum'), then=17),
+                          When(Q(aggregator__exact='538'), then=17),
+                          When(Q(aggregator__exact='SSC'), then=17),
+                          When(Q(aggregator__exact='80K'), then=17),
+                          When(Q(aggregator__exact='CEA'), then=17),
                           When(Q(aggregator__exact='Noah'), then=10),
                           When(Q(aggregator__exact='AI Impacts'), then=8),
                           When(Q(aggregator__exact='DanWahl'), then=8),
