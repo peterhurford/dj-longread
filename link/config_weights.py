@@ -11,15 +11,15 @@ RANDOM_WEIGHT = 50    # The lower this number, the more it will be the case that
                       # show up in a random order, disregarding recenty or aggregator weights
 
 # The relative rankings of different aggregators
-AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='LFaA'), then=40),
+AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
+                               Q(title__startswith='The Morning'), then=80),
+                          When(Q(aggregator__exact='LFaA'), then=40),
                           When(Q(aggregator__exact='FPMorning'), then=40),
                           When(Q(aggregator__exact='FPSecurity'), then=40),
                           When(Q(aggregator__exact='FPChina'), then=40),
                           When(Q(aggregator__exact='FPSouthAsia'), then=40),
                           When(Q(aggregator__exact='FP-WYWL'), then=40),
                           When(Q(aggregator__exact='MorningAg'), then=40),
-                          When(Q(aggregator__exact='Dispatch') &
-                               Q(title__startswith='The Morning'), then=40),
                           When(Q(aggregator__exact='Custom'), then=25),
                           When(Q(aggregator__exact='EAForum'), then=15),
                           When(Q(aggregator__exact='538'), then=15),
