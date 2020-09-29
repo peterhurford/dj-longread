@@ -18,7 +18,7 @@ There are too many articles on the internet to possibly read them all. We want t
 
 5. Run `make migrate`
 6. Run `python manage.py createsuperuser`
-7. [optional] Seed the DB by obtaining a data export CSV and [importing it into Postgres](https://www.postgresqltutorial.com/import-csv-file-into-posgresql-table/) (e.g., `\copy link_link(id, url, title, summary, domain, added, modified, liked, category, aggregator, seed) FROM 'data/export.csv' DELIMITER ',' CSV HEADER;`). Data export can be obtained with `make exportdb` from someone with a complete database.
+7. [optional] Set up AWS S3 access, add env vars for `AWS_ACCESS_KEY_ID` and `AWS_SECRET_KEY`, and then download the data export CSV using `make importdb`.
 8. Get latest data by running `make update`
 
 

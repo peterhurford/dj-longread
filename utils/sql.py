@@ -52,9 +52,6 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
     with open(outfile, 'w') as f:
         if verbose:
             print('...Downloading')
-        # path = os.path.abspath(outfile)
-        # copy_sql = 'COPY (SELECT * FROM link_link) TO \'{}\' WITH CSV;'.format(path)
-        # cur.copy_expert(copy_sql, f)
 
         # Ideally we would just copy directly, but Heroku permissions don't allow that
         # so we have to hack around with StringIO 
