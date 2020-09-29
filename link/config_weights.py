@@ -4,10 +4,10 @@ from django.db.models import Case, When, Q, FloatField
 PRIORITY_WEIGHT = 15  # The lower this number, the more links will be ranked according
                       # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
-TIME_WEIGHT = 14      # The lower this number, the more it will be the case that recent
+TIME_WEIGHT = 12      # The lower this number, the more it will be the case that recent
                       # links show up first
 
-RANDOM_WEIGHT = 55    # The lower this number, the more it will be the case that links will
+RANDOM_WEIGHT = 70    # The lower this number, the more it will be the case that links will
                       # show up in a random order, disregarding recenty or aggregator weights
 
 # The relative rankings of different aggregators
