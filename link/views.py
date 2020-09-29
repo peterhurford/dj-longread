@@ -104,9 +104,9 @@ class UpcomingListView(LoginRequiredMixin, ListView):
             queryset = queryset.order_by('seed', 'added')
         else:
             queryset = (queryset.annotate(priority=AGGREGATOR_WEIGHTS)
-                        .annotate(priority=ExpressionWrapper((1 + (F('priority') / PRIORITY_WEIGHT)) +
-                                                                  (F('id') / (TIME_WEIGHT * 100)) +
-                                                                  (F('seed') / RANDOM_WEIGHT),
+                        .annotate(priority=ExpressionWrapper((1 + (F('priority') / float(PRIORITY_WEIGHT))) +
+                                                                  (F('id') / (float(TIME_WEIGHT) * 100)) +
+                                                                  (F('seed') / float(RANDOM_WEIGHT)),
                                                              output_field=FloatField()))
                         .order_by('-priority', 'id'))
         queryset = queryset.all()
