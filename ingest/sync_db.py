@@ -10,7 +10,7 @@ mode = args.mode
 
 
 ACCESS_KEY = os.environ['AWS_ACCESS_KEY_ID']
-SECRET_KEY = os.enivron['AWS_SECRET_KEY']
+SECRET_KEY = os.environ['AWS_SECRET_KEY']
 BUCKET = 'jeffreyrunner'
 
 
