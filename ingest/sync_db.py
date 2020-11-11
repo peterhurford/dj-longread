@@ -20,7 +20,7 @@ if mode == 'up':
 					  aws_secret_access_key=SECRET_KEY)
 	s3.upload_file('data/export.csv', BUCKET, 'djlongread_db_export.csv')
 elif mode == 'down':
-	print('Uploading data/export.csv to S3...')
+	print('Downloading data/export.csv from S3...')
 	s3 = boto3.client('s3', aws_access_key_id=ACCESS_KEY,
 					  aws_secret_access_key=SECRET_KEY)
 	with open('data/export.csv', 'wb') as f:
