@@ -17,7 +17,11 @@ def chunk(l, n):
 
 def get_max_id(cur):
     cur.execute('SELECT MAX(id) FROM link_link')
-    return cur.fetchone()[0]
+    max_id = cur.fetchone()[0]
+    if not max_id:
+        return 1
+    else:
+        return max_id
 
 
 def add_link_row(cur, content):
@@ -518,21 +522,23 @@ print('-')
 print('Data export')
 links = export_db(cur)
 
-print('-')
-print('Purging broken links')
-broken = links[~links['url'].apply(lambda u: isinstance(u, str) and 'http' in u)]['id']
-lines = len(broken)
-if lines == 0:
-    print('...No broken links detected')
-else:
-    for i, id_ in enumerate(broken):
-        delete_link_row(cur, id_)
-    print('...{} broken links purged!'.format(lines))
+if links is not None:
+    print('-')
+    print('Purging broken links')
+    broken = links[~links['url'].apply(lambda u: isinstance(u, str) and 'http' in u)]['id']
+    lines = len(broken)
+    if lines == 0:
+        print('...No broken links detected')
+    else:
+        for i, id_ in enumerate(broken):
+            delete_link_row(cur, id_)
+        print('...{} broken links purged!'.format(lines))
 
 print('-')
 print('Calculating links to add')
-existing_urls = set(links['url'].values)
-contents = [c for c in contents if c[1] not in existing_urls]
+if links is not None:
+    existing_urls = set(links['url'].values)
+    contents = [c for c in contents if c[1] not in existing_urls]
 lines = len(contents)
 added = []
 if lines == 0:
@@ -545,16 +551,17 @@ else:
             added.append(content[1])
     print('...{} new links added!'.format(lines))
 
-print('-')
-print('Purging duplicated')
-duplicated = links[links['url'].duplicated()]['id']
-lines = len(duplicated)
-if lines == 0:
-    print('...No duplicated links detected')
-else:
-    for i, id_ in enumerate(duplicated):
-        delete_link_row(cur, id_)
-    print('...{} duplicated links purged!'.format(lines))
+if links is not None:
+    print('-')
+    print('Purging duplicated')
+    duplicated = links[links['url'].duplicated()]['id']
+    lines = len(duplicated)
+    if lines == 0:
+        print('...No duplicated links detected')
+    else:
+        for i, id_ in enumerate(duplicated):
+            delete_link_row(cur, id_)
+        print('...{} duplicated links purged!'.format(lines))
 
 print('-')
 print('Closing connection')
