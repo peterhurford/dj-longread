@@ -23,8 +23,13 @@ update: ## Update the DB with the latest articles pulled from RSS
 	python3 -m ingest.aggregate_feeds
 
 .PHONY: exportdb
-exportdb: ## Export the links database to CSV
+exportdb: ## Export the links database to CSV and upload to S3
 	python3 -m ingest.export_db
+	python3 -m ingest.sync_db --mode up
+
+.PHONY: importdb
+importdb: ## Get links database from S3
+	python3 -m ingest.sync_db --mode down
 
 .PHONY: help
 help:

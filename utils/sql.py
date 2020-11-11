@@ -52,9 +52,6 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
     with open(outfile, 'w') as f:
         if verbose:
             print('...Downloading')
-        # path = os.path.abspath(outfile)
-        # copy_sql = 'COPY (SELECT * FROM link_link) TO \'{}\' WITH CSV;'.format(path)
-        # cur.copy_expert(copy_sql, f)
 
         # Ideally we would just copy directly, but Heroku permissions don't allow that
         # so we have to hack around with StringIO 
@@ -62,19 +59,28 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
         cur.copy_to(data_io, 'link_link', sep=',')
         data_io.seek(0)
         content = data_io.read()
-        content = content.split('\n')
-        # Use re.split to ignore escaped commas
-        content = [re.split('(?<!\\\\),', c) for c in content]
-        writer = csv.writer(f, delimiter=',')
-        writer.writerows(content)
+        if content == '':
+            blank_db = True
+        else:
+            blank_db = False
+            content = content.split('\n')
+            # Use re.split to ignore escaped commas
+            content = [re.split('(?<!\\\\),', c) for c in content]
+            writer = csv.writer(f, delimiter=',')
+            writer.writerows(content)
 
     if verbose:
         print('...Formatting')
-    links = pd.read_csv(outfile, header=None)
-    links.columns = ALL_COLS
-    links = links[links['id'].notnull()]   # Drop empty column
-    links['id'] = links['id'].astype(int)  # Fix float ID issue
-    links = links.sort_values('id')
-    links.to_csv(outfile, index=False)
+
+    if blank_db:
+        links = None
+    else:
+        links = pd.read_csv(outfile, header=None)
+        links.columns = ALL_COLS
+        links = links[links['id'].notnull()]   # Drop empty column
+        links['id'] = links['id'].astype(int)  # Fix float ID issue
+        links = links.sort_values('id')
+        links.to_csv(outfile, index=False)
+
     return links
 
