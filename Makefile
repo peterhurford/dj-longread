@@ -28,7 +28,7 @@ exportdb: ## Export the links database to CSV and upload to S3
 	python3 -m ingest.sync_db up
 
 .PHONY: importdb
-exportdb: ## Get links database from S3
+importdb: ## Get links database from S3
 	python3 -m ingest.sync_db down
 
 .PHONY: help
