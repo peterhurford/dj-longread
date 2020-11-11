@@ -70,7 +70,11 @@ def load_contents(name, feed, reader_fn, return_type='soup', reader_type='xml'):
     elif reader_fn == 'entry-link':
         reader_fn = entry_link_process_fn
 
-    content = reader_fn(name, content)
+    try:
+        content = reader_fn(name, content)
+    except Exception as e:
+        print('-- ERROR in reader fn: {}'.format(e))
+        return []
 
     if len(content) == 0:
         print('--- ERROR: No content!')
