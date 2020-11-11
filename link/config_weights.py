@@ -1,26 +1,26 @@
 from django.db.models import Case, When, Q, FloatField
 
 
-PRIORITY_WEIGHT = 11  # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 12  # The lower this number, the more links will be ranked according
                       # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
-TIME_WEIGHT = 7       # The lower this number, the more it will be the case that recent
+TIME_WEIGHT = 8       # The lower this number, the more it will be the case that recent
                       # links show up first
 
-RANDOM_WEIGHT = 75    # The lower this number, the more it will be the case that links will
+RANDOM_WEIGHT = 70    # The lower this number, the more it will be the case that links will
                       # show up in a random order, disregarding recenty or aggregator weights
 
 # The relative rankings of different aggregators
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                                Q(title__startswith='The Morning'), then=80),
-                          When(Q(aggregator__exact='LFaA'), then=40),
-                          When(Q(aggregator__exact='FPMorning'), then=40),
-                          When(Q(aggregator__exact='FPSecurity'), then=40),
-                          When(Q(aggregator__exact='FPChina'), then=40),
-                          When(Q(aggregator__exact='FPSouthAsia'), then=40),
-                          When(Q(aggregator__exact='FP-WYWL'), then=40),
-                          When(Q(aggregator__exact='MorningAg'), then=40),
-                          When(Q(aggregator__exact='Custom'), then=25),
+                          When(Q(aggregator__exact='LFaA'), then=30),
+                          When(Q(aggregator__exact='FPMorning'), then=30),
+                          When(Q(aggregator__exact='FPSecurity'), then=30),
+                          When(Q(aggregator__exact='FPChina'), then=30),
+                          When(Q(aggregator__exact='FPSouthAsia'), then=30),
+                          When(Q(aggregator__exact='FP-WYWL'), then=30),
+                          When(Q(aggregator__exact='MorningAg'), then=30),
+                          When(Q(aggregator__exact='Custom'), then=30),
                           When(Q(aggregator__exact='Bollard'), then=18),
                           When(Q(aggregator__exact='EAForum'), then=17),
                           When(Q(aggregator__exact='538'), then=17),
