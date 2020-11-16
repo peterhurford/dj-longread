@@ -40,6 +40,12 @@ class LinkListView(ListView):
         summary = self.request.GET.get('summary')
         if summary:
             queryset = queryset.filter(Q(summary__icontains=summary))
+        if before:
+            before = datetime.strptime(before, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
+            queryset = queryset.filter(Q(added__gte=before))
+        if after:
+            after = datetime.strptime(after, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
+            queryset = queryset.filter(Q(added__gte=after))
         sort = self.request.GET.get('sort')
         if sort == 'random':
             queryset = queryset.order_by('seed', 'id')
@@ -89,6 +95,14 @@ class UpcomingListView(LoginRequiredMixin, ListView):
         aggregator = self.request.GET.get('aggregator')
         if aggregator:
             queryset = queryset.filter(Q(aggregator__icontains=aggregator))
+        before = self.request.GET.get('before')
+        if before:
+            before = datetime.strptime(before, '%d/%m/%y') # e.g., 18/09/19
+            queryset = queryset.filter(Q(added__lte=before))
+        after = self.request.GET.get('after')
+        if after:
+            after = datetime.strptime(after, '%d/%m/%y') # e.g., 18/09/19
+            queryset = queryset.filter(Q(added__gte=after))
         sort = self.request.GET.get('sort')
         if sort == 'recent':
             queryset = queryset.order_by('-added', 'id')
