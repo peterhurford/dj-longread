@@ -40,9 +40,11 @@ class LinkListView(ListView):
         summary = self.request.GET.get('summary')
         if summary:
             queryset = queryset.filter(Q(summary__icontains=summary))
+        before = self.request.GET.get('before')
         if before:
             before = datetime.strptime(before, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
             queryset = queryset.filter(Q(added__gte=before))
+        after = self.request.GET.get('after')
         if after:
             after = datetime.strptime(after, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
             queryset = queryset.filter(Q(added__gte=after))
