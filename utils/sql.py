@@ -84,3 +84,22 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
 
     return links
 
+
+def import_db(conn, infile='data/export.csv', verbose=True):
+    links = pd.read_csv(infile)
+    data_io = io.StringIO()
+    df = pd.read_csv(infile)
+    df.to_csv(data_io, index_label='id', header=False, index=False)
+    data_io.seek(0)
+    with open('data/tmpfile.csv', 'r') as f:
+        cur = conn.cursor()
+        if verbose:
+            print('...Clearing table')
+        cur.execute('DELETE FROM link_link')
+        if verbose:
+            print('...Importing to PSQL')
+        cur.copy_from(data_io, 'link_link', sep=',')
+        conn.commit()
+        cur.close()
+    return None
+
