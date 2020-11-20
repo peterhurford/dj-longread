@@ -17,7 +17,7 @@ from .config_weights import PRIORITY_WEIGHT, TIME_WEIGHT, RANDOM_WEIGHT, AGGREGA
 
 class LinkListView(ListView):
     model = Link
-    paginate_by = 50
+    paginate_by = 500
 
     def get_queryset(self):
         queryset = (Link.objects.exclude(liked__isnull=True)

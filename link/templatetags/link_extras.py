@@ -9,6 +9,9 @@ def capitalize_each(word):
 
 @register.filter
 def domain(domain):
+    if not domain or domain == '':
+        return ''
+
     domain = (domain.lower()
                     .replace('www.', '')
                     .replace('.com', '')
@@ -31,3 +34,17 @@ def domain(domain):
                     .replace('Currentaffairs', 'Current Affairs')
                     .replace('Askamathe Matician', 'Ask A Mathematician'))
     return domain
+
+
+@register.filter
+def summary(summary):
+    if not summary or summary == '':
+        return ''
+
+    summary = (summary.replace('&nbsp;', ' ')
+                      .replace('&ldquo;', '"')
+                      .replace('&lsquo;', '"')
+                      .replace('&rdquo;', '"')
+                      .replace('&rsquo;', '"')
+                      .replace('&mdash;', ' -- '))
+    return summary
