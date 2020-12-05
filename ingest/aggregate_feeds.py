@@ -306,6 +306,7 @@ contents += load_contents('Noah', 'http://noahpinionblog.blogspot.com/feeds/post
 contents += load_contents('Noah',
                           'https://www.bloomberg.com/opinion/authors/AR3OYuAmvcU/noah-smith.rss',
                           'item')
+contents += load_contents('Noah', 'https://noahpinion.substack.com/feed', 'item')
 contents += load_contents('Ariely', 'http://danariely.com/resources/the-blog/feed/', 'item')
 contents += load_contents('NotEvenWrong',
                           'http://www.math.columbia.edu/~woit/wordpress/?feed=rss2',
@@ -436,6 +437,7 @@ contents += load_contents('Exponents', 'https://exponentsmag.org/feed/', 'item')
 contents += load_contents('127', 'https://onetwentyseven.blog/feed/', 'item')
 contents += load_contents('SuperOrganizers', 'https://superorganizers.substack.com/feed', 'item')
 contents += load_contents('Dispatch', 'https://thedispatch.com/feed', 'item')
+contents += load_contents('Yglesias', 'https://www.slowboring.com/feed', 'item')
 
 def eliason_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'blog-page-heading' in str(c)]

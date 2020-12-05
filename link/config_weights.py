@@ -28,6 +28,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='80K'), then=17),
                           When(Q(aggregator__exact='CEA'), then=17),
                           When(Q(aggregator__exact='Noah'), then=10),
+                          When(Q(aggregator__exact='Yglesias'), then=10),
                           When(Q(aggregator__exact='AI Impacts'), then=8),
                           When(Q(aggregator__exact='DanWahl'), then=8),
                           When(Q(aggregator__exact='JenSkerritt'), then=8),

@@ -2,7 +2,6 @@ import gzip
 
 from os import path
 from bs4 import BeautifulSoup
-
 from urllib import request
 
 
