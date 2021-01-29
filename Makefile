@@ -31,6 +31,10 @@ exportdb: ## Export the links database to CSV and upload to S3
 importdb: ## Get links database from S3
 	python3 -m ingest.sync_db --mode down
 
+.PHONY: launch
+launch: ## Open the website
+	open https://guarded-everglades-89687.herokuapp.com/
+
 .PHONY: help
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
