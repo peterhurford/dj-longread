@@ -2,7 +2,9 @@ import os
 import random
 import psycopg2
 
-from datetime import datetime
+import pandas as pd
+
+from datetime import datetime, timedelta
 
 from utils.download import read
 from utils.sql import enquote, add_row, delete_row, export_db
@@ -570,6 +572,25 @@ if links is not None:
         for i, id_ in enumerate(duplicated):
             delete_link_row(cur, id_)
         print('...{} duplicated links purged!'.format(lines))
+
+if links is not None:
+    print('-')
+    print('Purging old')
+    purgable = ['Dispatch', 'LFaA', 'FPMorning', 'FPSecurity', 'FPChina', 'FPSouthAsia',
+                'FP-WYWL', 'MorningAg', '538']
+    links['added'] = pd.to_datetime(links['added'], utc=True).dt.tz_localize(None)
+    relative_now = links['added'].max()
+    one_week_ago = relative_now - timedelta(days=7)
+    purgable = links[(links['aggregator'].apply(lambda a: a in purgable)) &
+                     (links['added'] < one_week_ago)]
+    purgable = purgable['id']
+    lines = len(purgable)
+    if lines == 0:
+        print('...No old-purgable links detected')
+    else:
+        for i, id_ in enumerate(purgable):
+            delete_link_row(cur, id_)
+        print('...{} old links purged!'.format(lines))
 
 print('-')
 print('Resync IDs')
