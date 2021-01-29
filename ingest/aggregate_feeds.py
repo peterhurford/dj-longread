@@ -107,8 +107,6 @@ contents += load_contents('HN', 'https://news.ycombinator.com/rss',
                           hn_reader_fn, return_type='list')
 
 contents += load_contents('Vox', 'https://www.vox.com/rss/index.xml', 'entry')
-contents += load_contents('SSC', 'https://slatestarcodex.com/feed/', 'item')
-
 
 def ea_blogs_reader_fn(name, content):
     content = content.find_all('ul')[0]
@@ -385,6 +383,7 @@ contents += load_contents('ScholarsSage',
 contents += load_contents('Gross', 'https://dcgross.com/feed.xml', 'entry')
 contents += load_contents('Kling', 'http://www.arnoldkling.com/blog/feed/', 'item')
 contents += load_contents('Seliger', 'https://jakeseliger.com/feed/', 'item')
+contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/', 'item')
 
 def andy_reader_fn(name, content):
     content = content.find_all('a')
@@ -437,7 +436,9 @@ contents += load_contents('Exponents', 'https://exponentsmag.org/feed/', 'item')
 contents += load_contents('127', 'https://onetwentyseven.blog/feed/', 'item')
 contents += load_contents('SuperOrganizers', 'https://superorganizers.substack.com/feed', 'item')
 contents += load_contents('Dispatch', 'https://thedispatch.com/feed', 'item')
+contents += load_contents('SSC', 'https://astralcodexten.substack.com/feed', 'item')
 contents += load_contents('Yglesias', 'https://www.slowboring.com/feed', 'item')
+contents += load_contents('80K', 'https://80000hours.org/blog/feed/', 'item')
 
 def eliason_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'blog-page-heading' in str(c)]
