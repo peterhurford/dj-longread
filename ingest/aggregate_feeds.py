@@ -386,6 +386,7 @@ contents += load_contents('Gross', 'https://dcgross.com/feed.xml', 'entry')
 contents += load_contents('Kling', 'http://www.arnoldkling.com/blog/feed/', 'item')
 contents += load_contents('Seliger', 'https://jakeseliger.com/feed/', 'item')
 contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/', 'item')
+contents += load_contents('BreadFixer', 'https://medium.com/feed/@breadpricefixer', 'item')
 
 def andy_reader_fn(name, content):
     content = content.find_all('a')
