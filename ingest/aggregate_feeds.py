@@ -7,7 +7,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 from utils.download import read
-from utils.sql import enquote, add_row, delete_row, export_db
+from utils.sql import enquote, add_row, delete_row, update_row, export_db
 
 
 def chunk(l, n):
@@ -43,6 +43,11 @@ def add_link_row(cur, content):
 
 def delete_link_row(cur, id_):
     delete_row(cur, 'link_link', 'id', enquote(id_))
+    return None
+
+
+def hide_row(cur, id_):
+    update_row(cur, 'link_link', 'liked', -1, 'id', enquote(id_))
     return None
 
 
@@ -583,14 +588,17 @@ if links is not None:
     relative_now = links['added'].max()
     one_week_ago = relative_now - timedelta(days=7)
     purgable = links[(links['aggregator'].apply(lambda a: a in purgable)) &
-                     (links['added'] < one_week_ago)]
+                     # (links['added'] < one_week_ago) &
+                     (links['liked'] != 0) &
+                     (links['liked'] != 1) &
+                     (links['liked'] != -1)]
     purgable = purgable['id']
     lines = len(purgable)
     if lines == 0:
         print('...No old-purgable links detected')
     else:
         for i, id_ in enumerate(purgable):
-            delete_link_row(cur, id_)
+            hide_row(cur, id_)
         print('...{} old links purged!'.format(lines))
 
 print('-')

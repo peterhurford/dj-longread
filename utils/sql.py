@@ -38,6 +38,15 @@ def delete_row(cur, table_name, column_name, value):
     return None
 
 
+def update_row(cur, table_name, set_col, set_val, where_col, where_val):
+    cur.execute('UPDATE {} SET {} = {} WHERE {} = {}'.format(table_name,
+                                                             set_col,
+                                                             set_val,
+                                                             where_col,
+                                                             where_val))
+    return None
+
+
 def find_row(cur, table_name, col, value, n=1):
     cur.execute('SELECT * FROM {} WHERE {} = {}'.format(table_name, col, enquote(value)))
     if n == 1:
