@@ -588,7 +588,7 @@ if links is not None:
     relative_now = links['added'].max()
     one_week_ago = relative_now - timedelta(days=7)
     purgable = links[(links['aggregator'].apply(lambda a: a in purgable)) &
-                     # (links['added'] < one_week_ago) &
+                     (links['added'] < one_week_ago) &
                      (links['liked'] != 0) &
                      (links['liked'] != 1) &
                      (links['liked'] != -1)]
