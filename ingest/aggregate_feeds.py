@@ -100,6 +100,7 @@ def load_contents(name, feed, reader_fn, return_type='soup', reader_type='xml'):
         print('--- ERROR: Malformed URLs!')
         return []
 
+    print('...Got {}'.format(len(content)))
     return content
 
 
