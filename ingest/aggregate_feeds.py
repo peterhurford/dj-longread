@@ -313,6 +313,7 @@ contents += load_contents('Noah',
                           'https://www.bloomberg.com/opinion/authors/AR3OYuAmvcU/noah-smith.rss',
                           'item')
 contents += load_contents('Noah', 'https://noahpinion.substack.com/feed', 'item')
+contents += load_contents('ChinAI', 'https://chinai.substack.com/feed', 'item')
 contents += load_contents('Ariely', 'http://danariely.com/resources/the-blog/feed/', 'item')
 contents += load_contents('NotEvenWrong',
                           'http://www.math.columbia.edu/~woit/wordpress/?feed=rss2',
@@ -584,7 +585,7 @@ if links is not None:
     print('-')
     print('Purging old')
     purgable = ['Dispatch', 'LFaA', 'FPMorning', 'FPSecurity', 'FPChina', 'FPSouthAsia',
-                'FP-WYWL', 'MorningAg', '538']
+                'FP-WYWL', 'MorningAg', '538', 'ChinAI']
     links['added'] = pd.to_datetime(links['added'], utc=True).dt.tz_localize(None)
     relative_now = links['added'].max()
     one_week_ago = relative_now - timedelta(days=7)
