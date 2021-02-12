@@ -449,6 +449,7 @@ contents += load_contents('Krugman', 'https://paulkrugman.substack.com/feed', 'i
 contents += load_contents('Dispatch', 'https://thedispatch.com/feed', 'item')
 contents += load_contents('SSC', 'https://astralcodexten.substack.com/feed', 'item')
 contents += load_contents('Yglesias', 'https://www.slowboring.com/feed', 'item')
+contents += load_contents('Wilkinson', 'https://modelcitizen.substack.com/feed', 'item')
 contents += load_contents('80K', 'https://80000hours.org/blog/feed/', 'item')
 
 def eliason_reader_fn(name, content):
