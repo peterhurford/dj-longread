@@ -9,6 +9,8 @@ from datetime import datetime, timedelta
 from utils.download import read
 from utils.sql import enquote, add_row, delete_row, update_row, export_db
 
+from link.config import PURGE_OLDER_THAN_X_DAYS
+
 
 def chunk(l, n):
     out = []
@@ -586,13 +588,11 @@ if links is not None:
 if links is not None:
     print('-')
     print('Purging old')
-    purgable = ['Dispatch', 'LFaA', 'FPMorning', 'FPSecurity', 'FPChina', 'FPSouthAsia',
-                'FP-WYWL', 'MorningAg', '538', 'ChinAI']
     links['added'] = pd.to_datetime(links['added'], utc=True).dt.tz_localize(None)
     relative_now = links['added'].max()
-    one_week_ago = relative_now - timedelta(days=7)
-    purgable = links[(links['aggregator'].apply(lambda a: a in purgable)) &
-                     (links['added'] < one_week_ago) &
+    before_purge_window = relative_now - timedelta(days=PURGE_OLDER_THAN_X_DAYS)
+    purgable = links[(links['aggregator'].apply(lambda a: a in PURGABLE_AGGREGATORS)) &
+                     (links['added'] < before_purge_window) &
                      (links['liked'] != 0) &
                      (links['liked'] != 1) &
                      (links['liked'] != -1)]

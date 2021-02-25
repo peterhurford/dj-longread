@@ -12,7 +12,7 @@ from django.utils import timezone
 from link.models import Link
 
 from .utils.url import clean_url, get_root_url
-from .config_weights import PRIORITY_WEIGHT, TIME_WEIGHT, RANDOM_WEIGHT, AGGREGATOR_WEIGHTS
+from .config import PRIORITY_WEIGHT, TIME_WEIGHT, RANDOM_WEIGHT, AGGREGATOR_WEIGHTS
 
 
 class LinkListView(ListView):

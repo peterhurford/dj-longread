@@ -1,5 +1,10 @@
 from django.db.models import Case, When, Q, FloatField
 
+# Purge old articles if they come from these aggregators
+PURGABLE_AGGREGATORS = ['Dispatch', 'LFaA', 'FPMorning', 'FPSecurity', 'FPChina', 'FPSouthAsia',
+                        'FP-WYWL', 'MorningAg', '538', 'ChinAI']
+PURGE_OLDER_THAN_X_DAYS = 5  # For PURGABLE_AGGREGATORS, remove links older than this (in days)
+
 
 PRIORITY_WEIGHT = 11  # The lower this number, the more links will be ranked according
                       # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
@@ -9,6 +14,7 @@ TIME_WEIGHT = 7       # The lower this number, the more it will be the case that
 
 RANDOM_WEIGHT = 70    # The lower this number, the more it will be the case that links will
                       # show up in a random order, disregarding recenty or aggregator weights
+
 
 # The relative rankings of different aggregators
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
@@ -50,3 +56,4 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='3P'), then=3),
                           default=1,
                           output_field=FloatField())
+
