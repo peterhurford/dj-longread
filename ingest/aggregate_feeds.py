@@ -529,7 +529,7 @@ contents += load_contents('BenEvans', 'https://www.ben-evans.com/essays', evans_
                           reader_type='lxml')
 contents += load_contents('KateLowry', 'https://medium.com/feed/@kate.lowry', 'item')
 contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/', 'item')
-contnets += load_contents('HIPR', 'https://highimpactpolicy.review/rss/')
+contents += load_contents('HIPR', 'https://highimpactpolicy.review/rss/')
 
 print('-')
 print('Gathering content')
