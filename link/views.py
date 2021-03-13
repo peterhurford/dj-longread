@@ -163,7 +163,9 @@ class LinkUpdate(LoginRequiredMixin, UpdateView):
         aggregator = get_.get('aggregator', '')
         page = get_.get('page')
         sort = get_.get('sort')
-        return '/?url={}&title={}&aggregator={}&page={}&sort={}'.format(url, title, aggregator, page, sort)
+        before = get_.get('before')
+        after = get_.get('after')
+        return '/?url={}&title={}&aggregator={}&before={}&after={}&page={}&sort={}'.format(url, title, aggregator, before, after, page, sort)
 
     def form_valid(self, form):
         if not form.instance.liked:
