@@ -116,8 +116,6 @@ def hn_reader_fn(name, content):
 contents += load_contents('HN', 'https://news.ycombinator.com/rss',
                           hn_reader_fn, return_type='list')
 
-contents += load_contents('Vox', 'https://www.vox.com/rss/index.xml', 'entry')
-
 def ea_blogs_reader_fn(name, content):
     content = content.find_all('ul')[0]
     content = [str(c.a).split('href="')[1].split('rel=') for c in content.find_all('li')]
@@ -128,7 +126,6 @@ def ea_blogs_reader_fn(name, content):
 
     # Add custom aggregators for EA Blogs members
     url_map = {'forum.effectivealtruism.org': 'EAForum',
-               'lesswrong.com': 'LW',
                'faunalytics.org': 'Faunalytics',
                'cset.georgetown.edu': 'CSET',
                'givingwhatwecan.org': 'GWWC',
@@ -156,10 +153,10 @@ def ea_blogs_reader_fn(name, content):
                'globalprioritiesinstitute.org': 'GPI',
                'theunitofcaring.tumblr.com': 'Kelsey',
                'givedirectly.org': 'GiveDirectly',
-               'acesounderglass.com': 'VanNostrand'
-               }
+               'acesounderglass.com': 'VanNostrand'}
+
     # Drop certain sites from list
-    drops = ['reddit.com/r/', 'qualiacomputing.com', 'alignmentforum.org']
+    drops = ['reddit.com/r/', 'qualiacomputing.com', 'alignmentforum.org', 'lesswrong.com']
 
     for c in content:
         for url, label in url_map.items():
@@ -180,7 +177,7 @@ contents += load_contents('EABlogs', 'http://eablogs.net', ea_blogs_reader_fn)
 
 
 contents += load_contents('EAForum', 'https://forum.effectivealtruism.org/feed.xml?view=rss&karmaThreshold=20', 'item')
-contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml?view=rss&karmaThreshold=20', 'item')
+contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml?view=curated-rss', 'item')
 contents += load_contents('538', 'https://fivethirtyeight.com/politics/feed/', 'item')
 contents += load_contents('Lusk', 'http://jaysonlusk.com/blog?format=rss', 'item')
 
@@ -485,7 +482,6 @@ contents += load_contents('HLI',
                           'https://us19.campaign-archive.com/feed?u=e759f3a724b8709250fb153c2&id=163285db12',
                           'item')
 contents += load_contents('Pluripotent', 'https://pluripotent.substack.com/feed', 'item')
-contents += load_contents('LFaA', 'https://heathercoxrichardson.substack.com/feed/', 'item')
 contents += load_contents('FPChina', 'https://foreignpolicy.com/category/china-brief/feed/',
                           'item')
 contents += load_contents('FPSouthAsia', 'https://foreignpolicy.com/category/south-asia-brief/feed/',
@@ -497,7 +493,6 @@ contents += load_contents('FPSecurity', 'https://foreignpolicy.com/category/secu
 contents += load_contents('FP-WYWL',
                           'https://foreignpolicy.com/category/while-you-werent-looking/feed/',
                           'item')
-contents += load_contents('MorningAg', 'https://rss.politico.com/morningagriculture.xml', 'item')
 contents += load_contents('FWI',
                           'https://us3.campaign-archive.com/feed?u=2afeee16b30494a373a377a31&id=92de5d8090',
                           'item')
