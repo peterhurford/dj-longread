@@ -8,7 +8,7 @@ DEFAULT_TIME = datetime(1900, 1, 1, 0, 0, 0, 0)
 
 
 class Link(models.Model):
-    url = models.CharField(max_length=2000, default='htpp://www.example.com')
+    url = models.CharField(max_length=2000, default='http://www.example.com')
     title = models.CharField(max_length=2000, default='Example')
     summary = models.CharField(max_length=10000, blank=True, null=True, default='')
     domain = models.CharField(max_length=2000, blank=True, null=True, default='example.com')
