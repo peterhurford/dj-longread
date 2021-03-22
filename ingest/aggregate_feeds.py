@@ -263,36 +263,6 @@ def leo_reader_fn(name, content):
 contents += load_contents('Leo', 'https://zenhabits.net/archives/', leo_reader_fn,
                           reader_type='lxml')
 
-def wbw_reader_fn(name, content):
-    content = content.find_all('h5')
-    content = [c.find_all('a')[0] for c in content]
-    content = [str(c).split('"')[1:3] for c in content]
-    content = [[c[1].replace('>\r\n', '').replace('\t', '').replace('\n', '').replace('</a>', '').replace('>', ''), c[0], 'WBW'] for c in content]
-    return content
-contents += load_contents('WBW', 'https://waitbutwhy.com/archive', wbw_reader_fn,
-                          reader_type='lxml')
-
-def cummings_reader_fn(name, content):
-    content = content.find_all('h1')
-    content = [c.find_all('a') for c in content]
-    content = [c for c in content if 'bookmark' in str(c) and c != []]
-    content = [str(c).split('"') for c in content]
-    content = [[c[4].replace('</a>', '').replace('>', '').replace(']', ''), c[1], 'Cummings'] for c in content]
-    return content
-contents += load_contents('Cummings', 'https://dominiccummings.com/', cummings_reader_fn,
-                          reader_type='lxml')
-
-def d4p_reader_fn(name, content):
-    content = content.find_all('a')
-    content = [str(c).split('"') for c in content if 'BlogList-item' in str(c)]
-    content = [c for c in content if len(c) == 7]
-    content = [[c[6].replace('</a>', '').replace('>', ''), 'https://www.dataforprogress.org' + c[5], 'D4P'] for c in content]
-    return content
-contents += load_contents('D4P', 'https://www.dataforprogress.org/memos', d4p_reader_fn,
-                          reader_type='lxml')
-contents += load_contents('D4P', 'https://www.dataforprogress.org/blog', d4p_reader_fn,
-                          reader_type='lxml')
-
 def rosewater_reader_fn(name, content):
     content = content.find_all('a')
     content = [c for c in content if 'articles' in str(c)][1:-2]
@@ -313,7 +283,6 @@ contents += load_contents('Noah',
                           'item')
 contents += load_contents('Noah', 'https://noahpinion.substack.com/feed', 'item')
 contents += load_contents('ChinAI', 'https://chinai.substack.com/feed', 'item')
-contents += load_contents('Ariely', 'http://danariely.com/resources/the-blog/feed/', 'item')
 contents += load_contents('NotEvenWrong',
                           'http://www.math.columbia.edu/~woit/wordpress/?feed=rss2',
                           'item')
@@ -327,69 +296,25 @@ def chait_reader_fn(name, content):
 contents += load_contents('Chait', 'http://nymag.com/author/jonathan-chait/', chait_reader_fn,
                           reader_type='lxml')
 
-contents += load_contents('3P', 'https://www.peoplespolicyproject.org/feed/', 'item')
-contents += load_contents('DeLong', 'https://www.bradford-delong.com/atom.xml', 'entry-link')
 contents += load_contents('ImportAI', 'https://jack-clark.net/feed/', 'item')
-contents += load_contents('MoneyIllusion', 'http://feeds.feedburner.com/Themoneyillusion', 'item')
-contents += load_contents('AllegedWisdom', 
-                          'http://allegedwisdom.blogspot.com/feeds/posts/default',
-                          'entry-link')
-contents += load_contents('Mike', 'https://mikethemadbiologist.com/feed/', 'item')
 contents += load_contents('Gelman', 'https://statmodeling.stat.columbia.edu/feed/', 'item')
-contents += load_contents('EconometricSense',
-                          'http://econometricsense.blogspot.com/feeds/posts/default',
-                          'entry-link')
-contents += load_contents('Riholtz', 'https://ritholtz.com/feed/', 'item')
-contents += load_contents('PragCap', 'https://www.pragcap.com/feed/', 'item')
-contents += load_contents('NakedCapitalism', 'https://www.nakedcapitalism.com/feed', 'item')
-contents += load_contents('Conservable',
-                          'http://conversableeconomist.blogspot.com/feeds/posts/default',
-                          'entry-link')
-contents += load_contents('Krugman',
-                          'http://www.nytimes.com/svc/collections/v1/publish/www.nytimes.com/column/paul-krugman/rss.xml',
-                          'item')
-contents += load_contents('Fyfe', 'http://feeds.feedburner.com/blogspot/inod', 'item')
-contents += load_contents('VoxEU', 'https://voxeu.org/feed/recent/rss.xml', 'item')
-contents += load_contents('EnlightementEcon',
-                          'http://www.enlightenmenteconomics.com/blog/index.php/feed/',
-                          'item')
-contents += load_contents('Schneier', 'https://www.schneier.com/blog/atom.xml', 'entry-link')
-contents += load_contents('GrumpyEcon',
-                          'https://johnhcochrane.blogspot.com/feeds/posts/default',
-                          'entry-link')
-contents += load_contents('SupplySide', 'https://blog.supplysideliberal.com/post?format=rss', 'item')
-contents += load_contents('Bulletin', 'https://thebulletin.org/feed/', 'item')
-contents += load_contents('Rodney', 'http://rodneybrooks.com/blog/feed/', 'item')
-contents += load_contents('Theorem', 'https://afinetheorem.wordpress.com/feed/', 'item')
 contents += load_contents('VeganStrat', 'http://veganstrategist.org/feed/', 'item')
-contents += load_contents('RibbonFarm', 'http://www.ribbonfarm.com/feed/', 'item')
 
 def sumner_reading_fn(name, content):
     content = content.find_all('item')
     content = [[c.title.get_text().replace(', by Scott Sumner', ''), c.link.get_text(), 'Sumner'] for c in content]
     return content
-contents += load_contents('Sumner', 'https://www.econlib.org/feed/indexSumner_xml',
-                          sumner_reading_fn)
-contents += load_contents('NewFood', 'https://newfoodeconomy.org/feed/', 'item')
-contents += load_contents('Morrill', 'http://feeds.feedburner.com/daniellemorrill', 'item')
 contents += load_contents('WorldInData', 'https://ourworldindata.org/atom.xml', 'entry')
-contents += load_contents('FakeNous', 'http://fakenous.net/?feed=rss2', 'item')
 contents += load_contents('SamAltman', 'http://blog.samaltman.com/posts.atom', 'entry-link')
 contents += load_contents('Crawford', 'https://jasoncrawford.org/feed.xml', 'entry')
 contents += load_contents('HBR', 'http://feeds.hbr.org/harvardbusiness/', 'entry-link')
-contents += load_contents('Devon', 'https://devonzuegel.com/feed.xml', 'entry')
-contents += load_contents('Pseudoerasmus', 'https://pseudoerasmus.com/feed/', 'item')
 contents += load_contents('Nintil', 'https://nintil.com/rss.xml', 'item')
 contents += load_contents('Aarora', 'https://harshitaarora.com/feed/', 'item')
 contents += load_contents('WTB', 'https://medium.com/feed/what-to-build', 'item')
 contents += load_contents('Elad', 'http://blog.eladgil.com/feeds/posts/default', 'entry-link')
-contents += load_contents('Eghbal', 'https://nadiaeghbal.com/feed', 'entry')
-contents += load_contents('Greenspun', 'https://philip.greenspun.com/blog/feed/', 'item')
 contents += load_contents('ScholarsSage',
                           'https://scholars-stage.blogspot.com/feeds/posts/default',
                           'entry-link')
-contents += load_contents('Gross', 'https://dcgross.com/feed.xml', 'entry')
-contents += load_contents('Kling', 'http://www.arnoldkling.com/blog/feed/', 'item')
 contents += load_contents('Seliger', 'https://jakeseliger.com/feed/', 'item')
 contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/', 'item')
 contents += load_contents('BreadFixer', 'https://medium.com/feed/@breadpricefixer', 'item')
@@ -421,15 +346,8 @@ def guzey_link_reader_fn(name, content):
     return content
 contents += load_contents('Guzey', 'https://guzey.com/links/', guzey_link_reader_fn,
                           reader_type='lxml')
-contents += load_contents('CH', 'http://feeds.feedburner.com/codinghorror?format=xml', 'item')
-contents += load_contents('SSIR', 'https://ssir.org/site/rss_2.0', 'item')
 contents += load_contents('MOF', 'https://www.mischiefsoffaction.com/blog-feed.xml', 'item')
-contents += load_contents('Rosie', 'https://rosiecam.home.blog/blog-feed/feed/', 'item')
-contents += load_contents('RyanAvent', 'https://ryanavent.substack.com/feed', 'item')
 contents += load_contents('NMA', 'https://www.nomeatathlete.com/blog/feed/', 'item')
-contents += load_contents('EconMed', 'https://medium.economist.com/feed', 'item')
-contents += load_contents('NerdFitness', 'https://www.nerdfitness.com/blog/feed', 'item')
-contents += load_contents('DR', 'https://www.datarobot.com/blog/feed/', 'item')
 contents += load_contents('JSMP', 'https://jsmp.dk/index.xml', 'item')
 contents += load_contents('JSMP', 'https://medium.com/feed/@jsmp', 'item')
 contents += load_contents('Palladium', 'https://palladiummag.com/feed/', 'item')
@@ -501,7 +419,6 @@ contents += load_contents('QuintaJurecic',
 contents += load_contents('KenWhite', 'https://www.theatlantic.com/feed/author/ken-white/',
                           'entry-link')
 contents += load_contents('Frum', 'https://www.theatlantic.com/feed/author/david-frum/', 'entry-link')
-contents += load_contents('Reason', 'https://reason.com/latest/feed/', 'item')
 contents += load_contents('JenSkerritt',
                           'https://www.bloomberg.com/authors/ARMlA4tT8uE/jen-skerritt.rss',
                           'item')
@@ -517,7 +434,6 @@ def evans_reader_fn(name, content):
     return content
 contents += load_contents('BenEvans', 'https://www.ben-evans.com/essays', evans_reader_fn,
                           reader_type='lxml')
-contents += load_contents('KateLowry', 'https://medium.com/feed/@kate.lowry', 'item')
 contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/', 'item')
 contents += load_contents('HIPR', 'https://highimpactpolicy.review/rss/', 'item')
 
