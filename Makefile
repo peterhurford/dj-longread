@@ -22,6 +22,10 @@ build: ## Build package
 update: ## Update the DB with the latest articles pulled from RSS
 	python3 -m ingest.aggregate_feeds
 
+.PHONY: local_exportdb
+exportdb: ## Export the local links database to local CSV
+	python3 -m ingest.export_db
+
 .PHONY: exportdb
 exportdb: ## Export the links database to CSV and upload to S3
 	python3 -m ingest.export_db
