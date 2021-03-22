@@ -23,7 +23,7 @@ update: ## Update the DB with the latest articles pulled from RSS
 	python3 -m ingest.aggregate_feeds
 
 .PHONY: local_exportdb
-exportdb: ## Export the local links database to local CSV
+local_exportdb: ## Export the local links database to local CSV
 	python3 -m ingest.export_db
 
 .PHONY: exportdb
