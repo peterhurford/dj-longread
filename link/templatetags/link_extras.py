@@ -32,6 +32,7 @@ def domain(domain):
     domain = capitalize_each(domain)
     domain = (domain.replace('Lesswrong', 'LessWrong')
                     .replace('Forum.effectivealtruism', 'EA Forum')
+                    .replace('Noahpinion.substack', 'Noah')
                     .replace('Zenhabits.net', 'ZenHabits')
                     .replace('Nytimes', 'NYTimes')
                     .replace('Gfile.the Dispatch', 'GFile')
