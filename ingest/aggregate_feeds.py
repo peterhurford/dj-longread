@@ -468,6 +468,9 @@ print('Calculating links to add')
 if links is not None:
     existing_urls = set(links['url'].values)
     contents = [c for c in contents if c[1] not in existing_urls]
+    live_aggregators = set([c[2] for c in contents])
+    live_aggregators |= {'custom', 'Custom'}
+
 lines = len(contents)
 added = []
 if lines == 0:
@@ -491,6 +494,19 @@ if links is not None:
         for i, id_ in enumerate(duplicated):
             delete_link_row(cur, id_)
         print('...{} duplicated links purged!'.format(lines))
+
+if links is not None:
+    print('-')
+    print('Purging obsoleted')
+    obsolete = links[links['aggregator'].apply(lambda a: a not in live_aggregators)]
+    obsolete = obsolete['id']
+    lines = len(obsolete)
+    if lines == 0:
+        print('...No obsolete links detected')
+    else:
+        for i, id_ in enumerate(obsolete):
+            hide_row(cur, id_)
+        print('...{} obsolete links purged!'.format(lines))
 
 if links is not None:
     print('-')
