@@ -7,6 +7,18 @@ def capitalize_each(word):
     return ' '.join([w.capitalize() for w in word.split(' ')])
 
 
+def clean(text):
+    return (text.replace('&nbsp;', ' ')
+                .replace('&ldquo;', '"')
+                .replace('&lsquo;', '"')
+                .replace('&rdquo;', '"')
+                .replace('&rsquo;', '"')
+                 .replace('&mdash;', ' -- ')
+                 .replace('""', '"')
+                 .replace('""', '"')
+                 .replace('""', '"'))
+
+
 @register.filter
 def domain(domain):
     if not domain or domain == '':
@@ -40,11 +52,14 @@ def domain(domain):
 def summary(summary):
     if not summary or summary == '':
         return ''
+    else:
+        return clean(summary)
 
-    summary = (summary.replace('&nbsp;', ' ')
-                      .replace('&ldquo;', '"')
-                      .replace('&lsquo;', '"')
-                      .replace('&rdquo;', '"')
-                      .replace('&rsquo;', '"')
-                      .replace('&mdash;', ' -- '))
-    return summary
+
+@register.filter
+def title(title):
+    if not title or title == '':
+        return ''
+    else:
+        return clean(title)
+
