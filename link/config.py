@@ -31,6 +31,8 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='FPSouthAsia'), then=10),
                           When(Q(aggregator__exact='FP-WYWL'), then=10),
                           When(Q(aggregator__exact='538'), then=10),
+                          When(Q(aggregator__exact='GlobalGuessing'), then=10),
+                          When(Q(aggregator__exact='Metaculus'), then=10),
                           When(Q(aggregator__exact='Noah'), then=10),
                           When(Q(aggregator__exact='Wilkinson'), then=10),
                           When(Q(aggregator__exact='Leo'), then=10),
