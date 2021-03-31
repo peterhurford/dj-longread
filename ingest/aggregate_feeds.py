@@ -416,15 +416,13 @@ contents += load_contents('YaschaMounk', 'https://www.theatlantic.com/feed/autho
 contents += load_contents('QuintaJurecic',
                           'https://www.theatlantic.com/feed/author/quinta-jurecic',
                           'entry-link')
-contents += load_contents('KenWhite', 'https://www.theatlantic.com/feed/author/ken-white/',
-                          'entry-link')
-contents += load_contents('Frum', 'https://www.theatlantic.com/feed/author/david-frum/', 'entry-link')
 contents += load_contents('JenSkerritt',
                           'https://www.bloomberg.com/authors/ARMlA4tT8uE/jen-skerritt.rss',
                           'item')
 contents += load_contents('DanWahl', 'https://danwahl.net/atom.xml', 'entry')
 contents += load_contents('Katja', 'https://worldspiritsockpuppet.com/feed.xml', 'entry')
 contents += load_contents('Metaculus', 'https://www.metaculus.com/news/rss/', 'item')
+contents += load_contents('GlobalGuessing', 'https://globalguessing.com/rss/', 'item')
 def evans_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'benedictevans' in str(c)]
     content = [c.split('href="')[-1].split('>')[:-1] for c in content]
