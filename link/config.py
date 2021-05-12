@@ -24,6 +24,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='80K'), then=17),
                           When(Q(aggregator__exact='CEA'), then=17),
                           When(Q(aggregator__exact='SSC'), then=12),
+                          When(Q(aggregator__exact='HIPR'), then=10),
                           When(Q(aggregator__exact='EAForum'), then=10),
                           When(Q(aggregator__exact='FPMorning'), then=10),
                           When(Q(aggregator__exact='FPSecurity'), then=10),
