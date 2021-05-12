@@ -214,7 +214,6 @@ contents += load_contents('Mtlynch.io', 'https://mtlynch.io/feed.xml',
                           mtlynch_reader_fn, reader_type='lxml')
 
 contents += load_contents('Beeminder', 'http://feeds.feedburner.com/bmndr', 'item')
-contents += load_contents('MMM', 'https://feeds.feedburner.com/mrmoneymustache', 'item')
 contents += load_contents('Constantin', 'https://srconstantin.wordpress.com/feed/', 'item')
 contents += load_contents('MR', 'http://feeds.feedburner.com/marginalrevolution/feed', 'item')
 contents += load_contents('MR', 'https://www.bloomberg.com/opinion/authors/AS6n2t3d_iA/tyler-cowen.rss', 'item')
@@ -233,14 +232,6 @@ contents += load_contents('PhilosophyEtc',
                           'http://feeds.philosophyetc.net/PhilosophyEtCetera',
                           'entry-link')
 
-def asphalt_reader_fn(name, content):
-    content = [str(c) for c in content.find_all('a') if 'bookmark' in str(c)]
-    content = [c.split('"') for c in content]
-    content = [[c[6].replace('</a>', '').replace('>', ''), c[3], 'Asphalt'] for c in content]
-    return content
-contents += load_contents('Asphalt', 'https://meltingasphalt.com/archive/', asphalt_reader_fn,
-                          reader_type='lxml')
-
 def graham_reader_fn(name, content):
     content = [str(c).split('"') for c in content.find_all('a')]
     content = [[c[2].replace('</a>', '').replace('>', ''), 'http://paulgraham.com/' + c[1], 'Graham'] for c in content]
@@ -249,9 +240,7 @@ def graham_reader_fn(name, content):
 contents += load_contents('Graham', 'http://paulgraham.com/articles.html', graham_reader_fn,
                           reader_type='lxml')
 
-contents += load_contents('Joel', 'https://www.joelonsoftware.com/feed/', 'item')
 contents += load_contents('ALOP', 'https://alifeofproductivity.com/feed/', 'item')
-contents += load_contents('Dinsmore', 'https://thomaswdinsmore.com/feed/', 'item')
 contents += load_contents('Muehlhauser', 'http://feeds.feedburner.com/LukeMuehlhauser', 'entry')
 
 def leo_reader_fn(name, content):
@@ -275,7 +264,6 @@ contents += load_contents('Rosewater',
                           rosewater_reader_fn, reader_type='lxml')
 
 contents += load_contents('Levels', 'https://levels.io/rss/', 'item')
-contents += load_contents('TSNR', 'https://tnsr.org/feed/', 'item')
 contents += load_contents('Noah', 'http://noahpinionblog.blogspot.com/feeds/posts/default',
                           'entry-link')
 contents += load_contents('Noah',
@@ -283,22 +271,8 @@ contents += load_contents('Noah',
                           'item')
 contents += load_contents('Noah', 'https://noahpinion.substack.com/feed', 'item')
 contents += load_contents('ChinAI', 'https://chinai.substack.com/feed', 'item')
-contents += load_contents('NotEvenWrong',
-                          'http://www.math.columbia.edu/~woit/wordpress/?feed=rss2',
-                          'item')
-
-def chait_reader_fn(name, content):
-    content = [d for d in content.find_all('div') if 'the national interest' in str(d)][0]
-    content = content.find_all('a')[:-1]
-    content = [str(c).split('"') for c in content]
-    content = [[c[6].replace('</span></a>', '').replace('>', ''), 'http:' + c[3], 'Chait'] for c in content]
-    return content
-contents += load_contents('Chait', 'http://nymag.com/author/jonathan-chait/', chait_reader_fn,
-                          reader_type='lxml')
-
 contents += load_contents('ImportAI', 'https://jack-clark.net/feed/', 'item')
 contents += load_contents('Gelman', 'https://statmodeling.stat.columbia.edu/feed/', 'item')
-contents += load_contents('VeganStrat', 'http://veganstrategist.org/feed/', 'item')
 
 def sumner_reading_fn(name, content):
     content = content.find_all('item')
@@ -350,19 +324,13 @@ contents += load_contents('MOF', 'https://www.mischiefsoffaction.com/blog-feed.x
 contents += load_contents('NMA', 'https://www.nomeatathlete.com/blog/feed/', 'item')
 contents += load_contents('JSMP', 'https://jsmp.dk/index.xml', 'item')
 contents += load_contents('JSMP', 'https://medium.com/feed/@jsmp', 'item')
-contents += load_contents('Palladium', 'https://palladiummag.com/feed/', 'item')
-contents += load_contents('PossiblyWrong', 'https://possiblywrong.wordpress.com/feed/', 'item')
-contents += load_contents('XKCDWI', 'https://what-if.xkcd.com/feed.atom', 'entry')
 contents += load_contents('AskAM/P', 'https://www.askamathematician.com/feed/', 'item')
 contents += load_contents('SVN', 'https://m.signalvnoise.com/feed/', 'item')
-contents += load_contents('Exponents', 'https://exponentsmag.org/feed/', 'item')
-contents += load_contents('127', 'https://onetwentyseven.blog/feed/', 'item')
-contents += load_contents('SuperOrganizers', 'https://superorganizers.substack.com/feed', 'item')
 contents += load_contents('Dispatch', 'https://thedispatch.com/feed', 'item')
 contents += load_contents('SSC', 'https://astralcodexten.substack.com/feed', 'item')
 contents += load_contents('Yglesias', 'https://www.slowboring.com/feed', 'item')
 contents += load_contents('Wilkinson', 'https://modelcitizen.substack.com/feed', 'item')
-contents += load_contents('80K', 'https://80000hours.org/blog/feed/', 'item')
+contents += load_contents('80K', 'https://80000hours.org/latest/feed/', 'item')
 
 def eliason_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'blog-page-heading' in str(c)]
@@ -394,7 +362,6 @@ contents += load_contents('CSET',
 contents += load_contents('HLI',
                           'https://us19.campaign-archive.com/feed?u=e759f3a724b8709250fb153c2&id=163285db12',
                           'item')
-contents += load_contents('Pluripotent', 'https://pluripotent.substack.com/feed', 'item')
 contents += load_contents('FPChina', 'https://foreignpolicy.com/category/china-brief/feed/',
                           'item')
 contents += load_contents('FPSouthAsia', 'https://foreignpolicy.com/category/south-asia-brief/feed/',
@@ -408,16 +375,6 @@ contents += load_contents('FP-WYWL',
                           'item')
 contents += load_contents('FWI',
                           'https://us3.campaign-archive.com/feed?u=2afeee16b30494a373a377a31&id=92de5d8090',
-                          'item')
-contents += load_contents('Newport', 'https://www.calnewport.com/blog/feed/', 'item',
-                          reader_type='gzip')
-contents += load_contents('YaschaMounk', 'https://www.theatlantic.com/feed/author/yascha-mounk/',
-                          'entry-link')
-contents += load_contents('QuintaJurecic',
-                          'https://www.theatlantic.com/feed/author/quinta-jurecic',
-                          'entry-link')
-contents += load_contents('JenSkerritt',
-                          'https://www.bloomberg.com/authors/ARMlA4tT8uE/jen-skerritt.rss',
                           'item')
 contents += load_contents('DanWahl', 'https://danwahl.net/atom.xml', 'entry')
 contents += load_contents('Katja', 'https://worldspiritsockpuppet.com/feed.xml', 'entry')
@@ -434,7 +391,7 @@ def evans_reader_fn(name, content):
 contents += load_contents('BenEvans', 'https://www.ben-evans.com/essays', evans_reader_fn,
                           reader_type='lxml')
 contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/', 'item')
-contents += load_contents('HIPR', 'https://highimpactpolicy.review/rss/', 'item')
+contents += load_contents('HIPR', 'http://www.highimpactpolicy.review/feed', 'item')
 
 print('-')
 print('Gathering content')
