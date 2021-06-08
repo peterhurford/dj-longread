@@ -1,4 +1,5 @@
 import os
+import re
 import random
 import psycopg2
 
@@ -392,6 +393,26 @@ contents += load_contents('BenEvans', 'https://www.ben-evans.com/essays', evans_
                           reader_type='lxml')
 contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/', 'item')
 contents += load_contents('HIPR', 'http://www.highimpactpolicy.review/feed', 'item')
+
+def every_reader_fn(name, content):
+    content = [str(c) for c in content.find_all('a') if '/{}/'.format(name.lower()) in str(c) and 'h2' in str(c)]
+    content = [[re.sub(r'<span class="hand hand-[A-Z]">', '', c).replace('</span>', '').split('">')[2].
+split('</h2>')[0],
+                'https://every.to' + c.split('href="')[1].split('"')[0],
+                name] for c in content]
+    return content
+contents += load_contents('Superorganizers', 'https://every.to/superorganizers?sort=newest',
+                          every_reader_fn,
+                          reader_type='xml')
+contents += load_contents('Divinations', 'https://every.to/divinations?sort=newest',
+                          every_reader_fn,
+                          reader_type='xml')
+contents += load_contents('Napkin-Math', 'https://every.to/napkin-math?sort=newest',
+                          every_reader_fn,
+                          reader_type='xml')
+contents += load_contents('Almanack', 'https://every.to/almanack?sort=newest',
+                          every_reader_fn,
+                          reader_type='xml')
 
 print('-')
 print('Gathering content')
