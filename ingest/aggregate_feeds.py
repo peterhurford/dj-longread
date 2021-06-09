@@ -109,13 +109,13 @@ def load_contents(name, feed, reader_fn, return_type='soup', reader_type='xml'):
 
 contents = []
 
-def hn_reader_fn(name, content):
-    content = chunk(content[3:], 5)
-    content = [c[:2] for c in content]
-    content = [[c[0], c[1], 'HN'] for c in content]
-    return content
-contents += load_contents('HN', 'https://news.ycombinator.com/rss',
-                          hn_reader_fn, return_type='list')
+# def hn_reader_fn(name, content):
+#     content = chunk(content[3:], 5)
+#     content = [c[:2] for c in content]
+#     content = [[c[0], c[1], 'HN'] for c in content]
+#     return content
+# contents += load_contents('HN', 'https://news.ycombinator.com/rss',
+#                           hn_reader_fn, return_type='list')
 
 def ea_blogs_reader_fn(name, content):
     content = content.find_all('ul')[0]
@@ -216,8 +216,8 @@ contents += load_contents('Mtlynch.io', 'https://mtlynch.io/feed.xml',
 
 contents += load_contents('Beeminder', 'http://feeds.feedburner.com/bmndr', 'item')
 contents += load_contents('Constantin', 'https://srconstantin.wordpress.com/feed/', 'item')
-contents += load_contents('MR', 'http://feeds.feedburner.com/marginalrevolution/feed', 'item')
-contents += load_contents('MR', 'https://www.bloomberg.com/opinion/authors/AS6n2t3d_iA/tyler-cowen.rss', 'item')
+# contents += load_contents('MR', 'http://feeds.feedburner.com/marginalrevolution/feed', 'item')
+# contents += load_contents('MR', 'https://www.bloomberg.com/opinion/authors/AS6n2t3d_iA/tyler-cowen.rss', 'item')
 
 def roots_reader_fn(name, content):
     content = content.find_all('li')
