@@ -148,6 +148,7 @@ def ea_blogs_reader_fn(name, content):
                'centreforeffectivealtruism.org': 'CEA',
                '80000hours.org': '80K',
                'rationalconspiracy.com': 'RatlConspiracy',
+               'astralcodexten.substack.com': 'SSC',
                'lukemuehlhauser.com': 'Muehlhauser',
                'longtermrisk.org': 'CLR',
                'thewholesky.wordpress.com': 'JuliaWise',
