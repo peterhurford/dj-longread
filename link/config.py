@@ -6,13 +6,13 @@ PURGABLE_AGGREGATORS = ['Dispatch', 'LFaA', 'FPMorning', 'FPSecurity', 'FPChina'
 PURGE_OLDER_THAN_X_DAYS = 5  # For PURGABLE_AGGREGATORS, remove links older than this (in days)
 
 
-PRIORITY_WEIGHT = 12  # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 14  # The lower this number, the more links will be ranked according
                       # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 8       # The lower this number, the more it will be the case that recent
                       # links show up first
 
-RANDOM_WEIGHT = 60    # The lower this number, the more it will be the case that links will
+RANDOM_WEIGHT = 55    # The lower this number, the more it will be the case that links will
                       # show up in a random order, disregarding recenty or aggregator weights
 
 
