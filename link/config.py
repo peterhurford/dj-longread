@@ -6,6 +6,11 @@ PURGABLE_AGGREGATORS = ['Dispatch', 'LFaA', 'FPMorning', 'FPSecurity', 'FPChina'
 PURGE_OLDER_THAN_X_DAYS = 5  # For PURGABLE_AGGREGATORS, remove links older than this (in days)
 
 
+# Purge all articles from these aggregators
+OBSOLETE_AGGREGATORS = ['MR', 'HN']
+
+
+# Metaweights
 PRIORITY_WEIGHT = 14  # The lower this number, the more links will be ranked according
                       # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 

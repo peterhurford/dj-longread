@@ -490,6 +490,20 @@ if links is not None:
             hide_row(cur, id_)
         print('...{} old links purged!'.format(lines))
 
+if links is not None:
+    print('-')
+    print('Purging obsolete')
+    obsolete = links[(links['aggregator'].apply(lambda a: a in OBSOLETE_AGGREGATORS)) &
+                     (links['liked'] != 0) & (links['liked'] != 1)]
+    obsolete = obsolete['id']
+    lines = len(obsolete)
+    if lines == 0:
+        print('...No obsolete links detected')
+    else:
+        for i, id_ in enumerate(obsolete):
+            hide_row(cur, id_)
+        print('...{} obsolete links purged!'.format(lines))
+
 print('-')
 print('Resync IDs')
 resync_ids(cur)
