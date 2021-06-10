@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from utils.download import read
 from utils.sql import enquote, add_row, delete_row, update_row, export_db
 
-from link.config import PURGE_OLDER_THAN_X_DAYS, PURGABLE_AGGREGATORS
+from link.config import PURGE_OLDER_THAN_X_DAYS, PURGABLE_AGGREGATORS, OBSOLETE_AGGREGATORS
 
 
 def chunk(l, n):
