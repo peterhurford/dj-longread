@@ -26,6 +26,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                                Q(title__startswith='The Morning'), then=100),
                           When(Q(aggregator__exact='Custom'), then=20),
                           When(Q(aggregator__exact='HIPR'), then=12),
+                          When(Q(aggregator__exact='SLW'), then=10),
                           When(Q(aggregator__exact='EAForum'), then=8),
                           When(Q(aggregator__exact='Bollard'), then=8),
                           When(Q(aggregator__exact='80K'), then=8),
