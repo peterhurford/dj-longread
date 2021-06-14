@@ -414,6 +414,7 @@ contents += load_contents('Napkin-Math', 'https://every.to/napkin-math?sort=newe
 contents += load_contents('Almanack', 'https://every.to/almanack?sort=newest',
                           every_reader_fn,
                           reader_type='xml')
+contents += load_contents('PoliticalKiwi', 'https://politicalkiwi.wordpress.com/feed/', 'item')
 
 print('-')
 print('Gathering content')
