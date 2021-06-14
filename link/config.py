@@ -11,7 +11,7 @@ OBSOLETE_AGGREGATORS = ['MR', 'HN', 'EABlogs']
 
 
 # Metaweights
-PRIORITY_WEIGHT = 14  # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 16  # The lower this number, the more links will be ranked according
                       # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 8       # The lower this number, the more it will be the case that recent
@@ -38,18 +38,8 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='FPSouthAsia'), then=8),
                           When(Q(aggregator__exact='FP-WYWL'), then=8),
                           When(Q(aggregator__exact='GlobalGuessing'), then=8),
-                          When(Q(aggregator__exact='Metaculus'), then=8),
-                          When(Q(aggregator__exact='Leo'), then=8),
-                          When(Q(aggregator__exact='ALOP'), then=8),
-                          When(Q(aggregator__exact='Noah'), then=8),
-                          When(Q(aggregator__exact='Yglesias'), then=8),
                           When(Q(aggregator__exact='AI Impacts'), then=8),
                           When(Q(aggregator__exact='Lusk'), then=8),
-                          When(Q(aggregator__exact='NMA'), then=8),
-                          When(Q(aggregator__exact='NerdFitness'), then=8),
-                          When(Q(aggregator__exact='Wilkinson'), then=6),
-                          When(Q(aggregator__exact='LW'), then=6),
-                          When(Q(aggregator__exact='Caplan'), then=6),
                           default=1,
                           output_field=FloatField())
 
