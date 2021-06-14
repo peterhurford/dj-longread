@@ -272,6 +272,7 @@ contents += load_contents('Noah',
                           'https://www.bloomberg.com/opinion/authors/AR3OYuAmvcU/noah-smith.rss',
                           'item')
 contents += load_contents('Noah', 'https://noahpinion.substack.com/feed', 'item')
+contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed', 'item')
 contents += load_contents('ChinAI', 'https://chinai.substack.com/feed', 'item')
 contents += load_contents('ImportAI', 'https://jack-clark.net/feed/', 'item')
 contents += load_contents('Gelman', 'https://statmodeling.stat.columbia.edu/feed/', 'item')
