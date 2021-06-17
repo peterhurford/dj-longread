@@ -497,7 +497,7 @@ if links is not None:
     print('-')
     print('Purging obsolete')
     obsolete = links[(links['aggregator'].apply(lambda a: a in OBSOLETE_AGGREGATORS)) &
-                     (links['liked'] != 0) & (links['liked'] != 1)]
+                     (links['liked'] != 0) & (links['liked'] != 1) & (links['liked'] != -1)]
     obsolete = obsolete['id']
     lines = len(obsolete)
     if lines == 0:
