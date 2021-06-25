@@ -365,6 +365,7 @@ contents += load_contents('CSET',
 contents += load_contents('HLI',
                           'https://us19.campaign-archive.com/feed?u=e759f3a724b8709250fb153c2&id=163285db12',
                           'item')
+contents += load_contents('Alignment', 'https://us18.campaign-archive.com/feed?u=1d1821210cc4f04d1e05c4fa6&id=dbac5de515', 'item')
 contents += load_contents('FPChina', 'https://foreignpolicy.com/category/china-brief/feed/',
                           'item')
 contents += load_contents('FPSouthAsia', 'https://foreignpolicy.com/category/south-asia-brief/feed/',

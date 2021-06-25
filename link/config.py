@@ -17,7 +17,7 @@ PRIORITY_WEIGHT = 16  # The lower this number, the more links will be ranked acc
 TIME_WEIGHT = 8       # The lower this number, the more it will be the case that recent
                       # links show up first
 
-RANDOM_WEIGHT = 55    # The lower this number, the more it will be the case that links will
+RANDOM_WEIGHT = 60    # The lower this number, the more it will be the case that links will
                       # show up in a random order, disregarding recenty or aggregator weights
 
 
@@ -40,6 +40,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='GlobalGuessing'), then=8),
                           When(Q(aggregator__exact='AI Impacts'), then=8),
                           When(Q(aggregator__exact='Lusk'), then=8),
+                          When(Q(aggregator__exact='Alignment'), then=8),
                           default=1,
                           output_field=FloatField())
 
