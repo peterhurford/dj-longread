@@ -6,7 +6,7 @@ run: ## Run Django
 
 .PHONY: pipeline
 pipeline: ## Run the full pipeline on Heroku
-	heroku run make update &&  make launch && make importdb && git add . && git commit -m "Update DB" && git push origin master && printf "%s\n" "$(date)"
+	heroku run make update &&  make launch && make importdb && git add . && git commit -m "Update DB" && git push origin master; printf "%s\n" "$(date)"
 
 .PHONY: migrate
 migrate: ## Run Django migrations
