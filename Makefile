@@ -4,6 +4,10 @@
 run: ## Run Django
 	poetry run python manage.py runserver
 
+.PHONY: pipeline
+full_run: ## Run the full pipeline on Heroku
+	heroku run make update &&  make launch && make importdb && git add . && git commit -m "Update DB" && git push origin master && printf "%s\n" "$(date)"
+
 .PHONY: migrate
 migrate: ## Run Django migrations
 	poetry run python manage.py makemigrations && python manage.py makemigrations link && poetry run python manage.py migrate
