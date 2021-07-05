@@ -39,8 +39,9 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='FP-WYWL'), then=8),
                           When(Q(aggregator__exact='GlobalGuessing'), then=8),
                           When(Q(aggregator__exact='AI Impacts'), then=8),
-                          When(Q(aggregator__exact='Lusk'), then=8),
                           When(Q(aggregator__exact='Alignment'), then=8),
+                          When(Q(aggregator__exact='Lusk'), then=6),
+                          When(Q(aggregator__exact='ScholarsSage'), then=6),
                           default=1,
                           output_field=FloatField())
 
