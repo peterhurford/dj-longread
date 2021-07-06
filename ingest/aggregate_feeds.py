@@ -127,23 +127,16 @@ def ea_blogs_reader_fn(name, content):
 
     # Add custom aggregators for EA Blogs members
     url_map = {'forum.effectivealtruism.org': 'EAForum',
-               'faunalytics.org': 'Faunalytics',
                'cset.georgetown.edu': 'CSET',
-               'givingwhatwecan.org': 'GWWC',
-               'gfi.org': 'GFI',
                'overcomingbias.com': 'Hanson',
                'impartial-priorities.org': 'ImpPri',
                'philosophyetc.net': 'PhilosophyEtc',
                'thingofthings.wordpress.com': 'Ozy',
-               'povertyactionlab.org': 'JPAL',
+               'palladiummag.com': 'Palladium',
                'benjaminrosshoffman.com': 'BenHoffman',
                'vox.com': 'Vox',
-               'outbreakobservatory.org': 'OutbreakO',
-               'futureoflife.org': 'FLI',
                'charityentrepreneurship.com': 'CE',
-               'existence.org': 'BERI',
                'stijnbruers.wordpress.com': 'Bruers',
-               'animal-ethics.org': 'AnimalEthics',
                'fhi.ox.ac.uk': 'FHI',
                'centreforeffectivealtruism.org': 'CEA',
                '80000hours.org': '80K',
@@ -157,17 +150,12 @@ def ea_blogs_reader_fn(name, content):
                'givedirectly.org': 'GiveDirectly',
                'acesounderglass.com': 'VanNostrand'}
 
-    # Drop certain sites from list
-    drops = ['reddit.com/r/', 'qualiacomputing.com', 'alignmentforum.org', 'lesswrong.com']
-
     for c in content:
+        include = True
         for url, label in url_map.items():
             if url in c[1]:
                 c[2] = label
-        
-        include = True
-        for drop in drops:
-            if drop in c[1]:
+            else:
                 include = False
 
         if include:
@@ -175,9 +163,8 @@ def ea_blogs_reader_fn(name, content):
 
     return processed_content
 
+
 contents += load_contents('EABlogs', 'http://eablogs.net', ea_blogs_reader_fn)
-
-
 contents += load_contents('EAForum', 'https://forum.effectivealtruism.org/feed.xml?view=rss&karmaThreshold=40', 'item')
 contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml?view=curated-rss', 'item')
 contents += load_contents('538', 'https://fivethirtyeight.com/politics/feed/', 'item')
