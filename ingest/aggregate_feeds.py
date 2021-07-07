@@ -404,6 +404,8 @@ contents += load_contents('Almanack', 'https://every.to/almanack?sort=newest',
                           every_reader_fn,
                           reader_type='xml')
 contents += load_contents('PoliticalKiwi', 'https://politicalkiwi.wordpress.com/feed/', 'item')
+contents += load_contents('Taleb', 'https://fooledbyrandomnessdotcom.wordpress.com/feed/', 'item')
+contents += load_contents('Taleb', 'https://medium.com/feed/incerto', 'item')
 
 print('-')
 print('Gathering content')
