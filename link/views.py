@@ -22,7 +22,7 @@ class LinkTweetListView(ListView):
     def get_queryset(self):
         queryset = (Link.objects.exclude(liked__isnull=True)
                                 .exclude(liked__exact=0)
-                                .exclude(summary__isnull=True)
+                                .exclude(liked__exact=-1)
                                 .exclude(tweet__exact=0))
         url = self.request.GET.get('url')
         if url:
@@ -71,8 +71,9 @@ class LinkListView(ListView):
     def get_queryset(self):
         queryset = (Link.objects.exclude(liked__isnull=True)
                                 .exclude(liked__exact=0)
-                                .exclude(summary__isnull=True)
+                                .exclude(liked__exact=-1)
                                 .exclude(tweet__exact=1)
+                                .exclude(summary__isnull=True)
                                 .exclude(summary__exact='')
                                 .exclude(summary__exact='nan'))
         url = self.request.GET.get('url')
