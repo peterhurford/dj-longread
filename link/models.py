@@ -16,7 +16,7 @@ class Link(models.Model):
     modified = models.DateTimeField('date modified', default=DEFAULT_TIME)
     liked = models.IntegerField(blank=True, null=True, default=1)
     category = models.CharField(max_length=2000, blank=True, null=True, default='')
-    aggregator = models.CharField(max_length=2000, default='')
+    aggregator = models.CharField(max_length=2000, default='Custom')
     seed = models.IntegerField(blank=True, null=True, default=1)
     tweet = models.IntegerField(blank=True, null=True, default=0)
 
