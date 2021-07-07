@@ -10,11 +10,11 @@
   <div id="main">
     <div id="list">
       <h1>Links Archive</h1>
-      <p>(Links, <a href="/notes">Notes</a>, <a href="/">Upcoming</a>, <a href="/links/add_link.html">Add</a>, <a href="/admin/link/link">Admin</a>, <a href="/admin/logout">Logout</a>)</p>
+      <p>(<a href="/links">Links</a>, Notes, <a href="/">Upcoming</a>, <a href="/links/add_link.html">Add</a>, <a href="/admin/link/link">Admin</a>, <a href="/admin/logout">Logout</a>)</p>
 
       <ul>
       {% for link in object_list %}
-      <li><b><a href="{{ link.url }}">{{ link.title|title }}</a> [{{ link.domain|domain }}]:</b> {{ link.summary|summary }} <i>(<div class="tooltip">{{ link.modified|date:"d M 'y" }}<span class="tooltiptext">Added {{ link.modified }}</span></div> in <b>{{ link.category }}</b> | <a href="https://web.archive.org/{{ link.url }}" alt="archive">a</a>)</i></li>
+      <li><a href="{{ link.url }}">{{ link.title|title }}</a> <i>(<div class="tooltip">{{ link.modified|date:"d M 'y" }}<span class="tooltiptext">Added {{ link.modified }}</span></div> in <b>{{ link.category }}</b> | <a href="https://web.archive.org/{{ link.url }}" alt="archive">a</a>)</i></li>
       {% empty %}
         <li>No links yet.</li>
       {% endfor %}

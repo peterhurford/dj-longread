@@ -15,6 +15,55 @@ from .utils.url import clean_url, get_root_url
 from .config import PRIORITY_WEIGHT, TIME_WEIGHT, RANDOM_WEIGHT, AGGREGATOR_WEIGHTS
 
 
+class LinkTweetListView(ListView):
+    model = Link
+    paginate_by = 500
+
+    def get_queryset(self):
+        queryset = (Link.objects.exclude(liked__isnull=True)
+                                .exclude(liked__exact=0)
+                                .exclude(summary__isnull=True)
+                                .exclude(tweet__exact=0))
+        url = self.request.GET.get('url')
+        if url:
+            queryset = queryset.filter(Q(url__icontains=url))
+        title = self.request.GET.get('title')
+        if title:
+            queryset = queryset.filter(Q(title__icontains=title))
+        aggregator = self.request.GET.get('aggregator')
+        if aggregator:
+            queryset = queryset.filter(Q(aggregator__icontains=aggregator))
+        category = self.request.GET.get('category')
+        if category:
+            queryset = queryset.filter(Q(category__icontains=category))
+        summary = self.request.GET.get('summary')
+        if summary:
+            queryset = queryset.filter(Q(summary__icontains=summary))
+        before = self.request.GET.get('before')
+        if before:
+            before = datetime.strptime(before, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
+            queryset = queryset.filter(Q(added__gte=before))
+        after = self.request.GET.get('after')
+        if after:
+            after = datetime.strptime(after, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
+            queryset = queryset.filter(Q(added__gte=after))
+        sort = self.request.GET.get('sort')
+        if sort == 'random':
+            queryset = queryset.order_by('seed', 'id')
+        elif sort == 'diverse':
+            queryset = queryset.order_by('aggregator', '-modified', 'id').distinct('aggregator')
+        elif sort == 'oldest':
+            queryset = queryset.order_by('modified', 'id')
+        else:
+            queryset = queryset.order_by('-modified', 'id')
+            
+        queryset = queryset.all()
+        return queryset
+
+    context_object_name = 'link_tweet_list'
+    template_name = 'link/tweet_list.html'
+
+
 class LinkListView(ListView):
     model = Link
     paginate_by = 500
@@ -23,6 +72,7 @@ class LinkListView(ListView):
         queryset = (Link.objects.exclude(liked__isnull=True)
                                 .exclude(liked__exact=0)
                                 .exclude(summary__isnull=True)
+                                .exclude(tweet__exact=1)
                                 .exclude(summary__exact='')
                                 .exclude(summary__exact='nan'))
         url = self.request.GET.get('url')
@@ -134,7 +184,7 @@ class UpcomingListView(LoginRequiredMixin, ListView):
 
 class LinkCreate(LoginRequiredMixin, CreateView):
     model = Link
-    fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator']
+    fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator', 'tweet']
     login_url = 'admin/login'
 
     def form_valid(self, form):
@@ -152,7 +202,7 @@ class LinkCreate(LoginRequiredMixin, CreateView):
 
 class LinkUpdate(LoginRequiredMixin, UpdateView):
     model = Link
-    fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator']
+    fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator', 'tweet']
     template_name_suffix = '_update_form'
     login_url = 'admin/login'
 
