@@ -284,6 +284,7 @@ contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/', 'it
 contents += load_contents('BreadFixer', 'https://medium.com/feed/@breadpricefixer', 'item')
 contents += load_contents('Avraham', 'https://misinfounderload.substack.com/feed', 'item')
 contents += load_contents('FakeNous', 'https://fakenous.net/?feed=rss2', 'item')
+contents += load_contents('AppliedDiv', 'https://applieddivinitystudies.com/atom.xml', 'entry')
 
 def andy_reader_fn(name, content):
     content = content.find_all('a')
