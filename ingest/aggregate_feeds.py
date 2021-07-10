@@ -282,6 +282,7 @@ contents += load_contents('ScholarsSage',
 contents += load_contents('Seliger', 'https://jakeseliger.com/feed/', 'item')
 contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/', 'item')
 contents += load_contents('BreadFixer', 'https://medium.com/feed/@breadpricefixer', 'item')
+contents += load_contents('Avraham', 'https://misinfounderload.substack.com/feed', 'item')
 
 def andy_reader_fn(name, content):
     content = content.find_all('a')
