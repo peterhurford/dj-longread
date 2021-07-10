@@ -6,7 +6,7 @@ import pandas as pd
 
 
 ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
-            'liked', 'category', 'aggregator', 'seed']
+            'liked', 'category', 'aggregator', 'seed', 'tweet']
 
 
 def table_exists(cur, table_name):
