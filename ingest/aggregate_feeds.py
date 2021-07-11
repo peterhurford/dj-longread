@@ -286,6 +286,7 @@ contents += load_contents('Avraham', 'https://misinfounderload.substack.com/feed
 contents += load_contents('FakeNous', 'https://fakenous.net/?feed=rss2', 'item')
 contents += load_contents('AppliedDiv', 'https://applieddivinitystudies.com/atom.xml', 'entry')
 contents += load_contents('WIP', 'https://worksinprogress.co/feed/', 'item')
+contents += load_contents('Scrimshaw', 'https://scrimshawunscripted.substack.com/feed', 'item')
 
 def andy_reader_fn(name, content):
     content = content.find_all('a')
