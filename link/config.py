@@ -44,6 +44,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='Lusk'), then=4),
                           When(Q(aggregator__exact='ScholarsSage'), then=4),
                           When(Q(aggregator__exact='PoliticalKiwi'), then=4),
+                          When(Q(aggregator__exact='Holden'), then=4),
                           default=1,
                           output_field=FloatField())
 
