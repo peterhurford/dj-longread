@@ -411,6 +411,7 @@ contents += load_contents('Almanack', 'https://every.to/almanack?sort=newest',
 contents += load_contents('PoliticalKiwi', 'https://politicalkiwi.wordpress.com/feed/', 'item')
 contents += load_contents('Taleb', 'https://fooledbyrandomnessdotcom.wordpress.com/feed/', 'item')
 contents += load_contents('Taleb', 'https://medium.com/feed/incerto', 'item')
+contents += load_contents('Holden', 'https://www.cold-takes.com/rss/', 'item')
 
 print('-')
 print('Gathering content')
