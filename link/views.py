@@ -221,6 +221,7 @@ class LinkUpdate(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         if not form.instance.liked:
             form.instance.liked = 0
+            form.instance.tweet = 0
             logging.info('Deleted "{}"'.format(form.instance.title))
         else:
             logging.info('Liked "{}"'.format(form.instance.title))
