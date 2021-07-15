@@ -101,7 +101,7 @@ class LinkListView(ListView):
             queryset = queryset.filter(Q(added__gte=after))
         sort = self.request.GET.get('sort')
         if sort == 'random':
-            queryset = queryset.order_by('seed', 'id')
+            queryset = queryset.order_by('?')
         elif sort == 'diverse':
             queryset = queryset.order_by('aggregator', '-modified', 'id').distinct('aggregator')
         elif sort == 'oldest':
@@ -162,7 +162,7 @@ class UpcomingListView(LoginRequiredMixin, ListView):
         elif sort == 'oldest':
             queryset = queryset.order_by('added', 'id')
         elif sort == 'random':
-            queryset = queryset.order_by('seed', 'id')
+            queryset = queryset.order_by('?')
         elif sort == 'diverse':
             queryset = queryset.order_by('seed', 'aggregator', '-added')
         elif sort == 'diverserecent':
