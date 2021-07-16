@@ -18,7 +18,7 @@ class Link(models.Model):
     category = models.CharField(max_length=2000, blank=True, null=True, default='')
     aggregator = models.CharField(max_length=2000, default='Custom')
     seed = models.IntegerField(blank=True, null=True, default=1)
-    tweet = models.IntegerField(default=0)
+    tweet = models.IntegerField(null=True, default=0)
 
     def __str__(self):
         return self.title
