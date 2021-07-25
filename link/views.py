@@ -20,7 +20,7 @@ class LinkTweetListView(ListView):
     paginate_by = 500
 
     def get_queryset(self):
-        queryset = (Link.objects.filter(tweet__exact==1)
+        queryset = (Link.objects.filter(tweet=1)
                                 .exclude(liked__isnull=True)
                                 .exclude(liked__exact=0)
                                 .exclude(liked__exact=-1))
