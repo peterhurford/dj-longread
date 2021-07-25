@@ -20,10 +20,10 @@ class LinkTweetListView(ListView):
     paginate_by = 500
 
     def get_queryset(self):
-        queryset = (Link.objects.exclude(liked__isnull=True)
+        queryset = (Link.objects.filter(tweet__exact==1)
+                                .exclude(liked__isnull=True)
                                 .exclude(liked__exact=0)
-                                .exclude(liked__exact=-1)
-                                .exclude(tweet__exact=0))
+                                .exclude(liked__exact=-1))
         url = self.request.GET.get('url')
         if url:
             queryset = queryset.filter(Q(url__icontains=url))
