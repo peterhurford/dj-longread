@@ -20,6 +20,9 @@ TIME_WEIGHT = 10      # The lower this number, the more it will be the case that
 RANDOM_WEIGHT = 60    # The lower this number, the more it will be the case that links will
                       # show up in a random order, disregarding recenty or aggregator weights
 
+# Equation for ranking = 1 + (aggregator weight / PRIORITY_WEIGHT) +
+# (id (~100K) / TIME_WEIGHT * 100) + (seed (1-100) / RANDOM_WEIGHT)
+
 
 # The relative rankings of different aggregators
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
