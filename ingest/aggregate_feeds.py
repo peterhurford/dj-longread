@@ -412,6 +412,7 @@ contents += load_contents('PoliticalKiwi', 'https://politicalkiwi.wordpress.com/
 contents += load_contents('Taleb', 'https://fooledbyrandomnessdotcom.wordpress.com/feed/', 'item')
 contents += load_contents('Taleb', 'https://medium.com/feed/incerto', 'item')
 contents += load_contents('Holden', 'https://www.cold-takes.com/rss/', 'item')
+contents += load_contents('Cummings', 'https://dominiccummings.substack.com/feed', 'item')
 
 print('-')
 print('Gathering content')
