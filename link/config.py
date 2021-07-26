@@ -47,7 +47,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='Holden'), then=6),
                           When(Q(aggregator__exact='Lusk'), then=4),
                           When(Q(aggregator__exact='Guzey'), then=4),
-                          When(Q(aggregator__exact='Noahpinion'), then=4),
+                          When(Q(aggregator__exact='Noah'), then=4),
                           When(Q(aggregator__exact='Dispatch'), then=0.8),
                           default=1,
                           output_field=FloatField())
