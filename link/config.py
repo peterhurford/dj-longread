@@ -11,10 +11,10 @@ OBSOLETE_AGGREGATORS = ['MR', 'HN', 'EABlogs', 'Reason', 'NR', 'Quillette', 'Vox
 
 
 # Metaweights
-PRIORITY_WEIGHT = 12  # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 9   # The lower this number, the more links will be ranked according
                       # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
-TIME_WEIGHT = 8       # The lower this number, the more it will be the case that recent
+TIME_WEIGHT = 10      # The lower this number, the more it will be the case that recent
                       # links show up first
 
 RANDOM_WEIGHT = 60    # The lower this number, the more it will be the case that links will
