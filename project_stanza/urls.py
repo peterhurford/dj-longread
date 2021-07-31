@@ -9,6 +9,7 @@ from link import views
 
 urlpatterns = [
     path('', views.UpcomingListView.as_view(), name='upcoming-list'),
+    path('onetab', views.UpcomingCustomListView.as_view(), name='upcoming-custom-list'),
 	url(r'^update/(?P<pk>\d+)/$', views.LinkUpdate.as_view(), name='link_update'),
     path('links/', views.LinkListView.as_view(), name='tweet-list'),
     path('notes/', views.LinkTweetListView.as_view(), name='link-list'),

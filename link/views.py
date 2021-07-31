@@ -15,6 +15,9 @@ from .utils.url import clean_url, get_root_url
 from .config import PRIORITY_WEIGHT, TIME_WEIGHT, RANDOM_WEIGHT, AGGREGATOR_WEIGHTS
 
 
+# TODO: Use inheritence to DRY these classes
+
+
 class LinkTweetListView(ListView):
     model = Link
     paginate_by = 500
@@ -127,18 +130,21 @@ class UpcomingListView(LoginRequiredMixin, ListView):
         today = datetime(today.year, today.month, today.day)
         context['total_count'] = (Link.objects.exclude(liked__exact=0)
                                               .exclude(liked__exact=1)
+                                              .exclude(aggregator__exact='Custom')
                                               .count())
         context['read_count'] = (Link.objects.exclude(liked__isnull=True)
                                              .filter(modified__gte=today)
+                                             .exclude(aggregator__exact='Custom')
                                              .count())
         context['liked_count'] = (Link.objects.exclude(liked__isnull=True)
                                               .filter(modified__gte=today)
                                               .exclude(liked__exact=0)
+                                              .exclude(aggregator__exact='Custom')
                                               .count())
         return context
 
     def get_queryset(self):
-        queryset = Link.objects.filter(liked__isnull=True)
+        queryset = Link.objects.exclude(aggregator__exact='Custom').filter(liked__isnull=True)
         url = self.request.GET.get('url')
         if url:
             queryset = queryset.filter(Q(url__icontains=url))
@@ -183,6 +189,76 @@ class UpcomingListView(LoginRequiredMixin, ListView):
     template_name = 'link/upcoming_list.html'
 
 
+class UpcomingCustomListView(LoginRequiredMixin, ListView):
+    model = Link
+    paginate_by = 16
+    login_url = 'admin/login'
+
+    def get_context_data(self, **kwargs):
+        context = super(UpcomingCustomListView, self).get_context_data(**kwargs)
+        today = datetime.today()
+        today = datetime(today.year, today.month, today.day)
+        context['total_count'] = (Link.objects.exclude(liked__exact=0)
+                                              .exclude(liked__exact=1)
+                                              .filter(aggregator__exact='Custom')
+                                              .count())
+        context['read_count'] = (Link.objects.exclude(liked__isnull=True)
+                                             .filter(modified__gte=today)
+                                             .filter(aggregator__exact='Custom')
+                                             .count())
+        context['liked_count'] = (Link.objects.exclude(liked__isnull=True)
+                                              .filter(modified__gte=today)
+                                              .exclude(liked__exact=0)
+                                              .filter(aggregator__exact='Custom')
+                                              .count())
+        return context
+
+    def get_queryset(self):
+        queryset = Link.objects.filter(aggregator__exact='Custom').filter(liked__isnull=True)
+        url = self.request.GET.get('url')
+        if url:
+            queryset = queryset.filter(Q(url__icontains=url))
+        title = self.request.GET.get('title')
+        if title:
+            queryset = queryset.filter(Q(title__icontains=title))
+        aggregator = self.request.GET.get('aggregator')
+        if aggregator:
+            queryset = queryset.filter(Q(aggregator__icontains=aggregator))
+        before = self.request.GET.get('before')
+        if before:
+            before = datetime.strptime(before, '%d/%m/%y') # e.g., 18/09/19
+            queryset = queryset.filter(Q(added__lte=before))
+        after = self.request.GET.get('after')
+        if after:
+            after = datetime.strptime(after, '%d/%m/%y') # e.g., 18/09/19
+            queryset = queryset.filter(Q(added__gte=after))
+        sort = self.request.GET.get('sort')
+        if sort == 'recent':
+            queryset = queryset.order_by('-added', 'id')
+        elif sort == 'oldest':
+            queryset = queryset.order_by('added', 'id')
+        elif sort == 'random':
+            queryset = queryset.order_by('?')
+        elif sort == 'diverse':
+            queryset = queryset.order_by('seed', 'aggregator', '-added')
+        elif sort == 'diverserecent':
+            queryset = queryset.order_by('seed', '-added')
+        elif sort == 'diverseoldest':
+            queryset = queryset.order_by('seed', 'added')
+        else:
+            queryset = (queryset.annotate(priority=AGGREGATOR_WEIGHTS)
+                        .annotate(total_priority=ExpressionWrapper((1 + (F('priority') / float(PRIORITY_WEIGHT))) +
+                                                                   (F('id') / (float(TIME_WEIGHT) * 100)) +
+                                                                   (F('seed') / float(RANDOM_WEIGHT)),
+                                  output_field=FloatField()))
+                        .order_by('-total_priority', 'id'))
+        queryset = queryset.all()
+        return queryset
+
+    context_object_name = 'upcoming_custom_list'
+    template_name = 'link/upcoming_custom_list.html'
+
+
 class LinkCreate(LoginRequiredMixin, CreateView):
     model = Link
     fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator', 'tweet']
@@ -216,7 +292,9 @@ class LinkUpdate(LoginRequiredMixin, UpdateView):
         sort = get_.get('sort')
         before = get_.get('before')
         after = get_.get('after')
-        return '/?url={}&title={}&aggregator={}&before={}&after={}&page={}&sort={}'.format(url, title, aggregator, before, after, page, sort)
+        method = get_.get('method', '')
+        url_str = '{}/?url={}&title={}&aggregator={}&before={}&after={}&page={}&sort={}'
+        return url_str.format(method, url, title, aggregator, before, after, page, sort)
 
     def form_valid(self, form):
         if not form.instance.liked:
