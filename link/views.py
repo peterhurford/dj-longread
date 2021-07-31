@@ -148,6 +148,8 @@ class UpcomingListView(LoginRequiredMixin, ListView):
         aggregator = self.request.GET.get('aggregator')
         if aggregator:
             queryset = queryset.filter(Q(aggregator__icontains=aggregator))
+        else:
+            queryset = queryset.filter(~Q(aggregator__icontains='custom'))
         before = self.request.GET.get('before')
         if before:
             before = datetime.strptime(before, '%d/%m/%y') # e.g., 18/09/19
