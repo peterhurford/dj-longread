@@ -34,10 +34,10 @@ elif mode == 'down':
     links = pd.read_csv('data/export.csv')
     # links['seed'] = links['seed'].astype(int)
     # links.to_csv('data/export.csv', index=False) # Fix seed column and remove index
-    # DATABASE_URL = os.environ.get('DATABASE_URL', 'dbname=stanza_dev user=dbuser')
-    # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-    # import_db(conn)
-    # conn.close()
+    DATABASE_URL = os.environ.get('DATABASE_URL', 'dbname=stanza_dev user=dbuser')
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    import_db(conn)
+    conn.close()
 else:
     raise ValueError('mode not recognized... must be `up` or `down`')
 
