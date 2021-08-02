@@ -26,18 +26,31 @@ build: ## Build package
 update: ## Update the DB with the latest articles pulled from RSS
 	python3 -m ingest.aggregate_feeds
 
-.PHONY: local_exportdb
-local_exportdb: ## Export the local links database to local CSV
+.PHONY: db_to_csv
+db_to_csv: ## Export the links database to local CSV
 	python3 -m ingest.export_db
 
+.PHONY: db_from_csv
+db_from_csv: ## Import the links database from local CSV
+	python3 -m ingest.import_db
+
+.PHONY: csv_to_s3
+csv_to_s3: ## Upload the links CSV  file to S3
+	python3 -m ingest.sync_db --mode up
+
+.PHONY: csv_from_s3
+csv_from_s3: ## Download the links CSV file from S3
+	python3 -m ingest.sync_db --mode down
+
 .PHONY: exportdb
-exportdb: ## Export the links database to CSV and upload to S3
+exportdb: ## Export the links database to CSV and then to S3
 	python3 -m ingest.export_db
 	python3 -m ingest.sync_db --mode up
 
 .PHONY: importdb
-importdb: ## Get links database from S3
+importdb: ## Import the links database from S3
 	python3 -m ingest.sync_db --mode down
+	python3 -m ingest.import_db
 
 .PHONY: launch
 launch: ## Open the website
