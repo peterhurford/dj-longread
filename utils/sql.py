@@ -9,6 +9,17 @@ ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
             'liked', 'category', 'aggregator', 'seed', 'tweet']
 
 
+def fix_tweet(t):
+    return 0 if str(t) == '\\N' else str(t).split('.')[0]
+
+
+def fix_data_types(links):
+    links['tweet'] = links['tweet'].apply(fix_tweet).astype(int)
+    links['id'] = links['id'].astype(int)
+    links['seed'] = links['seed'].astype(int)
+    return links
+
+
 def table_exists(cur, table_name):
     cur.execute('SELECT * FROM information_schema.tables WHERE table_name=%s', (table_name,))
     return cur.rowcount >= 1
