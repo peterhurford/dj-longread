@@ -204,8 +204,6 @@ contents += load_contents('Mtlynch.io', 'https://mtlynch.io/feed.xml',
 
 contents += load_contents('Beeminder', 'http://feeds.feedburner.com/bmndr', 'item')
 contents += load_contents('Constantin', 'https://srconstantin.wordpress.com/feed/', 'item')
-# contents += load_contents('MR', 'http://feeds.feedburner.com/marginalrevolution/feed', 'item')
-# contents += load_contents('MR', 'https://www.bloomberg.com/opinion/authors/AS6n2t3d_iA/tyler-cowen.rss', 'item')
 
 def roots_reader_fn(name, content):
     content = content.find_all('li')
@@ -259,6 +257,8 @@ contents += load_contents('Noah',
                           'https://www.bloomberg.com/opinion/authors/AR3OYuAmvcU/noah-smith.rss',
                           'item')
 contents += load_contents('Noah', 'https://noahpinion.substack.com/feed', 'item')
+contents += load_contents('deBoer', 'https://freddiedeboer.substack.com/feed', 'item')
+contents += load_contents('CSET', 'https://cset.georgetown.edu/feed/', 'item')
 contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed', 'item')
 contents += load_contents('ChinAI', 'https://chinai.substack.com/feed', 'item')
 contents += load_contents('ImportAI', 'https://jack-clark.net/feed/', 'item')
