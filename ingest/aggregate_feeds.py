@@ -109,14 +109,6 @@ def load_contents(name, feed, reader_fn, return_type='soup', reader_type='xml'):
 
 contents = []
 
-# def hn_reader_fn(name, content):
-#     content = chunk(content[3:], 5)
-#     content = [c[:2] for c in content]
-#     content = [[c[0], c[1], 'HN'] for c in content]
-#     return content
-# contents += load_contents('HN', 'https://news.ycombinator.com/rss',
-#                           hn_reader_fn, return_type='list')
-
 def ea_blogs_reader_fn(name, content):
     content = content.find_all('ul')[0]
     content = [str(c.a).split('href="')[1].split('rel=') for c in content.find_all('li')]
@@ -415,6 +407,7 @@ contents += load_contents('Holden', 'https://www.cold-takes.com/rss/', 'item')
 contents += load_contents('Cummings', 'https://dominiccummings.substack.com/feed', 'item')
 contents += load_contents('Schubert', 'https://stefanfschubert.com/blog?format=rss', 'item')
 contents += load_contents('DataColada', 'https://datacolada.org/feed', 'item')
+contents += load_contents('Seth', 'https://seths.blog/feed/', 'item')
 
 print('-')
 print('Gathering content')
