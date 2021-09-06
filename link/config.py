@@ -11,7 +11,7 @@ OBSOLETE_AGGREGATORS = ['MR', 'HN', 'EABlogs', 'Reason', 'NR', 'Quillette', 'Vox
 
 
 # Metaweights
-PRIORITY_WEIGHT = 10  # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 9   # The lower this number, the more links will be ranked according
                       # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 9       # The lower this number, the more it will be the case that recent
@@ -31,6 +31,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='HIPR'), then=12),
                           When(Q(aggregator__exact='EAForum'), then=12),
                           When(Q(aggregator__exact='SLW'), then=10),
+                          When(Q(aggregator__exact='LW'), then=10),
                           When(Q(aggregator__exact='SuperOrganizers'), then=10),
                           When(Q(aggregator__exact='Bollard'), then=10),
                           When(Q(aggregator__exact='SSC'), then=10),
