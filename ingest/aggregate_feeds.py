@@ -408,6 +408,7 @@ contents += load_contents('Cummings', 'https://dominiccummings.substack.com/feed
 contents += load_contents('Schubert', 'https://stefanfschubert.com/blog?format=rss', 'item')
 contents += load_contents('DataColada', 'https://datacolada.org/feed', 'item')
 contents += load_contents('Seth', 'https://seths.blog/feed/', 'item')
+contents += load_contents('Trammell', 'https://philiptrammell.com/blog/feed', 'item')
 
 print('-')
 print('Gathering content')
