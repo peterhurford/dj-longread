@@ -70,6 +70,8 @@ def find_row(cur, table_name, col, value, n=1):
 
 def export_db(cur, outfile='data/export.csv', verbose=True):
     def clean(txt):
+        if not isinstance(txt, str):
+            return txt
         txt = txt.replace('&nbsp;', '')
         txt = txt.replace('&ldquo;', '"')
         txt = txt.replace('&rdquo;', '"')
