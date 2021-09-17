@@ -79,6 +79,7 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
         txt = txt.replace('&ndash;', '-')
         for i in range(10):
             txt = txt.replace('"""', '"')
+            txt = txt.replace('\'\'\'', '\'')
         return txt
 
     with open(outfile, 'w') as f:
@@ -114,6 +115,7 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
         links['seed'] = links['seed'].astype(int)
         links['tweet'] = links['tweet'].apply(lambda x: 0 if str(x) == '\\N' else str(x).split('.')[0]).astype(int)
         links['summary'] = links['summary'].apply(clean)
+        links['title'] = links['title'].apply(clean)
         links = links.sort_values('id')
         links.to_csv(outfile, index=False)
 
