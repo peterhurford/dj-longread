@@ -82,6 +82,8 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
         for i in range(10):
             txt = txt.replace('"""', '"')
             txt = txt.replace('\'\'\'', '\'')
+        txt = txt.replace('n"t', 'n\'t')
+        txt = txt.replace('n""t', 'n\'t')
         return txt
 
     with open(outfile, 'w') as f:
