@@ -69,6 +69,18 @@ def find_row(cur, table_name, col, value, n=1):
 
 
 def export_db(cur, outfile='data/export.csv', verbose=True):
+    def clean(txt):
+        txt = txt.replace('&nbsp;', '')
+        txt = txt.replace('&ldquo;', '"')
+        txt = txt.replace('&rdquo;', '"')
+        txt = txt.replace('&lsquo;', '\'')
+        txt = txt.replace('&rsquo;', '\'')
+        txt = txt.replace('&mdash;', '-')
+        txt = txt.replace('&ndash;', '-')
+        for i in range(10):
+            txt = txt.replace('"""', '"')
+        return txt
+
     with open(outfile, 'w') as f:
         if verbose:
             print('...Downloading')
@@ -99,6 +111,9 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
         links.columns = ALL_COLS
         links = links[links['id'].notnull()]   # Drop empty column
         links['id'] = links['id'].astype(int)  # Fix float ID issue
+        links['seed'] = links['seed'].astype(int)
+        links['tweet'] = links['tweet'].apply(lambda x: 0 if str(x) == '\\N' else str(x).split('.')[0]).astype(int)
+        links['summary'] = links['summary'].apply(clean)
         links = links.sort_values('id')
         links.to_csv(outfile, index=False)
 
