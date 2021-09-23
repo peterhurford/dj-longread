@@ -409,6 +409,7 @@ contents += load_contents('Schubert', 'https://stefanfschubert.com/blog?format=r
 contents += load_contents('DataColada', 'https://datacolada.org/feed', 'item')
 contents += load_contents('Seth', 'https://seths.blog/feed/', 'item')
 contents += load_contents('Trammell', 'https://philiptrammell.com/blog/feed', 'item')
+contents += load_contents('TIB', 'https://s3.amazonaws.com/revue/accounts/rss_feeds/000/033/453/original/rss_feed_33453.xml?1632204004', 'item')
 
 print('-')
 print('Gathering content')
