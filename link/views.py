@@ -20,25 +20,20 @@ class LinkTweetListView(ListView):
     paginate_by = 500
 
     def get_queryset(self):
+        def _get_queryset_part(self, queryset, var_name):
+            var = self.request.GET.get(var_name)
+            if var:
+                queryset = queryset.filter(Q(**{ var_name + '__icontains': var }))
+            return queryset
+
         queryset = (Link.objects.filter(tweet=1)
                                 .exclude(liked__isnull=True)
                                 .exclude(liked__exact=0)
                                 .exclude(liked__exact=-1))
-        url = self.request.GET.get('url')
-        if url:
-            queryset = queryset.filter(Q(url__icontains=url))
-        title = self.request.GET.get('title')
-        if title:
-            queryset = queryset.filter(Q(title__icontains=title))
-        aggregator = self.request.GET.get('aggregator')
-        if aggregator:
-            queryset = queryset.filter(Q(aggregator__icontains=aggregator))
-        category = self.request.GET.get('category')
-        if category:
-            queryset = queryset.filter(Q(category__icontains=category))
-        summary = self.request.GET.get('summary')
-        if summary:
-            queryset = queryset.filter(Q(summary__icontains=summary))
+
+        for var in ['url', 'title', 'aggregator', 'category', 'summary']:
+            queryset = _get_queryset_part(self, queryset, var)
+
         before = self.request.GET.get('before')
         if before:
             before = datetime.strptime(before, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
@@ -47,6 +42,7 @@ class LinkTweetListView(ListView):
         if after:
             after = datetime.strptime(after, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
             queryset = queryset.filter(Q(added__gte=after))
+
         sort = self.request.GET.get('sort')
         if sort == 'random':
             queryset = queryset.order_by('?')
