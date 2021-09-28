@@ -37,7 +37,7 @@ class LinkTweetListView(ListView):
         before = self.request.GET.get('before')
         if before:
             before = datetime.strptime(before, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
-            queryset = queryset.filter(Q(added__gte=before))
+            queryset = queryset.filter(Q(added__lte=before))
         after = self.request.GET.get('after')
         if after:
             after = datetime.strptime(after, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
