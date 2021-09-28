@@ -15,24 +15,23 @@ from .utils.url import clean_url, get_root_url
 from .config import PRIORITY_WEIGHT, TIME_WEIGHT, RANDOM_WEIGHT, AGGREGATOR_WEIGHTS
 
 
-class LinkTweetListView(ListView):
+class LinkListView(ListView):
     model = Link
     paginate_by = 500
 
-    def get_queryset(self):
-        def _get_queryset_part(self, queryset, var_name):
-            var = self.request.GET.get(var_name)
-            if var:
+    def _get_queryset_part(self, queryset, var_name):
+        var = self.request.GET.get(var_name)
+        if var:
+            if var.startswith('-'):
+                var = var[1:]
+                queryset = queryset.exclude(Q(**{ var_name + '__icontains': var }))
+            else:
                 queryset = queryset.filter(Q(**{ var_name + '__icontains': var }))
-            return queryset
+        return queryset
 
-        queryset = (Link.objects.filter(tweet=1)
-                                .exclude(liked__isnull=True)
-                                .exclude(liked__exact=0)
-                                .exclude(liked__exact=-1))
-
+    def _process_queryset(self, queryset):
         for var in ['url', 'title', 'aggregator', 'category', 'summary']:
-            queryset = _get_queryset_part(self, queryset, var)
+            queryset = self._get_queryset_part(queryset, var)
 
         before = self.request.GET.get('before')
         if before:
@@ -56,14 +55,20 @@ class LinkTweetListView(ListView):
         queryset = queryset.all()
         return queryset
 
+
+class LinkTweetListView(LinkListView):
     context_object_name = 'link_tweet_list'
     template_name = 'link/tweet_list.html'
 
+    def get_queryset(self):
+        queryset = (Link.objects.filter(tweet=1)
+                                .exclude(liked__isnull=True)
+                                .exclude(liked__exact=0)
+                                .exclude(liked__exact=-1))
+        return self._process_queryset(queryset)
 
-class LinkListView(ListView):
-    model = Link
-    paginate_by = 500
 
+class LinkListView(LinkListView):
     def get_queryset(self):
         queryset = (Link.objects.exclude(liked__isnull=True)
                                 .exclude(liked__exact=0)
@@ -72,47 +77,13 @@ class LinkListView(ListView):
                                 .exclude(summary__isnull=True)
                                 .exclude(summary__exact='')
                                 .exclude(summary__exact='nan'))
-        url = self.request.GET.get('url')
-        if url:
-            queryset = queryset.filter(Q(url__icontains=url))
-        title = self.request.GET.get('title')
-        if title:
-            queryset = queryset.filter(Q(title__icontains=title))
-        aggregator = self.request.GET.get('aggregator')
-        if aggregator:
-            queryset = queryset.filter(Q(aggregator__icontains=aggregator))
-        category = self.request.GET.get('category')
-        if category:
-            queryset = queryset.filter(Q(category__icontains=category))
-        summary = self.request.GET.get('summary')
-        if summary:
-            queryset = queryset.filter(Q(summary__icontains=summary))
-        before = self.request.GET.get('before')
-        if before:
-            before = datetime.strptime(before, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
-            queryset = queryset.filter(Q(added__gte=before))
-        after = self.request.GET.get('after')
-        if after:
-            after = datetime.strptime(after, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
-            queryset = queryset.filter(Q(added__gte=after))
-        sort = self.request.GET.get('sort')
-        if sort == 'random':
-            queryset = queryset.order_by('?')
-        elif sort == 'diverse':
-            queryset = queryset.order_by('aggregator', '-modified', 'id').distinct('aggregator')
-        elif sort == 'oldest':
-            queryset = queryset.order_by('modified', 'id')
-        else:
-            queryset = queryset.order_by('-modified', 'id')
-            
-        queryset = queryset.all()
-        return queryset
+        return self._process_queryset(queryset)
 
     context_object_name = 'link_list'
     template_name = 'link/link_list.html'
 
 
-class UpcomingListView(LoginRequiredMixin, ListView):
+class UpcomingListView(LoginRequiredMixin, LinkListView):
     model = Link
     paginate_by = 16
     login_url = 'admin/login'
@@ -135,25 +106,8 @@ class UpcomingListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = Link.objects.filter(liked__isnull=True)
-        url = self.request.GET.get('url')
-        if url:
-            queryset = queryset.filter(Q(url__icontains=url))
-        title = self.request.GET.get('title')
-        if title:
-            queryset = queryset.filter(Q(title__icontains=title))
-        aggregator = self.request.GET.get('aggregator')
-        if aggregator:
-            queryset = queryset.filter(Q(aggregator__icontains=aggregator))
-        else:
-            queryset = queryset.filter(~Q(aggregator__icontains='custom'))
-        before = self.request.GET.get('before')
-        if before:
-            before = datetime.strptime(before, '%d/%m/%y') # e.g., 18/09/19
-            queryset = queryset.filter(Q(added__lte=before))
-        after = self.request.GET.get('after')
-        if after:
-            after = datetime.strptime(after, '%d/%m/%y') # e.g., 18/09/19
-            queryset = queryset.filter(Q(added__gte=after))
+        queryset = self._process_queryset(queryset)
+
         sort = self.request.GET.get('sort')
         if sort == 'recent':
             queryset = queryset.order_by('-added', 'id')
