@@ -1,4 +1,5 @@
 import os
+import logging, logging.config
 import django_heroku
 import dj_database_url
 
@@ -100,7 +101,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '/')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -111,7 +111,8 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console'],
-        'level': 'INFO',
+        'level': 'DEBUG',
+        'propagate': True,
     },
 }
 

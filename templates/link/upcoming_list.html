@@ -19,6 +19,7 @@
             <input type="hidden" name="url" value="{{ link.url }}">
             <input type="hidden" name="title" value="{{ link.title }}">
             <input class="btn btn-default btn-danger" type="submit" name="delete" value="No"/>
+            <input class="btn btn-default btn-warning" type="submit" name="bin" value="-"/>
             <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a> (<div class="tooltip"><i>{{ link.added|date:"D, d M" }}<span class="tooltiptext">{{ link.added }} (id={{ link.id }}, seed={{ link.seed }}, weight={{ link.priority }} -> priority={{ link.total_priority|floatformat:3 }})</span></i></div>)</li>
         </form>
     {% empty %}

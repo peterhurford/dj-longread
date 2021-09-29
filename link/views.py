@@ -14,6 +14,11 @@ from link.models import Link
 from .utils.url import clean_url, get_root_url
 from .config import PRIORITY_WEIGHT, TIME_WEIGHT, RANDOM_WEIGHT, AGGREGATOR_WEIGHTS
 
+logging.basicConfig()
+logger = logging.getLogger(__name__)
+logger.setLevel('INFO')
+logger.info('Logger is on')
+
 
 class CustomListViewMixin(ListView):
     model = Link
@@ -171,11 +176,22 @@ class LinkUpdate(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         if not form.instance.liked:
-            form.instance.liked = 0
-            form.instance.tweet = 0
-            logging.info('Deleted "{}"'.format(form.instance.title))
+            if self.request.POST.get('bin') == '-':
+                form.instance.liked = -1
+                form.instance.tweet = 0
+                logger.info('Binned "{}"'.format(form.instance.title))
+            else:
+                form.instance.liked = 0
+                form.instance.tweet = 0
+                logger.info('Deleted "{}"'.format(form.instance.title))
+        elif form.instance.liked == 1:
+            logger.info('Liked "{}"'.format(form.instance.title))
+        elif form.instance.liked == 0:
+            logger.info('Binned "{}"'.format(form.instance.title))
+        elif form.instance.liked == -1:
+            logger.info('Binned "{}"'.format(form.instance.title))
         else:
-            logging.info('Liked "{}"'.format(form.instance.title))
+            logger.error('ERROR UNKNOWN like = `{}`'.format(form.instance.liked))
 
         form.instance.modified = timezone.now()
         form.instance.domain = get_root_url(clean_url(form.instance.url)) 
