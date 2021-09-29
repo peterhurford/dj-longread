@@ -15,7 +15,7 @@ from .utils.url import clean_url, get_root_url
 from .config import PRIORITY_WEIGHT, TIME_WEIGHT, RANDOM_WEIGHT, AGGREGATOR_WEIGHTS
 
 
-class LinkListView(ListView):
+class CustomListViewMixin(ListView):
     model = Link
     paginate_by = 500
 
@@ -56,7 +56,7 @@ class LinkListView(ListView):
         return queryset
 
 
-class LinkTweetListView(LinkListView):
+class LinkTweetListView(CustomListViewMixin):
     context_object_name = 'link_tweet_list'
     template_name = 'link/tweet_list.html'
 
@@ -68,7 +68,7 @@ class LinkTweetListView(LinkListView):
         return self._process_queryset(queryset)
 
 
-class LinkListView(LinkListView):
+class LinkListView(CustomListViewMixin):
     def get_queryset(self):
         queryset = (Link.objects.exclude(liked__isnull=True)
                                 .exclude(liked__exact=0)
@@ -83,7 +83,7 @@ class LinkListView(LinkListView):
     template_name = 'link/link_list.html'
 
 
-class UpcomingListView(LoginRequiredMixin, LinkListView):
+class UpcomingListView(LoginRequiredMixin, CustomListViewMixin):
     model = Link
     paginate_by = 16
     login_url = 'admin/login'
@@ -105,7 +105,7 @@ class UpcomingListView(LoginRequiredMixin, LinkListView):
         return context
 
     def get_queryset(self):
-        queryset = Link.objects.filter(liked__isnull=True).exclude(aggregator__exact='Custom')
+        queryset = Link.objects.filter(liked__isnull=True)
         queryset = self._process_queryset(queryset)
 
         sort = self.request.GET.get('sort')
