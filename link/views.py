@@ -105,7 +105,7 @@ class UpcomingListView(LoginRequiredMixin, LinkListView):
         return context
 
     def get_queryset(self):
-        queryset = Link.objects.filter(liked__isnull=True)
+        queryset = Link.objects.filter(liked__isnull=True).exclude(aggregator__exact='Custom')
         queryset = self._process_queryset(queryset)
 
         sort = self.request.GET.get('sort')
