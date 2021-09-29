@@ -92,8 +92,8 @@ def clean_links(links):
     links['id'] = links['id'].astype(int)  # Fix float ID issue
     links['seed'] = links['seed'].astype(int)
     links['tweet'] = links['tweet'].apply(lambda x: 0 if str(x) == '\\N' else str(x).split('.')[0]).astype(int)
-    links['summary'] = links['summary'].apply(clean_str)
-    links['title'] = links['title'].apply(clean_str)
+    for var in ['url', 'title', 'summary', 'domain', 'category', 'aggregator']:
+        links[var] = links[var].apply(clean_str)
     return links.sort_values('id')
 
 
