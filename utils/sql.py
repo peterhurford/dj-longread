@@ -68,24 +68,36 @@ def find_row(cur, table_name, col, value, n=1):
         return ValueError('n must be 1 or many')
 
 
-def export_db(cur, outfile='data/export.csv', verbose=True):
-    def clean(txt):
-        if not isinstance(txt, str):
-            return txt
-        txt = txt.replace('&nbsp;', '')
-        txt = txt.replace('&ldquo;', '"')
-        txt = txt.replace('&rdquo;', '"')
-        txt = txt.replace('&lsquo;', '\'')
-        txt = txt.replace('&rsquo;', '\'')
-        txt = txt.replace('&mdash;', '-')
-        txt = txt.replace('&ndash;', '-')
-        for i in range(10):
-            txt = txt.replace('"""', '"')
-            txt = txt.replace('\'\'\'', '\'')
-        txt = txt.replace('n"t', 'n\'t')
-        txt = txt.replace('n""t', 'n\'t')
+def clean_str(txt):
+    if not isinstance(txt, str):
         return txt
+    txt = txt.replace('&nbsp;', '')
+    txt = txt.replace('&ldquo;', '"')
+    txt = txt.replace('&rdquo;', '"')
+    txt = txt.replace('&lsquo;', '\'')
+    txt = txt.replace('&rsquo;', '\'')
+    txt = txt.replace('&mdash;', '-')
+    txt = txt.replace('&ndash;', '-')
+    for i in range(10):
+        txt = txt.replace('"""', '"')
+        txt = txt.replace('\'\'\'', '\'')
+    txt = txt.replace('n"t', 'n\'t')
+    txt = txt.replace('n""t', 'n\'t')
+    return txt
 
+
+def clean_links(links):
+    links.columns = ALL_COLS
+    links = links[links['id'].notnull()]   # Drop empty column
+    links['id'] = links['id'].astype(int)  # Fix float ID issue
+    links['seed'] = links['seed'].astype(int)
+    links['tweet'] = links['tweet'].apply(lambda x: 0 if str(x) == '\\N' else str(x).split('.')[0]).astype(int)
+    links['summary'] = links['summary'].apply(clean_str)
+    links['title'] = links['title'].apply(clean_str)
+    return links.sort_values('id')
+
+
+def export_db(cur, outfile='data/export.csv', verbose=True):
     with open(outfile, 'w') as f:
         if verbose:
             print('...Downloading')
@@ -113,22 +125,14 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
         links = None
     else:
         links = pd.read_csv(outfile, header=None)
-        links.columns = ALL_COLS
-        links = links[links['id'].notnull()]   # Drop empty column
-        links['id'] = links['id'].astype(int)  # Fix float ID issue
-        links['seed'] = links['seed'].astype(int)
-        links['tweet'] = links['tweet'].apply(lambda x: 0 if str(x) == '\\N' else str(x).split('.')[0]).astype(int)
-        links['summary'] = links['summary'].apply(clean)
-        links['title'] = links['title'].apply(clean)
-        links = links.sort_values('id')
-        links.to_csv(outfile, index=False)
+        clean_links(links).to_csv(outfile, index=False)
 
     return links
 
 
 def import_db(conn, infile='data/export.csv', verbose=True):
     data_io = io.StringIO()
-    df = pd.read_csv(infile)
+    df = clean_links(pd.read_csv(infile))
     df.to_csv(data_io, index_label='id', header=False, index=False)
     data_io.seek(0)
     cur = conn.cursor()
