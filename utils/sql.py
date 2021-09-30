@@ -89,9 +89,9 @@ def clean_str(txt):
 def clean_links(links):
     links.columns = ALL_COLS
     links = links[links['id'].notnull()]   # Drop empty column
-    links['id'] = links['id'].astype(int)  # Fix float ID issue
-    links['seed'] = links['seed'].astype(int)
-    links['tweet'] = links['tweet'].apply(lambda x: 0 if str(x) == '\\N' else str(x).split('.')[0]).astype(int)
+    links.loc[:, 'id'] = links['id'].astype(int)  # Fix float ID issue
+    links.loc[:, 'seed'] = links['seed'].astype(int)
+    links.loc[:, 'tweet'] = links['tweet'].apply(lambda x: 0 if str(x) == '\\N' else str(x).split('.')[0]).astype(int)
     for var in ['url', 'title', 'summary', 'domain', 'category', 'aggregator']:
         links[var] = links[var].apply(clean_str)
     return links.sort_values('id')
