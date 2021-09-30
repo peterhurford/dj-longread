@@ -54,7 +54,7 @@ importdb: ## Import the links database from S3
 
 .PHONY: launch
 launch: ## Open the website
-	open https://guarded-everglades-89687.herokuapp.com/
+	open https://guarded-everglades-89687.herokuapp.com/?aggregator=-Custom
 
 .PHONY: help
 help:
