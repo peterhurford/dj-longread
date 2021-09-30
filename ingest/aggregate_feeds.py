@@ -440,7 +440,7 @@ if links is not None:
         print('...No broken links detected')
     else:
         for i, id_ in enumerate(broken):
-            id_ = float(id_)
+            id_ = int(id_)
             delete_link_row(cur, id_)
         print('...{} broken links purged!'.format(lines))
 
