@@ -46,12 +46,12 @@ def add_link_row(cur, content):
 
 
 def delete_link_row(cur, id_):
-    delete_row(cur, 'link_link', 'id', enquote(id_))
+    delete_row(cur, 'link_link', 'id', id_)
     return None
 
 
 def hide_row(cur, id_):
-    update_row(cur, 'link_link', 'liked', -1, 'id', enquote(id_))
+    update_row(cur, 'link_link', 'liked', -1, 'id', id_)
     return None
 
 

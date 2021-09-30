@@ -93,7 +93,7 @@ def clean_links(links):
     links.loc[:, 'seed'] = links['seed'].astype(int)
     links.loc[:, 'tweet'] = links['tweet'].apply(lambda x: 0 if str(x) == '\\N' else str(x).split('.')[0]).astype(int)
     for var in ['url', 'title', 'summary', 'domain', 'category', 'aggregator']:
-        links[var] = links[var].apply(clean_str)
+        links.loc[:, var] = links[var].apply(clean_str)
     return links.sort_values('id')
 
 
