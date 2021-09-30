@@ -434,7 +434,7 @@ if links is not None:
     broken = links[~links['url'].apply(lambda u: isinstance(u, str) and 'http' in u)]['id']
     lines = len(broken)
     if lines:
-        broken = filter(lambda x: ~np.isnan(x), broken.values)
+        broken = list(filter(lambda x: ~np.isnan(x), broken.values))
         lines = len(broken)
     if lines == 0:
         print('...No broken links detected')
