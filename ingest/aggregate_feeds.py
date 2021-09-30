@@ -3,6 +3,7 @@ import re
 import random
 import psycopg2
 
+import numpy as np
 import pandas as pd
 
 from datetime import datetime, timedelta
@@ -431,6 +432,7 @@ if links is not None:
     print('-')
     print('Purging broken links')
     broken = links[~links['url'].apply(lambda u: isinstance(u, str) and 'http' in u)]['id']
+    broken = filter(lambda x: ~np.isnan(x), broken.values)
     lines = len(broken)
     if lines == 0:
         print('...No broken links detected')
