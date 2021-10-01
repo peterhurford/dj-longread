@@ -413,6 +413,7 @@ contents += load_contents('Trammell', 'https://philiptrammell.com/blog/feed', 'i
 contents += load_contents('TIB', 'https://s3.amazonaws.com/revue/accounts/rss_feeds/000/033/453/original/rss_feed_33453.xml?1632204004', 'item')
 contents += load_contents('AlignmentF', 'https://www.alignmentforum.org/feed.xml', 'item')
 contents += load_contents('MattBell', 'https://www.mattbell.us/rss/', 'item')
+contents += load_contents('Blattman', 'https://chrisblattman.com/feed/', 'item')
 
 print('-')
 print('Gathering content')
