@@ -14,11 +14,11 @@ class Link(models.Model):
     domain = models.CharField(max_length=2000, blank=True, null=True, default='example.com')
     added = models.DateTimeField('date added', default=DEFAULT_TIME)
     modified = models.DateTimeField('date modified', default=DEFAULT_TIME)
-    liked = models.IntegerField(blank=True, null=True, default=-1)
+    liked = models.FloatField(blank=True, null=True, default=-1)
     category = models.CharField(max_length=2000, blank=True, null=True, default='')
     aggregator = models.CharField(max_length=2000, default='Custom')
-    seed = models.IntegerField(blank=True, null=True, default=1)
-    tweet = models.IntegerField(blank=True, null=True, default=0)
+    seed = models.FloatField(blank=True, null=True, default=1)
+    tweet = models.FloatField(blank=True, null=True, default=0)
 
     def __str__(self):
         return self.title
