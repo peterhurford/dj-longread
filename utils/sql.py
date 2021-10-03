@@ -84,8 +84,8 @@ def clean_links(links):
     links.columns = ALL_COLS
     links = links[links['id'].notnull()]   # Drop empty column
     links.loc[:, 'id'] = links['id'].astype(int)  # Fix float ID issue
-    links.loc[:, 'seed'] = links['seed'].astype(int)
-    links.loc[:, 'tweet'] = links['tweet'].apply(lambda x: 0 if str(x) == '\\N' else str(x).split('.')[0]).astype(int)
+    links.loc[:, 'seed'] = links['seed'].astype(float).fillna(0)
+    links.loc[:, 'tweet'] = links['tweet'].apply(lambda x: 0 if (str(x) == '\\N' or str(x) == '') else str(x).split('.')[0]).astype(float)
     links.loc[:, 'liked'] = links['liked'].apply(lambda x: np.nan if (str(x) == '\\N' or str(x) == '') else str(x).split('.')[0]).astype(float)
     for var in ['url', 'title', 'summary', 'domain', 'category', 'aggregator']:
         links.loc[:, var] = links[var].apply(clean_str)
