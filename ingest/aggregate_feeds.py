@@ -264,7 +264,6 @@ def sumner_reading_fn(name, content):
 contents += load_contents('WorldInData', 'https://ourworldindata.org/atom.xml', 'entry')
 contents += load_contents('SamAltman', 'http://blog.samaltman.com/posts.atom', 'entry-link')
 contents += load_contents('Crawford', 'https://jasoncrawford.org/feed.xml', 'entry')
-contents += load_contents('HBR', 'http://feeds.hbr.org/harvardbusiness/', 'entry-link')
 contents += load_contents('Nintil', 'https://nintil.com/rss.xml', 'item')
 contents += load_contents('Aarora', 'https://harshitaarora.com/feed/', 'item')
 contents += load_contents('WTB', 'https://medium.com/feed/what-to-build', 'item')
@@ -478,6 +477,7 @@ if links is not None:
 if links is not None:
     print('-')
     print('Purging old')
+    links['liked'] = links['liked'].apply(lambda x: np.nan if str(x) == '\\N' else str(x).split('.')[0]).astype(float)
     links['added'] = pd.to_datetime(links['added'], utc=True).dt.tz_localize(None)
     relative_now = links['added'].max()
     before_purge_window = relative_now - timedelta(days=PURGE_OLDER_THAN_X_DAYS)

@@ -7,7 +7,8 @@ PURGE_OLDER_THAN_X_DAYS = 5  # For PURGABLE_AGGREGATORS, remove links older than
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['MR', 'HN', 'EABlogs', 'Reason', 'NR', 'Quillette', 'VoxEU']
+OBSOLETE_AGGREGATORS = ['MR', 'HN', 'EABlogs', 'Reason', 'NR', 'Quillette', 'VoxEU',
+                        'Vox', 'HBR', 'TDS']
 
 
 # Metaweights
