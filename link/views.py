@@ -76,9 +76,6 @@ class LinkTweetListView(CustomListViewMixin):
 class LinkListView(CustomListViewMixin):
     def get_queryset(self):
         queryset = (Link.objects.exclude(liked__isnull=True)
-                                .exclude(liked__exact=0)
-                                .exclude(liked__exact=-1)
-                                .exclude(tweet__exact=1)
                                 .exclude(summary__isnull=True)
                                 .exclude(summary__exact='')
                                 .exclude(summary__exact='nan'))
@@ -109,7 +106,9 @@ class UpcomingListView(LoginRequiredMixin, CustomListViewMixin):
         return context
 
     def get_queryset(self):
-        queryset = Link.objects.filter(liked__isnull=True)
+        queryset = (Link.objects.exclude(liked__exact=1)
+                                .exclude(liked__exact=0)
+                                .exclude(liked__exact=-1))
         queryset = self._process_queryset(queryset)
 
         sort = self.request.GET.get('sort')
