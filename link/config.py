@@ -28,7 +28,6 @@ RANDOM_WEIGHT = 35     # The lower this number, the more it will be the case tha
 # The relative rankings of different aggregators
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                                Q(title__startswith='The Morning'), then=100),
-                          When(Q(aggregator__exact='Custom'), then=20),
                           When(Q(aggregator__exact='HIPR'), then=12),
                           When(Q(aggregator__exact='EAForum'), then=12),
                           When(Q(aggregator__exact='SLW'), then=10),
@@ -56,6 +55,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='FP-WYWL'), then=4),
                           When(Q(aggregator__exact='Dispatch'), then=0.5),
                           When(Q(aggregator__exact='HBR'), then=0.5),
+                          When(Q(aggregator__exact='Custom'), then=0.0001),
                           default=1,
                           output_field=FloatField())
 
