@@ -252,6 +252,7 @@ contents += load_contents('Noah',
 contents += load_contents('Noah', 'https://noahpinion.substack.com/feed', 'item')
 contents += load_contents('deBoer', 'https://freddiedeboer.substack.com/feed', 'item')
 contents += load_contents('CSET', 'https://cset.georgetown.edu/feed/', 'item')
+contents += load_contents('CSET', 'https://cset.georgetown.edu/newsletters/feed/', 'item')
 contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed', 'item')
 contents += load_contents('ChinAI', 'https://chinai.substack.com/feed', 'item')
 contents += load_contents('ImportAI', 'https://jack-clark.net/feed/', 'item')
