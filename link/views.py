@@ -1,5 +1,7 @@
 import logging
 
+import numpy as np
+
 from datetime import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -176,7 +178,7 @@ class LinkUpdate(LoginRequiredMixin, UpdateView):
         return '/?url={}&title={}&aggregator={}&before={}&after={}&page={}&sort={}'.format(url, title, aggregator, before, after, page, sort)
 
     def form_valid(self, form):
-        if not form.instance.liked:
+        if not form.instance.liked or np.isnan(form.instance.liked):
             if self.request.POST.get('bin') == '-':
                 form.instance.liked = -1
                 form.instance.tweet = 0
