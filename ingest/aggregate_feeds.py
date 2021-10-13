@@ -269,9 +269,7 @@ contents += load_contents('Nintil', 'https://nintil.com/rss.xml', 'item')
 contents += load_contents('Aarora', 'https://harshitaarora.com/feed/', 'item')
 contents += load_contents('WTB', 'https://medium.com/feed/what-to-build', 'item')
 contents += load_contents('Elad', 'http://blog.eladgil.com/feeds/posts/default', 'entry-link')
-contents += load_contents('ScholarsSage',
-                          'https://scholars-stage.blogspot.com/feeds/posts/default',
-                          'entry-link')
+contents += load_contents('ScholarsStage', 'https://scholars-stage.org/feed/', 'item')
 contents += load_contents('Seliger', 'https://jakeseliger.com/feed/', 'item')
 contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/', 'item')
 contents += load_contents('BreadFixer', 'https://medium.com/feed/@breadpricefixer', 'item')

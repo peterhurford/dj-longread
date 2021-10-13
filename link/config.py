@@ -40,7 +40,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='Alignment'), then=8),
                           When(Q(aggregator__exact='GlobalGuessing'), then=6),
                           When(Q(aggregator__exact='AI Impacts'), then=6),
-                          When(Q(aggregator__exact='ScholarsSage'), then=6),
+                          When(Q(aggregator__exact='ScholarsStage'), then=6),
                           When(Q(aggregator__exact='PoliticalKiwi'), then=6),
                           When(Q(aggregator__exact='80K'), then=6),
                           When(Q(aggregator__exact='CEA'), then=6),
