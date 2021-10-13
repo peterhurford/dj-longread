@@ -415,6 +415,7 @@ contents += load_contents('AlignmentF', 'https://www.alignmentforum.org/feed.xml
 contents += load_contents('MattBell', 'https://www.mattbell.us/rss/', 'item')
 contents += load_contents('Blattman', 'https://chrisblattman.com/feed/', 'item')
 contents += load_contents('Carlsmith', 'https://handsandcities.com/feed/', 'item')
+contents += load_contents('GPI', 'https://globalprioritiesinstitute.org/feed/', 'item')
 
 print('-')
 print('Gathering content')
