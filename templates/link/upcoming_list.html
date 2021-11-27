@@ -12,15 +12,24 @@
     <ul>
     {% for link in object_list %}
       <li>
-        <form action="{% url 'link_update' pk=link.pk %}?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after}}&sort={{ request.GET.sort }}&page={{ page_obj.number }}" method="POST">
+        <form action="{% url 'link_update' pk=link.pk %}?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after}}&sort={{ request.GET.sort }}&page={{ page_obj.number }}&starred={{ page_obj.starred }}" method="POST">
             {% csrf_token %}
-            <a class='btn btn-success' href="/update/{{link.pk}}/?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after }}&sort={{ request.GET.sort }}&page={{ page_obj.number }}">Yes</a>
+            <a class='btn btn-success' href="/update/{{link.pk}}/?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after }}&sort={{ request.GET.sort }}&page={{ page_obj.number }}&starred={{ page_obj.starred }}">Yes</a>
             <input type="hidden" name="aggregator" value="{{ link.aggregator }}">
             <input type="hidden" name="url" value="{{ link.url }}">
             <input type="hidden" name="title" value="{{ link.title }}">
             <input class="btn btn-default btn-danger" type="submit" name="delete" value="No"/>
             <input class="btn btn-default btn-warning" type="submit" name="bin" value="-"/>
-            <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a> (<div class="tooltip"><i>{{ link.added|date:"D, d M" }}<span class="tooltiptext">{{ link.added }} (id={{ link.id }}, seed={{ link.seed }}, weight={{ link.priority }} -> priority={{ link.total_priority|floatformat:3 }})</span></i></div>)</li>
+            {% if link.starred != 1 %}
+              <input class="btn btn-default btn-warning" type="submit" name="star" value="*"/>
+            {% else %}
+              <input class="btn btn-default btn-warning" type="submit" name="star" value="v"/>
+            {% endif %}
+            <b>[{{ link.aggregator }}]</b> <a href="{{ link.url }}">{{ link.title }}</a>
+            {% if link.starred == 1 %}
+              <b>***</b>
+            {% endif %}
+            (<div class="tooltip"><i>{{ link.added|date:"D, d M" }}<span class="tooltiptext">{{ link.added }} (id={{ link.id }}, seed={{ link.seed }}, weight={{ link.priority }} -> priority={{ link.total_priority|floatformat:3 }})</span></i></div>)</li>
         </form>
     {% empty %}
         <li>No links yet.</li>
@@ -29,8 +38,8 @@
     <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
-            <a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after }}&sort={{ request.GET.sort }}&page=1">&laquo; first</a>
-            <a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after }}&sort={{ request.GET.sort }}&page={{ page_obj.previous_page_number }}">previous</a>...
+            <a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after }}&sort={{ request.GET.sort }}&starred={{ page_obj.starred }}&page=1">&laquo; first</a>
+            <a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after }}&sort={{ request.GET.sort }}&starred={{ page_obj.starred }}&page={{ page_obj.previous_page_number }}">previous</a>...
             {% endif %}
 
             <span class="current">
@@ -38,8 +47,8 @@
             </span>
 
             {% if page_obj.has_next %}
-            ...<a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after }}&sort={{ request.GET.sort }}&page={{ page_obj.next_page_number }}">next</a>
-            <a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after }}&sort={{ request.GET.sort }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            ...<a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after }}&sort={{ request.GET.sort }}&starred={{ page_obj.starred }}&page={{ page_obj.next_page_number }}">next</a>
+            <a href="?url={{ request.GET.url }}&title={{ request.GET.title }}&aggregator={{ request.GET.aggregator }}&before={{ request.GET.before }}&after={{ request.GET.after }}&sort={{ request.GET.sort }}&starred={{ page_obj.starred }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
     </div>

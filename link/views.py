@@ -49,6 +49,10 @@ class CustomListViewMixin(ListView):
             after = datetime.strptime(after, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
             queryset = queryset.filter(Q(added__gte=after))
 
+        starred = self.request.GET.get('starred')
+        if starred == '1':
+            queryset = queryset.filter(Q(starred=1))
+
         sort = self.request.GET.get('sort')
         if sort == 'random':
             queryset = queryset.order_by('?')
@@ -175,7 +179,8 @@ class LinkUpdate(LoginRequiredMixin, UpdateView):
         sort = get_.get('sort')
         before = get_.get('before')
         after = get_.get('after')
-        return '/?url={}&title={}&aggregator={}&before={}&after={}&page={}&sort={}'.format(url, title, aggregator, before, after, page, sort)
+        starred = get_.get('starred')
+        return '/?url={}&title={}&aggregator={}&before={}&after={}&page={}&sort={}&starred={}'.format(url, title, aggregator, before, after, page, sort, starred)
 
     def form_valid(self, form):
         if not form.instance.liked or np.isnan(form.instance.liked):
@@ -183,6 +188,12 @@ class LinkUpdate(LoginRequiredMixin, UpdateView):
                 form.instance.liked = -1
                 form.instance.tweet = 0
                 logger.info('Binned "{}"'.format(form.instance.title))
+            elif self.request.POST.get('star') == '*':
+                form.instance.starred = 1
+                logger.info('Starred "{}"'.format(form.instance.title))
+            elif self.request.POST.get('star') == 'v':
+                form.instance.starred = 0
+                logger.info('Unstarred "{}"'.format(form.instance.title))
             else:
                 form.instance.liked = 0
                 form.instance.tweet = 0

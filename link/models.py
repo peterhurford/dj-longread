@@ -19,6 +19,7 @@ class Link(models.Model):
     aggregator = models.CharField(max_length=2000, default='Custom')
     seed = models.FloatField(blank=True, null=True, default=1)
     tweet = models.FloatField(blank=True, null=True, default=0)
+    starred = models.FloatField(blank=True, null=True, default=0)
 
     def __str__(self):
         return self.title
