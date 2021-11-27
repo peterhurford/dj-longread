@@ -7,7 +7,7 @@ import pandas as pd
 
 
 ALL_COLS = ['id', 'url', 'title', 'summary', 'domain', 'added', 'modified',
-            'liked', 'category', 'aggregator', 'seed', 'tweet']
+            'liked', 'category', 'aggregator', 'seed', 'tweet', 'starred']
 
 
 def fix_tweet(t):
