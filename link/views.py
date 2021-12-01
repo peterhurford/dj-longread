@@ -148,7 +148,7 @@ class UpcomingListView(LoginRequiredMixin, CustomListViewMixin):
 
 class LinkCreate(LoginRequiredMixin, CreateView):
     model = Link
-    fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator', 'tweet']
+    fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator', 'tweet', 'starred']
     login_url = 'admin/login'
 
     def form_valid(self, form):
@@ -166,7 +166,7 @@ class LinkCreate(LoginRequiredMixin, CreateView):
 
 class LinkUpdate(LoginRequiredMixin, UpdateView):
     model = Link
-    fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator', 'tweet']
+    fields = ['url', 'title', 'summary', 'liked', 'category', 'aggregator', 'tweet', 'starred']
     template_name_suffix = '_update_form'
     login_url = 'admin/login'
 
