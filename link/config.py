@@ -17,10 +17,6 @@ OBSOLETE_AGGREGATORS = ['MR', 'HN', 'TDS', 'EABlogs', 'Reason', 'NR', 'Quillette
 						'Kling', 'CurrentAffairs', 'D4P', 'SupplySide', 'MoneyIllusion',
 						'Faunalytics', 'SSIR']
 
-OBSOLETE_AGGREGATORS = ['MR', 'HN', 'EABlogs', 'Reason', 'NR', 'Quillette', 'VoxEU',
-                        'Vox', 'HBR', 'TDS']
-
-
 # Metaweights
 PRIORITY_WEIGHT = 10   # The lower this number, the more links will be ranked according
                        # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
