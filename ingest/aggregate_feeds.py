@@ -176,18 +176,6 @@ contents += load_contents('AI Impacts', 'https://aiimpacts.org/feed/', 'item')
 contents += load_contents('Ben Kuhn', 'https://www.benkuhn.net/rss/', 'entry')
 contents += load_contents('Scott Young', 'http://feeds.feedburner.com/scotthyoung/HAHx', 'item')
 
-def current_affairs_reader_fn(name, content):
-    content = content.find_all('a')
-    content = [str(a).split('"') for a in content]
-    content = [[a[1], a[2]] for a in content if len(a) == 3 and 'author' not in a[1]]
-    content = content[2:]
-    content = [[a[1].replace('</a>', '').replace('>', ''),
-                 'https://www.currentaffairs.org' + a[0],
-                 'Current Affairs'] for a in content]
-    return content
-contents += load_contents('Current Affairs', 'https://www.currentaffairs.org',
-                          current_affairs_reader_fn)
-
 def mtlynch_reader_fn(name, content):
     content = content.find_all('item')
     content = [[c.title.get_text(), c.guid.get_text(), name] for c in content]
