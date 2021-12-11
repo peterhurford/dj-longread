@@ -42,15 +42,21 @@ class CustomListViewMixin(ListView):
 
         before = self.request.GET.get('before')
         if before:
-            before = datetime.strptime(before, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
-            queryset = queryset.filter(Q(added__lte=before))
+            try:
+                before = datetime.strptime(before, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
+                queryset = queryset.filter(Q(added__lte=before))
+            except ValueError:
+                pass
         after = self.request.GET.get('after')
         if after:
-            after = datetime.strptime(after, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
-            queryset = queryset.filter(Q(added__gte=after))
+            try:
+                after = datetime.strptime(after, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
+                queryset = queryset.filter(Q(added__gte=after))
+            except ValueError:
+                pass
 
         starred = self.request.GET.get('starred')
-        if starred == '1':
+        if str(starred) == '1':
             queryset = queryset.filter(Q(starred=1))
 
         sort = self.request.GET.get('sort')
@@ -175,11 +181,11 @@ class LinkUpdate(LoginRequiredMixin, UpdateView):
         url = get_.get('url', '')
         title = get_.get('title', '')
         aggregator = get_.get('aggregator', '')
-        page = get_.get('page')
-        sort = get_.get('sort')
-        before = get_.get('before')
-        after = get_.get('after')
-        starred = get_.get('starred')
+        page = get_.get('page', '')
+        sort = get_.get('sort', '')
+        before = get_.get('before', '')
+        after = get_.get('after', '')
+        starred = get_.get('starred', '')
         return '/?url={}&title={}&aggregator={}&before={}&after={}&page={}&sort={}&starred={}'.format(url, title, aggregator, before, after, page, sort, starred)
 
     def form_valid(self, form):
