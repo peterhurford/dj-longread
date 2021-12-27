@@ -8,8 +8,7 @@ PURGE_OLDER_THAN_X_DAYS = 5  # For PURGABLE_AGGREGATORS, remove links older than
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['Mike', 'Riholtz', 'GrumpyEcon', 'Conservable', 'Krugman',
-                        'Mankiw', 'MOF', 'EconMed', 'FPSouthAsia', 'Seth', 'Gelman']
+OBSOLETE_AGGREGATORS = ['ChristianRationalist', 'Harford', 'PragCap', 'Ariely', 'EconometricSense', 'Devon', 'Seliger', 'CH', 'Niskanen', 'DR', '127', '3P', 'Ozy', 'Pseudoerasmus']
 
 # Metaweights
 PRIORITY_WEIGHT = 10   # The lower this number, the more links will be ranked according

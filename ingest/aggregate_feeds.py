@@ -124,7 +124,6 @@ def ea_blogs_reader_fn(name, content):
                'overcomingbias.com': 'Hanson',
                'impartial-priorities.org': 'ImpPri',
                'philosophyetc.net': 'PhilosophyEtc',
-               'thingofthings.wordpress.com': 'Ozy',
                'palladiummag.com': 'Palladium',
                'benjaminrosshoffman.com': 'BenHoffman',
                'charityentrepreneurship.com': 'CE',
@@ -254,7 +253,6 @@ contents += load_contents('Aarora', 'https://harshitaarora.com/feed/', 'item')
 contents += load_contents('WTB', 'https://medium.com/feed/what-to-build', 'item')
 contents += load_contents('Elad', 'http://blog.eladgil.com/feeds/posts/default', 'entry-link')
 contents += load_contents('ScholarsStage', 'https://scholars-stage.org/feed/', 'item')
-contents += load_contents('Seliger', 'https://jakeseliger.com/feed/', 'item')
 contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/', 'item')
 contents += load_contents('BreadFixer', 'https://medium.com/feed/@breadpricefixer', 'item')
 contents += load_contents('Avraham', 'https://misinfounderload.substack.com/feed', 'item')
