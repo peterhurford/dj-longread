@@ -8,14 +8,8 @@ PURGE_OLDER_THAN_X_DAYS = 5  # For PURGABLE_AGGREGATORS, remove links older than
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['MR', 'HN', 'TDS', 'EABlogs', 'Reason', 'NR', 'Quillette', 'VoxEU',
-                        'Vox', 'HBR', 'TDS', 'Freakonometrics', 'MoneyIllusion', 'Faunalytics',
-                        'Kling', 'JPAL', 'Exponents', 'Levels', 'WIP', 'Napkin-Math',
-                        'Freakconometrics', 'OutbreakO', 'Greenspun', 'RAND', 'FPMorning',
-                        'Seth', 'Gelman', 'SupplySide', 'SSIR', 'LGM', 'CGDev', 'Vox',
-						'Bulletin', 'NakedCapitalism', 'LGM', 'Greenspun', 'NewFood', 'RAND',
-						'Kling', 'CurrentAffairs', 'D4P', 'SupplySide', 'MoneyIllusion',
-						'Faunalytics', 'SSIR', 'EnlightementEcon', 'Current Affairs']
+OBSOLETE_AGGREGATORS = ['Mike', 'Riholtz', 'GrumpyEcon', 'Conservable', 'Krugman',
+                        'Mankiw', 'MOF', 'EconMed', 'FPSouthAsia', 'Seth', 'Gelman']
 
 # Metaweights
 PRIORITY_WEIGHT = 10   # The lower this number, the more links will be ranked according

@@ -127,7 +127,6 @@ def ea_blogs_reader_fn(name, content):
                'thingofthings.wordpress.com': 'Ozy',
                'palladiummag.com': 'Palladium',
                'benjaminrosshoffman.com': 'BenHoffman',
-               'vox.com': 'Vox',
                'charityentrepreneurship.com': 'CE',
                'stijnbruers.wordpress.com': 'Bruers',
                'fhi.ox.ac.uk': 'FHI',
@@ -171,7 +170,6 @@ def caplan_reader_fn(name, content):
 contents += load_contents('Caplan', 'https://www.econlib.org/feed/indexCaplan_xml',
                           caplan_reader_fn)
 
-contents += load_contents('Mankiw', 'http://feeds.feedburner.com/blogspot/SOpj?format=xml', 'item')
 contents += load_contents('AI Impacts', 'https://aiimpacts.org/feed/', 'item')
 contents += load_contents('Ben Kuhn', 'https://www.benkuhn.net/rss/', 'entry')
 contents += load_contents('Scott Young', 'http://feeds.feedburner.com/scotthyoung/HAHx', 'item')
@@ -231,7 +229,6 @@ contents += load_contents('Rosewater',
                           'https://magic.wizards.com/en/articles/columns/making-magic',
                           rosewater_reader_fn, reader_type='lxml')
 
-contents += load_contents('Levels', 'https://levels.io/rss/', 'item')
 contents += load_contents('Noah', 'http://noahpinionblog.blogspot.com/feeds/posts/default',
                           'entry-link')
 contents += load_contents('Noah',
@@ -244,7 +241,6 @@ contents += load_contents('CSET', 'https://cset.georgetown.edu/newsletters/feed/
 contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed', 'item')
 contents += load_contents('ChinAI', 'https://chinai.substack.com/feed', 'item')
 contents += load_contents('ImportAI', 'https://jack-clark.net/feed/', 'item')
-contents += load_contents('Gelman', 'https://statmodeling.stat.columbia.edu/feed/', 'item')
 
 def sumner_reading_fn(name, content):
     content = content.find_all('item')
@@ -264,7 +260,6 @@ contents += load_contents('BreadFixer', 'https://medium.com/feed/@breadpricefixe
 contents += load_contents('Avraham', 'https://misinfounderload.substack.com/feed', 'item')
 contents += load_contents('FakeNous', 'https://fakenous.net/?feed=rss2', 'item')
 contents += load_contents('AppliedDiv', 'https://applieddivinitystudies.com/atom.xml', 'entry')
-contents += load_contents('WIP', 'https://worksinprogress.co/feed/', 'item')
 contents += load_contents('Scrimshaw', 'https://scrimshawunscripted.substack.com/feed', 'item')
 
 def andy_reader_fn(name, content):
@@ -294,7 +289,6 @@ def guzey_link_reader_fn(name, content):
     return content
 contents += load_contents('Guzey', 'https://guzey.com/links/', guzey_link_reader_fn,
                           reader_type='lxml')
-contents += load_contents('MOF', 'https://www.mischiefsoffaction.com/blog-feed.xml', 'item')
 contents += load_contents('NMA', 'https://www.nomeatathlete.com/blog/feed/', 'item')
 contents += load_contents('JSMP', 'https://jsmp.dk/index.xml', 'item')
 contents += load_contents('JSMP', 'https://medium.com/feed/@jsmp', 'item')
@@ -339,14 +333,7 @@ contents += load_contents('HLI',
 contents += load_contents('Alignment', 'https://us18.campaign-archive.com/feed?u=1d1821210cc4f04d1e05c4fa6&id=dbac5de515', 'item')
 contents += load_contents('FPChina', 'https://foreignpolicy.com/category/china-brief/feed/',
                           'item')
-contents += load_contents('FPSouthAsia', 'https://foreignpolicy.com/category/south-asia-brief/feed/',
-                          'item')
-contents += load_contents('FPMorning', 'https://foreignpolicy.com/category/morning-brief/feed/',
-                          'item')
 contents += load_contents('FPSecurity', 'https://foreignpolicy.com/category/security-brief/feed/',
-                          'item')
-contents += load_contents('FP-WYWL',
-                          'https://foreignpolicy.com/category/while-you-werent-looking/feed/',
                           'item')
 contents += load_contents('FWI',
                           'https://us3.campaign-archive.com/feed?u=2afeee16b30494a373a377a31&id=92de5d8090',
@@ -381,9 +368,6 @@ contents += load_contents('Superorganizers', 'https://every.to/superorganizers?s
 contents += load_contents('Divinations', 'https://every.to/divinations?sort=newest',
                           every_reader_fn,
                           reader_type='xml')
-contents += load_contents('Napkin-Math', 'https://every.to/napkin-math?sort=newest',
-                          every_reader_fn,
-                          reader_type='xml')
 contents += load_contents('Almanack', 'https://every.to/almanack?sort=newest',
                           every_reader_fn,
                           reader_type='xml')
@@ -394,7 +378,6 @@ contents += load_contents('Holden', 'https://www.cold-takes.com/rss/', 'item')
 contents += load_contents('Cummings', 'https://dominiccummings.substack.com/feed', 'item')
 contents += load_contents('Schubert', 'https://stefanfschubert.com/blog?format=rss', 'item')
 contents += load_contents('DataColada', 'https://datacolada.org/feed', 'item')
-contents += load_contents('Seth', 'https://seths.blog/feed/', 'item')
 contents += load_contents('Trammell', 'https://philiptrammell.com/blog/feed', 'item')
 contents += load_contents('TIB', 'https://s3.amazonaws.com/revue/accounts/rss_feeds/000/033/453/original/rss_feed_33453.xml?1632204004', 'item')
 contents += load_contents('AlignmentF', 'https://www.alignmentforum.org/feed.xml', 'item')
