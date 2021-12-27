@@ -472,12 +472,18 @@ if links is not None:
     print('Purging obsolete')
     obsolete = links[(links['aggregator'].apply(lambda a: a in OBSOLETE_AGGREGATORS)) &
                      (links['liked'] != 0) & (links['liked'] != 1) & (links['liked'] != -1)]
-    obsolete = obsolete['id']
-    lines = len(obsolete)
+    obsolete_ids = list(obsolete['id'].values)
+
+    # Kill Yglesias's "X Thread"
+    obsolete = links[(links['aggregator'] == 'Yglesias') & links['title'].apply(lambda t: 'Thread' in str(t)) &
+                     (links['liked'] != 0) & (links['liked'] != 1) & (links['liked'] != -1)]
+    obsolete_ids += list(obsolete['id'].values)
+
+    lines = len(obsolete_ids)
     if lines == 0:
         print('...No obsolete links detected')
     else:
-        for i, id_ in enumerate(obsolete):
+        for i, id_ in enumerate(obsolete_ids):
             hide_row(cur, id_)
         print('...{} obsolete links purged!'.format(lines))
 
