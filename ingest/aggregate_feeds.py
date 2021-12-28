@@ -124,7 +124,6 @@ def ea_blogs_reader_fn(name, content):
                'overcomingbias.com': 'Hanson',
                'impartial-priorities.org': 'ImpPri',
                'philosophyetc.net': 'PhilosophyEtc',
-               'palladiummag.com': 'Palladium',
                'benjaminrosshoffman.com': 'BenHoffman',
                'charityentrepreneurship.com': 'CE',
                'stijnbruers.wordpress.com': 'Bruers',
@@ -171,7 +170,6 @@ contents += load_contents('Caplan', 'https://www.econlib.org/feed/indexCaplan_xm
 
 contents += load_contents('AI Impacts', 'https://aiimpacts.org/feed/', 'item')
 contents += load_contents('Ben Kuhn', 'https://www.benkuhn.net/rss/', 'entry')
-contents += load_contents('Scott Young', 'http://feeds.feedburner.com/scotthyoung/HAHx', 'item')
 
 def mtlynch_reader_fn(name, content):
     content = content.find_all('item')
@@ -207,27 +205,6 @@ contents += load_contents('Graham', 'http://paulgraham.com/articles.html', graha
 
 contents += load_contents('ALOP', 'https://alifeofproductivity.com/feed/', 'item')
 contents += load_contents('Muehlhauser', 'http://feeds.feedburner.com/LukeMuehlhauser', 'entry')
-
-def leo_reader_fn(name, content):
-    content = [str(c).split('"') for c in content.find_all('a')]
-    content = [[c[2].replace('</a>', '').replace('>', '').replace('\n', ''),
-                'https://zenhabits.net' + c[1], 'Leo'] for c in content]
-    content = content[2:]
-    return content
-contents += load_contents('Leo', 'https://zenhabits.net/archives/', leo_reader_fn,
-                          reader_type='lxml')
-
-def rosewater_reader_fn(name, content):
-    content = content.find_all('a')
-    content = [c for c in content if 'articles' in str(c)][1:-2]
-    content = [[c.find_all('h3')[0].get_text(),
-                 'https://magic.wizards.com' + str(c).split('"')[1], 'Rosewater']
-                 for c in content]
-    return content
-contents += load_contents('Rosewater',
-                          'https://magic.wizards.com/en/articles/columns/making-magic',
-                          rosewater_reader_fn, reader_type='lxml')
-
 contents += load_contents('Noah', 'http://noahpinionblog.blogspot.com/feeds/posts/default',
                           'entry-link')
 contents += load_contents('Noah',
