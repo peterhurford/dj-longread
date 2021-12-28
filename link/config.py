@@ -8,7 +8,7 @@ PURGE_OLDER_THAN_X_DAYS = 5  # For PURGABLE_AGGREGATORS, remove links older than
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['FLI', 'MMM', 'Leo', 'RyanAvent', 'NotEvenWrong']
+OBSOLETE_AGGREGATORS = ['WBW', 'Frum', 'Gunther', 'PossiblyWrong', 'Scrimshaw']
 
 # Metaweights
 PRIORITY_WEIGHT = 10   # The lower this number, the more links will be ranked according
