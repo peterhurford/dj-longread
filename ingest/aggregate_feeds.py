@@ -189,10 +189,6 @@ def roots_reader_fn(name, content):
 contents += load_contents('Progress', 'https://rootsofprogress.org/posts',
                           roots_reader_fn, reader_type='lxml')
 
-contents += load_contents('PhilosophyEtc',
-                          'http://feeds.philosophyetc.net/PhilosophyEtCetera',
-                          'entry-link')
-
 def graham_reader_fn(name, content):
     content = [str(c).split('"') for c in content.find_all('a')]
     content = [[c[2].replace('</a>', '').replace('>', ''), 'http://paulgraham.com/' + c[1], 'Graham'] for c in content]
@@ -354,7 +350,6 @@ contents += load_contents('Trammell', 'https://philiptrammell.com/blog/feed', 'i
 contents += load_contents('TIB', 'https://s3.amazonaws.com/revue/accounts/rss_feeds/000/033/453/original/rss_feed_33453.xml?1632204004', 'item')
 contents += load_contents('AlignmentF', 'https://www.alignmentforum.org/feed.xml', 'item')
 contents += load_contents('MattBell', 'https://www.mattbell.us/rss/', 'item')
-contents += load_contents('Blattman', 'https://chrisblattman.com/feed/', 'item')
 contents += load_contents('Carlsmith', 'https://handsandcities.com/feed/', 'item')
 contents += load_contents('GPI', 'https://globalprioritiesinstitute.org/feed/', 'item')
 contents += load_contents('AskManager', 'https://www.askamanager.org/feed', 'item')
