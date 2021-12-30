@@ -1,13 +1,22 @@
 from django.db.models import Case, When, Q, FloatField
 
-# Purge old articles if they come from these aggregators
+
+# Purge old articles after 14 days if they come from these aggregators
 PURGABLE_AGGREGATORS = ['Dispatch', 'FPSecurity', 'FPChina', '538', 'ChinAI', 'ImportAI',
                         'Alignment', 'TIB', 'Schneier', 'Yglesias']
 PURGE_OLDER_THAN_X_DAYS = 14  # For PURGABLE_AGGREGATORS, remove links older than this (in days)
 
 
+# Purge old articles after 14 days if they come from these aggregators
+LONG_PURGABLE_AGGREGATORS = ['LW', 'EAForum', 'AskManager', 'SLW', 'CSET', 'Caplan',
+                             'Sumner', 'GEMorris', 'Lusk', 'TSNR', 'GlobalGuessing']
+LONG_PURGE_OLDER_THAN_X = 30*3  # For LONG_PURGABLE_AGGREGATORS, remove links older than this (in days)
+
+
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['Fyfe']
+OBSOLETE_AGGREGATORS = ['Leo', 'HBR', 'HN', 'Seliger', 'Gelman', 'NotEvenWrong', '127', 'MMM',
+                        'FLI', 'Ozy']
+
 
 # Metaweights
 PRIORITY_WEIGHT = 10   # The lower this number, the more links will be ranked according

@@ -11,7 +11,8 @@ from datetime import datetime, timedelta
 from utils.download import read
 from utils.sql import enquote, add_row, delete_row, update_row, export_db
 
-from link.config import PURGE_OLDER_THAN_X_DAYS, PURGABLE_AGGREGATORS, OBSOLETE_AGGREGATORS
+from link.config import (PURGE_OLDER_THAN_X_DAYS, LONG_PURGE_OLDER_THAN_X, PURGABLE_AGGREGATORS,
+                         LONG_PURGABLE_AGGREGATORS, OBSOLETE_AGGREGATORS)
 
 
 def chunk(l, n):
@@ -439,6 +440,27 @@ if links is not None:
         for i, id_ in enumerate(purgable):
             hide_row(cur, id_)
         print('...{} old links purged!'.format(lines))
+
+if links is not None:
+    print('-')
+    print('Purging long old')
+    links['liked'] = links['liked'].apply(lambda x: np.nan if str(x) == '\\N' else str(x).split('.')[0]).astype(float)
+    links['added'] = pd.to_datetime(links['added'], utc=True).dt.tz_localize(None)
+    relative_now = links['added'].max()
+    before_purge_window = relative_now - timedelta(days=LONG_PURGE_OLDER_THAN_X)
+    purgable = links[(links['aggregator'].apply(lambda a: a in LONG_PURGABLE_AGGREGATORS)) &
+                     (links['added'] < before_purge_window) &
+                     (links['liked'] != 0) &
+                     (links['liked'] != 1) &
+                     (links['liked'] != -1)]
+    purgable = purgable['id']
+    lines = len(purgable)
+    if lines == 0:
+        print('...No long old-purgable links detected')
+    else:
+        for i, id_ in enumerate(purgable):
+            hide_row(cur, id_)
+        print('...{} long old links purged!'.format(lines))
 
 if links is not None:
     print('-')
