@@ -356,6 +356,7 @@ contents += load_contents('Carlsmith', 'https://handsandcities.com/feed/', 'item
 contents += load_contents('GPI', 'https://globalprioritiesinstitute.org/feed/', 'item')
 contents += load_contents('AskManager', 'https://www.askamanager.org/feed', 'item')
 contents += load_contents('NeelNanda', 'https://www.neelnanda.io/blog?format=rss', 'item')
+contents += load_contents('Intelligencer', 'https://nymag.com/rss/Intelligencer.xml', 'item')
 
 print('-')
 print('Gathering content')
