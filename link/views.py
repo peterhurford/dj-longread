@@ -43,14 +43,14 @@ class CustomListViewMixin(ListView):
         before = self.request.GET.get('before')
         if before:
             try:
-                before = datetime.strptime(before, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
+                before = datetime.strptime(before, '%Y-%d-%m %H:%M:%S') # e.g., 2021-05-31
                 queryset = queryset.filter(Q(added__lte=before))
             except ValueError:
                 pass
         after = self.request.GET.get('after')
         if after:
             try:
-                after = datetime.strptime(after, '%d/%m/%y %H:%M:%S') # e.g., 18/09/19
+                after = datetime.strptime(after, '%Y-%d-%m %H:%M:%S')
                 queryset = queryset.filter(Q(added__gte=after))
             except ValueError:
                 pass
