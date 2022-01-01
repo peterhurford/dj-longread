@@ -359,6 +359,7 @@ contents += load_contents('AskManager', 'https://www.askamanager.org/feed', 'ite
 contents += load_contents('NeelNanda', 'https://www.neelnanda.io/blog?format=rss', 'item')
 contents += load_contents('Intelligencer', 'https://nymag.com/rss/Intelligencer.xml', 'item')
 contents += load_contents('BaM', 'https://bam.kalzumeus.com/archive/rss/', 'item')
+contents += load_contents('SplitTicket', 'https://split-ticket.org/feed/', 'item')
 
 print('-')
 print('Gathering content')
