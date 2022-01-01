@@ -91,7 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'America/Chicago'
-DATETIME_FORMAT = 'd b \'y P T'
+DATETIME_FORMAT = '\'y b d P T'
 USE_I18N = True
 USE_L10N = False
 USE_TZ = True

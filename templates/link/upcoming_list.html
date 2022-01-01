@@ -29,7 +29,7 @@
             {% if link.starred == 1 %}
               <b>***</b>
             {% endif %}
-            (<div class="tooltip"><i>{{ link.added|date:"D, d M" }}<span class="tooltiptext">{{ link.added }} (id={{ link.id }}, seed={{ link.seed }}, weight={{ link.priority }} -> priority={{ link.total_priority|floatformat:3 }})</span></i></div>)</li>
+            (<div class="tooltip"><i>{{ link.added|date:"\'y b d" }}<span class="tooltiptext">{{ link.added }} (id={{ link.id }}, seed={{ link.seed }}, weight={{ link.priority }} -> priority={{ link.total_priority|floatformat:3 }})</span></i></div>)</li>
         </form>
     {% empty %}
         <li>No links yet.</li>
