@@ -10,23 +10,23 @@ PURGE_OLDER_THAN_X_DAYS = 14  # For PURGABLE_AGGREGATORS, remove links older tha
 # Purge old articles after 14 days if they come from these aggregators
 LONG_PURGABLE_AGGREGATORS = ['LW', 'EAForum', 'AskManager', 'SLW', 'CSET', 'Caplan',
                              'Sumner', 'GEMorris', 'Lusk', 'TSNR', 'GlobalGuessing',
-                             'SplitTicket', 'Intelligencer']
+                             'SplitTicket', 'Intelligencer', 'Guzey', 'HLI']
 LONG_PURGE_OLDER_THAN_X = 30*3  # For LONG_PURGABLE_AGGREGATORS, remove links older than this (in days)
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['Leo', 'HBR', 'HN', 'Seliger', 'Gelman', 'NotEvenWrong', '127', 'MMM',
-                        'FLI', 'Ozy']
+OBSOLETE_AGGREGATORS = ['GFI', 'Eghbal', 'GWWC', 'GiveDirectly', 'HIPR', 'KenWhite',
+                        'YaschaMounk']
 
 
 # Metaweights
-PRIORITY_WEIGHT = 12   # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 10   # The lower this number, the more links will be ranked according
                        # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 8        # The lower this number, the more it will be the case that recent
                        # links show up first
 
-RANDOM_WEIGHT = 38     # The lower this number, the more it will be the case that links will
+RANDOM_WEIGHT = 28     # The lower this number, the more it will be the case that links will
                        # show up in a random order, disregarding recenty or aggregator weights
 
 # Equation for ranking = 1 + (aggregator weight / PRIORITY_WEIGHT) +
@@ -56,12 +56,14 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='Holden'), then=6),
                           When(Q(aggregator__exact='Lusk'), then=4),
                           When(Q(aggregator__exact='Guzey'), then=4),
+                          When(Q(aggregator__exact='HLI'), then=4),
                           When(Q(aggregator__exact='Noah'), then=4),
                           When(Q(aggregator__exact='FPMorning'), then=4),
                           When(Q(aggregator__exact='FPSecurity'), then=4),
                           When(Q(aggregator__exact='FPChina'), then=4),
                           When(Q(aggregator__exact='FPSouthAsia'), then=4),
                           When(Q(aggregator__exact='FP-WYWL'), then=4),
+                          When(Q(aggregator__exact='Guzey'), then=4),
                           When(Q(aggregator__exact='Dispatch'), then=0.5),
                           When(Q(aggregator__exact='HBR'), then=0.5),
                           When(Q(aggregator__exact='Custom'), then=0.0001),

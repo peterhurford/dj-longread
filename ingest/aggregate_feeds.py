@@ -136,7 +136,6 @@ def ea_blogs_reader_fn(name, content):
                'thewholesky.wordpress.com': 'JuliaWise',
                'globalprioritiesinstitute.org': 'GPI',
                'theunitofcaring.tumblr.com': 'Kelsey',
-               'givedirectly.org': 'GiveDirectly',
                'acesounderglass.com': 'VanNostrand'}
 
     for c in content:
@@ -262,7 +261,6 @@ contents += load_contents('NMA', 'https://www.nomeatathlete.com/blog/feed/', 'it
 contents += load_contents('JSMP', 'https://jsmp.dk/index.xml', 'item')
 contents += load_contents('JSMP', 'https://medium.com/feed/@jsmp', 'item')
 contents += load_contents('AskAM/P', 'https://www.askamathematician.com/feed/', 'item')
-contents += load_contents('SVN', 'https://m.signalvnoise.com/feed/', 'item')
 contents += load_contents('SVN', 'https://world.hey.com/jason/feed.atom', 'entry')
 contents += load_contents('SVN', 'https://world.hey.com/dhh/feed.atom', 'entry')
 contents += load_contents('Dispatch', 'https://thedispatch.com/feed', 'item')
@@ -304,8 +302,6 @@ contents += load_contents('HLI',
 contents += load_contents('Alignment', 'https://us18.campaign-archive.com/feed?u=1d1821210cc4f04d1e05c4fa6&id=dbac5de515', 'item')
 contents += load_contents('FPChina', 'https://foreignpolicy.com/category/china-brief/feed/',
                           'item')
-contents += load_contents('FPSecurity', 'https://foreignpolicy.com/category/security-brief/feed/',
-                          'item')
 contents += load_contents('FWI',
                           'https://us3.campaign-archive.com/feed?u=2afeee16b30494a373a377a31&id=92de5d8090',
                           'item')
@@ -324,7 +320,6 @@ def evans_reader_fn(name, content):
 contents += load_contents('BenEvans', 'https://www.ben-evans.com/essays', evans_reader_fn,
                           reader_type='lxml')
 contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/', 'item')
-contents += load_contents('HIPR', 'http://www.highimpactpolicy.review/feed', 'item')
 
 def every_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if '/{}/'.format(name.lower()) in str(c) and 'h2' in str(c)]
