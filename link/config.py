@@ -10,7 +10,7 @@ PURGE_OLDER_THAN_X_DAYS = 14  # For PURGABLE_AGGREGATORS, remove links older tha
 # Purge old articles after 14 days if they come from these aggregators
 LONG_PURGABLE_AGGREGATORS = ['LW', 'EAForum', 'AskManager', 'SLW', 'CSET', 'Caplan',
                              'Sumner', 'GEMorris', 'Lusk', 'TSNR', 'GlobalGuessing',
-                             'SplitTicket', 'Intelligencer', 'Guzey', 'HLI']
+                             'SplitTicket', 'Intelligencer', 'Guzey', 'HLI', 'EALondon']
 LONG_PURGE_OLDER_THAN_X = 30*3  # For LONG_PURGABLE_AGGREGATORS, remove links older than this (in days)
 
 
@@ -41,6 +41,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='LW'), then=10),
                           When(Q(aggregator__exact='SuperOrganizers'), then=10),
                           When(Q(aggregator__exact='Bollard'), then=10),
+                          When(Q(aggregator__exact='EALondon'), then=10),
                           When(Q(aggregator__exact='SSC'), then=10),
                           When(Q(aggregator__exact='ChinAI'), then=8),
                           When(Q(aggregator__exact='ImportAI'), then=8),
