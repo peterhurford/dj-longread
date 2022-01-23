@@ -356,6 +356,7 @@ contents += load_contents('Intelligencer', 'https://nymag.com/rss/Intelligencer.
 contents += load_contents('BaM', 'https://bam.kalzumeus.com/archive/rss/', 'item')
 contents += load_contents('SplitTicket', 'https://split-ticket.org/feed/', 'item')
 contents += load_contents('EALondon', 'https://us5.campaign-archive.com/feed?u=7438f1bb80988376e9cae8c11&id=182579324a', 'item')
+contents += load_contents('IFP', 'https://progress.institute/feed/', 'item')
 
 print('-')
 print('Gathering content')
