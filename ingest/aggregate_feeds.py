@@ -76,7 +76,7 @@ def entry_link_process_fn(name, content):
     return content
 
 
-def load_contents(name, feed, reader_fn, return_type='soup', reader_type='xml'):
+def load_contents(name, feed, reader_fn='item', return_type='soup', reader_type='xml'):
     print('Load {}...'.format(name))
 
     content, error, msg = read(feed, return_type=return_type, reader_type=reader_type)
@@ -111,52 +111,9 @@ def load_contents(name, feed, reader_fn, return_type='soup', reader_type='xml'):
 
 contents = []
 
-def ea_blogs_reader_fn(name, content):
-    content = content.find_all('ul')[0]
-    content = [str(c.a).split('href="')[1].split('rel=') for c in content.find_all('li')]
-    content = [[c[1].split('>')[1].split('<')[0],
-                 c[0].replace('"', '').strip(),
-                 'EABlogs'] for c in content]
-    processed_content = []
-
-    # Add custom aggregators for EA Blogs members
-    url_map = {'forum.effectivealtruism.org': 'EAForum',
-               'cset.georgetown.edu': 'CSET',
-               'overcomingbias.com': 'Hanson',
-               'philosophyetc.net': 'PhilosophyEtc',
-               'benjaminrosshoffman.com': 'BenHoffman',
-               'charityentrepreneurship.com': 'CE',
-               'stijnbruers.wordpress.com': 'Bruers',
-               'fhi.ox.ac.uk': 'FHI',
-               'centreforeffectivealtruism.org': 'CEA',
-               '80000hours.org': '80K',
-               'astralcodexten.substack.com': 'SSC',
-               'lukemuehlhauser.com': 'Muehlhauser',
-               'longtermrisk.org': 'CLR',
-               'thewholesky.wordpress.com': 'JuliaWise',
-               'globalprioritiesinstitute.org': 'GPI',
-               'theunitofcaring.tumblr.com': 'Kelsey',
-               'acesounderglass.com': 'VanNostrand'}
-
-    for c in content:
-        include = True
-        for url, label in url_map.items():
-            if url in c[1]:
-                c[2] = label
-            else:
-                include = False
-
-        if include:
-            processed_content.append(c)
-
-    return processed_content
-
-
-contents += load_contents('EABlogs', 'http://eablogs.net', ea_blogs_reader_fn)
-contents += load_contents('EAForum', 'https://forum.effectivealtruism.org/feed.xml?view=rss&karmaThreshold=40', 'item')
-contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml?view=curated-rss', 'item')
-contents += load_contents('538', 'https://fivethirtyeight.com/politics/feed/', 'item')
-contents += load_contents('Lusk', 'http://jaysonlusk.com/blog?format=rss', 'item')
+contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml?view=curated-rss')
+contents += load_contents('538', 'https://fivethirtyeight.com/politics/feed/')
+contents += load_contents('Lusk', 'http://jaysonlusk.com/blog?format=rss')
 
 def caplan_reader_fn(name, content):
     content = content.find_all('item')
@@ -166,7 +123,7 @@ def caplan_reader_fn(name, content):
 contents += load_contents('Caplan', 'https://www.econlib.org/feed/indexCaplan_xml',
                           caplan_reader_fn)
 
-contents += load_contents('AI Impacts', 'https://aiimpacts.org/feed/', 'item')
+contents += load_contents('AI Impacts', 'https://aiimpacts.org/feed/')
 contents += load_contents('Ben Kuhn', 'https://www.benkuhn.net/rss/', 'entry')
 
 def mtlynch_reader_fn(name, content):
@@ -176,8 +133,8 @@ def mtlynch_reader_fn(name, content):
 contents += load_contents('Mtlynch.io', 'https://mtlynch.io/feed.xml',
                           mtlynch_reader_fn, reader_type='lxml')
 
-contents += load_contents('Beeminder', 'http://feeds.feedburner.com/bmndr', 'item')
-contents += load_contents('Constantin', 'https://srconstantin.wordpress.com/feed/', 'item')
+contents += load_contents('Beeminder', 'http://feeds.feedburner.com/bmndr')
+contents += load_contents('Constantin', 'https://srconstantin.wordpress.com/feed/')
 
 def roots_reader_fn(name, content):
     content = content.find_all('li')
@@ -197,20 +154,18 @@ def graham_reader_fn(name, content):
 contents += load_contents('Graham', 'http://paulgraham.com/articles.html', graham_reader_fn,
                           reader_type='lxml')
 
-contents += load_contents('ALOP', 'https://alifeofproductivity.com/feed/', 'item')
+contents += load_contents('ALOP', 'https://alifeofproductivity.com/feed/')
 contents += load_contents('Muehlhauser', 'http://feeds.feedburner.com/LukeMuehlhauser', 'entry')
 contents += load_contents('Noah', 'http://noahpinionblog.blogspot.com/feeds/posts/default',
                           'entry-link')
 contents += load_contents('Noah',
                           'https://www.bloomberg.com/opinion/authors/AR3OYuAmvcU/noah-smith.rss',
                           'item')
-contents += load_contents('Noah', 'https://noahpinion.substack.com/feed', 'item')
-contents += load_contents('deBoer', 'https://freddiedeboer.substack.com/feed', 'item')
-contents += load_contents('CSET', 'https://cset.georgetown.edu/feed/', 'item')
-contents += load_contents('CSET', 'https://cset.georgetown.edu/newsletters/feed/', 'item')
-contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed', 'item')
-contents += load_contents('ChinAI', 'https://chinai.substack.com/feed', 'item')
-contents += load_contents('ImportAI', 'https://jack-clark.net/feed/', 'item')
+contents += load_contents('Noah', 'https://noahpinion.substack.com/feed')
+contents += load_contents('deBoer', 'https://freddiedeboer.substack.com/feed')
+contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed')
+contents += load_contents('ChinAI', 'https://chinai.substack.com/feed')
+contents += load_contents('ImportAI', 'https://jack-clark.net/feed/')
 
 def sumner_reading_fn(name, content):
     content = content.find_all('item')
@@ -219,15 +174,15 @@ def sumner_reading_fn(name, content):
 contents += load_contents('WorldInData', 'https://ourworldindata.org/atom.xml', 'entry')
 contents += load_contents('SamAltman', 'http://blog.samaltman.com/posts.atom', 'entry-link')
 contents += load_contents('Crawford', 'https://jasoncrawford.org/feed.xml', 'entry')
-contents += load_contents('Nintil', 'https://nintil.com/rss.xml', 'item')
-contents += load_contents('Aarora', 'https://harshitaarora.com/feed/', 'item')
-contents += load_contents('WTB', 'https://medium.com/feed/what-to-build', 'item')
+contents += load_contents('Nintil', 'https://nintil.com/rss.xml')
+contents += load_contents('Aarora', 'https://harshitaarora.com/feed/')
+contents += load_contents('WTB', 'https://medium.com/feed/what-to-build')
 contents += load_contents('Elad', 'http://blog.eladgil.com/feeds/posts/default', 'entry-link')
-contents += load_contents('ScholarsStage', 'https://scholars-stage.org/feed/', 'item')
-contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/', 'item')
-contents += load_contents('BreadFixer', 'https://medium.com/feed/@breadpricefixer', 'item')
-contents += load_contents('Avraham', 'https://misinfounderload.substack.com/feed', 'item')
-contents += load_contents('FakeNous', 'https://fakenous.net/?feed=rss2', 'item')
+contents += load_contents('ScholarsStage', 'https://scholars-stage.org/feed/')
+contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/')
+contents += load_contents('BreadFixer', 'https://medium.com/feed/@breadpricefixer')
+contents += load_contents('Avraham', 'https://misinfounderload.substack.com/feed')
+contents += load_contents('FakeNous', 'https://fakenous.net/?feed=rss2')
 contents += load_contents('AppliedDiv', 'https://applieddivinitystudies.com/atom.xml', 'entry')
 
 def andy_reader_fn(name, content):
@@ -247,7 +202,7 @@ def guzey_reader_fn(name, content):
                'https://guzey.com/' + c[1], 'Guzey'] for c in content]
     return content
 contents += load_contents('Guzey', 'https://guzey.com/', guzey_reader_fn)
-contents += load_contents('Guzey', 'https://bestoftwitter.substack.com/feed', 'item')
+contents += load_contents('Guzey', 'https://bestoftwitter.substack.com/feed')
 
 def guzey_link_reader_fn(name, content):
     content = [c for c in content.find_all('a') if 'http' in str(c) and 'perma.cc' not in str(c) and 'social-icon' not in str(c) and 'div' not in str(c)]
@@ -257,17 +212,17 @@ def guzey_link_reader_fn(name, content):
     return content
 contents += load_contents('Guzey', 'https://guzey.com/links/', guzey_link_reader_fn,
                           reader_type='lxml')
-contents += load_contents('NMA', 'https://www.nomeatathlete.com/blog/feed/', 'item')
-contents += load_contents('JSMP', 'https://jsmp.dk/index.xml', 'item')
-contents += load_contents('JSMP', 'https://medium.com/feed/@jsmp', 'item')
-contents += load_contents('AskAM/P', 'https://www.askamathematician.com/feed/', 'item')
+contents += load_contents('NMA', 'https://www.nomeatathlete.com/blog/feed/')
+contents += load_contents('JSMP', 'https://jsmp.dk/index.xml')
+contents += load_contents('JSMP', 'https://medium.com/feed/@jsmp')
+contents += load_contents('AskAM/P', 'https://www.askamathematician.com/feed/')
 contents += load_contents('SVN', 'https://world.hey.com/jason/feed.atom', 'entry')
 contents += load_contents('SVN', 'https://world.hey.com/dhh/feed.atom', 'entry')
-contents += load_contents('Dispatch', 'https://thedispatch.com/feed', 'item')
-contents += load_contents('SSC', 'https://astralcodexten.substack.com/feed', 'item')
-contents += load_contents('Yglesias', 'https://www.slowboring.com/feed', 'item')
-contents += load_contents('Wilkinson', 'https://modelcitizen.substack.com/feed', 'item')
-contents += load_contents('80K', 'https://80000hours.org/latest/feed/', 'item')
+contents += load_contents('Dispatch', 'https://thedispatch.com/feed')
+contents += load_contents('SSC', 'https://astralcodexten.substack.com/feed')
+contents += load_contents('Yglesias', 'https://www.slowboring.com/feed')
+contents += load_contents('Wilkinson', 'https://modelcitizen.substack.com/feed')
+contents += load_contents('80K', 'https://80000hours.org/latest/feed/')
 
 def eliason_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'blog-page-heading' in str(c)]
@@ -289,7 +244,7 @@ def slw_reader_fn(name, content):
     return content
 contents += load_contents('SLW', 'https://softwareleadweekly.com/issues/', slw_reader_fn,
                           reader_type='lxml')
-contents += load_contents('Danluu', 'https://danluu.com/atom.xml', 'item')
+contents += load_contents('Danluu', 'https://danluu.com/atom.xml')
 contents += load_contents('Bollard',
                           'https://us14.campaign-archive.com/feed?u=66df320da8400b581cbc1b539&id=de632a3c62',
                           'item')
@@ -299,7 +254,7 @@ contents += load_contents('CSET',
 contents += load_contents('HLI',
                           'https://us19.campaign-archive.com/feed?u=e759f3a724b8709250fb153c2&id=163285db12',
                           'item')
-contents += load_contents('Alignment', 'https://us18.campaign-archive.com/feed?u=1d1821210cc4f04d1e05c4fa6&id=dbac5de515', 'item')
+contents += load_contents('Alignment', 'https://us18.campaign-archive.com/feed?u=1d1821210cc4f04d1e05c4fa6&id=dbac5de515')
 contents += load_contents('FPChina', 'https://foreignpolicy.com/category/china-brief/feed/',
                           'item')
 contents += load_contents('FWI',
@@ -307,8 +262,8 @@ contents += load_contents('FWI',
                           'item')
 contents += load_contents('DanWahl', 'https://danwahl.net/atom.xml', 'entry')
 contents += load_contents('Katja', 'https://worldspiritsockpuppet.com/feed.xml', 'entry')
-contents += load_contents('Metaculus', 'https://www.metaculus.com/news/rss/', 'item')
-contents += load_contents('GlobalGuessing', 'https://globalguessing.com/rss/', 'item')
+contents += load_contents('Metaculus', 'https://www.metaculus.com/news/rss/')
+contents += load_contents('GlobalGuessing', 'https://globalguessing.com/rss/')
 def evans_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'benedictevans' in str(c)]
     content = [c.split('href="')[-1].split('>')[:-1] for c in content]
@@ -319,7 +274,7 @@ def evans_reader_fn(name, content):
     return content
 contents += load_contents('BenEvans', 'https://www.ben-evans.com/essays', evans_reader_fn,
                           reader_type='lxml')
-contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/', 'item')
+contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/')
 
 def every_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if '/{}/'.format(name.lower()) in str(c) and 'h2' in str(c)]
@@ -337,26 +292,36 @@ contents += load_contents('Divinations', 'https://every.to/divinations?sort=newe
 contents += load_contents('Almanack', 'https://every.to/almanack?sort=newest',
                           every_reader_fn,
                           reader_type='xml')
-contents += load_contents('PoliticalKiwi', 'https://politicalkiwi.wordpress.com/feed/', 'item')
-contents += load_contents('Taleb', 'https://fooledbyrandomnessdotcom.wordpress.com/feed/', 'item')
-contents += load_contents('Taleb', 'https://medium.com/feed/incerto', 'item')
-contents += load_contents('Holden', 'https://www.cold-takes.com/rss/', 'item')
-contents += load_contents('Cummings', 'https://dominiccummings.substack.com/feed', 'item')
-contents += load_contents('Schubert', 'https://stefanfschubert.com/blog?format=rss', 'item')
-contents += load_contents('DataColada', 'https://datacolada.org/feed', 'item')
-contents += load_contents('Trammell', 'https://philiptrammell.com/blog/feed', 'item')
-contents += load_contents('TIB', 'https://s3.amazonaws.com/revue/accounts/rss_feeds/000/033/453/original/rss_feed_33453.xml?1632204004', 'item')
-contents += load_contents('AlignmentF', 'https://www.alignmentforum.org/feed.xml', 'item')
-contents += load_contents('MattBell', 'https://www.mattbell.us/rss/', 'item')
-contents += load_contents('Carlsmith', 'https://handsandcities.com/feed/', 'item')
-contents += load_contents('GPI', 'https://globalprioritiesinstitute.org/feed/', 'item')
-contents += load_contents('AskManager', 'https://www.askamanager.org/feed', 'item')
-contents += load_contents('NeelNanda', 'https://www.neelnanda.io/blog?format=rss', 'item')
-contents += load_contents('Intelligencer', 'https://nymag.com/rss/Intelligencer.xml', 'item')
-contents += load_contents('BaM', 'https://bam.kalzumeus.com/archive/rss/', 'item')
-contents += load_contents('SplitTicket', 'https://split-ticket.org/feed/', 'item')
-contents += load_contents('EALondon', 'https://us5.campaign-archive.com/feed?u=7438f1bb80988376e9cae8c11&id=182579324a', 'item')
-contents += load_contents('IFP', 'https://progress.institute/feed/', 'item')
+contents += load_contents('PoliticalKiwi', 'https://politicalkiwi.wordpress.com/feed/')
+contents += load_contents('Taleb', 'https://fooledbyrandomnessdotcom.wordpress.com/feed/')
+contents += load_contents('Taleb', 'https://medium.com/feed/incerto')
+contents += load_contents('Holden', 'https://www.cold-takes.com/rss/')
+contents += load_contents('Cummings', 'https://dominiccummings.substack.com/feed')
+contents += load_contents('Schubert', 'https://stefanfschubert.com/blog?format=rss')
+contents += load_contents('DataColada', 'https://datacolada.org/feed')
+contents += load_contents('Trammell', 'https://philiptrammell.com/blog/feed')
+contents += load_contents('TIB', 'https://s3.amazonaws.com/revue/accounts/rss_feeds/000/033/453/original/rss_feed_33453.xml?1632204004')
+contents += load_contents('AlignmentF', 'https://www.alignmentforum.org/feed.xml')
+contents += load_contents('MattBell', 'https://www.mattbell.us/rss/')
+contents += load_contents('Carlsmith', 'https://handsandcities.com/feed/')
+contents += load_contents('GPI', 'https://globalprioritiesinstitute.org/feed/')
+contents += load_contents('AskManager', 'https://www.askamanager.org/feed')
+contents += load_contents('NeelNanda', 'https://www.neelnanda.io/blog?format=rss')
+contents += load_contents('Intelligencer', 'https://nymag.com/rss/Intelligencer.xml')
+contents += load_contents('BaM', 'https://bam.kalzumeus.com/archive/rss/')
+contents += load_contents('SplitTicket', 'https://split-ticket.org/feed/')
+contents += load_contents('EALondon', 'https://us5.campaign-archive.com/feed?u=7438f1bb80988376e9cae8c11&id=182579324a')
+contents += load_contents('IFP', 'https://progress.institute/feed/')
+contents += load_contents('JuliaWise', 'https://juliawise.net/feed/')
+contents += load_contents('JeffKauffman', 'https://www.jefftk.com/news.rss')
+contents += load_contents('CSET', 'https://cset.georgetown.edu/publications/feed/')
+contents += load_contents('Hanson', 'https://www.overcomingbias.com/feed')
+contents += load_contents('PhilosophyEtc', 'http://feeds.philosophyetc.net/PhilosophyEtCetera', 'entry')
+contents += load_contents('VanNostrand', 'https://acesounderglass.com/feed/')
+contents += load_contents('GPI', 'https://globalprioritiesinstitute.org/feed/')
+contents += load_contents('CEA', 'https://www.centreforeffectivealtruism.org/blog.xml')
+contents += load_contents('BenHoffman', 'http://benjaminrosshoffman.com/feed/')
+contents += load_contents('Zvi', 'https://thezvi.wordpress.com/feed/')
 
 print('-')
 print('Gathering content')
