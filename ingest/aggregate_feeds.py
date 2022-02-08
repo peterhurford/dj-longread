@@ -322,6 +322,7 @@ contents += load_contents('GPI', 'https://globalprioritiesinstitute.org/feed/')
 contents += load_contents('CEA', 'https://www.centreforeffectivealtruism.org/blog.xml')
 contents += load_contents('BenHoffman', 'http://benjaminrosshoffman.com/feed/')
 contents += load_contents('Zvi', 'https://thezvi.wordpress.com/feed/')
+contents += load_contents('GoodEnough', 'https://www.goodenoughanswers.com/blog-feed.xml')
 
 print('-')
 print('Gathering content')
