@@ -323,6 +323,7 @@ contents += load_contents('CEA', 'https://www.centreforeffectivealtruism.org/blo
 contents += load_contents('BenHoffman', 'http://benjaminrosshoffman.com/feed/')
 contents += load_contents('Zvi', 'https://thezvi.wordpress.com/feed/')
 contents += load_contents('GoodEnough', 'https://www.goodenoughanswers.com/blog-feed.xml')
+contents += load_contents('Atis', 'https://atis.substack.com/feed')
 
 print('-')
 print('Gathering content')
