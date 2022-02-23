@@ -342,11 +342,18 @@ links = export_db(cur)
 if links is not None:
     print('-')
     print('Purging broken links')
+    nans_if_any = links[links['id'].astype('str') == 'nan']
+
     broken = links[~links['url'].apply(lambda u: isinstance(u, str) and 'http' in u)]['id']
     lines = len(broken)
     if lines:
         broken = list(filter(lambda x: ~np.isnan(x), broken.values))
         lines = len(broken)
+
+    if len(nans_if_any) > 0:
+        links = links.dropna()
+        lines += 1
+
     if lines == 0:
         print('...No broken links detected')
     else:
