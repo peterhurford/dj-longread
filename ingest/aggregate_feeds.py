@@ -338,36 +338,35 @@ cur = conn.cursor()
 
 print('-')
 print('Data export')
-links = export_db(cur)
+export_db(cur)
 
-if links is not None:
-    print('-')
-    print('Purging broken links')
-    nans_if_any = links[links['id'].astype('str') == 'nan']
+links = pd.read_csv('data/export.csv')
+print('-')
+print('Purging broken links')
+nans_if_any = links[links['id'].astype('str') == 'nan']
 
-    broken = links[~links['url'].apply(lambda u: isinstance(u, str) and 'http' in u)]['id']
+broken = links[~links['url'].apply(lambda u: isinstance(u, str) and 'http' in u)]['id']
+lines = len(broken)
+if lines:
+    broken = list(filter(lambda x: ~np.isnan(x), broken.values))
     lines = len(broken)
-    if lines:
-        broken = list(filter(lambda x: ~np.isnan(x), broken.values))
-        lines = len(broken)
 
-    if len(nans_if_any) > 0:
-        links = links.dropna()
-        lines += 1
+if len(nans_if_any) > 0:
+    links = links.dropna()
+    lines += 1
 
-    if lines == 0:
-        print('...No broken links detected')
-    else:
-        for i, id_ in enumerate(broken):
-            id_ = int(id_)
-            delete_link_row(cur, id_)
-        print('...{} broken links purged!'.format(lines))
+if lines == 0:
+    print('...No broken links detected')
+else:
+    for i, id_ in enumerate(broken):
+        id_ = int(id_)
+        delete_link_row(cur, id_)
+    print('...{} broken links purged!'.format(lines))
 
 print('-')
 print('Calculating links to add')
-if links is not None:
-    existing_urls = set(links['url'].values)
-    contents = [c for c in contents if c[1] not in existing_urls]
+existing_urls = set(links['url'].values)
+contents = [c for c in contents if c[1] not in existing_urls]
 
 lines = len(contents)
 added = []
@@ -375,85 +374,82 @@ if lines == 0:
     print('...No links to add')
 else:
     print('...Adding links to DB')
-    for i, content in enumerate(contents):
-        if content[1] not in added:
-            add_link_row(cur, content)
-            added.append(content[1])
-    print('...{} new links added!'.format(lines))
 
-if links is not None:
-    print('-')
-    print('Purging duplicated')
-    duplicated = links[links['url'].duplicated()]['id']
-    lines = len(duplicated)
-    if lines == 0:
-        print('...No duplicated links detected')
-    else:
-        for i, id_ in enumerate(duplicated):
-            delete_link_row(cur, id_)
-        print('...{} duplicated links purged!'.format(lines))
+for i, content in enumerate(contents):
+    if content[1] not in added:
+        add_link_row(cur, content)
+        added.append(content[1])
+print('...{} new links added!'.format(lines))
 
-if links is not None:
-    print('-')
-    print('Purging old')
-    links['liked'] = links['liked'].apply(lambda x: np.nan if str(x) == '\\N' else str(x).split('.')[0]).astype(float)
-    links['added'] = pd.to_datetime(links['added'], utc=True).dt.tz_localize(None)
-    relative_now = links['added'].max()
-    before_purge_window = relative_now - timedelta(days=PURGE_OLDER_THAN_X_DAYS)
-    purgable = links[(links['aggregator'].apply(lambda a: a in PURGABLE_AGGREGATORS)) &
-                     (links['added'] < before_purge_window) &
-                     (links['liked'] != 0) &
-                     (links['liked'] != 1) &
-                     (links['liked'] != -1)]
-    purgable = purgable['id']
-    lines = len(purgable)
-    if lines == 0:
-        print('...No old-purgable links detected')
-    else:
-        for i, id_ in enumerate(purgable):
-            hide_row(cur, id_)
-        print('...{} old links purged!'.format(lines))
+print('-')
+print('Purging duplicated')
+duplicated = links[links['url'].duplicated()]['id']
+lines = len(duplicated)
+if lines == 0:
+    print('...No duplicated links detected')
+else:
+    for i, id_ in enumerate(duplicated):
+        delete_link_row(cur, id_)
+    print('...{} duplicated links purged!'.format(lines))
 
-if links is not None:
-    print('-')
-    print('Purging long old')
-    links['liked'] = links['liked'].apply(lambda x: np.nan if str(x) == '\\N' else str(x).split('.')[0]).astype(float)
-    links['added'] = pd.to_datetime(links['added'], utc=True).dt.tz_localize(None)
-    relative_now = links['added'].max()
-    before_purge_window = relative_now - timedelta(days=LONG_PURGE_OLDER_THAN_X)
-    purgable = links[(links['aggregator'].apply(lambda a: a in LONG_PURGABLE_AGGREGATORS)) &
-                     (links['added'] < before_purge_window) &
-                     (links['liked'] != 0) &
-                     (links['liked'] != 1) &
-                     (links['liked'] != -1)]
-    purgable = purgable['id']
-    lines = len(purgable)
-    if lines == 0:
-        print('...No long old-purgable links detected')
-    else:
-        for i, id_ in enumerate(purgable):
-            hide_row(cur, id_)
-        print('...{} long old links purged!'.format(lines))
+print('-')
+print('Purging old')
+links['liked'] = links['liked'].apply(lambda x: np.nan if str(x) == '\\N' else str(x).split('.')[0]).astype(float)
+links['added'] = pd.to_datetime(links['added'], utc=True).dt.tz_localize(None)
+relative_now = links['added'].max()
+before_purge_window = relative_now - timedelta(days=PURGE_OLDER_THAN_X_DAYS)
+purgable = links[(links['aggregator'].apply(lambda a: a in PURGABLE_AGGREGATORS)) &
+                 (links['added'] < before_purge_window) &
+                 (links['liked'] != 0) &
+                 (links['liked'] != 1) &
+                 (links['liked'] != -1)]
+purgable = purgable['id']
+lines = len(purgable)
+if lines == 0:
+    print('...No old-purgable links detected')
+else:
+    for i, id_ in enumerate(purgable):
+        hide_row(cur, id_)
+    print('...{} old links purged!'.format(lines))
 
-if links is not None:
-    print('-')
-    print('Purging obsolete')
-    obsolete = links[(links['aggregator'].apply(lambda a: a in OBSOLETE_AGGREGATORS)) &
-                     (links['liked'] != 0) & (links['liked'] != 1) & (links['liked'] != -1)]
-    obsolete_ids = list(obsolete['id'].values)
+print('-')
+print('Purging long old')
+links['liked'] = links['liked'].apply(lambda x: np.nan if str(x) == '\\N' else str(x).split('.')[0]).astype(float)
+links['added'] = pd.to_datetime(links['added'], utc=True).dt.tz_localize(None)
+relative_now = links['added'].max()
+before_purge_window = relative_now - timedelta(days=LONG_PURGE_OLDER_THAN_X)
+purgable = links[(links['aggregator'].apply(lambda a: a in LONG_PURGABLE_AGGREGATORS)) &
+                 (links['added'] < before_purge_window) &
+                 (links['liked'] != 0) &
+                 (links['liked'] != 1) &
+                 (links['liked'] != -1)]
+purgable = purgable['id']
+lines = len(purgable)
+if lines == 0:
+    print('...No long old-purgable links detected')
+else:
+    for i, id_ in enumerate(purgable):
+        hide_row(cur, id_)
+    print('...{} long old links purged!'.format(lines))
 
-    # Kill Yglesias's "X Thread"
-    obsolete = links[(links['aggregator'] == 'Yglesias') & links['title'].apply(lambda t: 'Thread' in str(t)) &
-                     (links['liked'] != 0) & (links['liked'] != 1) & (links['liked'] != -1)]
-    obsolete_ids += list(obsolete['id'].values)
+print('-')
+print('Purging obsolete')
+obsolete = links[(links['aggregator'].apply(lambda a: a in OBSOLETE_AGGREGATORS)) &
+                 (links['liked'] != 0) & (links['liked'] != 1) & (links['liked'] != -1)]
+obsolete_ids = list(obsolete['id'].values)
 
-    lines = len(obsolete_ids)
-    if lines == 0:
-        print('...No obsolete links detected')
-    else:
-        for i, id_ in enumerate(obsolete_ids):
-            hide_row(cur, id_)
-        print('...{} obsolete links purged!'.format(lines))
+# Kill Yglesias's "X Thread"
+obsolete = links[(links['aggregator'] == 'Yglesias') & links['title'].apply(lambda t: 'Thread' in str(t)) &
+                 (links['liked'] != 0) & (links['liked'] != 1) & (links['liked'] != -1)]
+obsolete_ids += list(obsolete['id'].values)
+
+lines = len(obsolete_ids)
+if lines == 0:
+    print('...No obsolete links detected')
+else:
+    for i, id_ in enumerate(obsolete_ids):
+        hide_row(cur, id_)
+    print('...{} obsolete links purged!'.format(lines))
 
 print('-')
 print('Resync IDs')
