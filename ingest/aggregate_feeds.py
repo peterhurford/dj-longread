@@ -325,6 +325,8 @@ contents += load_contents('Zvi', 'https://thezvi.wordpress.com/feed/')
 contents += load_contents('GoodEnough', 'https://www.goodenoughanswers.com/blog-feed.xml')
 contents += load_contents('Atis', 'https://atis.substack.com/feed')
 contents += load_contents('DeNeufville', 'https://tellingthefuture.substack.com/feed')
+contents += load_contents('ThinkingComplete', 'https://thinkingcomplete.blogspot.com/feeds/posts/default',
+                          'entry-link')
 
 print('-')
 print('Gathering content')
