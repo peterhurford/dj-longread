@@ -47,6 +47,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='ChinAI'), then=8),
                           When(Q(aggregator__exact='ImportAI'), then=8),
                           When(Q(aggregator__exact='MLSafety'), then=8),
+                          When(Q(aggregator__exact='Forecasting'), then=8),
                           When(Q(aggregator__exact='Alignment'), then=8),
                           When(Q(aggregator__exact='GlobalGuessing'), then=6),
                           When(Q(aggregator__exact='AI Impacts'), then=6),
