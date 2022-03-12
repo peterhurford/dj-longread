@@ -325,6 +325,7 @@ contents += load_contents('GoodEnough', 'https://www.goodenoughanswers.com/blog-
 contents += load_contents('Atis', 'https://atis.substack.com/feed')
 contents += load_contents('DeNeufville', 'https://tellingthefuture.substack.com/feed')
 contents += load_contents('Gleech', 'https://www.gleech.org/feed.xml')
+contents += load_contents('MLSafety', 'https://newsletter.mlsafety.org/feed')
 contents += load_contents('ThinkingComplete', 'https://thinkingcomplete.blogspot.com/feeds/posts/default',
                           'entry-link')
 
