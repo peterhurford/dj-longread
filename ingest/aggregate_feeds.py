@@ -327,8 +327,10 @@ contents += load_contents('DeNeufville', 'https://tellingthefuture.substack.com/
 contents += load_contents('Forecasting', 'https://forecasting.substack.com/feed')
 contents += load_contents('Gleech', 'https://www.gleech.org/feed.xml')
 contents += load_contents('MLSafety', 'https://newsletter.mlsafety.org/feed')
+contents += load_contents('Ollie', 'https://baserates.medium.com/feed')
 contents += load_contents('ThinkingComplete', 'https://thinkingcomplete.blogspot.com/feeds/posts/default',
-                          'entry-link')
+                          'entry')
+contents += load_contents('Dynomight', 'https://dynomight.net/feed', 'entry')
 
 print('-')
 print('Gathering content')
