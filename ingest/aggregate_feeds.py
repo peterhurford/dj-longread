@@ -331,6 +331,7 @@ contents += load_contents('Ollie', 'https://baserates.medium.com/feed')
 contents += load_contents('ThinkingComplete', 'https://thinkingcomplete.blogspot.com/feeds/posts/default',
                           'entry')
 contents += load_contents('Dynomight', 'https://dynomight.net/feed', 'entry')
+contents += load_contents('ClarifyingConsequences', 'https://clarifyingconsequences.substack.com/feed')
 
 print('-')
 print('Gathering content')
