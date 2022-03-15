@@ -332,6 +332,8 @@ contents += load_contents('ThinkingComplete', 'https://thinkingcomplete.blogspot
                           'entry')
 contents += load_contents('Dynomight', 'https://dynomight.net/feed', 'entry')
 contents += load_contents('ClarifyingConsequences', 'https://clarifyingconsequences.substack.com/feed')
+contents += load_contents('Ziggurat', 'https://ziggurat.substack.com/feed')
+contents += load_contents('Mugwump', 'https://mugwump.substack.com/feed')
 
 print('-')
 print('Gathering content')
