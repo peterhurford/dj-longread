@@ -334,6 +334,7 @@ contents += load_contents('Dynomight', 'https://dynomight.net/feed', 'entry')
 contents += load_contents('ClarifyingConsequences', 'https://clarifyingconsequences.substack.com/feed')
 contents += load_contents('Ziggurat', 'https://ziggurat.substack.com/feed')
 contents += load_contents('Mugwump', 'https://mugwump.substack.com/feed')
+contents += load_contents('Icosian', 'https://blog.rossry.net/rss/')
 
 print('-')
 print('Gathering content')
