@@ -335,6 +335,7 @@ contents += load_contents('ClarifyingConsequences', 'https://clarifyingconsequen
 contents += load_contents('Ziggurat', 'https://ziggurat.substack.com/feed')
 contents += load_contents('Mugwump', 'https://mugwump.substack.com/feed')
 contents += load_contents('Icosian', 'https://blog.rossry.net/rss/')
+contents += load_contents('Dwarkesh', 'https://dwarkeshpatel.com/posts/index.xml')
 
 print('-')
 print('Gathering content')
