@@ -282,15 +282,6 @@ split('</h2>')[0],
                 'https://every.to' + c.split('href="')[1].split('"')[0],
                 name] for c in content]
     return content
-contents += load_contents('Superorganizers', 'https://every.to/superorganizers?sort=newest',
-                          every_reader_fn,
-                          reader_type='xml')
-contents += load_contents('Divinations', 'https://every.to/divinations?sort=newest',
-                          every_reader_fn,
-                          reader_type='xml')
-contents += load_contents('Almanack', 'https://every.to/almanack?sort=newest',
-                          every_reader_fn,
-                          reader_type='xml')
 contents += load_contents('PoliticalKiwi', 'https://politicalkiwi.wordpress.com/feed/')
 contents += load_contents('Taleb', 'https://fooledbyrandomnessdotcom.wordpress.com/feed/')
 contents += load_contents('Taleb', 'https://medium.com/feed/incerto')
