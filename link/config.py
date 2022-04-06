@@ -22,7 +22,7 @@ OBSOLETE_AGGREGATORS = ['GFI', 'Eghbal', 'GWWC', 'GiveDirectly', 'HIPR', 'KenWhi
 
 
 # Metaweights
-PRIORITY_WEIGHT = 10   # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 8    # The lower this number, the more links will be ranked according
                        # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 10       # The lower this number, the more it will be the case that recent
@@ -38,10 +38,9 @@ RANDOM_WEIGHT = 32     # The lower this number, the more it will be the case tha
 # The relative rankings of different aggregators
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                                Q(title__startswith='The Morning'), then=100),
-                          When(Q(aggregator__exact='EAForum'), then=15),
+                          When(Q(aggregator__exact='EAForum'), then=10),
                           When(Q(aggregator__exact='SLW'), then=10),
                           When(Q(aggregator__exact='LW'), then=10),
-                          When(Q(aggregator__exact='SuperOrganizers'), then=10),
                           When(Q(aggregator__exact='Bollard'), then=10),
                           When(Q(aggregator__exact='EALondon'), then=10),
                           When(Q(aggregator__exact='SSC'), then=10),
@@ -50,7 +49,12 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='MLSafety'), then=8),
                           When(Q(aggregator__exact='Forecasting'), then=8),
                           When(Q(aggregator__exact='Alignment'), then=8),
-                          When(Q(aggregator__exact='GlobalGuessing'), then=6),
+                          When(Q(aggregator__exact='FP21'), then=8),
+                          When(Q(aggregator__exact='FPChina'), then=8),
+                          When(Q(aggregator__exact='FWI'), then=8),
+                          When(Q(aggregator__exact='HLI'), then=8),
+                          When(Q(aggregator__exact='CSET'), then=8),
+                          When(Q(aggregator__exact='GlobalGuessing'), then=8),
                           When(Q(aggregator__exact='AI Impacts'), then=6),
                           When(Q(aggregator__exact='ScholarsStage'), then=6),
                           When(Q(aggregator__exact='PoliticalKiwi'), then=6),
@@ -70,7 +74,6 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                           When(Q(aggregator__exact='Guzey'), then=4),
                           When(Q(aggregator__exact='Dispatch'), then=0.5),
                           When(Q(aggregator__exact='HBR'), then=0.5),
-                          When(Q(aggregator__exact='Custom'), then=0.0001),
                           default=1,
                           output_field=FloatField())
 

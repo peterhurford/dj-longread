@@ -328,6 +328,9 @@ contents += load_contents('Mugwump', 'https://mugwump.substack.com/feed')
 contents += load_contents('Icosian', 'https://blog.rossry.net/rss/')
 contents += load_contents('Dwarkesh', 'https://dwarkeshpatel.com/posts/index.xml')
 contents += load_contents('MattLakeman', 'https://mattlakeman.org/feed/')
+contents += load_contents('FP21',
+                          'https://us18.campaign-archive.com/feed?u=75b96a50185221e3874428fc6&id=0232491d26',
+                          'item')
 
 print('-')
 print('Gathering content')
