@@ -333,8 +333,6 @@ contents += load_contents('FP21',
                           'item')
 contents += load_contents('WarOnRocks', 'https://warontherocks.com/feed/')
 def aorn_reader_fn(name, content):
-    import pdb
-    pdb.set_trace()
     content = [str(c).split('"') for c in content.find_all('a')]
     content = [[c[2].replace('</a>', '').replace('>', ''), '/https://1a3orn.com' + c[1], '1a3orn'] for c in content]
     content = content[2:-1]
