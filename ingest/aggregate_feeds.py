@@ -332,6 +332,15 @@ contents += load_contents('FP21',
                           'https://us18.campaign-archive.com/feed?u=75b96a50185221e3874428fc6&id=0232491d26',
                           'item')
 contents += load_contents('WarOnRocks', 'https://warontherocks.com/feed/')
+def aorn_reader_fn(name, content):
+    import pdb
+    pdb.set_trace()
+    content = [str(c).split('"') for c in content.find_all('a')]
+    content = [[c[2].replace('</a>', '').replace('>', ''), '/https://1a3orn.com' + c[1], '1a3orn'] for c in content]
+    content = content[2:-1]
+    content = [c for c in content if 'About' not in c[0] and 'See more' not in c[0]]
+    return content
+contents += load_contents('1a3orn', 'https://1a3orn.com', aorn_reader_fn, reader_type='lxml')
 
 print('-')
 print('Gathering content')
