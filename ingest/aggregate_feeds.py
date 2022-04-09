@@ -339,6 +339,7 @@ def aorn_reader_fn(name, content):
     content = [c for c in content if 'About' not in c[0] and 'See more' not in c[0]]
     return content
 contents += load_contents('1a3orn', 'https://1a3orn.com', aorn_reader_fn, reader_type='lxml')
+contents += load_contents('Metakuna', 'https://metakuna.substack.com/feed')
 
 print('-')
 print('Gathering content')
