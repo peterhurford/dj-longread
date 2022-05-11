@@ -39,7 +39,7 @@ RANDOM_WEIGHT = 32     # The lower this number, the more it will be the case tha
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                                Q(title__startswith='The Morning'), then=100),
                           When(Q(aggregator__exact='EAForum'), then=20),
-                          When(Q(aggregator__exact='LW'), then=20),
+                          When(Q(aggregator__exact='LW'), then=14),
                           When(Q(aggregator__exact='SLW'), then=10),
                           When(Q(aggregator__exact='Bollard'), then=10),
                           When(Q(aggregator__exact='EALondon'), then=10),
