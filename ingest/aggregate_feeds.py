@@ -352,6 +352,7 @@ contents += load_contents('Metakuna', 'https://metakuna.substack.com/feed')
 contents += load_contents('SlimeMold', 'https://slimemoldtimemold.com/feed/')
 contents += load_contents('KateLowry', 'https://medium.com/@kate.lowry/feed')
 contents += load_contents('Nadia', 'https://nadia.xyz/feed')
+contents += load_contents('Nadia', 'https://nayafia.substack.com/feed')
 
 print('-')
 print('Gathering content')
