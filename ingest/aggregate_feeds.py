@@ -344,6 +344,7 @@ contents += load_contents('1a3orn', 'https://1a3orn.com', aorn_reader_fn, reader
 contents += load_contents('Metakuna', 'https://metakuna.substack.com/feed')
 contents += load_contents('SlimeMold', 'https://slimemoldtimemold.com/feed/')
 contents += load_contents('KateLowry', 'https://medium.com/@kate.lowry/feed')
+contents += load_contents('Nadia', 'https://nadia.xyz/feed')
 
 print('-')
 print('Gathering content')
