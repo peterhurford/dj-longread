@@ -146,6 +146,7 @@ def roots_reader_fn(name, content):
     return content
 contents += load_contents('Progress', 'https://rootsofprogress.org/posts',
                           roots_reader_fn, reader_type='lxml')
+contents += load_contents('ProgressFo', 'https://progressforum.org/feed.xml?view=community-rss&karmaThreshold=2')
 
 def graham_reader_fn(name, content):
     content = [str(c).split('"') for c in content.find_all('a')]
