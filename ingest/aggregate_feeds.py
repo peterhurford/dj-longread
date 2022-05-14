@@ -123,7 +123,7 @@ def caplan_reader_fn(name, content):
     return content
 contents += load_contents('Caplan', 'https://www.econlib.org/feed/indexCaplan_xml',
                           caplan_reader_fn)
-contents += load_contents('Caplan', 'https://betonit.blog/feed/')
+contents += load_contents('Caplan', 'https://betonit.substack.com/feed/')
 contents += load_contents('AI Impacts', 'https://aiimpacts.org/feed/')
 contents += load_contents('Ben Kuhn', 'https://www.benkuhn.net/rss/', 'entry')
 
