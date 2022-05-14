@@ -216,8 +216,15 @@ contents += load_contents('NMA', 'https://www.nomeatathlete.com/blog/feed/')
 contents += load_contents('JSMP', 'https://jsmp.dk/index.xml')
 contents += load_contents('JSMP', 'https://medium.com/feed/@jsmp')
 contents += load_contents('AskAM/P', 'https://www.askamathematician.com/feed/')
-contents += load_contents('SVN', 'https://world.hey.com/jason/feed.atom', 'entry')
-contents += load_contents('SVN', 'https://world.hey.com/dhh/feed.atom', 'entry')
+
+def svn_reader_fn(name, content):
+    content = content.find_all('entry')
+    content = [[c.title.get_text() if c.title is not None else 'Blank',
+                str(c.link).split('"')[1], name] for c in content]
+    return content
+contents += load_contents('SVN', 'https://world.hey.com/jason/feed.atom', svn_reader_fn)
+contents += load_contents('SVN', 'https://world.hey.com/dhh/feed.atom', svn_reader_fn)
+
 contents += load_contents('Dispatch', 'https://thedispatch.com/feed')
 contents += load_contents('SSC', 'https://astralcodexten.substack.com/feed')
 contents += load_contents('Yglesias', 'https://www.slowboring.com/feed')
