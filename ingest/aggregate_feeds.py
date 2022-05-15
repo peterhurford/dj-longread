@@ -111,7 +111,7 @@ def load_contents(name, feed, reader_fn='item', return_type='soup', reader_type=
 
 contents = []
 
-contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml?view=community-rss&karmaThreshold=30')
+contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml?view=community-rss&karmaThreshold=50')
 contents += load_contents('EAForum', 'https://forum.effectivealtruism.org/feed.xml?view=community-rss&karmaThreshold=30')
 contents += load_contents('538', 'https://fivethirtyeight.com/politics/feed/')
 contents += load_contents('Lusk', 'http://jaysonlusk.com/blog?format=rss')
