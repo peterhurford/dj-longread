@@ -355,6 +355,8 @@ contents += load_contents('KateLowry', 'https://medium.com/@kate.lowry/feed')
 contents += load_contents('Nadia', 'https://nadia.xyz/feed')
 contents += load_contents('Nadia', 'https://nayafia.substack.com/feed')
 contents += load_contents('RadReads', 'https://radreads.co/feed/')
+contents += load_contents('UnderSun', 'https://www.newthingsunderthesun.com/rss.xml')
+contents += load_contents('FreakTakes', 'https://freaktakes.substack.com/feed')
 
 print('-')
 print('Gathering content')
