@@ -136,6 +136,8 @@ contents += load_contents('Mtlynch.io', 'https://mtlynch.io/feed.xml',
 
 contents += load_contents('Beeminder', 'http://feeds.feedburner.com/bmndr')
 contents += load_contents('Constantin', 'https://srconstantin.wordpress.com/feed/')
+contents += load_contents('Constantin', 'https://sarahconstantin.substack.com/feed')
+contents += load_contents('Constantin', 'https://srconstantin.github.io/feed', 'entry')
 
 def roots_reader_fn(name, content):
     content = content.find_all('li')
