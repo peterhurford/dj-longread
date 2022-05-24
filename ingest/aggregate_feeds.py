@@ -357,6 +357,8 @@ contents += load_contents('Nadia', 'https://nayafia.substack.com/feed')
 contents += load_contents('RadReads', 'https://radreads.co/feed/')
 contents += load_contents('UnderSun', 'https://www.newthingsunderthesun.com/rss.xml')
 contents += load_contents('FreakTakes', 'https://freaktakes.substack.com/feed')
+contents += load_contents('ExperienceMachines', 'https://experiencemachines.wordpress.com/feed')
+contents += load_contents('ExperimentalHistory', 'https://experimentalhistory.substack.com/feed')
 
 print('-')
 print('Gathering content')
