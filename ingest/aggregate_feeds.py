@@ -193,8 +193,6 @@ def mtlynch_reader_fn(name, content):
     content = content.find_all('item')
     content = [[c.title.get_text(), c.guid.get_text(), name] for c in content]
     return content
-contents += load_contents('Mtlynch.io', 'https://mtlynch.io/feed.xml',
-                          mtlynch_reader_fn, reader_type='lxml')
 
 
 def roots_reader_fn(name, content):
@@ -308,6 +306,7 @@ contents += load_contents('Matuschak', 'https://andymatuschak.org/', andy_reader
 contents += load_contents('Metaculus', 'https://www.metaculus.com/news/rss/')
 contents += load_contents('Metakuna', 'https://metakuna.substack.com/feed')
 contents += load_contents('MLSafety', 'https://newsletter.mlsafety.org/feed')
+contents += load_contents('Mtlynch.io', 'https://mtlynch.io/feed.xml', mtlynch_reader_fn, reader_type='lxml')
 contents += load_contents('Muehlhauser', 'http://feeds.feedburner.com/LukeMuehlhauser', 'entry')
 contents += load_contents('Mugwump', 'https://mugwump.substack.com/feed')
 contents += load_contents('NatEliason', 'https://www.nateliason.com/blog', eliason_reader_fn, reader_type='lxml')

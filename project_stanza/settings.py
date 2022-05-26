@@ -1,5 +1,4 @@
 import os
-import logging, logging.config
 import django_heroku
 import dj_database_url
 
