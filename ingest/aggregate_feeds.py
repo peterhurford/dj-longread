@@ -59,22 +59,22 @@ def hide_row(cur, id_):
 def entry_process_fn(name, content):
     content = content.find_all('entry')
     content = [[c.title.get_text() if c.title is not None else 'Blank',
-                c.id.get_text() if c.id is not None else '', name] for c in content]
+        c.id.get_text() if c.id is not None else '', name] for c in content]
     return content
 
 
 def item_process_fn(name, content):
     content = content.find_all('item')
     content = [[c.title.get_text() if c.title is not None else 'Blank',
-                c.link.get_text() if c.link is not None else '', name] for c in content]
+        c.link.get_text() if c.link is not None else '', name] for c in content]
     return content
 
 
 def entry_link_process_fn(name, content):
     content = content.find_all('entry')
     content = [[c.title.get_text() if c.title is not None else 'Blank',
-                str(c.find_all('link')[-1]).split('"')[1] if c.link is not None else '',
-                name] for c in content]
+        str(c.find_all('link')[-1]).split('"')[1] if c.link is not None else '',
+        name] for c in content]
     return content
 
 
@@ -118,8 +118,6 @@ def andy_reader_fn(name, content):
     content = [['Matuschak', c[1].replace('</p>', '').replace('</a>', '').replace('><h3>', '').replace('</h3><p>', ': ').replace('>', ''), c[0]] for c in content]
     content = [[c[1], 'https://andymatuschak.org' + c[2] if 'http' not in c[2] else c[2], c[0]] for c in content]
     return content
-contents += load_contents('Matuschak', 'https://andymatuschak.org/', andy_reader_fn,
-                          reader_type='lxml')
 
 
 def aorn_reader_fn(name, content):
@@ -141,16 +139,12 @@ def eliason_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'blog-page-heading' in str(c)]
     content = [[c[6].replace('</h2><p class=', '').replace('>', ''), 'https://www.nateliason.com' + c[3], 'NatEliason'] for c in [c.split('"') for c in content]]
     return content
-contents += load_contents('NatEliason', 'https://www.nateliason.com/blog', eliason_reader_fn,
-                          reader_type='lxml')
 
 
 def eliason_book_reader_fn(name, content):
     content = [str(c) for c in content.find_all('p') if '/notes' in str(c)]
     content = [['Book Notes: ' + c[2].split('</a>')[0].replace('>', ''), 'https://www.nateliason.com' + c[1], 'NatEliason'] for c in [c.split('"') for c in content]]
     return content
-contents += load_contents('NatEliason', 'https://www.nateliason.com/notes',
-                          eliason_book_reader_fn, reader_type='lxml')
 
 
 def every_reader_fn(name, content):
@@ -310,11 +304,14 @@ contents += load_contents('Lusk', 'http://jaysonlusk.com/blog?format=rss')
 contents += load_contents('LW', 'https://www.lesswrong.com/feed.xml?view=community-rss&karmaThreshold=50')
 contents += load_contents('MattBell', 'https://www.mattbell.us/rss/')
 contents += load_contents('MattLakeman', 'https://mattlakeman.org/feed/')
+contents += load_contents('Matuschak', 'https://andymatuschak.org/', andy_reader_fn, reader_type='lxml')
 contents += load_contents('Metaculus', 'https://www.metaculus.com/news/rss/')
 contents += load_contents('Metakuna', 'https://metakuna.substack.com/feed')
 contents += load_contents('MLSafety', 'https://newsletter.mlsafety.org/feed')
 contents += load_contents('Muehlhauser', 'http://feeds.feedburner.com/LukeMuehlhauser', 'entry')
 contents += load_contents('Mugwump', 'https://mugwump.substack.com/feed')
+contents += load_contents('NatEliason', 'https://www.nateliason.com/blog', eliason_reader_fn, reader_type='lxml')
+contents += load_contents('NatEliason', 'https://www.nateliason.com/notes', eliason_book_reader_fn, reader_type='lxml')
 contents += load_contents('Nadia', 'https://nadia.xyz/feed')
 contents += load_contents('Nadia', 'https://nayafia.substack.com/feed')
 contents += load_contents('NeelNanda', 'https://www.neelnanda.io/blog?format=rss')
