@@ -348,6 +348,7 @@ contents += load_contents('UnderSun', 'https://www.newthingsunderthesun.com/rss.
 contents += load_contents('VanNostrand', 'https://acesounderglass.com/feed/')
 contents += load_contents('WarOnRocks', 'https://warontherocks.com/feed/')
 contents += load_contents('Wilkinson', 'https://modelcitizen.substack.com/feed')
+contents += load_contents('WorksInProgress', 'https://www.worksinprogress.co/feed/')
 contents += load_contents('WorldInData', 'https://ourworldindata.org/atom.xml', 'entry')
 contents += load_contents('WTB', 'https://medium.com/feed/what-to-build')
 contents += load_contents('Yglesias', 'https://www.slowboring.com/feed')
