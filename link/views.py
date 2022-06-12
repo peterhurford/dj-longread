@@ -116,6 +116,7 @@ class UpcomingListView(LoginRequiredMixin, CustomListViewMixin):
         context['liked_count'] = (queryset.exclude(liked__isnull=True)
                                                    .filter(modified__gte=today)
                                                    .exclude(liked__exact=0)
+                                                   .exclude(liked__exact=-1)
                                                    .count())
         return context
 
