@@ -22,13 +22,13 @@ OBSOLETE_AGGREGATORS = ['GFI', 'Eghbal', 'GWWC', 'GiveDirectly', 'HIPR', 'KenWhi
 
 
 # Metaweights
-PRIORITY_WEIGHT = 8    # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 9    # The lower this number, the more links will be ranked according
                        # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 10       # The lower this number, the more it will be the case that recent
                        # links show up first
 
-RANDOM_WEIGHT = 32     # The lower this number, the more it will be the case that links will
+RANDOM_WEIGHT = 30     # The lower this number, the more it will be the case that links will
                        # show up in a random order, disregarding recenty or aggregator weights
 
 # Equation for ranking = 1 + (aggregator weight / PRIORITY_WEIGHT) +
@@ -39,7 +39,7 @@ RANDOM_WEIGHT = 32     # The lower this number, the more it will be the case tha
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
                                Q(title__startswith='The Morning'), then=100),
                           When(Q(aggregator__exact='EAForum'), then=20),
-                          When(Q(aggregator__exact='LW'), then=14),
+                          When(Q(aggregator__exact='LW'), then=10),
                           When(Q(aggregator__exact='SLW'), then=10),
                           When(Q(aggregator__exact='Bollard'), then=10),
                           When(Q(aggregator__exact='EALondon'), then=10),
