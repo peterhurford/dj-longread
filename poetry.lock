@@ -264,17 +264,6 @@ botocore = ">=1.12.36,<2.0a.0"
 futures = ">=2.2.0,<4.0.0"
 
 [[package]]
-name = "scipy"
-version = "1.4.1"
-description = "SciPy: Scientific Library for Python"
-category = "main"
-optional = false
-python-versions = ">=3.5"
-
-[package.dependencies]
-numpy = ">=1.13.3"
-
-[[package]]
 name = "six"
 version = "1.15.0"
 description = "Python 2 and 3 compatibility utilities"
