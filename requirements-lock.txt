@@ -141,7 +141,7 @@ Pillow==8.0.1
 pkginfo==1.6.1
 platformdirs==2.4.1
 plotnine==0.6.0
-poetry==1.0.5
+poetry==1.1.9
 poetry-core==1.0.0
 prometheus-client==0.8.0
 prompt-toolkit==3.0.8
