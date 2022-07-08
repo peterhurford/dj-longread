@@ -38,7 +38,7 @@ country-converter==0.6.7
 crashtest==0.3.1
 cryptography==3.3.1
 cssselect==1.1.0
-cvxopt==1.2.5
+cvxopt==1.2.7
 cycler==0.10.0
 decorator==4.4.2
 defusedxml==0.6.0
