@@ -180,7 +180,6 @@ rfc3986==1.4.0
 rsa==4.6
 s3transfer @ file:///Users/peterhurford/Library/Caches/pypoetry/artifacts/6b/c7/58/1aed9dbe74f228d78b9584e09cfb29b03cb2428d9c7a0c2e4d204b9faf/s3transfer-0.3.3-py2.py3-none-any.whl
 scikit-learn==0.24.1
-scipy==1.5.2
 Scrapy @ file:///Users/peterhurford/dev/scrapy
 seaborn==0.10.0
 Send2Trash==1.5.0
