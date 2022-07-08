@@ -11,7 +11,7 @@ astunparse==1.6.3
 async-generator==1.10
 attrs==20.2.0
 Automat==20.2.0
-Babel==2.9.0
+Babel==2.9.1
 backcall==0.2.0
 backports.cached-property==1.0.0.post2
 bayesian-optimization==1.2.0
