@@ -137,7 +137,7 @@ pathspec==0.9.0
 patsy==0.5.1
 pexpect==4.8.0
 pickleshare==0.7.5
-Pillow==8.0.1
+Pillow==9.0.1
 pkginfo==1.6.1
 platformdirs==2.4.1
 plotnine==0.6.0
