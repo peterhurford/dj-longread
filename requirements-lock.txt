@@ -156,7 +156,7 @@ pycodestyle==2.8.0
 pycparser==2.20
 PyDispatcher==2.0.5
 pyflakes==2.4.0
-Pygments==2.7.2
+Pygments==2.7.4
 PyHamcrest==2.0.2
 PyInputPlus==0.2.12
 PyJWT==2.4.0
