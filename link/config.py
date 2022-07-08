@@ -7,7 +7,7 @@ PURGABLE_AGGREGATORS = ['Dispatch', 'FPSecurity', 'FPChina', '538', 'ChinAI', 'I
 PURGE_OLDER_THAN_X_DAYS = 14  # For PURGABLE_AGGREGATORS, remove links older than this (in days)
 
 
-# Purge old articles after 14 days if they come from these aggregators
+# Purge old articles after 90 days if they come from these aggregators
 LONG_PURGABLE_AGGREGATORS = ['LW', 'EAForum', 'AskManager', 'SLW', 'CSET', 'Caplan',
                              'Sumner', 'GEMorris', 'Lusk', 'TSNR', 'GlobalGuessing',
                              'SplitTicket', 'Intelligencer', 'Guzey', 'HLI', 'EALondon',
@@ -36,8 +36,7 @@ RANDOM_WEIGHT = 30     # The lower this number, the more it will be the case tha
 
 
 # The relative rankings of different aggregators
-AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch') &
-                               Q(title__startswith='The Morning'), then=100),
+AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='EAForum'), then=20),
                           When(Q(aggregator__exact='LW'), then=10),
                           When(Q(aggregator__exact='SLW'), then=10),
