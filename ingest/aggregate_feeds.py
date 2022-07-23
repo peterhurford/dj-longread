@@ -339,6 +339,7 @@ contents += load_contents('SVN', 'https://world.hey.com/dhh/feed.atom', svn_read
 contents += load_contents('SVN', 'https://world.hey.com/jason/feed.atom', svn_reader_fn)
 contents += load_contents('Taleb', 'https://fooledbyrandomnessdotcom.wordpress.com/feed/')
 contents += load_contents('Taleb', 'https://medium.com/feed/incerto')
+contents += load_contents('ThingOfThings', 'https://thingofthings.substack.com/feed')
 contents += load_contents('ThinkingComplete', 'https://thinkingcomplete.blogspot.com/feeds/posts/default', svn_reader_fn)
 contents += load_contents('TIB', 'https://s3.amazonaws.com/revue/accounts/rss_feeds/000/033/453/original/rss_feed_33453.xml?1632204004')
 contents += load_contents('Trammell', 'https://philiptrammell.com/blog/feed')
