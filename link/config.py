@@ -37,8 +37,6 @@ RANDOM_WEIGHT = 30     # The lower this number, the more it will be the case tha
 
 # The relative rankings of different aggregators
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
-                          When(Q(aggregator__exact='EAForum'), then=8),
-                          When(Q(aggregator__exact='LW'), then=8),
                           When(Q(aggregator__exact='SLW'), then=8),
                           When(Q(aggregator__exact='Bollard'), then=8),
                           When(Q(aggregator__exact='EALondon'), then=8),
@@ -55,6 +53,8 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='CSET'), then=8),
                           When(Q(aggregator__exact='GlobalGuessing'), then=8),
                           When(Q(aggregator__exact='AI Impacts'), then=8),
+                          When(Q(aggregator__exact='EAForum'), then=6),
+                          When(Q(aggregator__exact='LW'), then=6),
                           When(Q(aggregator__exact='ScholarsStage'), then=6),
                           When(Q(aggregator__exact='PoliticalKiwi'), then=6),
                           When(Q(aggregator__exact='WorldInData'), then=6),
