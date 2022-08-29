@@ -22,13 +22,13 @@ OBSOLETE_AGGREGATORS = ['GFI', 'Eghbal', 'GWWC', 'GiveDirectly', 'HIPR', 'KenWhi
 
 
 # Metaweights
-PRIORITY_WEIGHT = 14   # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 15   # The lower this number, the more links will be ranked according
                        # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 10       # The lower this number, the more it will be the case that recent
                        # links show up first
 
-RANDOM_WEIGHT = 30     # The lower this number, the more it will be the case that links will
+RANDOM_WEIGHT = 33     # The lower this number, the more it will be the case that links will
                        # show up in a random order, disregarding recenty or aggregator weights
 
 # Equation for ranking = 1 + (aggregator weight / PRIORITY_WEIGHT) +
@@ -71,7 +71,6 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='FPSouthAsia'), then=4),
                           When(Q(aggregator__exact='FP-WYWL'), then=4),
                           When(Q(aggregator__exact='Guzey'), then=4),
-                          When(Q(aggregator__exact='Dispatch'), then=0.5),
                           When(Q(aggregator__exact='HBR'), then=0.5),
                           default=1,
                           output_field=FloatField())
