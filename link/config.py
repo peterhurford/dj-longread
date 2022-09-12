@@ -3,7 +3,7 @@ from django.db.models import Case, When, Q, FloatField
 
 # Purge old articles after 14 days if they come from these aggregators
 PURGABLE_AGGREGATORS = ['Dispatch', 'FPSecurity', 'FPChina', '538', 'ChinAI', 'ImportAI',
-                        'Alignment', 'TIB', 'Schneier', 'Yglesias', 'MLSafety', 'EAForum', 'LW']
+                        'Alignment', 'TIB', 'Schneier', 'Yglesias', 'MLSafety']
 PURGE_OLDER_THAN_X_DAYS = 14  # For PURGABLE_AGGREGATORS, remove links older than this (in days)
 
 
