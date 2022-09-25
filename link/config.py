@@ -11,7 +11,7 @@ PURGE_OLDER_THAN_X_DAYS = 14  # For PURGABLE_AGGREGATORS, remove links older tha
 LONG_PURGABLE_AGGREGATORS = ['AskManager', 'SLW', 'CSET', 'Caplan',
                              'Sumner', 'GEMorris', 'Lusk', 'TSNR', 'GlobalGuessing',
                              'SplitTicket', 'Intelligencer', 'Guzey', 'HLI', 'EALondon',
-                             'CEA']
+                             'CEA', 'AlignmnentForum']
 LONG_PURGE_OLDER_THAN_X = 30*2  # For LONG_PURGABLE_AGGREGATORS, remove links older than this (in days)
 
 
