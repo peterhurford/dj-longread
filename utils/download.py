@@ -12,7 +12,7 @@ def file_name_from_url(url):
     return file_name
 
 
-def read(url, return_type='text', reader_type='lxml'):
+def read(url, return_type='text', reader_type='lxml', timeout=10):
     error = False
     output = None
     response = None
@@ -37,7 +37,7 @@ def read(url, return_type='text', reader_type='lxml'):
                'Connection': 'keep-alive'}
         try:
             req = request.Request(url, headers=hdr)
-            response = request.urlopen(req, timeout=10)
+            response = request.urlopen(req, timeout=timeout)
             msg = 'Success'
         except Exception as e:
             msg = str(e)
