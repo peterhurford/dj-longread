@@ -189,12 +189,6 @@ def guzey_link_reader_fn(name, content):
     return content
 
 
-def mtlynch_reader_fn(name, content):
-    content = content.find_all('item')
-    content = [[c.title.get_text(), c.guid.get_text(), name] for c in content]
-    return content
-
-
 def roots_reader_fn(name, content):
     content = content.find_all('li')
     content = [c.find_all('a') for c in content]
@@ -245,7 +239,7 @@ contents += load_contents('Bollard', 'https://us14.campaign-archive.com/feed?u=6
 contents += load_contents('BreadFixer', 'https://medium.com/feed/@breadpricefixer')
 contents += load_contents('Caplan', 'https://betonit.substack.com/feed/')
 contents += load_contents('Caplan', 'https://www.econlib.org/feed/indexCaplan_xml', caplan_reader_fn)
-contents += load_contents('Carlsmith', 'https://handsandcities.com/feed/')
+contents += load_contents('Carlsmith', 'https://joecarlsmith.com/rss.xml')
 contents += load_contents('CEA', 'https://www.centreforeffectivealtruism.org/blog.xml')
 contents += load_contents('ChinAI', 'https://chinai.substack.com/feed')
 contents += load_contents('ClarifyingConsequences', 'https://clarifyingconsequences.substack.com/feed')
@@ -264,7 +258,7 @@ contents += load_contents('Dispatch', 'https://thedispatch.com/newsletter/mornin
 contents += load_contents('Dwarkesh', 'https://www.dwarkeshpatel.com/feed')
 contents += load_contents('Dynomight', 'https://dynomight.net/feed', 'entry')
 contents += load_contents('EALondon', 'https://us5.campaign-archive.com/feed?u=7438f1bb80988376e9cae8c11&id=182579324a')
-contents += load_contents('Elad', 'http://blog.eladgil.com/feeds/posts/default', 'entry-link')
+contents += load_contents('Elad', 'https://blog.eladgil.com/feed')
 contents += load_contents('ExperienceMachines', 'https://experiencemachines.wordpress.com/feed')
 contents += load_contents('ExperimentalHistory', 'https://experimentalhistory.substack.com/feed')
 contents += load_contents('FakeNous', 'https://fakenous.substack.com/feed')
@@ -306,7 +300,7 @@ contents += load_contents('Matuschak', 'https://andymatuschak.org/', andy_reader
 contents += load_contents('Metaculus', 'https://www.metaculus.com/news/rss/')
 contents += load_contents('Metakuna', 'https://metakuna.substack.com/feed')
 contents += load_contents('MLSafety', 'https://newsletter.mlsafety.org/feed')
-contents += load_contents('Mtlynch.io', 'https://mtlynch.io/feed.xml', mtlynch_reader_fn, reader_type='lxml')
+contents += load_contents('Mtlynch.io', 'https://mtlynch.io/posts/index.xml')
 contents += load_contents('Muehlhauser', 'http://feeds.feedburner.com/LukeMuehlhauser', 'entry')
 contents += load_contents('Mugwump', 'https://mugwump.substack.com/feed')
 contents += load_contents('NatEliason', 'https://www.nateliason.com/blog', eliason_reader_fn, reader_type='lxml')
@@ -326,7 +320,6 @@ contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/')
 contents += load_contents('Progress', 'https://rootsofprogress.org/posts', roots_reader_fn, reader_type='lxml')
 contents += load_contents('ProgressFo', 'https://progressforum.org/feed.xml?view=community-rss&karmaThreshold=2')
 contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/')
-contents += load_contents('RadReads', 'https://radreads.co/feed/')
 contents += load_contents('SamAltman', 'http://blog.samaltman.com/posts.atom', 'entry-link')
 contents += load_contents('ScholarsStage', 'https://scholars-stage.org/feed/')
 contents += load_contents('Schubert', 'https://stefanfschubert.com/blog?format=rss')
