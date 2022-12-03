@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'project_stanza.urls'
+ROOT_URLCONF = 'djlongread.urls'
 
 TEMPLATES = [
     {
@@ -60,7 +60,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'project_stanza.wsgi.application'
+WSGI_APPLICATION = 'djlongread.wsgi.application'
 
 
 DATABASES = {}

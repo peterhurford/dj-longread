@@ -1,2 +1,2 @@
-release: python manage.py migrate
-web: gunicorn project_stanza.wsgi --log-file -
+release: pip install -r requirements.txt && python manage.py migrate
+web: gunicorn djlongread.wsgi --log-file -

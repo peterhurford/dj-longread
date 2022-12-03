@@ -6,6 +6,5 @@ django-heroku
 gunicorn
 lxml
 pandas
-poetry
 psycopg2-binary
 requests

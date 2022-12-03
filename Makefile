@@ -2,7 +2,7 @@
 
 .PHONY: run
 run: ## Run Django
-	poetry run python manage.py runserver
+	python manage.py runserver
 
 .PHONY: pipeline
 pipeline: ## Run the full pipeline on Heroku
@@ -10,17 +10,7 @@ pipeline: ## Run the full pipeline on Heroku
 
 .PHONY: migrate
 migrate: ## Run Django migrations
-	poetry run python manage.py makemigrations && python manage.py makemigrations link && poetry run python manage.py migrate
-
-.PHONY: setup
-setup: ## Install Python deps
-	pip install poetry
-	poetry update
-	poetry install
-
-.PHONY: build
-build: ## Build package
-	poetry build
+	python manage.py makemigrations && python manage.py makemigrations link && python manage.py migrate
 
 .PHONY: update
 update: ## Update the DB with the latest articles pulled from RSS
