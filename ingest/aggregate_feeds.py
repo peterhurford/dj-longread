@@ -283,6 +283,7 @@ contents += load_contents('GoodEnough', 'https://www.goodenoughanswers.com/blog-
 contents += load_contents('GPI', 'https://globalprioritiesinstitute.org/feed/')
 contents += load_contents('GPI', 'https://globalprioritiesinstitute.org/feed/')
 contents += load_contents('Graham', 'http://paulgraham.com/articles.html', graham_reader_fn, reader_type='lxml')
+contents += load_contents('Grunewald', 'https://www.erichgrunewald.com/feed.xml', 'entry')
 contents += load_contents('Guzey', 'https://bestoftwitter.substack.com/feed')
 contents += load_contents('Guzey', 'https://guzey.com/', guzey_reader_fn)
 contents += load_contents('Guzey', 'https://guzey.com/links/', guzey_link_reader_fn, reader_type='lxml')
