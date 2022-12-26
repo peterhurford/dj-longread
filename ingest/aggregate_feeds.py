@@ -297,7 +297,6 @@ contents += load_contents('INFERPub', 'https://us1.campaign-archive.com/feed/?u=
 contents += load_contents('Intelligencer', 'https://nymag.com/rss/Intelligencer.xml')
 contents += load_contents('JeffKauffman', 'https://www.jefftk.com/news.rss')
 contents += load_contents('JSMP', 'https://jsmp.dk/index.xml')
-contents += load_contents('JSMP', 'https://medium.com/feed/@jsmp')
 contents += load_contents('JuliaWise', 'https://juliawise.net/feed/')
 contents += load_contents('KateLowry', 'https://medium.com/@kate.lowry/feed')
 contents += load_contents('Katja', 'https://worldspiritsockpuppet.com/feed.xml', 'entry')
