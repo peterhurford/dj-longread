@@ -308,6 +308,7 @@ contents += load_contents('Matuschak', 'https://andymatuschak.org/', andy_reader
 contents += load_contents('Metaculus', 'https://www.metaculus.com/news/rss/')
 contents += load_contents('Metakuna', 'https://metakuna.substack.com/feed')
 contents += load_contents('MLSafety', 'https://newsletter.mlsafety.org/feed')
+contents += load_contents('Moynihan', 'https://donmoynihan.substack.com/feed')
 contents += load_contents('Mtlynch.io', 'https://mtlynch.io/posts/index.xml')
 contents += load_contents('Muehlhauser', 'http://feeds.feedburner.com/LukeMuehlhauser', 'entry')
 contents += load_contents('Mugwump', 'https://mugwump.substack.com/feed')
