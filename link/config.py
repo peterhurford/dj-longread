@@ -22,7 +22,7 @@ OBSOLETE_AGGREGATORS = ['GFI', 'Eghbal', 'GWWC', 'GiveDirectly', 'HIPR', 'KenWhi
 
 
 # Metaweights
-PRIORITY_WEIGHT = 15   # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 12   # The lower this number, the more links will be ranked according
                        # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 10       # The lower this number, the more it will be the case that recent
