@@ -11,7 +11,7 @@ PURGE_OLDER_THAN_X_DAYS = 14  # For PURGABLE_AGGREGATORS, remove links older tha
 LONG_PURGABLE_AGGREGATORS = ['AskManager', 'SLW', 'CSET', 'Caplan',
                              'Sumner', 'GEMorris', 'Lusk', 'TSNR', 'GlobalGuessing',
                              'SplitTicket', 'Intelligencer', 'Guzey', 'HLI', 'EALondon',
-                             'CEA', 'AlignmnentForum']
+                             'CEA', 'AlignmnentForum', 'Zvi']
 LONG_PURGE_OLDER_THAN_X = 30*2  # For LONG_PURGABLE_AGGREGATORS, remove links older than this (in days)
 
 
@@ -45,31 +45,20 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='ImportAI'), then=8),
                           When(Q(aggregator__exact='MLSafety'), then=8),
                           When(Q(aggregator__exact='Forecasting'), then=8),
-                          When(Q(aggregator__exact='Alignment'), then=8),
                           When(Q(aggregator__exact='FP21'), then=8),
                           When(Q(aggregator__exact='FPChina'), then=8),
                           When(Q(aggregator__exact='FWI'), then=8),
-                          When(Q(aggregator__exact='HLI'), then=8),
-                          When(Q(aggregator__exact='CSET'), then=8),
+                          When(Q(aggregator__exact='Zvi'), then=8),
                           When(Q(aggregator__exact='GlobalGuessing'), then=8),
                           When(Q(aggregator__exact='AI Impacts'), then=8),
+                          When(Q(aggregator__exact='Holden'), then=8),
                           When(Q(aggregator__exact='ScholarsStage'), then=6),
-                          When(Q(aggregator__exact='PoliticalKiwi'), then=6),
-                          When(Q(aggregator__exact='WorldInData'), then=6),
-                          When(Q(aggregator__exact='80K'), then=6),
-                          When(Q(aggregator__exact='CEA'), then=6),
-                          When(Q(aggregator__exact='Holden'), then=6),
-                          When(Q(aggregator__exact='Lusk'), then=4),
-                          When(Q(aggregator__exact='Guzey'), then=4),
-                          When(Q(aggregator__exact='HLI'), then=4),
-                          When(Q(aggregator__exact='Noah'), then=4),
+                          When(Q(aggregator__exact='Noah'), then=6),
                           When(Q(aggregator__exact='FPMorning'), then=4),
                           When(Q(aggregator__exact='FPSecurity'), then=4),
                           When(Q(aggregator__exact='FPChina'), then=4),
                           When(Q(aggregator__exact='FPSouthAsia'), then=4),
                           When(Q(aggregator__exact='FP-WYWL'), then=4),
-                          When(Q(aggregator__exact='Guzey'), then=4),
-                          When(Q(aggregator__exact='HBR'), then=0.5),
                           default=1,
                           output_field=FloatField())
 
