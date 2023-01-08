@@ -324,6 +324,7 @@ contents += load_contents('Noah', 'http://noahpinionblog.blogspot.com/feeds/post
 contents += load_contents('Noah', 'https://noahpinion.substack.com/feed')
 contents += load_contents('Noah', 'https://www.bloomberg.com/opinion/authors/AR3OYuAmvcU/noah-smith.rss')
 contents += load_contents('nostalgebraist', 'https://nostalgebraist.tumblr.com/rss')
+contents += load_contents('Numinous', 'https://nwilliams030.substack.com/feed')
 contents += load_contents('Ollie', 'https://baserates.medium.com/feed')
 contents += load_contents('Ollie', 'https://baseratesblog.substack.com/feed')
 contents += load_contents('PhilosophyEtc', 'https://rychappell.substack.com/feed')
