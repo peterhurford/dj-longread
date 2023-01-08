@@ -333,6 +333,7 @@ contents += load_contents('PriceTheory', 'https://pricetheory.substack.com/feed'
 contents += load_contents('Progress', 'https://rootsofprogress.org/posts', roots_reader_fn, reader_type='lxml')
 contents += load_contents('ProgressFo', 'https://progressforum.org/feed.xml?view=community-rss&karmaThreshold=2')
 contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/')
+contents += load_contents('RiversInfect', 'https://caitlinrivers.substack.com/feed')
 contents += load_contents('SamAltman', 'http://blog.samaltman.com/posts.atom', 'entry-link')
 contents += load_contents('ScholarsStage', 'https://scholars-stage.org/feed/')
 contents += load_contents('Schubert', 'https://stefanfschubert.com/blog?format=rss')
@@ -358,6 +359,7 @@ contents += load_contents('WorksInProgress', 'https://www.worksinprogress.co/fee
 contents += load_contents('WorldInData', 'https://ourworldindata.org/atom.xml', 'entry')
 contents += load_contents('WTB', 'https://medium.com/feed/what-to-build')
 contents += load_contents('Yglesias', 'https://www.slowboring.com/feed')
+contents += load_contents('YLEpi', 'https://yourlocalepidemiologist.substack.com/feed/')
 contents += load_contents('Ziggurat', 'https://ziggurat.substack.com/feed')
 contents += load_contents('Zvi', 'https://thezvi.wordpress.com/feed/')
 
