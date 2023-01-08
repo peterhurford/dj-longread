@@ -334,6 +334,7 @@ contents += load_contents('Progress', 'https://rootsofprogress.org/posts', roots
 contents += load_contents('ProgressFo', 'https://progressforum.org/feed.xml?view=community-rss&karmaThreshold=2')
 contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/')
 contents += load_contents('RiversInfect', 'https://caitlinrivers.substack.com/feed')
+contents += load_contents('Salonium', 'https://salonium.substack.com/feed')
 contents += load_contents('SamAltman', 'http://blog.samaltman.com/posts.atom', 'entry-link')
 contents += load_contents('ScholarsStage', 'https://scholars-stage.org/feed/')
 contents += load_contents('Schubert', 'https://stefanfschubert.com/blog?format=rss')
