@@ -135,14 +135,6 @@ def caplan_reader_fn(name, content):
     return content
 
 
-def dispatch_reader_fn(name, content):
-    content = [str(c) for c in content.find_all('a')]
-    content = [c for c in content if 'newsletter/morning/' in c and '\n' in c]
-    content = [c.split('"')[3] for c in content]
-    content = [[c.split('/')[-2].replace('-', ' ').title(), c, 'Dispatch'] for c in content]
-    return content
-
-
 def eliason_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'blog-page-heading' in str(c)]
     content = [[c[6].replace('</h2><p class=', '').replace('>', ''), 'https://www.nateliason.com' + c[3], 'NatEliason'] for c in [c.split('"') for c in content]]
@@ -263,7 +255,7 @@ contents += load_contents('Danluu', 'https://danluu.com/atom.xml')
 contents += load_contents('DanWahl', 'https://danwahl.net/atom.xml', 'entry')
 contents += load_contents('DataColada', 'https://datacolada.org/feed')
 contents += load_contents('DeNeufville', 'https://tellingthefuture.substack.com/feed')
-contents += load_contents('Dispatch', 'https://thedispatch.com/newsletter/morning/', dispatch_reader_fn, reader_type='lxml')
+contents += load_contents('Dispatch', 'https://thedispatch.com/feed/?newsletter-brands=morning')
 contents += load_contents('Dwarkesh', 'https://www.dwarkeshpatel.com/feed')
 contents += load_contents('Dynomight', 'https://dynomight.net/feed', 'entry')
 contents += load_contents('EALondon', 'https://us5.campaign-archive.com/feed?u=7438f1bb80988376e9cae8c11&id=182579324a')
