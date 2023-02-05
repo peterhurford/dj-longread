@@ -16,9 +16,7 @@ LONG_PURGE_OLDER_THAN_X = 30*2  # For LONG_PURGABLE_AGGREGATORS, remove links ol
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['GFI', 'Eghbal', 'GWWC', 'GiveDirectly', 'HIPR', 'KenWhite',
-                        'YaschaMounk', 'Rosie', 'deBoer', 'Superorganizers', 'Divinations',
-                        'Almanack', 'SlimeMoldTimeMold', 'WTB', 'INFERPub', 'Dispatch']
+OBSOLETE_AGGREGATORS = ['Hanson', 'Guzey']
 
 
 # Metaweights
