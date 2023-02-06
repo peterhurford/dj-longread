@@ -189,15 +189,6 @@ def guzey_link_reader_fn(name, content):
     return content
 
 
-def roots_reader_fn(name, content):
-    content = content.find_all('li')
-    content = [c.find_all('a') for c in content]
-    content = [str(c).split('"')[3:5] for c in content]
-    content = [[c[1].replace('</a>', '').replace('>', ''),
-                  'http://www.rootsofprogress.org' + c[0], 'Progress'] for c in content]
-    return content
-
-
 def slw_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'Issue' in str(c)]
     content = [['Software Lead Weekly ' + c[-1].replace('></path></svg>', '').replace('</a>', ''), 'https://softwareleadweekly.com' + c[3], 'SLW'] for c in [c.split('"') for c in content]]
@@ -319,8 +310,6 @@ contents += load_contents('PhilosophyEtc', 'https://rychappell.substack.com/feed
 contents += load_contents('PoliticalKiwi', 'https://politicalkiwi.wordpress.com/feed/')
 contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/')
 contents += load_contents('PriceTheory', 'https://pricetheory.substack.com/feed')
-contents += load_contents('Progress', 'https://rootsofprogress.org/posts', roots_reader_fn, reader_type='lxml')
-contents += load_contents('ProgressFo', 'https://progressforum.org/feed.xml?view=community-rss&karmaThreshold=2')
 contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/')
 contents += load_contents('RiversInfect', 'https://caitlinrivers.substack.com/feed')
 contents += load_contents('Salonium', 'https://salonium.substack.com/feed')
