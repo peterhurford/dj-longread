@@ -20,13 +20,13 @@ OBSOLETE_AGGREGATORS = ['Hanson', 'Guzey', 'Progress', 'ProgressFo', 'WarOnRocks
 
 
 # Metaweights
-PRIORITY_WEIGHT = 12   # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 10   # The lower this number, the more links will be ranked according
                        # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 10       # The lower this number, the more it will be the case that recent
                        # links show up first
 
-RANDOM_WEIGHT = 33     # The lower this number, the more it will be the case that links will
+RANDOM_WEIGHT = 35     # The lower this number, the more it will be the case that links will
                        # show up in a random order, disregarding recenty or aggregator weights
 
 # Equation for ranking = 1 + (aggregator weight / PRIORITY_WEIGHT) +
@@ -36,27 +36,15 @@ RANDOM_WEIGHT = 33     # The lower this number, the more it will be the case tha
 # The relative rankings of different aggregators
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='SLW'), then=8),
+                          When(Q(aggregator__exact='SafeAI'), then=8),
                           When(Q(aggregator__exact='Bollard'), then=8),
                           When(Q(aggregator__exact='EALondon'), then=8),
-                          When(Q(aggregator__exact='SSC'), then=8),
                           When(Q(aggregator__exact='ChinAI'), then=8),
                           When(Q(aggregator__exact='ImportAI'), then=8),
                           When(Q(aggregator__exact='MLSafety'), then=8),
-                          When(Q(aggregator__exact='Forecasting'), then=8),
                           When(Q(aggregator__exact='FP21'), then=8),
                           When(Q(aggregator__exact='FPChina'), then=8),
-                          When(Q(aggregator__exact='FWI'), then=8),
-                          When(Q(aggregator__exact='Zvi'), then=8),
-                          When(Q(aggregator__exact='GlobalGuessing'), then=8),
-                          When(Q(aggregator__exact='AI Impacts'), then=8),
-                          When(Q(aggregator__exact='Holden'), then=8),
-                          When(Q(aggregator__exact='ScholarsStage'), then=6),
-                          When(Q(aggregator__exact='Noah'), then=6),
-                          When(Q(aggregator__exact='FPMorning'), then=4),
-                          When(Q(aggregator__exact='FPSecurity'), then=4),
-                          When(Q(aggregator__exact='FPChina'), then=4),
-                          When(Q(aggregator__exact='FPSouthAsia'), then=4),
-                          When(Q(aggregator__exact='FP-WYWL'), then=4),
+                          When(Q(aggregator__exact='Noah'), then=8),
                           default=1,
                           output_field=FloatField())
 
