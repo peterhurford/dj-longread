@@ -318,6 +318,7 @@ contents += load_contents('SamAltman', 'http://blog.samaltman.com/posts.atom', '
 contents += load_contents('ScholarsStage', 'https://scholars-stage.org/feed/')
 contents += load_contents('Schubert', 'https://stefanfschubert.com/blog?format=rss')
 contents += load_contents('SimonM', 'https://simonm.substack.com/feed')
+contents += load_contents('SimonWilliamson', 'https://simonwillison.net/atom/everything/', 'entry')
 contents += load_contents('SLW', 'https://softwareleadweekly.com/issues/', slw_reader_fn, reader_type='lxml')
 contents += load_contents('SplitTicket', 'https://split-ticket.org/feed/')
 contents += load_contents('SSC', 'https://astralcodexten.substack.com/feed')
