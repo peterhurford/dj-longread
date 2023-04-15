@@ -44,7 +44,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='MLSafety'), then=8),
                           When(Q(aggregator__exact='FP21'), then=8),
                           When(Q(aggregator__exact='FPChina'), then=8),
-                          When(Q(aggregator__exact='Noah'), then=8),
+                          When(Q(aggregator__exact='GCRPolicy'), then=8),
                           default=1,
                           output_field=FloatField())
 

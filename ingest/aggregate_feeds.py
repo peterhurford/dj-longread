@@ -258,6 +258,7 @@ contents += load_contents('FP21', 'https://us18.campaign-archive.com/feed?u=75b9
 contents += load_contents('FPChina', 'https://foreignpolicy.com/category/china-brief/feed/', 'item')
 contents += load_contents('FreakTakes', 'https://freaktakes.substack.com/feed')
 contents += load_contents('FWI', 'https://us3.campaign-archive.com/feed?u=2afeee16b30494a373a377a31&id=92de5d8090', 'item')
+contents += load_contents('GCRPolicy', 'https://gcrpolicy.substack.com/feed')
 contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed')
 contents += load_contents('Gleech', 'https://www.gleech.org/feed.xml')
 contents += load_contents('GlobalGuessing', 'https://globalguessing.com/rss/')
