@@ -208,6 +208,12 @@ def svn_reader_fn(name, content):
     return content
 
 
+def ted_reader_fn(name, content):
+    content = [str(c).split('"') for c in content.find_all('a')][2:]
+    content = [[c[4].replace('>', '').replace('</a', ''), 'https://www.tedsanders.com' + c[3], 'Ted'] for c in content]
+    return content
+
+
 contents = []
 contents += load_contents('1a3orn', 'https://1a3orn.com', aorn_reader_fn, reader_type='lxml')
 contents += load_contents('80K', 'https://80000hours.org/latest/feed/')
@@ -330,6 +336,7 @@ contents += load_contents('SVN', 'https://world.hey.com/dhh/feed.atom', svn_read
 contents += load_contents('SVN', 'https://world.hey.com/jason/feed.atom', svn_reader_fn)
 contents += load_contents('Taleb', 'https://fooledbyrandomnessdotcom.wordpress.com/feed/')
 contents += load_contents('Taleb', 'https://medium.com/feed/incerto')
+contents += load_contents('Ted', 'https://www.tedsanders.com/', ted_reader_fn, reader_type='lxml')
 contents += load_contents('ThingOfThings', 'https://thingofthings.substack.com/feed')
 contents += load_contents('ThinkingComplete', 'https://thinkingcomplete.blogspot.com/feeds/posts/default', svn_reader_fn)
 contents += load_contents('TIB', 'https://s3.amazonaws.com/revue/accounts/rss_feeds/000/033/453/original/rss_feed_33453.xml?1632204004')
