@@ -5,7 +5,7 @@ There are too many articles on the internet to possibly read them all. We want t
 ## Install
 
 1. Install [postgres.app](https://postgresapp.com/downloads.html) - or figure out how to install postgres yourself
-2. Run `make setup`
+2. Run `pip3 install -r requirements.txt`
 3. Make sure you got your Clang working `xcode-select --install`
 4. Once you have postgres running, please also create a database called `stanza_dev` and a user:
 
