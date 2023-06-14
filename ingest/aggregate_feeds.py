@@ -316,7 +316,6 @@ contents += load_contents('PhilosophyEtc', 'https://rychappell.substack.com/feed
 contents += load_contents('PlannedOb', 'https://www.planned-obsolescence.org/rss/')
 contents += load_contents('PoliticalKiwi', 'https://politicalkiwi.wordpress.com/feed/')
 contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/')
-contents += load_contents('PriceTheory', 'https://pricetheory.substack.com/feed')
 contents += load_contents('Putanumonit', 'https://putanumonit.com/feed/')
 contents += load_contents('RiversInfect', 'https://caitlinrivers.substack.com/feed')
 contents += load_contents('Salonium', 'https://salonium.substack.com/feed')
