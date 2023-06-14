@@ -257,7 +257,6 @@ contents += load_contents('EALondon', 'https://us5.campaign-archive.com/feed?u=7
 contents += load_contents('Elad', 'https://blog.eladgil.com/feed')
 contents += load_contents('ExperienceMachines', 'https://experiencemachines.wordpress.com/feed')
 contents += load_contents('ExperimentalHistory', 'https://experimentalhistory.substack.com/feed')
-contents += load_contents('FakeNous', 'https://fakenous.substack.com/feed')
 contents += load_contents('Forecasting', 'https://forecasting.substack.com/feed')
 contents += load_contents('FP21', 'https://us18.campaign-archive.com/feed?u=75b96a50185221e3874428fc6&id=0232491d26', 'item')
 contents += load_contents('FPChina', 'https://foreignpolicy.com/category/china-brief/feed/', 'item')
