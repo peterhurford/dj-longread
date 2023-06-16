@@ -225,7 +225,6 @@ contents += load_contents('AppliedDiv', 'https://applieddivinitystudies.com/atom
 contents += load_contents('AskAM/P', 'https://www.askamathematician.com/feed/')
 contents += load_contents('AskManager', 'https://www.askamanager.org/feed')
 contents += load_contents('Atis', 'https://atis.substack.com/feed')
-contents += load_contents('BaM', 'https://bam.kalzumeus.com/archive/rss/')
 contents += load_contents('Beeminder', 'http://feeds.feedburner.com/bmndr')
 contents += load_contents('BenEvans', 'https://www.ben-evans.com/essays', evans_reader_fn, reader_type='lxml')
 contents += load_contents('BenHoffman', 'http://benjaminrosshoffman.com/feed/')
