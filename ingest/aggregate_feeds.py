@@ -128,13 +128,6 @@ def aorn_reader_fn(name, content):
     return content
 
 
-def caplan_reader_fn(name, content):
-    content = content.find_all('item')
-    content = [[c.title.get_text().replace(', by Bryan Caplan', ''),
-                c.link.get_text(), 'Caplan'] for c in content]
-    return content
-
-
 def eliason_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'blog-page-heading' in str(c)]
     content = [[c[6].replace('</h2><p class=', '').replace('>', ''), 'https://www.nateliason.com' + c[3], 'NatEliason'] for c in [c.split('"') for c in content]]
@@ -232,8 +225,6 @@ contents += load_contents('Ben Kuhn', 'https://www.benkuhn.net/rss/', 'entry')
 contents += load_contents('Blattman', 'https://chrisblattman.com/feed/')
 contents += load_contents('Bollard', 'https://us14.campaign-archive.com/feed?u=66df320da8400b581cbc1b539&id=de632a3c62', 'item')
 contents += load_contents('BreadFixer', 'https://medium.com/feed/@breadpricefixer')
-contents += load_contents('Caplan', 'https://betonit.substack.com/feed/')
-contents += load_contents('Caplan', 'https://www.econlib.org/feed/indexCaplan_xml', caplan_reader_fn)
 contents += load_contents('Carlsmith', 'https://joecarlsmith.com/rss.xml')
 contents += load_contents('CEA', 'https://www.centreforeffectivealtruism.org/blog.xml')
 contents += load_contents('ChinAI', 'https://chinai.substack.com/feed')
