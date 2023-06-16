@@ -247,7 +247,6 @@ contents += load_contents('CSET', 'https://us20.campaign-archive.com/feed?u=2481
 contents += load_contents('Cummings', 'https://dominiccummings.substack.com/feed')
 contents += load_contents('Danluu', 'https://danluu.com/atom.xml')
 contents += load_contents('DanWahl', 'https://danwahl.net/atom.xml', 'entry')
-contents += load_contents('DataColada', 'https://datacolada.org/feed')
 contents += load_contents('DeNeufville', 'https://tellingthefuture.substack.com/feed')
 contents += load_contents('Dispatch', 'https://thedispatch.com/feed/?newsletter-brands=morning')
 contents += load_contents('Dwarkesh', 'https://www.dwarkeshpatel.com/feed')
