@@ -16,7 +16,7 @@ LONG_PURGE_OLDER_THAN_X = 30*2  # For LONG_PURGABLE_AGGREGATORS, remove links ol
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['SVN', 'Apricitas', 'INFERPub', 'PriceTheory', 'FakeNous', 'BaM', 'Dwarkesh', 'DataColada', 'Caplan']
+OBSOLETE_AGGREGATORS = ['Lusk', 'SimonWilliamson'] 
 
 
 # Metaweights
