@@ -16,8 +16,29 @@ LONG_PURGE_OLDER_THAN_X = 30*2  # For LONG_PURGABLE_AGGREGATORS, remove links ol
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['GCRPolicy'] 
-
+OBSOLETE_AGGREGATORS = ['Freakonometrics', 'deBoer', 'MoneyIllusion', 'Faunalytics', 'Kling', 'Matuschak',
+						'JPAL', 'Putanumonit', 'GPI', 'Moynihan', 'Napkin-Math', 'AnimalEthics', 'Exponents',
+                        'INFERPub', 'WIP', 'JenSkerritt', 'OutbreakO', 'Wilkinson', 'FP21', 'GFI', 'Palladium',
+                        'Ted', '1a3orn', 'Divinations', 'FreakTakes', 'Fyfe', 'ImpPri', 'Nadia', 'PredPol',
+                        'Pseudoerasmus', 'RatlConspiracy', 'SlimeMold', 'ThinkingComplete', 'Carlsmith', 'DanWahl',
+                        'EconMed', 'FHI', 'FLI', 'FPSouthAsia', 'Intelligencer', 'Mtlynch.io', 'Superorganizers',
+                        'WTB', 'BenHoffman', 'CLR', 'DataColada', 'ExperimentalHistory', 'Icosian', 'Joel',
+                        'Mugwump', 'NeelNanda', 'PlannedOb', 'WarOnRocks', 'DeLong', 'Nintil', 'TDS', 'Greenspun',
+                        'CSET', 'Muehlhauser', 'ProgressFo', 'NakedCapitalism', 'Progress', 'SuperOrganizers',
+                        'HBR', 'Seth', 'Chait', 'RAND', 'Gelman', 'SimonWilliamson', 'Leo', 'LGM', 'SSIR', '538',
+                        'SupplySide', 'Graham', 'Dwarkesh', 'Elad', 'PriceTheory', 'Hanson', 'nostalgebraist',
+                        'CGDev', 'Scrimshaw', 'Aarora', 'Bruers', 'Niskanen', 'Metaculus', 'AlignmentF', 'Riholtz',
+                        'NotEvenWrong', 'Almanack', 'Newport', 'Vox', 'SVN', 'FPMorning', 'KenWhite', 'NewFood',
+                        'FakeNous', 'WorldInData', 'EnlightementEcon', 'GEMorris', 'Mike', 'Bulletin', 'NMA',
+                        'Devon', 'Gleech', 'Krugman', 'Conservable', 'DR', 'Theorem', 'NerdFitness', 'Church',
+                        'GrumpyEcon', 'RibbonFarm', 'GlobalGuessing', 'ScholarsSage', 'Apricitas', 'RiversInfect',
+                        'Taleb', 'JSMP', 'BLH', 'FPChina', 'Josh', 'YLEpi', 'YaschaMounk', 'Beeminder', '3P',
+                        'Caplan', 'Frum', 'Gunther', 'SamAltman', 'ScholarsStage', 'Lusk', 'MOF', 'TIB',
+                        'VanNostrand', 'Schneier', 'ThingOfThings', 'Danluu', 'Sumner', 'LW',
+                        'Cummings', 'QuintaJurecic', 'WBW', 'BERI', 'Crawford', 'Ziggurat', 'Guzey', '80K',
+                        'EconometricSense', 'TSNR', 'CH', 'IFP', 'PragCap', 'RadReads', 'Current Affairs',
+                        'ALOP', 'Acton', 'Harford', '127', 'Ariely', 'Asphalt', 'Dynomight', 'Gross',
+                        'Morrill', 'D4P', 'AllegedWisdom', 'Whittlestone', 'EAForum', 'Mtlynch', 'Mankiw']
 
 # Metaweights
 PRIORITY_WEIGHT = 10   # The lower this number, the more links will be ranked according
