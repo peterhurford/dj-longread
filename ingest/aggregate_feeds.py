@@ -241,7 +241,6 @@ contents += load_contents('Dispatch', 'https://thedispatch.com/feed/?newsletter-
 contents += load_contents('Dynomight', 'https://dynomight.net/feed', 'entry')
 contents += load_contents('EALondon', 'https://us5.campaign-archive.com/feed?u=7438f1bb80988376e9cae8c11&id=182579324a')
 contents += load_contents('ExperienceMachines', 'https://experiencemachines.wordpress.com/feed')
-contents += load_contents('ExperimentalHistory', 'https://experimentalhistory.substack.com/feed')
 contents += load_contents('FPChina', 'https://foreignpolicy.com/category/china-brief/feed/', 'item')
 contents += load_contents('FWI', 'https://us3.campaign-archive.com/feed?u=2afeee16b30494a373a377a31&id=92de5d8090', 'item')
 contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed')
