@@ -1,5 +1,4 @@
 import os
-import re
 import random
 import psycopg2
 
@@ -128,27 +127,6 @@ def aorn_reader_fn(name, content):
     return content
 
 
-def eliason_reader_fn(name, content):
-    content = [str(c) for c in content.find_all('a') if 'blog-page-heading' in str(c)]
-    content = [[c[6].replace('</h2><p class=', '').replace('>', ''), 'https://www.nateliason.com' + c[3], 'NatEliason'] for c in [c.split('"') for c in content]]
-    return content
-
-
-def eliason_book_reader_fn(name, content):
-    content = [str(c) for c in content.find_all('p') if '/notes' in str(c)]
-    content = [['Book Notes: ' + c[2].split('</a>')[0].replace('>', ''), 'https://www.nateliason.com' + c[1], 'NatEliason'] for c in [c.split('"') for c in content]]
-    return content
-
-
-def every_reader_fn(name, content):
-    content = [str(c) for c in content.find_all('a') if '/{}/'.format(name.lower()) in str(c) and 'h2' in str(c)]
-    content = [[re.sub(r'<span class="hand hand-[A-Z]">', '', c).replace('</span>', '').split('">')[2].
-split('</h2>')[0],
-                'https://every.to' + c.split('href="')[1].split('"')[0],
-                name] for c in content]
-    return content
-
-
 def evans_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'benedictevans' in str(c)]
     content = [c.split('href="')[-1].split('>')[:-1] for c in content]
@@ -166,38 +144,9 @@ def graham_reader_fn(name, content):
     return content
 
 
-def guzey_reader_fn(name, content):
-    content = [c for c in content.find_all('a')][16:-8]
-    content = [str(c).split('"') for c in content]
-    content = [[c[2].replace('</a>', '').replace('>', '').replace('“', '').replace('”', ''),
-               'https://guzey.com/' + c[1], 'Guzey'] for c in content]
-    return content
-
-
-def guzey_link_reader_fn(name, content):
-    content = [c for c in content.find_all('a') if 'http' in str(c) and 'perma.cc' not in str(c) and 'social-icon' not in str(c) and 'div' not in str(c)]
-    content = [str(c).split('"') for c in content]
-    content = [c for c in content if c[1].count('/') > 3]
-    content = [[c[2].replace('</a>', '').replace('>', '').replace('“', '').replace('”', ''), c[1], 'Guzey'] for c in content]
-    return content
-
-
 def slw_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'Issue' in str(c)]
     content = [['Software Lead Weekly ' + c[-1].replace('></path></svg>', '').replace('</a>', ''), 'https://softwareleadweekly.com' + c[3], 'SLW'] for c in [c.split('"') for c in content]]
-    return content
-
-
-def sumner_reading_fn(name, content):
-    content = content.find_all('item')
-    content = [[c.title.get_text().replace(', by Scott Sumner', ''), c.link.get_text(), 'Sumner'] for c in content]
-    return content
-
-
-def svn_reader_fn(name, content):
-    content = content.find_all('entry')
-    content = [[c.title.get_text() if c.title is not None else 'Blank',
-                str(c.link).split('"')[1], name] for c in content]
     return content
 
 
@@ -268,8 +217,6 @@ contents += load_contents('Metaculus', 'https://www.metaculus.com/news/rss/')
 contents += load_contents('Metakuna', 'https://metakuna.substack.com/feed')
 contents += load_contents('MLSafety', 'https://newsletter.mlsafety.org/feed')
 contents += load_contents('Mtlynch.io', 'https://mtlynch.io/posts/index.xml')
-contents += load_contents('NatEliason', 'https://www.nateliason.com/blog', eliason_reader_fn, reader_type='lxml')
-contents += load_contents('NatEliason', 'https://www.nateliason.com/notes', eliason_book_reader_fn, reader_type='lxml')
 contents += load_contents('NavigatingAI', 'https://navigatingairisks.substack.com/feed')
 contents += load_contents('Nintil', 'https://nintil.com/rss.xml')
 contents += load_contents('NMA', 'https://www.nomeatathlete.com/blog/feed/')
