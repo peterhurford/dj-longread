@@ -244,6 +244,7 @@ contents += load_contents('ThingOfThings', 'https://thingofthings.substack.com/f
 contents += load_contents('Trammell', 'https://philiptrammell.com/blog/feed')
 contents += load_contents('UnderstandingAI', 'https://www.understandingai.org/feed')
 contents += load_contents('UnderSun', 'https://www.newthingsunderthesun.com/rss.xml')
+contents += load_contents('Utopian', 'https://utopianscrapbook.substack.com/feed')
 contents += load_contents('VanNostrand', 'https://acesounderglass.com/feed/')
 contents += load_contents('Wilkinson', 'https://modelcitizen.substack.com/feed')
 contents += load_contents('WorksInProgress', 'https://www.worksinprogress.news/feed')
