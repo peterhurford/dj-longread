@@ -181,8 +181,6 @@ contents += load_contents('Constantin', 'https://sarahconstantin.substack.com/fe
 contents += load_contents('Constantin', 'https://srconstantin.github.io/feed', 'entry')
 contents += load_contents('Constantin', 'https://srconstantin.wordpress.com/feed/')
 contents += load_contents('Crawford', 'https://jasoncrawford.org/feed.xml', 'entry')
-contents += load_contents('CSET', 'https://cset.georgetown.edu/publications/feed/')
-contents += load_contents('CSET', 'https://us20.campaign-archive.com/feed?u=248119f7a6386759c3a4f7155&id=fcbacf8c3e', 'item')
 contents += load_contents('Cummings', 'https://dominiccummings.substack.com/feed')
 contents += load_contents('Danluu', 'https://danluu.com/atom.xml')
 contents += load_contents('DeNeufville', 'https://tellingthefuture.substack.com/feed')
