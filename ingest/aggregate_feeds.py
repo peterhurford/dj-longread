@@ -237,6 +237,7 @@ contents += load_contents('SLW', 'https://softwareleadweekly.com/issues/', slw_r
 contents += load_contents('SplitTicket', 'https://split-ticket.org/feed/')
 contents += load_contents('SSC', 'https://astralcodexten.substack.com/feed')
 contents += load_contents('Steinhardt', 'https://bounded-regret.ghost.io/rss/')
+contents += load_contents('Stevenson', 'https://doingwestminsterbetter.substack.com/feed')
 contents += load_contents('Ted', 'https://www.tedsanders.com/', ted_reader_fn, reader_type='lxml')
 contents += load_contents('ThingOfThings', 'https://thingofthings.substack.com/feed')
 contents += load_contents('Trammell', 'https://philiptrammell.com/blog/feed')
