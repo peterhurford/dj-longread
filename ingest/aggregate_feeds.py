@@ -193,8 +193,6 @@ contents += load_contents('FWI', 'https://us3.campaign-archive.com/feed?u=2afeee
 contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed')
 contents += load_contents('Gleech', 'https://www.gleech.org/feed.xml')
 contents += load_contents('GoodEnough', 'https://www.goodenoughanswers.com/blog-feed.xml')
-contents += load_contents('GPI', 'https://globalprioritiesinstitute.org/feed/')
-contents += load_contents('GPI', 'https://globalprioritiesinstitute.org/feed/')
 contents += load_contents('Graham', 'http://paulgraham.com/articles.html', graham_reader_fn, reader_type='lxml')
 contents += load_contents('Grunewald', 'https://www.erichgrunewald.com/feed.xml', 'entry')
 contents += load_contents('HLI', 'https://us19.campaign-archive.com/feed?u=e759f3a724b8709250fb153c2&id=163285db12', 'item')
