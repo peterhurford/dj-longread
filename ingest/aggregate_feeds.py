@@ -226,6 +226,7 @@ contents += load_contents('PhilosophyEtc', 'https://rychappell.substack.com/feed
 contents += load_contents('PoliticalKiwi', 'https://politicalkiwi.wordpress.com/feed/')
 contents += load_contents('Predictions', 'https://predictions.substack.com/feed')
 contents += load_contents('PredPol', 'https://predictingpolitics.com/feed/')
+contents += load_contents('Rodney', 'https://rodneybrooks.com/blog/feed/')
 contents += load_contents('Salonium', 'https://salonium.substack.com/feed')
 contents += load_contents('SafeAI', 'https://newsletter.safe.ai/feed')
 contents += load_contents('SamAltman', 'http://blog.samaltman.com/posts.atom', 'entry-link')
