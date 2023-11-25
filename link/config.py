@@ -13,7 +13,7 @@ LONG_PURGE_OLDER_THAN_X = 60
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['UnderSun']
+OBSOLETE_AGGREGATORS = ['80K', 'Beeminder', 'CEA', 'Crawford', 'HLI', 'IFP', 'Intelligencer', 'NMA', 'ThingOfThings', 'VanNostrand']
 
 # Metaweights
 PRIORITY_WEIGHT = 10   # The lower this number, the more links will be ranked according
