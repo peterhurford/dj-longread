@@ -182,6 +182,7 @@ contents += load_contents('DeNeufville', 'https://tellingthefuture.substack.com/
 contents += load_contents('Dispatch', 'https://thedispatch.com/feed/?newsletter-brands=morning')
 contents += load_contents('Dynomight', 'https://dynomight.net/feed', 'entry')
 contents += load_contents('EALondon', 'https://us5.campaign-archive.com/feed?u=7438f1bb80988376e9cae8c11&id=182579324a')
+contents += load_contents('Ettingermentum', 'https://www.ettingermentum.news/feed')
 contents += load_contents('ExperienceMachines', 'https://experiencemachines.wordpress.com/feed')
 contents += load_contents('FPChina', 'https://foreignpolicy.com/category/china-brief/feed/', 'item')
 contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed')
