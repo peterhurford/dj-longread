@@ -50,6 +50,11 @@ def delete_link_row(cur, id_):
     return None
 
 
+def star_row(cur, id_):
+    update_row(cur, 'link_link', 'starred', 1, 'id', id_)
+    return None
+
+
 def hide_row(cur, id_):
     update_row(cur, 'link_link', 'liked', -1, 'id', id_)
     return None
@@ -300,6 +305,7 @@ if lines == 0:
     print('...No duplicated links detected')
 else:
     for i, id_ in enumerate(duplicated):
+        star_row(cur, id_)
         delete_link_row(cur, id_)
     print('...{} duplicated links purged!'.format(lines))
 
