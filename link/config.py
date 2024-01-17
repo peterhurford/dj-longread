@@ -16,7 +16,7 @@ LONG_PURGE_OLDER_THAN_X = 60
 OBSOLETE_AGGREGATORS = ['Trammel']
 
 # Metaweights
-PRIORITY_WEIGHT = 10   # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 15   # The lower this number, the more links will be ranked according
                        # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 12       # The lower this number, the more it will be the case that recent
@@ -31,20 +31,21 @@ RANDOM_WEIGHT = 40     # The lower this number, the more it will be the case tha
 
 # The relative rankings of different aggregators
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
-                          When(Q(aggregator__exact='SLW'), then=8),
-                          When(Q(aggregator__exact='SafeAI'), then=8),
-                          When(Q(aggregator__exact='Bollard'), then=8),
-                          When(Q(aggregator__exact='EALondon'), then=8),
-                          When(Q(aggregator__exact='NavigatingAI'), then=8),
-                          When(Q(aggregator__exact='Yglesias'), then=4),
+                          When(Q(aggregator__exact='SLW'), then=12),
+                          When(Q(aggregator__exact='SafeAI'), then=12),
+                          When(Q(aggregator__exact='Bollard'), then=12),
+                          When(Q(aggregator__exact='EALondon'), then=12),
+                          When(Q(aggregator__exact='NavigatingAI'), then=12),
+                          When(Q(aggregator__exact='Yglesias'), then=12),
+                          When(Q(aggregator__exact='Noah'), then=12),
                           When(Q(aggregator__exact='SSC'), then=4),
-                          When(Q(aggregator__exact='Noah'), then=4),
                           When(Q(aggregator__exact='SplitTicket'), then=4),
                           When(Q(aggregator__exact='Holden'), then=4),
                           When(Q(aggregator__exact='DeNeufville'), then=4),
                           When(Q(aggregator__exact='AI Impacts'), then=4),
-                          When(Q(aggregator__exact='Rodney'), then=4),
-                          When(Q(aggregator__exact='PoliticalKiwi'), then=4),
                           When(Q(aggregator__exact='Steinhardt'), then=4),
+                          When(Q(aggregator__exact='Carlsmith'), then=0.5),
+                          When(Q(aggregator__exact='NateSilver'), then=0.5),
+                          When(Q(aggregator__exact='AskManager'), then=0.2),
                           default=1,
                           output_field=FloatField())
