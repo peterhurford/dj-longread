@@ -22,7 +22,7 @@ PRIORITY_WEIGHT = 15   # The lower this number, the more links will be ranked ac
 TIME_WEIGHT = 12       # The lower this number, the more it will be the case that recent
                        # links show up first
 
-RANDOM_WEIGHT = 40     # The lower this number, the more it will be the case that links will
+RANDOM_WEIGHT = 30     # The lower this number, the more it will be the case that links will
                        # show up in a random order, disregarding recenty or aggregator weights
 
 # Equation for ranking = 1 + (aggregator weight / PRIORITY_WEIGHT) +
