@@ -20,22 +20,21 @@ def table_exists(cur, table_name):
 
 
 def drop_table(cur, table_name):
-    cur.execute('DROP TABLE {}'.format(table_name))
+    if table_exists(cur, table_name):
+        cur.execute(f'DROP TABLE {table_name}')
+    else:
+        ValueError(f'{table_name} not found')
     return None
 
 
-def escape(text, quote='\''):
-    return text.replace(quote, '\{}'.format(quote))
-
-def enquote(text, quote='\''):
-     return quote + escape(str(text), quote=quote) + quote
-
-
 def add_row(cur, table_name, column_names, row):
-     cur.execute('INSERT INTO {} {} VALUES {}'.format(table_name,
-                                                      '(' + ', '.join(column_names) + ')',
-                                                      '(' + ', '.join(row) + ')'))
-     return None
+    query = 'INSERT INTO {} ({}) VALUES ({})'.format(
+                table_name,
+                    ', '.join(column_names),
+                        ', '.join(['%s' for _ in row])
+                        )
+    cur.execute(query, row)
+    return None
 
 
 def delete_row(cur, table_name, column_name, value):
@@ -44,16 +43,12 @@ def delete_row(cur, table_name, column_name, value):
 
 
 def update_row(cur, table_name, set_col, set_val, where_col, where_val):
-    cur.execute('UPDATE {} SET {} = {} WHERE {} = {}'.format(table_name,
-                                                             set_col,
-                                                             set_val,
-                                                             where_col,
-                                                             where_val))
+    cur.execute('DELETE FROM %s WHERE %s = %%s', (table_name, column_name, value))
     return None
 
 
 def find_row(cur, table_name, col, value, n=1):
-    cur.execute('SELECT * FROM {} WHERE {} = {}'.format(table_name, col, enquote(value)))
+    cur.execute('SELECT * FROM %s WHERE %s = %%s', (table_name, col, value))
     if n == 1:
         return cur.fetchone()
     elif n == 'many':
