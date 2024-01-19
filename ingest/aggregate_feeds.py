@@ -8,7 +8,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 from utils.download import read
-from utils.sql import enquote, add_row, delete_row, update_row, export_db
+from utils.sql import add_row, delete_row, update_row, export_db
 
 from link.config import (PURGE_OLDER_THAN_X_DAYS, LONG_PURGE_OLDER_THAN_X, PURGABLE_AGGREGATORS,
                          LONG_PURGABLE_AGGREGATORS, OBSOLETE_AGGREGATORS)
@@ -41,7 +41,7 @@ def add_link_row(cur, content):
     add_row(cur,
             'link_link',
             ['id', 'title', 'url', 'aggregator', 'added', 'modified', 'seed'],
-            [enquote(str(idx))] + [enquote(c.replace('\'', '"')) for c in content + [str(datetime.now())] * 2] + [enquote(str(seed))])
+            [idx] + [c.replace('\'', '"') for c in content + [str(datetime.now())] * 2] + [seed])
     return None
 
 
