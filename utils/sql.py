@@ -38,12 +38,12 @@ def add_row(cur, table_name, column_names, row):
 
 
 def delete_row(cur, table_name, column_name, value):
-    cur.execute('DELETE FROM {} WHERE {} = {}'.format(table_name, column_name, value))
+    cur.execute('DELETE FROM %s WHERE %s = %%s', (table_name, column_name, value))
     return None
 
 
 def update_row(cur, table_name, set_col, set_val, where_col, where_val):
-    cur.execute('DELETE FROM %s WHERE %s = %%s', (table_name, column_name, value))
+    cur.execute('UPDATE %s SET %s = %%s WHERE %s = %%s', (table_name, set_col, set_val, where_col, where_val))
     return None
 
 
