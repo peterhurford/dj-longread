@@ -79,6 +79,7 @@ def delete_row(cur, table_name, column_name, value):
 
 def update_row(cur, table_name, set_col, set_val, where_col, where_val):
     set_val = clean_input(set_val)
+    where_val = clean_input(where_val)
     cur.execute('UPDATE {} SET {} = %s WHERE {} = %s'.format(table_name, set_col, where_col), (set_val, where_val))
     return None
 
