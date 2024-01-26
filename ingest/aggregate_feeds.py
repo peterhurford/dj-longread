@@ -301,14 +301,16 @@ print('...{} new links added!'.format(lines))
 
 print('-')
 print('Purging duplicated')
-duplicated = links[links['url'].duplicated()]['id']
+duplicated = links[links['url'].duplicated(keep=True)]['id']
 lines = len(duplicated)
 if lines == 0:
     print('...No duplicated links detected')
 else:
     for i, id_ in enumerate(duplicated):
-        star_row(cur, id_)
-        delete_link_row(cur, id_)
+        if i % 2 == 0:
+            star_row(cur, id_)
+        else:
+            delete_link_row(cur, id_)
     print('...{} duplicated links purged!'.format(lines))
 
 print('-')
