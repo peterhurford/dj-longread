@@ -5,7 +5,8 @@ from django.db.models import Case, When, Q, FloatField
 PURGABLE_AGGREGATORS = ['Dispatch', 'FPChina', 'ChinAI', 'ImportAI',
                         'Alignment', 'TIB', 'Schneier', 'Yglesias', 'MLSafety',
                         'SafeAI', 'Bollard', 'EALondon', 'NavigatingAI',
-                        'GlobalShield', 'UnderstandingAI', '3Shot', 'CSET']
+                        'GlobalShield', 'UnderstandingAI', '3Shot', 'CSET',
+                        'AIChina']
 PURGE_OLDER_THAN_X_DAYS = 14
 
 
@@ -39,6 +40,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='CSET'), then=12),
                           When(Q(aggregator__exact='NavigatingAI'), then=12),
                           When(Q(aggregator__exact='ChinAI'), then=12),
+                          When(Q(aggregator__exact='AIChina'), then=12),
                           When(Q(aggregator__exact='FPChina'), then=12),
                           When(Q(aggregator__exact='GlobalShield'), then=12),
                           When(Q(aggregator__exact='ImportAI'), then=12),

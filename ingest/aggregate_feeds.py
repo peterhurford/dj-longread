@@ -165,6 +165,7 @@ contents = []
 contents += load_contents('1a3orn', 'https://1a3orn.com', aorn_reader_fn, reader_type='lxml')
 contents += load_contents('3Shot', 'https://aipolicyus.substack.com/feed')
 contents += load_contents('Aarora', 'https://harshitaarora.com/feed/')
+contents += load_contents('AIChina', 'https://aisafetychina.substack.com/feed')
 contents += load_contents('AI Impacts', 'https://blog.aiimpacts.org/feed')
 contents += load_contents('Alignment', 'https://us18.campaign-archive.com/feed?u=1d1821210cc4f04d1e05c4fa6&id=dbac5de515')
 contents += load_contents('AskAM/P', 'https://www.askamathematician.com/feed/')
