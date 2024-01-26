@@ -301,7 +301,7 @@ print('...{} new links added!'.format(lines))
 
 print('-')
 print('Purging duplicated')
-duplicated = links[links['url'].duplicated(keep=True)]['id']
+duplicated = links[links['url'].duplicated(keep=False)]['id']
 lines = len(duplicated)
 if lines == 0:
     print('...No duplicated links detected')
