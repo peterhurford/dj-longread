@@ -311,7 +311,7 @@ else:
             star_row(cur, id_)
         else:
             delete_link_row(cur, id_)
-    print('...{} duplicated links purged!'.format(lines))
+    print('...{} duplicated links purged!'.format(lines / 2))
 
 print('-')
 print('Purging old')
