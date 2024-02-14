@@ -245,6 +245,7 @@ contents += load_contents('WTB', 'https://medium.com/feed/what-to-build')
 contents += load_contents('Yglesias', 'https://www.slowboring.com/feed')
 contents += load_contents('YLEpi', 'https://yourlocalepidemiologist.substack.com/feed/')
 contents += load_contents('Ziggurat', 'https://ziggurat.substack.com/feed')
+contents += load_contents('Zvi', 'https://thezvi.substack.com/feed')
 
 print('-')
 print('Gathering content')

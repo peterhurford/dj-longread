@@ -6,7 +6,7 @@ PURGABLE_AGGREGATORS = ['Dispatch', 'FPChina', 'ChinAI', 'ImportAI',
                         'Alignment', 'TIB', 'Schneier', 'Yglesias', 'MLSafety',
                         'SafeAI', 'Bollard', 'EALondon', 'NavigatingAI',
                         'GlobalShield', 'UnderstandingAI', '3Shot', 'CSET',
-                        'AIChina']
+                        'AIChina', 'Zvi']
 PURGE_OLDER_THAN_X_DAYS = 14
 
 
@@ -16,7 +16,7 @@ LONG_PURGE_OLDER_THAN_X = 60
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['ALOP', 'Metaculus', 'ZVI']
+OBSOLETE_AGGREGATORS = []
 
 # Metaweights
 PRIORITY_WEIGHT = 15   # The lower this number, the more links will be ranked according
@@ -49,6 +49,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='Noah'), then=6),
                           When(Q(aggregator__exact='SSC'), then=4),
                           When(Q(aggregator__exact='Yglesias'), then=4),
+                          When(Q(aggregator__exact='Zvi'), then=4),
                           When(Q(aggregator__exact='Holden'), then=4),
                           When(Q(aggregator__exact='SplitTicket'), then=4),
                           When(Q(aggregator__exact='Holden'), then=4),
@@ -59,6 +60,6 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='1a3orn'), then=4),
                           When(Q(aggregator__exact='Carlsmith'), then=0.5),
                           When(Q(aggregator__exact='NateSilver'), then=0.5),
-                          When(Q(aggregator__exact='AskManager'), then=0.2),
+                          When(Q(aggregator__exact='AskManager'), then=0.1),
                           default=1,
                           output_field=FloatField())
