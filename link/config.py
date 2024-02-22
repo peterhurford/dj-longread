@@ -16,10 +16,10 @@ LONG_PURGE_OLDER_THAN_X = 60
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['Ettingermentum']
+OBSOLETE_AGGREGATORS = []
 
 # Metaweights
-PRIORITY_WEIGHT = 15   # The lower this number, the more links will be ranked according
+PRIORITY_WEIGHT = 18   # The lower this number, the more links will be ranked according
                        # to the manual preferences set in `AGGREGATOR_WEIGHTS` below.
 
 TIME_WEIGHT = 12       # The lower this number, the more it will be the case that recent
