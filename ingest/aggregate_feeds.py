@@ -1,4 +1,5 @@
 import os
+import json
 import random
 import psycopg2
 
@@ -132,6 +133,12 @@ def aorn_reader_fn(name, content):
     return content
 
 
+def caip_reader_fn(name, content):
+    content = json.loads(content.find_all('script')[12].text)
+    content = [['CAIP', c['title'], 'https://www.aipolicy.us/blog/' + c['route']] for c in content['props']['pageProps']['blogs']]
+    return content
+
+
 def evans_reader_fn(name, content):
     content = [str(c) for c in content.find_all('a') if 'benedictevans' in str(c)]
     content = [c.split('href="')[-1].split('>')[:-1] for c in content]
@@ -163,7 +170,6 @@ def ted_reader_fn(name, content):
 
 contents = []
 contents += load_contents('1a3orn', 'https://1a3orn.com', aorn_reader_fn, reader_type='lxml')
-contents += load_contents('3Shot', 'https://aipolicyus.substack.com/feed')
 contents += load_contents('Aarora', 'https://harshitaarora.com/feed/')
 contents += load_contents('AIChina', 'https://aisafetychina.substack.com/feed')
 contents += load_contents('AI Impacts', 'https://blog.aiimpacts.org/feed')
@@ -176,6 +182,8 @@ contents += load_contents('BenHoffman', 'http://benjaminrosshoffman.com/feed/')
 contents += load_contents('Ben Kuhn', 'https://www.benkuhn.net/rss/', 'entry')
 contents += load_contents('Boaz', 'https://windowsontheory.org/feed/')
 contents += load_contents('Bollard', 'https://us14.campaign-archive.com/feed?u=66df320da8400b581cbc1b539&id=de632a3c62', 'item')
+contents += load_contents('CAIP', 'https://aipolicyus.substack.com/feed')
+contents += load_contents('CAIP', 'https://www.aipolicy.us/blog', caip_reader_fn, reader_type='lxml')
 contents += load_contents('Carlsmith', 'https://joecarlsmith.com/rss.xml')
 contents += load_contents('ChinAI', 'https://chinai.substack.com/feed')
 contents += load_contents('CSET', 'https://cset.georgetown.edu/newsletters/feed')

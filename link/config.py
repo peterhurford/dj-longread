@@ -16,7 +16,7 @@ LONG_PURGE_OLDER_THAN_X = 60
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = []
+OBSOLETE_AGGREGATORS = ['3Shot']
 
 # Metaweights
 PRIORITY_WEIGHT = 18   # The lower this number, the more links will be ranked according
@@ -45,7 +45,6 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='GlobalShield'), then=12),
                           When(Q(aggregator__exact='ImportAI'), then=12),
                           When(Q(aggregator__exact='UnderstandingAI'), then=12),
-                          When(Q(aggregator__exact='3Shot'), then=12),
                           When(Q(aggregator__exact='Noah'), then=6),
                           When(Q(aggregator__exact='SSC'), then=4),
                           When(Q(aggregator__exact='Yglesias'), then=4),
@@ -58,6 +57,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='Steinhardt'), then=4),
                           When(Q(aggregator__exact='SLW'), then=4),
                           When(Q(aggregator__exact='1a3orn'), then=4),
+                          When(Q(aggregator__exact='CAIP'), then=3),
                           When(Q(aggregator__exact='Carlsmith'), then=0.5),
                           When(Q(aggregator__exact='NateSilver'), then=0.5),
                           When(Q(aggregator__exact='AskManager'), then=0.1),
