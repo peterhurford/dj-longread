@@ -135,7 +135,7 @@ def aorn_reader_fn(name, content):
 
 def caip_reader_fn(name, content):
     content = json.loads(content.find_all('script')[12].text)
-    content = [['CAIP', c['title'], 'https://www.aipolicy.us/blog/' + c['route']] for c in content['props']['pageProps']['blogs']]
+    content = [[c['title'], 'https://www.aipolicy.us/blog/' + c['route']] for c in content['props']['pageProps']['blogs'], 'CAIP']
     return content
 
 
@@ -195,7 +195,7 @@ contents += load_contents('Cummings', 'https://dominiccummings.substack.com/feed
 contents += load_contents('Danluu', 'https://danluu.com/atom.xml')
 contents += load_contents('DeNeufville', 'https://tellingthefuture.substack.com/feed')
 contents += load_contents('Dispatch', 'https://thedispatch.com/feed/?newsletter-brands=morning')
-contents += load_contents('Dispatch', 'https://thedispatch.com/newsletter/dispatch-politics/')
+contents += load_contents('Dispatch', 'https://thedispatch.com/newsletter/dispatch-politics/feed')
 contents += load_contents('Drexler', 'https://aiprospects.substack.com/feed')
 contents += load_contents('Dynomight', 'https://dynomight.net/feed', 'entry')
 contents += load_contents('EALondon', 'https://us5.campaign-archive.com/feed?u=7438f1bb80988376e9cae8c11&id=182579324a')
