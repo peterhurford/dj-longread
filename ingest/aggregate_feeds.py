@@ -135,7 +135,7 @@ def aorn_reader_fn(name, content):
 
 def caip_reader_fn(name, content):
     content = json.loads(content.find_all('script')[12].text)
-    content = [[c['title'], 'https://www.aipolicy.us/blog/' + c['route']] for c in content['props']['pageProps']['blogs'], 'CAIP']
+    content = [[c['title'], 'https://www.aipolicy.us/blog/' + c['route'], 'CAIP'] for c in content['props']['pageProps']['blogs']]
     return content
 
 
