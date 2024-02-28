@@ -1,4 +1,6 @@
 import os
+import boto # Fail fast if Python env is not properly loaded
+import psycopg2
 import pandas as pd
 import random
 from datetime import datetime
@@ -52,6 +54,8 @@ def clean_text_field(txt):
 def process_links(filepath):
     """Processes new links from a file and updates the links DataFrame."""
     links = pd.read_csv('data/export.csv')
+    last_added_date = links['added'].max()
+
     with open(filepath, 'r') as file:
         new_links = file.readlines()
     
@@ -64,6 +68,7 @@ def process_links(filepath):
     # Clean text fields
     links['summary'] = links['summary'].apply(clean_text_field)
     links['title'] = links['title'].apply(clean_text_field)
+
     # Correct data types and sort
     links = links[links['id'].notnull()]
     links['id'] = links['id'].astype(int)
@@ -72,7 +77,7 @@ def process_links(filepath):
     links = links.sort_values('id')
     
     links.to_csv('data/export.csv', index=False)
-    print(f"Updated links exported to data/export.csv. Latest added date: {links['added'].max()}")
+    print(f"Updated links exported to data/export.csv. Latest added date: {last_added_date}")
 
 
 def confirm_step(message):
@@ -82,6 +87,10 @@ def confirm_step(message):
 
 
 def main():
+    # Fail fast if psql is not properly loaded
+    DATABASE_URL = os.environ.get('DATABASE_URL', 'dbname=stanza_dev user=dbuser')
+    psycopg2.connect(DATABASE_URL, sslmode='require')
+
     # Run initial database export/import command
     print("Exporting and importing database...")
     execute_shell_command("heroku run --app guarded-everglades-89687 make exportdb && make importdb")
