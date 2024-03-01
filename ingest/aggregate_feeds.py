@@ -1,5 +1,5 @@
 import os
-import boto # Fail fast if Python env is not properly loaded
+import boto3 # Fail fast if Python env is not properly loaded
 import json
 import random
 import psycopg2
