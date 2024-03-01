@@ -1,4 +1,5 @@
 import os
+import boto # Fail fast if Python env is not properly loaded
 import json
 import random
 import psycopg2
@@ -168,6 +169,12 @@ def ted_reader_fn(name, content):
     return content
 
 
+# Fail fast if psql is not properly loaded
+DATABASE_URL = os.environ.get('DATABASE_URL', 'dbname=stanza_dev user=dbuser')
+psycopg2.connect(DATABASE_URL, sslmode='require')
+
+
+# Load the contents
 contents = []
 contents += load_contents('1a3orn', 'https://1a3orn.com', aorn_reader_fn, reader_type='lxml')
 contents += load_contents('Aarora', 'https://harshitaarora.com/feed/')
@@ -260,6 +267,8 @@ print('-')
 print('Gathering content')
 random.shuffle(contents)
 
+
+# Dump into DB
 print('-')
 print('Psycopg2 connect')
 DATABASE_URL = os.environ.get('DATABASE_URL', 'dbname=stanza_dev user=dbuser')
@@ -270,6 +279,8 @@ print('-')
 print('Data export')
 export_db(cur)
 
+
+# Clean
 links = pd.read_csv('data/export.csv')
 print('-')
 print('Purging broken links')
@@ -372,6 +383,7 @@ obsolete = links[(links['aggregator'].apply(lambda a: a in OBSOLETE_AGGREGATORS)
 obsolete_ids = list(obsolete['id'].values)
 
 # Kill Yglesias's "X Thread"
+# TODO: This doesn't work!
 obsolete = links[(links['aggregator'] == 'Yglesias') & links['title'].apply(lambda t: 'Thread' in str(t)) &
                  (links['liked'] != 0) & (links['liked'] != 1) & (links['liked'] != -1)]
 obsolete_ids += list(obsolete['id'].values)
