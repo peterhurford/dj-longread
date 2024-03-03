@@ -6,17 +6,17 @@ PURGABLE_AGGREGATORS = ['Dispatch', 'FPChina', 'ChinAI', 'ImportAI',
                         'Alignment', 'TIB', 'Schneier', 'Yglesias', 'MLSafety',
                         'SafeAI', 'Bollard', 'EALondon', 'NavigatingAI',
                         'GlobalShield', 'UnderstandingAI', '3Shot', 'CSET',
-                        'AIChina', 'Zvi']
+                        'AIChina', 'Zvi', 'AskManager']
 PURGE_OLDER_THAN_X_DAYS = 14
 
 
 # Purge old articles after 60 days if they come from these aggregators
-LONG_PURGABLE_AGGREGATORS = ['AskManager', 'SLW', 'SplitTicket', 'Noah']
+LONG_PURGABLE_AGGREGATORS = ['SLW', 'SplitTicket', 'Noah']
 LONG_PURGE_OLDER_THAN_X = 60
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['Lincicome', 'YLEpi', 'NateSilver', 'Gleech']
+OBSOLETE_AGGREGATORS = []
 
 # Metaweights
 PRIORITY_WEIGHT = 18   # The lower this number, the more links will be ranked according
