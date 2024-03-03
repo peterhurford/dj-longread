@@ -16,7 +16,7 @@ LONG_PURGE_OLDER_THAN_X = 60
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['3Shot']
+OBSOLETE_AGGREGATORS = ['Lincicome', 'YLEpi', 'NateSilver']
 
 # Metaweights
 PRIORITY_WEIGHT = 18   # The lower this number, the more links will be ranked according
@@ -58,8 +58,6 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='SLW'), then=4),
                           When(Q(aggregator__exact='1a3orn'), then=4),
                           When(Q(aggregator__exact='CAIP'), then=3),
-                          When(Q(aggregator__exact='Carlsmith'), then=0.5),
-                          When(Q(aggregator__exact='NateSilver'), then=0.5),
-                          When(Q(aggregator__exact='AskManager'), then=0.1),
+                          When(Q(aggregator__exact='AskManager'), then=-3),
                           default=1,
                           output_field=FloatField())
