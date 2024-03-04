@@ -6,7 +6,10 @@ run: ## Run Django
 
 .PHONY: pipeline
 pipeline: ## Run the full pipeline on Heroku
-	heroku run -a guarded-everglades-89687 make update && make launch && heroku run -a guarded-everglades-89687 make exportdb && make importdb && git add data/export.csv && git commit -m "Update DB" && git push origin master; echo "$$(date)"
+	make check && heroku run -a guarded-everglades-89687 make check && heroku run -a guarded-everglades-89687 make update && make launch && heroku run -a guarded-everglades-89687 make exportdb && make importdb && git add data/export.csv && git commit -m "Update DB" && git push origin master; echo "$$(date)"
+
+.PHONY: check
+	python fail_fast.py
 
 .PHONY: migrate
 migrate: ## Run Django migrations
