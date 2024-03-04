@@ -177,6 +177,7 @@ psycopg2.connect(DATABASE_URL, sslmode='require')
 # Load the contents
 contents = []
 contents += load_contents('1a3orn', 'https://1a3orn.com', aorn_reader_fn, reader_type='lxml')
+contents += load_contents('80K', 'https://80000hours.org/podcast/episodes/feed/')
 contents += load_contents('Aarora', 'https://harshitaarora.com/feed/')
 contents += load_contents('AIChina', 'https://aisafetychina.substack.com/feed')
 contents += load_contents('AI Impacts', 'https://blog.aiimpacts.org/feed')
