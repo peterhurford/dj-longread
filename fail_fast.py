@@ -1,3 +1,4 @@
+import os
 import boto3 # Fail fast if Python env is not properly loaded
 import psycopg2
 
