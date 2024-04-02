@@ -212,8 +212,6 @@ contents += load_contents('EALondon', 'https://us5.campaign-archive.com/feed?u=7
 contents += load_contents('ExperienceMachines', 'https://experiencemachines.substack.com/feed')
 contents += load_contents('FPChina', 'https://foreignpolicy.com/category/china-brief/feed/', 'item')
 contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed')
-contents += load_contents('GlobalShield', 'https://globalshield.substack.com/feed')
-contents += load_contents('GoodEnough', 'https://www.goodenoughanswers.com/blog-feed.xml')
 contents += load_contents('Graham', 'http://paulgraham.com/articles.html', graham_reader_fn, reader_type='lxml')
 contents += load_contents('Grunewald', 'https://www.erichgrunewald.com/feed.xml', 'entry')
 contents += load_contents('Holden', 'https://www.cold-takes.com/rss/')
