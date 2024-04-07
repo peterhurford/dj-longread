@@ -73,7 +73,8 @@ def process_links(filepath):
     links = links[links['id'].notnull()]
     links['id'] = links['id'].astype(int)
     links['seed'] = links['seed'].astype(int)
-    links['tweet'] = links['tweet'].apply(lambda x: 0 if str(x) == '\\N' else int(float(str(x)))).astype(int)
+    links['tweet'] = pd.to_numeric(links['tweet'], errors='coerce')
+    links['tweet'] = links['tweet'].fillna(0).astype(int)
     links = links.sort_values('id')
     
     links.to_csv('data/export.csv', index=False)
