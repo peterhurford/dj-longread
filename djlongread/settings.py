@@ -18,6 +18,9 @@ if not DEBUG and SECRET_KEY == localsecret:
     raise ValueError('Entering production with no APP_SECRET_KEY')
 
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 ALLOWED_HOSTS = ['*']
 
 
