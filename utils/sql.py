@@ -121,7 +121,10 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
     if blank_db:
         links = None
     else:
-        links = pd.read_csv(outfile, header=None, dtype={7: 'float64', 11: 'float64'})
+        links = pd.read_csv(outfile,
+                            header=None,
+                            dtype={7: 'float64', 11: 'float64', 12: 'float64'},
+                            na_values='\\N')
         clean_links(links).to_csv(outfile, index=False)
 
     return links
