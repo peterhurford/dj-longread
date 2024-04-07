@@ -121,7 +121,7 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
     if blank_db:
         links = None
     else:
-        links = pd.read_csv(outfile, header=None, dtypes={7: 'float64', 11: 'float64'})
+        links = pd.read_csv(outfile, header=None, dtype={7: 'float64', 11: 'float64'})
         clean_links(links).to_csv(outfile, index=False)
 
     return links
@@ -172,8 +172,8 @@ def clean_links(links):
     links.loc[:, 'liked'] = links['liked'].apply(lambda x: np.nan if (str(x) == '\\N' or str(x) == '') else str(x).split('.')[0]).astype(float)
     for var in ['url', 'title', 'summary', 'domain', 'category', 'aggregator']:
         links.loc[:, var] = links[var].apply(clean_str)
-    links[:, 'title'] = links['title'].fillna('')
-    links[:, 'liked'] = links['liked'].fillna(np.nan)
+    links.loc[:, 'title'] = links['title'].fillna('')
+    links.loc[:, 'liked'] = links['liked'].fillna(np.nan)
     return links.sort_values('id')
 
 
