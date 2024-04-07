@@ -167,6 +167,7 @@ def clean_str(txt):
 
 
 def clean_links(links):
+    links = links.copy()
     links.columns = ALL_COLS
     links = links[links['id'].notnull()]   # Drop empty column
     links.loc[:, 'id'] = links['id'].astype(int)  # Fix float ID issue
