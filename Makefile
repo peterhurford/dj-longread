@@ -6,7 +6,7 @@ run: ## Run Django
 
 .PHONY: pipeline
 pipeline: ## Run the full pipeline on Heroku
-	make check && heroku run -a guarded-everglades-89687 make check && make migrate && heroku run -a guarded-everglades-89687 make migrate && heroku run -a guarded-everglades-89687 make update && make launch && heroku run -a guarded-everglades-89687 make exportdb && make importdb && git add data/export.csv && git commit -m "Update DB" && git push origin master; echo "$$(date)"
+	make check && heroku run -a guarded-everglades-89687 make check && env DEVELOPMENT=1 make migrate && heroku run -a guarded-everglades-89687 make migrate && heroku run -a guarded-everglades-89687 make update && make launch && heroku run -a guarded-everglades-89687 make exportdb && make importdb && git add data/export.csv && git commit -m "Update DB" && git push origin master; echo "$$(date)"
 
 .PHONY: check
 check: ## Run a fail fast check
