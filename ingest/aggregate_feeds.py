@@ -126,8 +126,9 @@ def aorn_reader_fn(name, content):
 
 
 def caip_reader_fn(name, content):
-    content = json.loads(content.find_all('script')[12].text)
-    content = [[c['title'], 'https://www.aipolicy.us/blog/' + c['route'], 'CAIP'] for c in content['props']['pageProps']['blogs']]
+    content = [str(c).split('div>') for c in content.find_all('a') if '/work' in str(c)]
+    content = [[c[0].split('"')[3], c[3].replace("</", "")] for c in content if len(c) > 3]
+    content = [[c[1], 'https://www.aipolicy.us/work/' + c[0], 'CAIP'] for c in content]
     return content
 
 
@@ -166,7 +167,7 @@ contents += load_contents('AskManager', 'https://www.askamanager.org/feed')
 contents += load_contents('Ben Kuhn', 'https://www.benkuhn.net/rss/', 'entry')
 contents += load_contents('Bollard', 'https://us14.campaign-archive.com/feed?u=66df320da8400b581cbc1b539&id=de632a3c62', 'item')
 contents += load_contents('CAIP', 'https://aipolicyus.substack.com/feed')
-contents += load_contents('CAIP', 'https://www.aipolicy.us/blog', caip_reader_fn, reader_type='lxml')
+contents += load_contents('CAIP', 'https://www.aipolicy.us/work', caip_reader_fn, reader_type='lxml')
 contents += load_contents('Carlsmith', 'https://joecarlsmith.com/rss.xml')
 contents += load_contents('CAIS', 'https://newsletter.safe.ai/feed')
 contents += load_contents('ChinAI', 'https://chinai.substack.com/feed')
