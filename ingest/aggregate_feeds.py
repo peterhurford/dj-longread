@@ -128,7 +128,7 @@ def aorn_reader_fn(name, content):
 def caip_reader_fn(name, content):
     content = [str(c).split('div>') for c in content.find_all('a') if '/work' in str(c)]
     content = [[c[0].split('"')[3], c[3].replace("</", "")] for c in content if len(c) > 3]
-    content = [[c[1], 'https://www.aipolicy.us/work/' + c[0], 'CAIP'] for c in content]
+    content = [[c[1], 'https://www.aipolicy.us' + c[0], 'CAIP'] for c in content]
     return content
 
 
