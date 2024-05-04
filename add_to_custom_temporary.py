@@ -97,7 +97,7 @@ def main():
     execute_shell_command("heroku run --app guarded-everglades-89687 make exportdb && make importdb")
     
     # Process new links
-    links_filepath = '/Users/peterhurford/Documents/links.txt'
+    links_filepath = '/Users/peterwildeford/Documents/links.txt'
     process_links(links_filepath)
     
     # Confirmation before running the final command
