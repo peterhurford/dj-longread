@@ -2,21 +2,20 @@ from django.db.models import Case, When, Q, FloatField
 
 
 # Purge old articles after 14 days if they come from these aggregators
-PURGABLE_AGGREGATORS = ['Dispatch', 'FPChina', 'ChinAI', 'ImportAI',
-                        'Alignment', 'TIB', 'Schneier', 'Yglesias', 'MLSafety',
-                        'SafeAI', 'Bollard', 'EALondon', 'NavigatingAI',
-                        'GlobalShield', 'UnderstandingAI', '3Shot', 'CSET',
-                        'AIChina', 'Zvi', 'AskManager']
+PURGABLE_AGGREGATORS = ['Dispatch', 'ImportAI', 'Noah', 'Alignment', 'Yglesias', 'MLSafety',
+                        'Bollard', 'NavigatingAI', 'UnderstandingAI', 'Zvi', 'AskManager',
+                        'CAIP', 'CAIS', 'Observatory']
 PURGE_OLDER_THAN_X_DAYS = 14
 
 
 # Purge old articles after 60 days if they come from these aggregators
-LONG_PURGABLE_AGGREGATORS = ['SLW', 'SplitTicket', 'Noah']
+LONG_PURGABLE_AGGREGATORS = ['SLW', 'SplitTicket', 'AI Impacts', 'DeNeufville', 'ScholarsStage',
+                             'SamHammond']
 LONG_PURGE_OLDER_THAN_X = 60
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['GlobalSheild']
+OBSOLETE_AGGREGATORS = ['AIChina', 'ChinAI', 'FPChina', 'Salonium', 'SamAltman']
 
 # Metaweights
 PRIORITY_WEIGHT = 18   # The lower this number, the more links will be ranked according
@@ -38,17 +37,22 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='SafeAI'), then=25),
                           When(Q(aggregator__exact='Bollard'), then=25),
                           When(Q(aggregator__exact='NavigatingAI'), then=25),
-                          When(Q(aggregator__exact='GlobalShield'), then=25),
                           When(Q(aggregator__exact='Zvi'), then=25),
                           When(Q(aggregator__exact='CAIP'), then=25),
-                          When(Q(aggregator__exact='ChinAI'), then=12),
-                          When(Q(aggregator__exact='AIChina'), then=12),
-                          When(Q(aggregator__exact='FPChina'), then=12),
+                          When(Q(aggregator__exact='CAIS'), then=25),
                           When(Q(aggregator__exact='UnderstandingAI'), then=12),
-                          When(Q(aggregator__exact='Noah'), then=6),
-                          When(Q(aggregator__exact='Yglesias'), then=6),
+                          When(Q(aggregator__exact='Noah'), then=12),
+                          When(Q(aggregator__exact='Yglesias'), then=12),
                           When(Q(aggregator__exact='1a3orn'), then=6),
+                          When(Q(aggregator__exact='Alignment'), then=6),
+                          When(Q(aggregator__exact='MLSafety'), then=6),
+                          When(Q(aggregator__exact='Zvi'), then=6),
                           When(Q(aggregator__exact='SSC'), then=4),
+                          When(Q(aggregator__exact='Observatory'), then=4),
+                          When(Q(aggregator__exact='SamHammond'), then=4),
+                          When(Q(aggregator__exact='SplitTicket'), then=4),
+                          When(Q(aggregator__exact='DeNeufville'), then=4),
+                          When(Q(aggregator__exact='ScholarsStage'), then=4),
                           When(Q(aggregator__exact='AskManager'), then=-5),
                           default=1,
                           output_field=FloatField())
