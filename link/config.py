@@ -10,7 +10,7 @@ PURGE_OLDER_THAN_X_DAYS = 14
 
 # Purge old articles after 60 days if they come from these aggregators
 LONG_PURGABLE_AGGREGATORS = ['SLW', 'SplitTicket', 'AI Impacts', 'DeNeufville', 'ScholarsStage',
-                             'SamHammond']
+                             'SamHammond', 'SamF']
 LONG_PURGE_OLDER_THAN_X = 60
 
 
@@ -40,18 +40,18 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='Zvi'), then=25),
                           When(Q(aggregator__exact='CAIP'), then=25),
                           When(Q(aggregator__exact='CAIS'), then=25),
+                          When(Q(aggregator__exact='SamF'), then=12),
+                          When(Q(aggregator__exact='SamHammond'), then=12),
                           When(Q(aggregator__exact='UnderstandingAI'), then=12),
                           When(Q(aggregator__exact='Noah'), then=12),
                           When(Q(aggregator__exact='Yglesias'), then=12),
+                          When(Q(aggregator__exact='SplitTicket'), then=12),
                           When(Q(aggregator__exact='1a3orn'), then=6),
                           When(Q(aggregator__exact='Alignment'), then=6),
                           When(Q(aggregator__exact='MLSafety'), then=6),
-                          When(Q(aggregator__exact='Zvi'), then=6),
+                          When(Q(aggregator__exact='SSC'), then=6),
                           When(Q(aggregator__exact='AirStreet'), then=4),
-                          When(Q(aggregator__exact='SSC'), then=4),
                           When(Q(aggregator__exact='Observatory'), then=4),
-                          When(Q(aggregator__exact='SamHammond'), then=4),
-                          When(Q(aggregator__exact='SplitTicket'), then=4),
                           When(Q(aggregator__exact='DeNeufville'), then=4),
                           When(Q(aggregator__exact='ScholarsStage'), then=4),
                           When(Q(aggregator__exact='AskManager'), then=-5),
