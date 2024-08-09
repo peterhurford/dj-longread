@@ -33,6 +33,7 @@ RANDOM_WEIGHT = 30     # The lower this number, the more it will be the case tha
 
 # The relative rankings of different aggregators
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
+                          When(Q(aggregator__exact='Transformer'), then=80),
                           When(Q(aggregator__exact='ImportAI'), then=50),
                           When(Q(aggregator__exact='SafeAI'), then=25),
                           When(Q(aggregator__exact='Bollard'), then=25),
