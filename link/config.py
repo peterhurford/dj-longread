@@ -4,8 +4,8 @@ from django.db.models import Case, When, Q, FloatField
 # Purge old articles after 14 days if they come from these aggregators
 PURGABLE_AGGREGATORS = ['Dispatch', 'ImportAI', 'Noah', 'Alignment', 'Yglesias', 'MLSafety',
                         'Bollard', 'NavigatingAI', 'UnderstandingAI', 'Zvi', 'AskManager',
-                        'CAIP', 'CAIS', 'Observatory']
-PURGE_OLDER_THAN_X_DAYS = 14
+                        'CAIP', 'CAIS', 'Observatory', 'Punchbowl', 'Transformer']
+PURGE_OLDER_THAN_X_DAYS = 7
 
 
 # Purge old articles after 60 days if they come from these aggregators
@@ -33,6 +33,7 @@ RANDOM_WEIGHT = 30     # The lower this number, the more it will be the case tha
 
 # The relative rankings of different aggregators
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
+                          When(Q(aggregator__exact='Punchbowl'), then=80),
                           When(Q(aggregator__exact='Transformer'), then=80),
                           When(Q(aggregator__exact='ImportAI'), then=50),
                           When(Q(aggregator__exact='SafeAI'), then=25),
