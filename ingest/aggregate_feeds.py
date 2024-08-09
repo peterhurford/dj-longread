@@ -197,6 +197,7 @@ contents += load_contents('Noah', 'http://noahpinionblog.blogspot.com/feeds/post
 contents += load_contents('Noah', 'https://noahpinion.substack.com/feed')
 contents += load_contents('Noah', 'https://www.bloomberg.com/opinion/authors/AR3OYuAmvcU/noah-smith.rss')
 contents += load_contents('Observatory', 'https://effectiveinstitutionsproject.substack.com/feed')
+contents += load_contents('Polymarket', 'https://news.polymarket.com/feed')
 contents += load_contents('Punchbowl', 'https://punchbowl.news/archive/feed/')
 contents += load_contents('Rodney', 'https://rodneybrooks.com/blog/feed/')
 contents += load_contents('SamF', 'https://samf.substack.com/feed')
