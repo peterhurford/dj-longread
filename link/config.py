@@ -11,7 +11,7 @@ PURGE_OLDER_THAN_X_DAYS = 7
 
 # Purge old articles after 60 days if they come from these aggregators
 LONG_PURGABLE_AGGREGATORS = ['SLW', 'SplitTicket', 'AI Impacts', 'DeNeufville', 'ScholarsStage',
-                             'SamHammond', 'SamF']
+                             'SamHammond', 'SamF', 'MarkB']
 LONG_PURGE_OLDER_THAN_X = 60
 
 
@@ -51,6 +51,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='SamF'), then=8),
                           When(Q(aggregator__exact='SamHammond'), then=8),
                           When(Q(aggregator__exact='Polymarket'), then=8),
+                          When(Q(aggregator__exact='MarkB'), then=8),
                           When(Q(aggregator__exact='1a3orn'), then=6),
                           When(Q(aggregator__exact='Alignment'), then=6),
                           When(Q(aggregator__exact='MLSafety'), then=6),
