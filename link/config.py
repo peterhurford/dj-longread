@@ -4,7 +4,8 @@ from django.db.models import Case, When, Q, FloatField
 # Purge old articles after 14 days if they come from these aggregators
 PURGABLE_AGGREGATORS = ['Dispatch', 'ImportAI', 'Noah', 'Alignment', 'Yglesias', 'MLSafety',
                         'Bollard', 'NavigatingAI', 'UnderstandingAI', 'Zvi', 'AskManager',
-                        'CAIP', 'CAIS', 'Observatory', 'Punchbowl', 'Transformer']
+                        'CAIP', 'CAIS', 'Observatory', 'Punchbowl', 'Transformer',
+                        'SCSP']
 PURGE_OLDER_THAN_X_DAYS = 7
 
 
@@ -42,12 +43,13 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='Zvi'), then=25),
                           When(Q(aggregator__exact='CAIP'), then=25),
                           When(Q(aggregator__exact='CAIS'), then=25),
-                          When(Q(aggregator__exact='SamF'), then=12),
-                          When(Q(aggregator__exact='SamHammond'), then=12),
-                          When(Q(aggregator__exact='UnderstandingAI'), then=12),
-                          When(Q(aggregator__exact='Noah'), then=12),
-                          When(Q(aggregator__exact='Yglesias'), then=12),
-                          When(Q(aggregator__exact='SplitTicket'), then=12),
+                          When(Q(aggregator__exact='SCSP'), then=25),
+                          When(Q(aggregator__exact='UnderstandingAI'), then=25),
+                          When(Q(aggregator__exact='Noah'), then=15),
+                          When(Q(aggregator__exact='Yglesias'), then=15),
+                          When(Q(aggregator__exact='SplitTicket'), then=15),
+                          When(Q(aggregator__exact='SamF'), then=8),
+                          When(Q(aggregator__exact='SamHammond'), then=8),
                           When(Q(aggregator__exact='Polymarket'), then=8),
                           When(Q(aggregator__exact='1a3orn'), then=6),
                           When(Q(aggregator__exact='Alignment'), then=6),
