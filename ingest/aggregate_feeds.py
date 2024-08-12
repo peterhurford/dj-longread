@@ -175,6 +175,7 @@ contents += load_contents('Constantin', 'https://srconstantin.github.io/feed', '
 contents += load_contents('Constantin', 'https://srconstantin.wordpress.com/feed/')
 contents += load_contents('ConPhys', 'https://www.construction-physics.com/feed')
 contents += load_contents('Danluu', 'https://danluu.com/atom.xml')
+contents += load_contents('DeanBall', 'https://www.hyperdimensional.co/feed')
 contents += load_contents('DeNeufville', 'https://tellingthefuture.substack.com/feed')
 contents += load_contents('Dispatch', 'https://thedispatch.com/feed/?newsletter-brands=morning')
 contents += load_contents('Dispatch', 'https://thedispatch.com/newsletter/dispatch-politics/feed')
