@@ -16,7 +16,7 @@ LONG_PURGE_OLDER_THAN_X = 60
 
 
 # Purge all articles from these aggregators
-OBSOLETE_AGGREGATORS = ['AIChina', 'ChinAI', 'FPChina', 'Salonium', 'SamAltman']
+OBSOLETE_AGGREGATORS = ['AIChina', 'ChinAI', 'FPChina', 'SamAltman', 'Semianalysis']
 
 # Metaweights
 PRIORITY_WEIGHT = 18   # The lower this number, the more links will be ranked according
@@ -51,6 +51,7 @@ AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='SamF'), then=8),
                           When(Q(aggregator__exact='SamHammond'), then=8),
                           When(Q(aggregator__exact='Polymarket'), then=8),
+                          When(Q(aggregator__exact='Semianalysis'), then=8),
                           When(Q(aggregator__exact='MarkB'), then=8),
                           When(Q(aggregator__exact='1a3orn'), then=6),
                           When(Q(aggregator__exact='Alignment'), then=6),
