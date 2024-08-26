@@ -99,7 +99,7 @@ class LinkListView(CustomListViewMixin):
 
 class UpcomingListView(LoginRequiredMixin, CustomListViewMixin):
     model = Link
-    paginate_by = 16
+    paginate_by = 25
     login_url = 'admin/login'
 
     def get_context_data(self, **kwargs):
