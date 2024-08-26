@@ -196,6 +196,7 @@ contents += load_contents('Kitstack', 'https://kitsonjonathon.substack.com/feed'
 contents += load_contents('MarkB', 'https://notanotherbigtech.substack.com/feed')
 contents += load_contents('Masley', 'https://andymasley.substack.com/feed')
 contents += load_contents('MLSafety', 'https://newsletter.mlsafety.org/feed')
+contents += load_contents('NateSilver', 'https://www.natesilver.net/feed')
 contents += load_contents('NavigatingAI', 'https://navigatingairisks.substack.com/feed')
 contents += load_contents('Noah', 'http://noahpinionblog.blogspot.com/feeds/posts/default', 'entry-link')
 contents += load_contents('Noah', 'https://noahpinion.substack.com/feed')
