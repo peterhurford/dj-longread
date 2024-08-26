@@ -126,8 +126,9 @@ def aorn_reader_fn(name, content):
 
 
 def caip_reader_fn(name, content):
-    content = [str(c).split('div>') for c in content.find_all('a') if '/work' in str(c)]
-    content = [[c[0].split('"')[3], c[3].replace("</", "")] for c in content if len(c) > 3]
+    content = [str(c).split('div>')[0] for c in content.find_all('a') if '/work/' in str(c)]
+    content = [c.split('href="')[1].split('" class="')[0] for c in content]
+    content = [c.split('"><img alt="') for c in content if 'img alt' in c]
     content = [[c[1], 'https://www.aipolicy.us' + c[0], 'CAIP'] for c in content]
     return content
 
@@ -193,6 +194,7 @@ contents += load_contents('Josh', 'https://www.joshbarro.com/feed')
 contents += load_contents('JuliaWise', 'https://juliawise.net/feed/')
 contents += load_contents('Kitstack', 'https://kitsonjonathon.substack.com/feed')
 contents += load_contents('MarkB', 'https://notanotherbigtech.substack.com/feed')
+contents += load_contents('Masley', 'https://andymasley.substack.com/feed')
 contents += load_contents('MLSafety', 'https://newsletter.mlsafety.org/feed')
 contents += load_contents('NavigatingAI', 'https://navigatingairisks.substack.com/feed')
 contents += load_contents('Noah', 'http://noahpinionblog.blogspot.com/feeds/posts/default', 'entry-link')
@@ -218,7 +220,6 @@ contents += load_contents('Transformer', 'https://www.transformernews.ai/feed')
 contents += load_contents('QuantGalore', 'https://quantgalore.substack.com/feed')
 contents += load_contents('Ted', 'https://www.tedsanders.com/', ted_reader_fn, reader_type='lxml')
 contents += load_contents('UnderstandingAI', 'https://www.understandingai.org/feed')
-contents += load_contents('Utopian', 'https://utopianscrapbook.substack.com/feed')
 contents += load_contents('Yglesias', 'https://www.slowboring.com/feed')
 contents += load_contents('Zvi', 'https://thezvi.substack.com/feed')
 
