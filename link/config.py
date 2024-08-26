@@ -5,7 +5,7 @@ from django.db.models import Case, When, Q, FloatField
 PURGABLE_AGGREGATORS = ['Dispatch', 'ImportAI', 'Noah', 'Alignment', 'Yglesias', 'MLSafety',
                         'Bollard', 'NavigatingAI', 'UnderstandingAI', 'Zvi', 'AskManager',
                         'CAIP', 'CAIS', 'Observatory', 'Punchbowl', 'Transformer',
-                        'SCSP']
+                        'SCSP', 'NateSilver', 'Sentinel']
 PURGE_OLDER_THAN_X_DAYS = 7
 
 
@@ -36,7 +36,8 @@ RANDOM_WEIGHT = 30     # The lower this number, the more it will be the case tha
 AGGREGATOR_WEIGHTS = Case(When(Q(aggregator__exact='Dispatch'), then=100),
                           When(Q(aggregator__exact='Punchbowl'), then=80),
                           When(Q(aggregator__exact='Transformer'), then=80),
-                          When(Q(aggregator__exact='ImportAI'), then=50),
+                          When(Q(aggregator__exact='Sentinel'), then=80),
+                          When(Q(aggregator__exact='ImportAI'), then=25),
                           When(Q(aggregator__exact='SafeAI'), then=25),
                           When(Q(aggregator__exact='Bollard'), then=25),
                           When(Q(aggregator__exact='NavigatingAI'), then=25),

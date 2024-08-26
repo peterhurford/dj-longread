@@ -214,6 +214,7 @@ contents += load_contents('SLW', 'https://softwareleadweekly.com/issues/', slw_r
 contents += load_contents('SplitTicket', 'https://split-ticket.org/feed/')
 contents += load_contents('SSC', 'https://astralcodexten.substack.com/feed')
 contents += load_contents('SCSP', 'https://scsp222.substack.com/feed')
+contents += load_contents('Sentinel', 'https://blog.sentinel-team.org/feed')
 contents += load_contents('Statecraft', 'https://www.statecraft.pub/feed')
 contents += load_contents('Steinhardt', 'https://bounded-regret.ghost.io/rss/')
 contents += load_contents('Stevenson', 'https://doingwestminsterbetter.substack.com/feed')
