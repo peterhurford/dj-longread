@@ -68,8 +68,8 @@ a:hover { color: red; }
     vertical-align: middle;
     user-select: none;
     border: 1px solid transparent;
-    padding: 0.15rem 0.3rem;
-    line-height: 1;
+    padding: 0;
+    line-height: 20px;
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     text-decoration: none;
@@ -78,6 +78,19 @@ a:hover { color: red; }
     align-items: center;
     justify-content: center;
     margin-right: 3px;
+    box-sizing: border-box;
+}
+
+a.btn {
+    padding: 0;
+}
+
+input.btn {
+    cursor: pointer;
+}
+
+.btn, .btn input {
+    text-align: center;
 }
 
 .btn-success {
