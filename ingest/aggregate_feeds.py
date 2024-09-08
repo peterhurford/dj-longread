@@ -184,6 +184,7 @@ contents += load_contents('Dispatch', 'https://thedispatch.com/newsletter/techne
 contents += load_contents('Dwarkesh', 'https://www.dwarkeshpatel.com/feed')
 contents += load_contents('Dynomight', 'https://dynomight.net/feed', 'entry')
 contents += load_contents('ExperienceMachines', 'https://experiencemachines.substack.com/feed')
+contents += load_contents('Forecasting', 'https://forecasting.substack.com/feed')
 contents += load_contents('GEMorris', 'https://gelliottmorris.substack.com/feed')
 contents += load_contents('Graham', 'http://paulgraham.com/articles.html', graham_reader_fn, reader_type='lxml')
 contents += load_contents('Grunewald', 'https://www.erichgrunewald.com/feed.xml', 'entry')
