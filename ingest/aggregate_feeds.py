@@ -239,7 +239,7 @@ export_db(cur)
 
 
 # Clean
-links = pd.read_csv('data/export.csv')
+links = pd.read_csv('data/export.csv', dtype={'id': int})
 print('-')
 print('Purging broken links')
 nans_if_any = links[links['id'].astype('str') == 'nan']
@@ -297,7 +297,7 @@ else:
 print('-')
 print('Purging old')
 links['liked'] = links['liked'].apply(lambda x: np.nan if str(x) == '\\N' else str(x).split('.')[0]).astype(float)
-links['added'] = pd.to_datetime(links['added'], utc=True).dt.tz_localize(None)
+links['added'] = pd.to_datetime(links['added'], format='ISO8601', utc=True).dt.tz_localize(None)
 relative_now = links['added'].max()
 before_purge_window = relative_now - timedelta(days=PURGE_OLDER_THAN_X_DAYS)
 purgable = links[(links['aggregator'].apply(lambda a: a in PURGABLE_AGGREGATORS)) &
@@ -317,7 +317,7 @@ else:
 print('-')
 print('Purging long old')
 links['liked'] = links['liked'].apply(lambda x: np.nan if str(x) == '\\N' else str(x).split('.')[0]).astype(float)
-links['added'] = pd.to_datetime(links['added'], utc=True).dt.tz_localize(None)
+links['added'] = pd.to_datetime(links['added'], format='ISO8601', utc=True).dt.tz_localize(None)
 relative_now = links['added'].max()
 before_purge_window = relative_now - timedelta(days=LONG_PURGE_OLDER_THAN_X)
 purgable = links[(links['aggregator'].apply(lambda a: a in LONG_PURGABLE_AGGREGATORS)) &

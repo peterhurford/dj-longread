@@ -101,9 +101,8 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
     with open(outfile, 'w') as f:
         if verbose:
             print('...Downloading')
-
         # Ideally we would just copy directly, but Heroku permissions don't allow that
-        # so we have to hack around with StringIO 
+        # so we have to hack around with StringIO
         data_io = io.StringIO()
         cur.copy_to(data_io, 'link_link', sep=',')
         data_io.seek(0)
@@ -117,19 +116,31 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
             content = [re.split('(?<!\\\\),', c) for c in content]
             writer = csv.writer(f, delimiter=',')
             writer.writerows(content)
-
     if verbose:
         print('...Formatting')
-
     if blank_db:
         links = None
     else:
         links = pd.read_csv(outfile,
-                            header=None,
-                            dtype={7: 'float64', 11: 'float64', 12: 'float64'},
-                            na_values='\\N')
+                          names=['id', 'title', 'url', 'aggregator', 'added', 'modified', 
+                                'seed', 'starred', 'liked', 'read', 'viewed', 'meta', 'score'],
+                          dtype={
+                              'id': 'int64',
+                              'title': 'str',
+                              'url': 'str',
+                              'aggregator': 'str',
+                              'added': 'str',
+                              'modified': 'str',
+                              'seed': 'float64',
+                              'starred': 'float64',
+                              'liked': 'float64',
+                              'read': 'float64',
+                              'viewed': 'float64',
+                              'meta': 'str',
+                              'score': 'float64'
+                          },
+                          na_values='\\N')
         clean_links(links).to_csv(outfile, index=False)
-
     return links
 
 
