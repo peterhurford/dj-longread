@@ -121,18 +121,15 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
     if blank_db:
         links = None
     else:
-        # First read everything as strings
         links = pd.read_csv(outfile,
                           names=['id', 'title', 'url', 'aggregator', 'added', 'modified', 
                                 'seed', 'starred', 'liked', 'read', 'viewed', 'meta', 'score'],
                           dtype='str',
                           na_values='\\N')
         
-        # Convert id column carefully, dropping any rows with NA ids
         links = links.dropna(subset=['id'])
-        links['id'] = links['id'].astype(float).astype(int)  # Convert through float to handle any decimal points
+        links['id'] = links['id'].astype(float).astype(int)
         
-        # Convert numeric columns after loading
         numeric_cols = ['seed', 'starred', 'liked', 'read', 'viewed', 'score']
         for col in numeric_cols:
             links[col] = pd.to_numeric(links[col], errors='coerce')
@@ -145,6 +142,7 @@ def import_db(conn, infile='data/export.csv', verbose=True):
     data_io = io.StringIO()
     df = clean_links(pd.read_csv(infile))
     df['modified'] = df['modified'].fillna(df['added'])
+    df['aggregator'] = df['aggregator'].fillna('Unknown')
     df.to_csv(data_io, index_label='id', header=False, index=False, na_rep='\\N')
     data_io.seek(0)
     cur = conn.cursor()
