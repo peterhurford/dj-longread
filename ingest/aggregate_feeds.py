@@ -1,6 +1,4 @@
 import os
-import boto3 # Fail fast if Python env is not properly loaded
-import json
 import random
 import psycopg2
 
@@ -16,10 +14,10 @@ from link.config import (PURGE_OLDER_THAN_X_DAYS, LONG_PURGE_OLDER_THAN_X, PURGA
                          LONG_PURGABLE_AGGREGATORS, OBSOLETE_AGGREGATORS)
 
 
-def chunk(l, n):
+def chunk(lst, n):
     out = []
-    for i in range(0, len(l), n):
-        out.append(l[i:i + n])
+    for i in range(0, len(lst), n):
+        out.append(lst[i:i + n])
     return out
 
 
