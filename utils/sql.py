@@ -144,7 +144,7 @@ def export_db(cur, outfile='data/export.csv', verbose=True):
 def import_db(conn, infile='data/export.csv', verbose=True):
     data_io = io.StringIO()
     df = clean_links(pd.read_csv(infile))
-    df.to_csv(data_io, index_label='id', header=False, index=False, na_rep='NaN')
+    df.to_csv(data_io, index_label='id', header=False, index=False, na_rep='\\N')  # Changed from 'NaN'
     data_io.seek(0)
     cur = conn.cursor()
     if verbose:
