@@ -2,7 +2,7 @@
 
 .PHONY: run
 run: ## Run Django
-	python manage.py runserver
+	python3 manage.py runserver
 
 .PHONY: pipeline
 pipeline: ## Run the full pipeline on Heroku
@@ -10,11 +10,11 @@ pipeline: ## Run the full pipeline on Heroku
 
 .PHONY: check
 check: ## Run a fail fast check
-	python fail_fast.py
+	python3 fail_fast.py
 
 .PHONY: migrate
 migrate: ## Run Django migrations
-	python manage.py makemigrations && python manage.py makemigrations link && python manage.py migrate
+	python3 manage.py makemigrations && python3 manage.py makemigrations link && python3 manage.py migrate
 
 .PHONY: update
 update: ## Update the DB with the latest articles pulled from RSS
