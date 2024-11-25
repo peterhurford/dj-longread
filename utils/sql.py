@@ -98,50 +98,56 @@ def find_row(cur, table_name, col, value, n=1):
 
 
 def export_db(cur, outfile='data/export.csv', verbose=True):
-    with open(outfile, 'w') as f:
-        if verbose:
-            print('...Downloading')
-        # Ideally we would just copy directly, but Heroku permissions don't allow that
-        # so we have to hack around with StringIO
-        data_io = io.StringIO()
-        cur.copy_to(data_io, 'link_link', sep=',')
-        data_io.seek(0)
-        content = data_io.read()
-        if content == '':
-            blank_db = True
-        else:
-            blank_db = False
-            content = content.split('\n')
-            # Use re.split to ignore escaped commas
-            content = [re.split('(?<!\\\\),', c) for c in content]
-            writer = csv.writer(f, delimiter=',')
-            writer.writerows(content)
-    if verbose:
-        print('...Formatting')
-    if blank_db:
-        links = None
-    else:
-        links = pd.read_csv(outfile,
-                          names=['id', 'title', 'url', 'aggregator', 'added', 'modified', 
-                                'seed', 'starred', 'liked', 'read', 'viewed', 'meta', 'score'],
-                          dtype={
-                              'id': 'int64',
-                              'title': 'str',
-                              'url': 'str',
-                              'aggregator': 'str',
-                              'added': 'str',
-                              'modified': 'str',
-                              'seed': 'float64',
-                              'starred': 'float64',
-                              'liked': 'float64',
-                              'read': 'float64',
-                              'viewed': 'float64',
-                              'meta': 'str',
-                              'score': 'float64'
-                          },
-                          na_values='\\N')
-        clean_links(links).to_csv(outfile, index=False)
-    return links
+   with open(outfile, 'w') as f:
+       if verbose:
+           print('...Downloading')
+       # Ideally we would just copy directly, but Heroku permissions don't allow that
+       # so we have to hack around with StringIO
+       data_io = io.StringIO()
+       cur.copy_to(data_io, 'link_link', sep=',')
+       data_io.seek(0)
+       content = data_io.read()
+       if content == '':
+           blank_db = True
+       else:
+           blank_db = False
+           content = content.split('\n')
+           # Use re.split to ignore escaped commas
+           content = [re.split('(?<!\\\\),', c) for c in content]
+           writer = csv.writer(f, delimiter=',')
+           writer.writerows(content)
+   if verbose:
+       print('...Formatting')
+   if blank_db:
+       links = None
+   else:
+       links = pd.read_csv(outfile,
+                         names=['id', 'title', 'url', 'aggregator', 'added', 'modified', 
+                               'seed', 'starred', 'liked', 'read', 'viewed', 'meta', 'score'],
+                         dtype={
+                             'id': 'int64',
+                             'title': 'str',
+                             'url': 'str',
+                             'aggregator': 'str',
+                             'added': 'str',
+                             'modified': 'str',
+                             'seed': 'str',
+                             'starred': 'str',
+                             'liked': 'str',
+                             'read': 'str',
+                             'viewed': 'str',
+                             'meta': 'str',
+                             'score': 'str'
+                         },
+                         na_values='\\N')
+       
+       # Convert numeric columns after loading
+       numeric_cols = ['seed', 'starred', 'liked', 'read', 'viewed', 'score']
+       for col in numeric_cols:
+           links[col] = pd.to_numeric(links[col], errors='coerce')
+           
+       clean_links(links).to_csv(outfile, index=False)
+   return links
 
 
 def import_db(conn, infile='data/export.csv', verbose=True):
